@@ -12,4 +12,9 @@ export const theme: DefaultTheme = {
     cancel: "#BA1A1A",
     alert: "#FF5800",
   },
+  fonts: {
+    redHatDisplayRegular: "RedHatDisplay_400Regular",
+    redHatDisplayMedium: "RedHatDisplay_500Medium",
+    redHatDisplaySemiBold: "RedHatDisplay_600SemiBold",
+  },
 };

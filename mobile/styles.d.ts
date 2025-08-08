@@ -13,5 +13,10 @@ declare module "styled-components" {
       cancel: string;
       alert: string;
     };
+    fonts: {
+      redHatDisplayRegular: string;
+      redHatDisplayMedium: string;
+      redHatDisplaySemiBold: string;
+    };
   }
 }
