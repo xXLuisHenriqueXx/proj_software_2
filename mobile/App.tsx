@@ -12,6 +12,7 @@ import "react-native-gesture-handler";
 import { ThemeProvider } from "styled-components/native";
 
 import { useThemeStore } from "@src/stores/ThemeStore";
+import Navbar from "@src/components/Navbar";
 
 export default function App() {
   const { theme } = useThemeStore();
@@ -45,7 +46,9 @@ export default function App() {
         backgroundColor={theme.colors.backgroundPrimary}
       />
 
-      <ThemeProvider theme={theme}></ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <Navbar />
+      </ThemeProvider>
     </>
   );
 }
