@@ -12,11 +12,9 @@ import "react-native-gesture-handler";
 import { ThemeProvider } from "styled-components/native";
 
 import { useThemeStore } from "@src/stores/ThemeStore";
-import Navbar from "@src/components/Navbar";
+import Routes from "@src/routes";
 
 export default function App() {
-  const { theme } = useThemeStore();
-
   const [fontsLoaded] = useFonts({
     RedHatDisplay_400Regular: RedHatDisplay_400Regular,
     RedHatDisplay_500Medium: RedHatDisplay_500Medium,
@@ -39,6 +37,11 @@ export default function App() {
 
   if (!fontsLoaded) return null;
 
+  return <AppContent />;
+}
+const AppContent = () => {
+  const { theme } = useThemeStore();
+
   return (
     <>
       <StatusBar
@@ -47,8 +50,8 @@ export default function App() {
       />
 
       <ThemeProvider theme={theme}>
-        <Navbar />
+        <Routes />
       </ThemeProvider>
     </>
   );
-}
+};
