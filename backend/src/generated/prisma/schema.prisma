@@ -1,0 +1,129 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+model User {
+  id              String   @id @default(uuid()) // UUID no lugar de ObjectId
+  createdAt       DateTime @default(now())
+  email           String   @unique
+  password        String
+  name            String
+  role            Role     @default(USER)
+  parentalControl Boolean  @default(false) // flag para contas de crianças
+  active          Boolean  @default(true)
+  cpf             String   @unique
+
+  addressDistrict String
+  addressStreet   String
+  addressNumber   Int
+  addressDetail   String?
+
+  // Relacionamentos
+  toys       Toy[] // brinquedos que esse user possui
+  lendsMade  Lend[] @relation("LenderLends") // empréstimos que ele fez (como dono do brinquedo)
+  lendsTaken Lend[] @relation("BorrowerLends") // empréstimos que ele recebeu (como quem pegou emprestado)
+
+  history HistoryEntry[] // ações no sistema
+
+  soldToys   Sale[] @relation("SoldToys")
+  boughtToys Sale[] @relation("BoughtToys")
+
+  ratings Rate[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Toy {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  name      String
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  lends   Lend[]
+  history HistoryEntry[]
+  sales   Sale[]
+
+  usageTime    Int
+  preservation Int // de 0 a 5 (pode ser validado por constraint CHECK)
+}
+
+model Lend {
+  id        String    @id @default(uuid())
+  startDate DateTime
+  endDate   DateTime?
+
+  // Quem empresta: dono do Toy
+  lenderId String
+  lender   User   @relation("LenderLends", fields: [lenderId], references: [id])
+
+  // Quem pega emprestado
+  borrowerId String
+  borrower   User   @relation("BorrowerLends", fields: [borrowerId], references: [id])
+
+  // Qual brinquedo foi emprestado
+  toyId String
+  toy   Toy    @relation(fields: [toyId], references: [id])
+}
+
+model HistoryEntry {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  visible   Boolean  @default(true)
+
+  // Quem realizou a ação
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  // Qual brinquedo foi visitado
+  toyId String
+  toy   Toy    @relation(fields: [toyId], references: [id])
+}
+
+model Sale {
+  id String @id @default(uuid())
+
+  // Dono do brinquedo
+  owner   User   @relation("SoldToys", fields: [ownerId], references: [id])
+  ownerId String
+
+  // Comprador
+  buyer   User   @relation("BoughtToys", fields: [buyerId], references: [id])
+  buyerId String
+
+  // Qual brinquedo vendido
+  toyId String
+  toy   Toy    @relation(fields: [toyId], references: [id])
+
+  price      Float
+  negotiable Boolean @default(false) // melhor como flag em vez de número
+  discount   Float?
+
+  // Item foi pago com sucesso
+  paidFor     Boolean   @default(false)
+  paymentDate DateTime?
+
+  // Comprador confirmou o recebimento do item
+  itemReceived Boolean   @default(false)
+  receiveDate  DateTime?
+}
+
+model Rate {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  value     Int // nota de avaliação (1-5, pode ter CHECK)
+  comment   String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
