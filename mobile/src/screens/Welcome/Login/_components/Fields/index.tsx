@@ -17,9 +17,15 @@ interface IFieldsProps {
   fields: IFieldsLogin;
   setFields: (fields: IFieldsLogin) => void;
   onLogin: () => void;
+  onForgotEmail: () => void;
 }
 
-const Fields = ({ fields, setFields, onLogin }: IFieldsProps) => {
+const Fields = ({
+  fields,
+  setFields,
+  onLogin,
+  onForgotEmail,
+}: IFieldsProps) => {
   const { theme } = useThemeStore();
   const passwordRef = useRef<any>();
 
@@ -75,7 +81,7 @@ const Fields = ({ fields, setFields, onLogin }: IFieldsProps) => {
             />
           )}
         </ContainerInput>
-        <ButtonForgot>
+        <ButtonForgot onPress={onForgotEmail}>
           <ButtonForgotText>Esqueci a senha</ButtonForgotText>
         </ButtonForgot>
       </ContainerField>
