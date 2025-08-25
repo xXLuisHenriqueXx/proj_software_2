@@ -9,10 +9,11 @@ import {
 } from "@expo-google-fonts/red-hat-display";
 import "react-native-reanimated";
 import "react-native-gesture-handler";
-import { ThemeProvider } from "styled-components/native";
 
+import { ThemeProvider } from "styled-components/native";
 import { useThemeStore } from "@src/stores/ThemeStore";
 import Routes from "@src/routes";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -43,7 +44,7 @@ const AppContent = () => {
   const { theme } = useThemeStore();
 
   return (
-    <>
+    <GestureHandlerRootView>
       <StatusBar
         barStyle={"dark-content"}
         backgroundColor={theme.colors.backgroundPrimary}
@@ -52,6 +53,6 @@ const AppContent = () => {
       <ThemeProvider theme={theme}>
         <Routes />
       </ThemeProvider>
-    </>
+    </GestureHandlerRootView>
   );
 };
