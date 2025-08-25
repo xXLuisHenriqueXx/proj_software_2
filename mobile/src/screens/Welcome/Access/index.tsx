@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import {
   ButtonLogin,
-  ButtonLoginText,
+  LoginText,
   ButtonRegister,
-  ButtonRegisterText,
+  RegisterText,
   Container,
   ContainerBottom,
   ContainerText,
@@ -27,6 +27,10 @@ const Access = () => {
     navigation.navigate("Login");
   }, [navigation]);
 
+  const handleNavigateToRegister = useCallback(() => {
+    navigation.navigate("Register");
+  }, [navigation]);
+
   return (
     <Container>
       <Logo source={logoImage} />
@@ -42,10 +46,10 @@ const Access = () => {
         style={{ elevation: 30, shadowColor: theme.colors.textPrimary }}
       >
         <ButtonLogin onPress={handleNavigateToLogin}>
-          <ButtonLoginText>Acessar minha conta</ButtonLoginText>
+          <LoginText>Acessar minha conta</LoginText>
         </ButtonLogin>
-        <ButtonRegister>
-          <ButtonRegisterText>Criar conta</ButtonRegisterText>
+        <ButtonRegister onPress={handleNavigateToRegister}>
+          <RegisterText>Criar conta</RegisterText>
         </ButtonRegister>
       </ContainerBottom>
     </Container>

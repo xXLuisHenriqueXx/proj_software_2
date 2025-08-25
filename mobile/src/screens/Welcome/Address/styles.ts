@@ -36,7 +36,7 @@ export const Title = styled.Text`
   color: ${({ theme }: ITheme) => theme.colors.textPrimary};
 `;
 
-export const ButtonLogin = styled.TouchableOpacity.attrs({
+export const ButtonRegister = styled.TouchableOpacity.attrs({
   activeOpacity: 0.85,
 })`
   position: absolute;
@@ -50,7 +50,7 @@ export const ButtonLogin = styled.TouchableOpacity.attrs({
   border-radius: 12px;
 `;
 
-export const LoginText = styled.Text`
+export const RegisterText = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }: ITheme) => theme.fonts.redHatDisplayMedium};
   color: ${({ theme }: ITheme) => theme.colors.textContrast};

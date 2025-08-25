@@ -14,7 +14,7 @@ export const Container = styled.View`
   flex-direction: column;
   align-items: center;
   background-color: ${({ theme }: ITheme) => theme.colors.backgroundPrimary};
-  padding-top: ${statusBarHeight + 60};
+  padding-top: ${statusBarHeight + 60}px;
 `;
 
 export const Logo = styled.Image.attrs({
@@ -73,12 +73,12 @@ export const ButtonRegister = styled(ButtonLogin)`
   background-color: transparent;
 `;
 
-export const ButtonLoginText = styled.Text`
+export const LoginText = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }: ITheme) => theme.fonts.redHatDisplayMedium};
   color: ${({ theme }: ITheme) => theme.colors.textContrast};
 `;
 
-export const ButtonRegisterText = styled(ButtonLoginText)`
+export const RegisterText = styled(LoginText)`
   color: ${({ theme }: ITheme) => theme.colors.highlight};
 `;

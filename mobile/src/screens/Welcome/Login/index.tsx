@@ -1,22 +1,23 @@
-import { useNavigation } from "@react-navigation/native";
-import { PropsStack } from "@src/routes";
-import { useThemeStore } from "@src/stores/ThemeStore";
+import { useState } from "react";
+import { ActivityIndicator } from "react-native";
 import {
   ButtonBack,
-  ButtonForgot,
-  ButtonForgotText,
   ButtonLogin,
-  ButtonLoginText,
+  LoginText,
   Container,
-  ContainerFields,
   ContainerHeader,
   Title,
 } from "./styles";
-import { ChevronLeft, Eye, EyeOff } from "lucide-react-native";
-import { useRef, useState } from "react";
-import Input from "@src/components/Input";
+import { useNavigation } from "@react-navigation/native";
+import { ChevronLeft } from "lucide-react-native";
 
-interface IFields {
+import Fields from "./_components/Fields";
+
+import { PropsStack } from "@src/routes";
+import { useThemeStore } from "@src/stores/ThemeStore";
+import { validateLoginFields } from "@src/utils/ValidateLoginFields";
+
+export interface IFieldsLogin {
   email: string;
   password: string;
 }
@@ -25,15 +26,23 @@ const Login = () => {
   const { theme } = useThemeStore();
 
   const navigation = useNavigation<PropsStack>();
-  const passwordRef = useRef<any>();
 
-  const [fields, setFields] = useState<IFields>({
+  const [fields, setFields] = useState<IFieldsLogin>({
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = () => {
-    alert(fields);
+    const validFields = validateLoginFields(fields);
+    if (!validFields) return;
+
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    console.log("[LOGIN]: ", validFields);
   };
 
   return (
@@ -45,39 +54,14 @@ const Login = () => {
         <Title>Acessar conta</Title>
       </ContainerHeader>
 
-      <ContainerFields>
-        <Input
-          label="E-mail"
-          placeholder="seuemail@exemplo.com"
-          keyType="next"
-          onSubmitEditing={() => passwordRef.current?.focus()}
-          blurOnSubmit={false}
-          value={fields.email}
-          setValue={(text) => {
-            setFields({ ...fields, email: text });
-          }}
-        />
+      <Fields fields={fields} setFields={setFields} onLogin={handleLogin} />
 
-        <Input
-          ref={passwordRef}
-          label="Senha"
-          placeholder="Sua senha"
-          keyType="done"
-          onSubmitEditing={handleLogin}
-          blurOnSubmit={true}
-          password
-          value={fields.password}
-          setValue={(text) => {
-            setFields({ ...fields, password: text });
-          }}
-        />
-        <ButtonForgot>
-          <ButtonForgotText>Esqueci a senha</ButtonForgotText>
-        </ButtonForgot>
-      </ContainerFields>
-
-      <ButtonLogin>
-        <ButtonLoginText>Acessar</ButtonLoginText>
+      <ButtonLogin onPress={handleLogin} disabled={loading}>
+        {loading ? (
+          <ActivityIndicator size="small" color={theme.colors.textContrast} />
+        ) : (
+          <LoginText>Acessar</LoginText>
+        )}
       </ButtonLogin>
     </Container>
   );
