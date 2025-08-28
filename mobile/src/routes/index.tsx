@@ -3,12 +3,13 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
-import { UserCreate } from "@src/common/Entities/User";
 
 import Access from "@src/screens/Welcome/Access";
 import Address from "@src/screens/Welcome/Address";
 import Login from "@src/screens/Welcome/Login";
 import Register from "@src/screens/Welcome/Register";
+
+import { UserCreate } from "@src/common/Entities/User";
 
 export type PropsNavigationStack = {
   Access: undefined;

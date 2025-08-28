@@ -1,19 +1,16 @@
 import { forwardRef, useRef, useState } from "react";
-import { TextInput, TextInputProps } from "react-native";
 import {
-  ContainerField,
-  ContainerFields,
-  ContainerInput,
-  InputField,
-  Instruction,
-  Label,
-} from "./styles";
+  ScrollView,
+  Text,
+  TextInput,
+  TextInputProps,
+  View,
+} from "react-native";
 import { Eye, EyeOff } from "lucide-react-native";
 
 import MaskedInput from "@src/components/MaskedInput";
 
 import { IFieldsRegister } from "../..";
-import { useThemeStore } from "@src/stores/ThemeStore";
 import { CNPJ_MASK } from "@src/constants/Masks";
 
 interface IFieldProps {
@@ -31,18 +28,19 @@ type IInputProps = TextInputProps & {
 };
 
 const Input = forwardRef<any, IInputProps>((props, ref) => {
-  const { theme } = useThemeStore();
   const { label, instruction, password, ...rest } = props;
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   return (
-    <ContainerField>
-      <ContainerInput>
-        <Label>{label}</Label>
-        <InputField
+    <View className="flex-col">
+      <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+        <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
+          {label}
+        </Text>
+        <TextInput
+          className="flex-1 text-base font-redHatDisplayRegular text-primary"
           ref={ref}
-          placeholderTextColor={theme.colors.textPrimary60}
           secureTextEntry={password ? showPassword : false}
           {...rest}
         />
@@ -51,18 +49,21 @@ const Input = forwardRef<any, IInputProps>((props, ref) => {
             <Eye
               onPress={() => setShowPassword(!showPassword)}
               size={24}
-              color={theme.colors.textSecondary}
+              color={"#373737"}
             />
           ) : (
             <EyeOff
               onPress={() => setShowPassword(!showPassword)}
               size={24}
-              color={theme.colors.textSecondary}
+              color={"#373737"}
             />
           ))}
-      </ContainerInput>
-      <Instruction hasInstruction={!!instruction}>{instruction}</Instruction>
-    </ContainerField>
+      </View>
+
+      <Text className="mt-1 text-sm font-redHatDisplayRegular text-primary">
+        {instruction}
+      </Text>
+    </View>
   );
 });
 
@@ -131,8 +132,9 @@ const Fields = ({
   ];
 
   return (
-    <ContainerFields
-      contentContainerStyle={{ rowGap: 24, paddingBottom: 120 }}
+    <ScrollView
+      className="w-full pt-12"
+      contentContainerStyle={{ rowGap: 28, paddingBottom: 120 }}
       showsVerticalScrollIndicator={false}
     >
       {fieldConfigs.map((field, index) => (
@@ -156,7 +158,7 @@ const Fields = ({
           mask={field.mask}
         />
       ))}
-    </ContainerFields>
+    </ScrollView>
   );
 };
 

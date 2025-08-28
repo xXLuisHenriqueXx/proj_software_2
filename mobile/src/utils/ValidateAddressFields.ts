@@ -1,5 +1,6 @@
-import { IFieldsAddress } from "@src/screens/Welcome/Address";
 import { Alert } from "react-native";
+
+import { IFieldsAddress } from "@src/screens/Welcome/Address";
 
 export const validateAddressFields = (fields: IFieldsAddress) => {
   const streetTrimmed = fields.street.trim();

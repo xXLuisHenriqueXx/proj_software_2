@@ -1,8 +1,6 @@
 import { forwardRef } from "react";
-import { ContainerField, ContainerInput, InputField, Label } from "./styles";
-import { MaskInputProps } from "react-native-mask-input";
-
-import { useThemeStore } from "@src/stores/ThemeStore";
+import { Text, View } from "react-native";
+import MaskInput, { MaskInputProps } from "react-native-mask-input";
 
 type MaskType = (string | RegExp)[];
 
@@ -12,20 +10,19 @@ type IMaskedInputProps = MaskInputProps & {
 };
 
 const MaskedInput = forwardRef<any, IMaskedInputProps>((props, ref) => {
-  const { theme } = useThemeStore();
   const { label, ...rest } = props;
 
   return (
-    <ContainerField>
-      <ContainerInput>
-        <Label>{label}</Label>
-        <InputField
-          ref={ref}
-          placeholderTextColor={theme.colors.textPrimary60}
-          {...rest}
-        />
-      </ContainerInput>
-    </ContainerField>
+    <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+      <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
+        {label}
+      </Text>
+      <MaskInput
+        className="flex-1 text-base font-redHatDisplayRegular text-primary"
+        ref={ref}
+        {...rest}
+      />
+    </View>
   );
 });
 

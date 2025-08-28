@@ -1,17 +1,14 @@
 import { useRef, useState } from "react";
 import {
-  ButtonForgot,
-  ButtonForgotText,
-  ContainerField,
-  ContainerFields,
-  ContainerInput,
-  InputField,
-  Label,
-} from "./styles";
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Eye, EyeOff } from "lucide-react-native";
 
 import { IFieldsLogin } from "../..";
-import { useThemeStore } from "@src/stores/ThemeStore";
 
 interface IFieldsProps {
   fields: IFieldsLogin;
@@ -26,41 +23,47 @@ const Fields = ({
   onLogin,
   onForgotEmail,
 }: IFieldsProps) => {
-  const { theme } = useThemeStore();
   const passwordRef = useRef<any>();
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   return (
-    <ContainerFields
+    <ScrollView
+      className="w-full pt-12"
       contentContainerStyle={{ rowGap: 40, paddingBottom: 120 }}
       showsVerticalScrollIndicator={false}
     >
-      <ContainerField>
-        <ContainerInput>
-          <Label>E-mail</Label>
-          <InputField
+      <View className="flex-col">
+        <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+          <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
+            E-mail
+          </Text>
+
+          <TextInput
+            className="flex-1 text-base font-redHatDisplayRegular text-primary"
             placeholder="seuemail@exemplo.com"
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current?.focus()}
-            blurOnSubmit={false}
             value={fields.email}
             onChangeText={(text: string) => {
               setFields({ ...fields, email: text });
             }}
           />
-        </ContainerInput>
-      </ContainerField>
+        </View>
+      </View>
 
-      <ContainerField>
-        <ContainerInput>
-          <Label>Senha</Label>
-          <InputField
+      <View className="flex-col">
+        <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+          <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
+            Senha
+          </Text>
+
+          <TextInput
+            className="flex-1 text-base font-redHatDisplayRegular text-primary"
             ref={passwordRef}
             placeholder="Sua senha"
             returnKeyType="done"
             onSubmitEditing={onLogin}
-            blurOnSubmit={true}
             secureTextEntry={showPassword}
             value={fields.password}
             onChangeText={(text: string) => {
@@ -71,21 +74,23 @@ const Fields = ({
             <Eye
               onPress={() => setShowPassword(!showPassword)}
               size={24}
-              color={theme.colors.textSecondary}
+              color={"#373737"}
             />
           ) : (
             <EyeOff
               onPress={() => setShowPassword(!showPassword)}
               size={24}
-              color={theme.colors.textSecondary}
+              color={"#373737"}
             />
           )}
-        </ContainerInput>
-        <ButtonForgot onPress={onForgotEmail}>
-          <ButtonForgotText>Esqueci a senha</ButtonForgotText>
-        </ButtonForgot>
-      </ContainerField>
-    </ContainerFields>
+        </View>
+        <TouchableOpacity activeOpacity={0.85} onPress={onForgotEmail}>
+          <Text className="w-full mt-2 text-base font-redHatDisplayMedium text-highlight text-right underline">
+            Esqueci a senha
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 

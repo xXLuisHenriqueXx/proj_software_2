@@ -14,7 +14,7 @@ module.exports = {
         highlight: "#316A41",
         primary: "#131313",
         secondary: "#373737",
-        constrast: "#FEFEFE",
+        contrast: "#FEFEFE",
         backgroundPrimary: "#FAF9F6",
         backgroundSecondary: "#EBEEEC",
         cancel: "#BA1A1A",

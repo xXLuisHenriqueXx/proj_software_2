@@ -1,24 +1,13 @@
 import { useCallback, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import {
-  ButtonBack,
-  ButtonRegister,
-  RegisterText,
-  Container,
-  ContainerHeader,
-  Title,
-  ContainerType,
-  ButtonType,
-  TextType,
-} from "./styles";
+import Constants from "expo-constants";
 import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
 
-import { useThemeStore } from "@src/stores/ThemeStore";
 import { PropsStack } from "@src/routes";
 import { validateRegisterFields } from "@src/utils/ValidateRegisterFields";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 
 export interface IFieldsRegister {
   name: string;
@@ -29,8 +18,6 @@ export interface IFieldsRegister {
 }
 
 const Register = () => {
-  const { theme } = useThemeStore();
-
   const navigation = useNavigation<PropsStack>();
 
   const [type, setType] = useState<"personal" | "enterprise">("personal");
@@ -70,28 +57,59 @@ const Register = () => {
   }, [navigation, fields, type]);
 
   const isTypePersonal = type === "personal";
+  const statusBarHeight = Constants.statusBarHeight;
 
   return (
-    <Container>
-      <ContainerHeader>
-        <ButtonBack onPress={() => navigation.goBack()}>
-          <ChevronLeft size={24} color={theme.colors.textPrimary} />
-        </ButtonBack>
-        <Title>Criar conta</Title>
-      </ContainerHeader>
-
-      <ContainerType>
-        <ButtonType onPress={() => setType("personal")} active={isTypePersonal}>
-          <TextType active={isTypePersonal}>Conta pessoal</TextType>
-        </ButtonType>
-
-        <ButtonType
-          onPress={() => setType("enterprise")}
-          active={!isTypePersonal}
+    <View
+      className="relative flex-1 flex-col items-center px-6 bg-backgroundPrimary"
+      style={{ paddingTop: statusBarHeight }}
+    >
+      <View className="flex-row items-center gap-x-4 w-full py-4 mb-4">
+        <TouchableOpacity
+          activeOpacity={0.85}
+          onPress={() => navigation.goBack()}
         >
-          <TextType active={!isTypePersonal}>Conta jurídica</TextType>
-        </ButtonType>
-      </ContainerType>
+          <ChevronLeft size={24} color={"#131313"} />
+        </TouchableOpacity>
+
+        <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
+          Criar conta
+        </Text>
+      </View>
+
+      <View className="flex-row items-center justify-center gap-x-2 w-full p-2 border border-primary rounded-xl">
+        <TouchableOpacity
+          className="flex-1 items-center justify-center py-2 rounded-lg"
+          style={{
+            backgroundColor: isTypePersonal ? "#316A41" : "transparent",
+          }}
+          activeOpacity={0.85}
+          onPress={() => setType("personal")}
+        >
+          <Text
+            className="text-lg font-redHatDisplayMedium"
+            style={{ color: isTypePersonal ? "#FAF9F6" : "#131313" }}
+          >
+            Conta pessoal
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          className="flex-1 items-center justify-center py-2 rounded-lg"
+          style={{
+            backgroundColor: !isTypePersonal ? "#316A41" : "transparent",
+          }}
+          activeOpacity={0.85}
+          onPress={() => setType("enterprise")}
+        >
+          <Text
+            className="text-lg font-redHatDisplayMedium"
+            style={{ color: !isTypePersonal ? "#FAF9F6" : "#131313" }}
+          >
+            Conta jurídica
+          </Text>
+        </TouchableOpacity>
+      </View>
 
       <Fields
         fields={fields}
@@ -101,19 +119,21 @@ const Register = () => {
         onRegister={handleRegister}
       />
 
-      <ButtonRegister
+      <TouchableOpacity
+        className="absolute bottom-6 flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
+        activeOpacity={0.85}
         onPress={isTypePersonal ? handleRegister : handleNavigateToAddress}
         disabled={loading}
       >
         {loading ? (
-          <ActivityIndicator size="small" color={theme.colors.textContrast} />
+          <ActivityIndicator size="small" color={"#FEFEFE"} />
         ) : (
-          <RegisterText>
+          <Text className="text-lg font-redHatDisplayMedium text-contrast">
             {isTypePersonal ? "Cadastrar-se" : "Avançar"}
-          </RegisterText>
+          </Text>
         )}
-      </ButtonRegister>
-    </Container>
+      </TouchableOpacity>
+    </View>
   );
 };
 

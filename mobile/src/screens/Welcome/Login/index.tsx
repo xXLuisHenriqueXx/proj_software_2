@@ -1,21 +1,19 @@
 import { useRef, useState } from "react";
-import { ActivityIndicator, Alert } from "react-native";
 import {
-  ButtonBack,
-  ButtonLogin,
-  LoginText,
-  Container,
-  ContainerHeader,
-  Title,
-} from "./styles";
+  ActivityIndicator,
+  Alert,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import BottomSheet from "@gorhom/bottom-sheet";
+import Constants from "expo-constants";
 import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
 
 import { PropsStack } from "@src/routes";
-import { useThemeStore } from "@src/stores/ThemeStore";
 import { validateLoginFields } from "@src/utils/ValidateLoginFields";
 import SheetEmail from "../_components/SheetEmail";
 import SheetCode from "../_components/SheetCode";
@@ -27,8 +25,6 @@ export interface IFieldsLogin {
 }
 
 const Login = () => {
-  const { theme } = useThemeStore();
-
   const navigation = useNavigation<PropsStack>();
   const bottomSheetEmailRef = useRef<BottomSheet>(null);
   const bottomSheetCodeRef = useRef<BottomSheet>(null);
@@ -61,6 +57,11 @@ const Login = () => {
     console.log("BottomSheet fechado → resetando ações...");
   };
 
+  const handleCloseSheetCode = () => {
+    bottomSheetCodeRef.current?.close();
+    console.log("BottomSheet fechado → resetando ações...");
+  };
+
   const handleSendEmail = () => {
     if (!EMAIL_REGEX.test(email)) {
       Alert.alert("Aviso", "Preencha um e-mail válido");
@@ -71,14 +72,25 @@ const Login = () => {
     bottomSheetCodeRef.current?.expand();
   };
 
+  const statusBarHeight = Constants.statusBarHeight;
+
   return (
-    <Container>
-      <ContainerHeader>
-        <ButtonBack onPress={() => navigation.goBack()}>
-          <ChevronLeft size={24} color={theme.colors.textPrimary} />
-        </ButtonBack>
-        <Title>Acessar conta</Title>
-      </ContainerHeader>
+    <View
+      className="relative flex-1 flex-col items-center px-6 bg-backgroundPrimary"
+      style={{ paddingTop: statusBarHeight }}
+    >
+      <View className="flex-row items-center gap-x-4 w-full py-4">
+        <TouchableOpacity
+          activeOpacity={0.85}
+          onPress={() => navigation.goBack()}
+        >
+          <ChevronLeft size={24} color={"#131313"} />
+        </TouchableOpacity>
+
+        <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
+          Acessar conta
+        </Text>
+      </View>
 
       <Fields
         fields={fields}
@@ -87,13 +99,20 @@ const Login = () => {
         onForgotEmail={handleOpenSheetEmail}
       />
 
-      <ButtonLogin onPress={handleLogin} disabled={loading}>
+      <TouchableOpacity
+        className="absolute bottom-6 flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
+        activeOpacity={0.85}
+        onPress={handleLogin}
+        disabled={loading}
+      >
         {loading ? (
-          <ActivityIndicator size="small" color={theme.colors.textContrast} />
+          <ActivityIndicator size="small" color={"#FEFEFE"} />
         ) : (
-          <LoginText>Acessar</LoginText>
+          <Text className="text-lg font-redHatDisplayMedium text-contrast">
+            Acessar
+          </Text>
         )}
-      </ButtonLogin>
+      </TouchableOpacity>
 
       <SheetEmail
         ref={bottomSheetEmailRef}
@@ -102,8 +121,8 @@ const Login = () => {
         onSend={handleSendEmail}
         onClose={handleCloseSheetEmail}
       />
-      <SheetCode ref={bottomSheetCodeRef} onClose={handleCloseSheetEmail} />
-    </Container>
+      <SheetCode ref={bottomSheetCodeRef} onClose={handleCloseSheetCode} />
+    </View>
   );
 };
 

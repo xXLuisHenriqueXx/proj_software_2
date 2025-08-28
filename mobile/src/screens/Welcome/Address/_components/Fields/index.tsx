@@ -1,15 +1,13 @@
 import React, { useRef } from "react";
 import {
-  ContainerField,
-  ContainerFields,
-  ContainerInput,
-  GroupField,
-  InputField,
-  Label,
-  Separator,
-} from "./styles";
+  ScrollView,
+  Text,
+  TextInput,
+  useWindowDimensions,
+  View,
+} from "react-native";
+
 import { IEditableFields, IFieldsAddress } from "../..";
-import { useWindowDimensions } from "react-native";
 import MaskedInput from "@src/components/MaskedInput";
 import { CEP_MASK } from "@src/constants/Masks";
 
@@ -38,23 +36,23 @@ const Fields = ({
   const cityRef = useRef<any>();
   const stateRef = useRef<any>();
 
-  const streetWidth = width * 0.7 - 24;
-  const numberWidth = width * 0.3 - 24;
-  const neighborhoodWidth = width * 0.6 - 24;
-  const extraWidth = width * 0.4 - 24;
-  const cityWidth = width * 0.8 - 24;
-  const stateWidth = width * 0.2 - 24;
+  const streetWidth = width * 0.7 - 28;
+  const numberWidth = width * 0.3 - 28;
+  const neighborhoodWidth = width * 0.6 - 28;
+  const extraWidth = width * 0.4 - 28;
+  const cityWidth = width * 0.8 - 28;
+  const stateWidth = width * 0.2 - 28;
 
   return (
-    <ContainerFields
-      contentContainerStyle={{ rowGap: 32, paddingBottom: 82 }}
+    <ScrollView
+      className="w-full pt-12"
+      contentContainerStyle={{ rowGap: 32, paddingBottom: 120 }}
       showsVerticalScrollIndicator={false}
     >
       <MaskedInput
         label="Cep"
         placeholder="00000-000"
         returnKeyType="done"
-        blurOnSubmit={true}
         value={cep}
         onChangeText={(masked, unmasked) => {
           setCep(unmasked);
@@ -62,13 +60,17 @@ const Fields = ({
         mask={CEP_MASK}
       />
 
-      <Separator />
+      <View className="w-full border border-dashed border-highlight" />
 
-      <GroupField>
-        <ContainerField style={{ width: streetWidth }}>
-          <ContainerInput>
-            <Label>Endereço*</Label>
-            <InputField
+      <View className="flex-row items-center gap-x-4">
+        <View className="flex-col" style={{ width: streetWidth }}>
+          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
+              Endereço*
+            </Text>
+
+            <TextInput
+              className="flex-1 text-base font-redHatDisplayRegular text-primary"
               placeholder="Seu endereço"
               returnKeyType="next"
               onSubmitEditing={() => numberRef.current?.focus()}
@@ -79,13 +81,17 @@ const Fields = ({
                 setFields({ ...fields, street: text });
               }}
             />
-          </ContainerInput>
-        </ContainerField>
+          </View>
+        </View>
 
-        <ContainerField style={{ width: numberWidth }}>
-          <ContainerInput>
-            <Label>Número*</Label>
-            <InputField
+        <View className="flex-col" style={{ width: numberWidth }}>
+          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
+              Número*
+            </Text>
+
+            <TextInput
+              className="flex-1 text-base font-redHatDisplayRegular text-primary"
               placeholder="000"
               returnKeyType="next"
               onSubmitEditing={() => neighborhoodRef.current?.focus()}
@@ -96,15 +102,19 @@ const Fields = ({
                 setFields({ ...fields, number: text });
               }}
             />
-          </ContainerInput>
-        </ContainerField>
-      </GroupField>
+          </View>
+        </View>
+      </View>
 
-      <GroupField>
-        <ContainerField style={{ width: neighborhoodWidth }}>
-          <ContainerInput>
-            <Label>Bairro*</Label>
-            <InputField
+      <View className="flex-row items-center gap-x-4">
+        <View className="flex-col" style={{ width: neighborhoodWidth }}>
+          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
+              Bairro*
+            </Text>
+
+            <TextInput
+              className="flex-1 text-base font-redHatDisplayRegular text-primary"
               placeholder="Seu bairro"
               returnKeyType="next"
               onSubmitEditing={() => extraRef.current?.focus()}
@@ -115,13 +125,17 @@ const Fields = ({
                 setFields({ ...fields, neighborhood: text });
               }}
             />
-          </ContainerInput>
-        </ContainerField>
+          </View>
+        </View>
 
-        <ContainerField style={{ width: extraWidth }}>
-          <ContainerInput>
-            <Label>Complemento</Label>
-            <InputField
+        <View className="flex-col" style={{ width: extraWidth }}>
+          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
+              Complemento
+            </Text>
+
+            <TextInput
+              className="flex-1 text-base font-redHatDisplayRegular text-primary"
               placeholder="Opcional"
               returnKeyType="next"
               onSubmitEditing={() => cityRef.current?.focus()}
@@ -132,15 +146,19 @@ const Fields = ({
                 setFields({ ...fields, extra: text });
               }}
             />
-          </ContainerInput>
-        </ContainerField>
-      </GroupField>
+          </View>
+        </View>
+      </View>
 
-      <GroupField>
-        <ContainerField style={{ width: cityWidth }}>
-          <ContainerInput>
-            <Label>Cidade*</Label>
-            <InputField
+      <View className="flex-row items-center gap-x-4">
+        <View className="flex-col" style={{ width: cityWidth }}>
+          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
+              Cidade*
+            </Text>
+
+            <TextInput
+              className="flex-1 text-base font-redHatDisplayRegular text-primary"
               placeholder="Sua cidade"
               returnKeyType="next"
               onSubmitEditing={() => stateRef.current?.focus()}
@@ -151,13 +169,17 @@ const Fields = ({
                 setFields({ ...fields, city: text });
               }}
             />
-          </ContainerInput>
-        </ContainerField>
+          </View>
+        </View>
 
-        <ContainerField style={{ width: stateWidth }}>
-          <ContainerInput>
-            <Label>UF*</Label>
-            <InputField
+        <View className="flex-col" style={{ width: stateWidth }}>
+          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
+              UF*
+            </Text>
+
+            <TextInput
+              className="flex-1 text-base font-redHatDisplayRegular text-primary"
               placeholder="XX"
               returnKeyType="next"
               onSubmitEditing={onRegister}
@@ -168,10 +190,10 @@ const Fields = ({
                 setFields({ ...fields, state: text });
               }}
             />
-          </ContainerInput>
-        </ContainerField>
-      </GroupField>
-    </ContainerFields>
+          </View>
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 

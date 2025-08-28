@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native";
-import {
-  ButtonBack,
-  ButtonRegister,
-  Container,
-  ContainerHeader,
-  RegisterText,
-  Title,
-} from "./styles";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import Constants from "expo-constants";
 import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
 
-import { useThemeStore } from "@src/stores/ThemeStore";
 import { PropsNavigationStack, PropsStack } from "@src/routes";
 import { validateAddressFields } from "@src/utils/ValidateAddressFields";
 
@@ -39,7 +31,6 @@ export interface IEditableFields {
 type Props = NativeStackScreenProps<PropsNavigationStack, "Address">;
 
 const Address = ({ route }: Props) => {
-  const { theme } = useThemeStore();
   const { fieldsData } = route.params || {};
 
   const navigation = useNavigation<PropsStack>();
@@ -139,23 +130,39 @@ const Address = ({ route }: Props) => {
     }
   }, [cep]);
 
+  const statusBarHeight = Constants.statusBarHeight;
+
   if (loadingCep) {
     return (
-      <Container>
-        <Title>Carregando...</Title>
+      <View
+        className="relative flex-1 flex-col items-center justify-center px-6 bg-backgroundPrimary"
+        style={{ paddingTop: statusBarHeight }}
+      >
+        <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
+          Carregando ...
+        </Text>
         <ActivityIndicator />
-      </Container>
+      </View>
     );
   }
 
   return (
-    <Container>
-      <ContainerHeader>
-        <ButtonBack onPress={() => navigation.goBack()}>
-          <ChevronLeft size={24} color={theme.colors.textPrimary} />
-        </ButtonBack>
-        <Title>Endereço</Title>
-      </ContainerHeader>
+    <View
+      className="relative flex-1 flex-col items-center px-6 bg-backgroundPrimary"
+      style={{ paddingTop: statusBarHeight }}
+    >
+      <View className="flex-row items-center gap-x-4 w-full py-4">
+        <TouchableOpacity
+          activeOpacity={0.85}
+          onPress={() => navigation.goBack()}
+        >
+          <ChevronLeft size={24} color={"#131313"} />
+        </TouchableOpacity>
+
+        <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
+          Endereço
+        </Text>
+      </View>
 
       <Fields
         cep={cep}
@@ -166,14 +173,21 @@ const Address = ({ route }: Props) => {
         onRegister={handleRegister}
       />
 
-      <ButtonRegister onPress={handleRegister} disabled={loading}>
+      <TouchableOpacity
+        className="absolute bottom-6 flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
+        activeOpacity={0.85}
+        onPress={handleRegister}
+        disabled={loading}
+      >
         {loading ? (
-          <ActivityIndicator size="small" color={theme.colors.textContrast} />
+          <ActivityIndicator size="small" color={"#FEFEFE"} />
         ) : (
-          <RegisterText>Cadastrar-se</RegisterText>
+          <Text className="text-lg font-redHatDisplayMedium text-contrast">
+            Cadastrar-se
+          </Text>
         )}
-      </ButtonRegister>
-    </Container>
+      </TouchableOpacity>
+    </View>
   );
 };
 

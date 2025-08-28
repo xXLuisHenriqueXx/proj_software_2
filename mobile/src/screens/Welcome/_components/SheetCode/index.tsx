@@ -1,24 +1,6 @@
 import { forwardRef, useEffect, useState } from "react";
-import { View } from "react-native";
-import BottomSheet from "@gorhom/bottom-sheet";
-import {
-  ButtonNew,
-  ButtonSend,
-  Container,
-  ContainerButtons,
-  ContainerIcon,
-  ContainerInput,
-  ContainerRemainingTime,
-  ContainerText,
-  InputField,
-  Label,
-  Subtitle,
-  TextNew,
-  TextRemainingTime,
-  TextSend,
-  Title,
-} from "./styles";
-import { useThemeStore } from "@src/stores/ThemeStore";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { PlusSquare } from "lucide-react-native";
 
 interface SheetCodeProps {
@@ -27,8 +9,6 @@ interface SheetCodeProps {
 
 const SheetCode = forwardRef<BottomSheet, SheetCodeProps>(
   ({ onClose }, ref) => {
-    const { theme } = useThemeStore();
-
     const [remainingTime, setRemainingTime] = useState<number>(60);
     const [showButton, setShowButton] = useState<boolean>(false);
 
@@ -69,66 +49,77 @@ const SheetCode = forwardRef<BottomSheet, SheetCodeProps>(
               {
                 borderTopLeftRadius: 24,
                 borderTopRightRadius: 24,
-                backgroundColor: theme.colors.textContrast,
-                shadowColor: theme.colors.textPrimary,
+                backgroundColor: "#FEFEFE",
+                shadowColor: "#131313",
                 elevation: 30,
               },
             ]}
           />
         )}
       >
-        <Container>
-          <ContainerIcon>
+        <BottomSheetView className="relative flex-1 flex-col items-center gap-y-12 h-full py-4 px-6">
+          <View className="flex-row items-center">
             {[1, 2, 3].map((index) => (
-              <PlusSquare
-                key={index}
-                size={22}
-                color={theme.colors.highlight}
-              />
+              <PlusSquare key={index} size={22} color={"#316A41"} />
             ))}
-          </ContainerIcon>
+          </View>
 
-          <ContainerText>
-            <Title>Código de confirmação</Title>
+          <View className="flex-col items-center gap-y-1">
+            <Text className="text-2xl font-redHatDisplaySemiBold text-primary text-center">
+              Código de confirmação
+            </Text>
 
-            <Subtitle>
+            <Text className="text-lg font-redHatDisplayRegular text-primary/60 text-center">
               Para confirmar seu e-mail, enviamos um código para sua caixa de
               entrada em youremail@exemplo.com
-            </Subtitle>
-          </ContainerText>
+            </Text>
+          </View>
 
-          <ContainerInput>
-            <Label>Código</Label>
-            <InputField
+          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
+            <Text className="absolute -top-3 left-4 px-2 bg-contrast text-sm font-redHatDisplayMedium text-highlight">
+              Código
+            </Text>
+            <TextInput
+              className="flex-1 text-base font-redHatDisplayRegular text-primary"
               placeholder="Seu código"
               returnKeyType="next"
               onSubmitEditing={() => onClose?.()}
-              blurOnSubmit={false}
               //   value={email}
               //   onChangeText={(text: string) => {
               //     setEmail(text);
               //   }}
             />
-          </ContainerInput>
+          </View>
 
-          <ContainerButtons>
-            <ButtonSend>
-              <TextSend>Enviar</TextSend>
-            </ButtonSend>
+          <View className="flex-col gap-y-4 w-full">
+            <TouchableOpacity
+              className="flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
+              activeOpacity={0.85}
+            >
+              <Text className="text-lg font-redHatDisplayMedium text-contrast">
+                Enviar
+              </Text>
+            </TouchableOpacity>
 
             {showButton ? (
-              <ButtonNew onPress={handleResendCode}>
-                <TextNew>Reenviar</TextNew>
-              </ButtonNew>
+              <TouchableOpacity
+                className="flex-row items-center justify-center w-full h-16 border border-highlight rounded-xl"
+                activeOpacity={0.85}
+                onPress={handleResendCode}
+              >
+                <Text className="text-lg font-redHatDisplayMedium text-highlight">
+                  Reenviar
+                </Text>
+              </TouchableOpacity>
             ) : (
-              <ContainerRemainingTime>
-                <TextRemainingTime>
+              <View className="flex-col items-center justify-center w-full h-16">
+                <Text className="text-lg font-redHatDisplayMedium text-highlight text-center">
                   Reenviar código em {remainingTime} segundos
-                </TextRemainingTime>
-              </ContainerRemainingTime>
+                </Text>
+              </View>
             )}
-          </ContainerButtons>
-        </Container>
+          </View>
+        </BottomSheetView>
       </BottomSheet>
     );
   }
