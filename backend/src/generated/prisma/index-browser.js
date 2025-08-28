@@ -130,10 +130,21 @@ exports.Prisma.UserScalarFieldEnum = {
   parentalControl: 'parentalControl',
   active: 'active',
   cpf: 'cpf',
+  cnpj: 'cnpj',
+  pix_key: 'pix_key',
   addressDistrict: 'addressDistrict',
   addressStreet: 'addressStreet',
   addressNumber: 'addressNumber',
-  addressDetail: 'addressDetail'
+  addressDetail: 'addressDetail',
+  addressCep: 'addressCep'
+};
+
+exports.Prisma.OrganizationInfoScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  description: 'description',
+  phone_number1: 'phone_number1',
+  phone_number2: 'phone_number2'
 };
 
 exports.Prisma.ToyScalarFieldEnum = {
@@ -142,7 +153,8 @@ exports.Prisma.ToyScalarFieldEnum = {
   name: 'name',
   ownerId: 'ownerId',
   usageTime: 'usageTime',
-  preservation: 'preservation'
+  preservation: 'preservation',
+  type: 'type'
 };
 
 exports.Prisma.LendScalarFieldEnum = {
@@ -162,26 +174,27 @@ exports.Prisma.HistoryEntryScalarFieldEnum = {
   toyId: 'toyId'
 };
 
-exports.Prisma.SaleScalarFieldEnum = {
-  id: 'id',
-  ownerId: 'ownerId',
-  buyerId: 'buyerId',
-  toyId: 'toyId',
-  price: 'price',
-  negotiable: 'negotiable',
-  discount: 'discount',
-  paidFor: 'paidFor',
-  paymentDate: 'paymentDate',
-  itemReceived: 'itemReceived',
-  receiveDate: 'receiveDate'
-};
-
 exports.Prisma.RateScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   value: 'value',
   comment: 'comment',
   userId: 'userId'
+};
+
+exports.Prisma.ChatScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  user1Id: 'user1Id',
+  user2Id: 'user2Id'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  content: 'content',
+  senderId: 'senderId',
+  chatId: 'chatId'
 };
 
 exports.Prisma.SortOrder = {
@@ -203,13 +216,20 @@ exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN'
 };
 
+exports.ToyType = exports.$Enums.ToyType = {
+  BOYS: 'BOYS',
+  GIRLS: 'GIRLS'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
+  organizationInfo: 'organizationInfo',
   Toy: 'Toy',
   Lend: 'Lend',
   HistoryEntry: 'HistoryEntry',
-  Sale: 'Sale',
-  Rate: 'Rate'
+  Rate: 'Rate',
+  Chat: 'Chat',
+  Message: 'Message'
 };
 
 /**

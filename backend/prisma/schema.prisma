@@ -25,7 +25,7 @@ model User {
   addressStreet   String
   addressNumber   Int
   addressDetail   String?
-  adressCep       Int
+  addressCep      String
 
   // Relacionamentos
   toys       Toy[]

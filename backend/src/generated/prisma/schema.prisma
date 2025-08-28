@@ -9,32 +9,49 @@ generator client {
 }
 
 model User {
-  id              String   @id @default(uuid()) // UUID no lugar de ObjectId
+  id              String   @id @default(uuid())
   createdAt       DateTime @default(now())
   email           String   @unique
   password        String
   name            String
   role            Role     @default(USER)
-  parentalControl Boolean  @default(false) // flag para contas de crianças
+  parentalControl Boolean  @default(false)
   active          Boolean  @default(true)
-  cpf             String   @unique
+  cpf             String?  @unique
+  cnpj            String?  @unique
+  pix_key         String?  @unique
 
   addressDistrict String
   addressStreet   String
   addressNumber   Int
   addressDetail   String?
+  addressCep      String
 
   // Relacionamentos
-  toys       Toy[] // brinquedos que esse user possui
-  lendsMade  Lend[] @relation("LenderLends") // empréstimos que ele fez (como dono do brinquedo)
-  lendsTaken Lend[] @relation("BorrowerLends") // empréstimos que ele recebeu (como quem pegou emprestado)
+  toys       Toy[]
+  lendsMade  Lend[] @relation("LendedToys")
+  lendsTaken Lend[] @relation("BorrowedToys")
 
-  history HistoryEntry[] // ações no sistema
+  history HistoryEntry[]
 
-  soldToys   Sale[] @relation("SoldToys")
-  boughtToys Sale[] @relation("BoughtToys")
+  ratings          Rate[]
+  organizationInfo organizationInfo?
 
-  ratings Rate[]
+  // relação com chats
+  chatsAsUser1 Chat[] @relation("User1Chats")
+  chatsAsUser2 Chat[] @relation("User2Chats")
+
+  // mensagens enviadas
+  messages Message[]
+}
+
+model organizationInfo {
+  id             String @id @default(uuid())
+  organizationId String @unique
+  organization   User   @relation(fields: [organizationId], references: [id])
+  description    String
+  phone_number1  Int
+  phone_number2  Int?
 }
 
 enum Role {
@@ -52,10 +69,15 @@ model Toy {
 
   lends   Lend[]
   history HistoryEntry[]
-  sales   Sale[]
 
   usageTime    Int
-  preservation Int // de 0 a 5 (pode ser validado por constraint CHECK)
+  preservation Int // CHECK (preservation BETWEEN 0 AND 5)
+  type         ToyType[]
+}
+
+enum ToyType {
+  BOYS
+  GIRLS
 }
 
 model Lend {
@@ -63,67 +85,65 @@ model Lend {
   startDate DateTime
   endDate   DateTime?
 
-  // Quem empresta: dono do Toy
   lenderId String
-  lender   User   @relation("LenderLends", fields: [lenderId], references: [id])
+  lender   User   @relation("LendedToys", fields: [lenderId], references: [id])
 
-  // Quem pega emprestado
   borrowerId String
-  borrower   User   @relation("BorrowerLends", fields: [borrowerId], references: [id])
+  borrower   User   @relation("BorrowedToys", fields: [borrowerId], references: [id])
 
-  // Qual brinquedo foi emprestado
   toyId String
   toy   Toy    @relation(fields: [toyId], references: [id])
 }
 
+// Visualização de um brinquedo pelo usuário
+// - Utilizado para recomendações futuras baseado em gostos
 model HistoryEntry {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   visible   Boolean  @default(true)
 
-  // Quem realizou a ação
   userId String?
   user   User?   @relation(fields: [userId], references: [id])
 
-  // Qual brinquedo foi visitado
   toyId String
   toy   Toy    @relation(fields: [toyId], references: [id])
-}
-
-model Sale {
-  id String @id @default(uuid())
-
-  // Dono do brinquedo
-  owner   User   @relation("SoldToys", fields: [ownerId], references: [id])
-  ownerId String
-
-  // Comprador
-  buyer   User   @relation("BoughtToys", fields: [buyerId], references: [id])
-  buyerId String
-
-  // Qual brinquedo vendido
-  toyId String
-  toy   Toy    @relation(fields: [toyId], references: [id])
-
-  price      Float
-  negotiable Boolean @default(false) // melhor como flag em vez de número
-  discount   Float?
-
-  // Item foi pago com sucesso
-  paidFor     Boolean   @default(false)
-  paymentDate DateTime?
-
-  // Comprador confirmou o recebimento do item
-  itemReceived Boolean   @default(false)
-  receiveDate  DateTime?
 }
 
 model Rate {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-  value     Int // nota de avaliação (1-5, pode ter CHECK)
+  value     Int // CHECK (value BETWEEN 1 AND 5)
   comment   String?
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
+}
+
+model Chat {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // participantes (2 usuários por chat)
+  user1Id String
+  user1   User   @relation("User1Chats", fields: [user1Id], references: [id])
+
+  user2Id String
+  user2   User   @relation("User2Chats", fields: [user2Id], references: [id])
+
+  // mensagens
+  messages Message[]
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  content   String
+
+  // remetente
+  senderId String
+  sender   User   @relation(fields: [senderId], references: [id])
+
+  // chat em que a mensagem foi enviada
+  chatId String
+  chat   Chat   @relation(fields: [chatId], references: [id])
 }
