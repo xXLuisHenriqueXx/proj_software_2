@@ -10,6 +10,7 @@ import {
 import "react-native-reanimated";
 import "react-native-gesture-handler";
 
+import "./global.css";
 import { ThemeProvider } from "styled-components/native";
 import { useThemeStore } from "@src/stores/ThemeStore";
 import Routes from "@src/routes";
