@@ -7,8 +7,9 @@ import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
 
-import { PropsNavigationStack, PropsStack } from "@src/routes";
 import { validateAddressFields } from "@src/utils/ValidateAddressFields";
+import { AuthStackParamList } from "@src/routes/stacks/AuthStack";
+import { PropsRoot } from "@src/routes";
 
 export interface IFieldsAddress {
   street: string;
@@ -28,12 +29,12 @@ export interface IEditableFields {
   state: boolean;
 }
 
-type Props = NativeStackScreenProps<PropsNavigationStack, "Address">;
+type Props = NativeStackScreenProps<AuthStackParamList, "Address">;
 
 const Address = ({ route }: Props) => {
   const { fieldsData } = route.params || {};
 
-  const navigation = useNavigation<PropsStack>();
+  const navigation = useNavigation<PropsRoot>();
 
   const [cep, setCep] = useState<string>("");
   const [fields, setFields] = useState<IFieldsAddress>({
@@ -120,6 +121,8 @@ const Address = ({ route }: Props) => {
     const registerData = { user: fieldsData, address };
 
     console.log("[ADDRESS] handleRegister: ", registerData);
+
+    navigation.replace("AppTabs");
   };
 
   useEffect(() => {

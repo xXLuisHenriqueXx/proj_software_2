@@ -4,25 +4,17 @@ import {
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
 
-import Access from "@src/screens/Welcome/Access";
-import Address from "@src/screens/Welcome/Address";
-import Login from "@src/screens/Welcome/Login";
-import Register from "@src/screens/Welcome/Register";
+import AuthStack from "./stacks/AuthStack";
+import AppTabs from "./tabs/AppTabs";
 
-import { UserCreate } from "@src/common/Entities/User";
-
-export type PropsNavigationStack = {
-  Access: undefined;
-  Login: undefined;
-  Register: undefined;
-  Address: {
-    fieldsData: UserCreate;
-  };
+export type RootParamList = {
+  AuthStack: undefined;
+  AppTabs: undefined;
 };
 
-const Stack = createNativeStackNavigator<PropsNavigationStack>();
+const Stack = createNativeStackNavigator<RootParamList>();
 
-export type PropsStack = NativeStackNavigationProp<PropsNavigationStack>;
+export type PropsRoot = NativeStackNavigationProp<RootParamList>;
 
 const Routes = () => {
   return (
@@ -33,10 +25,8 @@ const Routes = () => {
           animation: "none",
         }}
       >
-        <Stack.Screen name="Access" component={Access} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="Address" component={Address} />
+        <Stack.Screen name="AuthStack" component={AuthStack} />
+        <Stack.Screen name="AppTabs" component={AppTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );

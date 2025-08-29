@@ -3,10 +3,10 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 
-import { PropsStack } from "@src/routes";
+import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
 
 const Access = () => {
-  const navigation = useNavigation<PropsStack>();
+  const navigation = useNavigation<PropsAuthStack>();
 
   const handleNavigateToLogin = useCallback(() => {
     navigation.navigate("Login");

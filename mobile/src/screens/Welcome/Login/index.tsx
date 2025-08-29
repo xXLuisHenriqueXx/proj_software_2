@@ -13,11 +13,11 @@ import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
 
-import { PropsStack } from "@src/routes";
 import { validateLoginFields } from "@src/utils/ValidateLoginFields";
 import SheetEmail from "../_components/SheetEmail";
 import SheetCode from "../_components/SheetCode";
 import { EMAIL_REGEX } from "@src/constants/Regex";
+import { PropsRoot } from "@src/routes";
 
 export interface IFieldsLogin {
   email: string;
@@ -25,7 +25,7 @@ export interface IFieldsLogin {
 }
 
 const Login = () => {
-  const navigation = useNavigation<PropsStack>();
+  const navigation = useNavigation<PropsRoot>();
   const bottomSheetEmailRef = useRef<BottomSheet>(null);
   const bottomSheetCodeRef = useRef<BottomSheet>(null);
 
@@ -46,6 +46,8 @@ const Login = () => {
     }, 3000);
 
     console.log("[LOGIN]: ", validFields);
+
+    navigation.replace("AppTabs");
   };
 
   const handleOpenSheetEmail = () => {

@@ -1,13 +1,14 @@
 import { useCallback, useState } from "react";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
 
-import { PropsStack } from "@src/routes";
+import { PropsRoot } from "@src/routes";
+import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
 import { validateRegisterFields } from "@src/utils/ValidateRegisterFields";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 
 export interface IFieldsRegister {
   name: string;
@@ -18,7 +19,8 @@ export interface IFieldsRegister {
 }
 
 const Register = () => {
-  const navigation = useNavigation<PropsStack>();
+  const rootNavigation = useNavigation<PropsRoot>();
+  const authNavigation = useNavigation<PropsAuthStack>();
 
   const [type, setType] = useState<"personal" | "enterprise">("personal");
   const [fields, setFields] = useState<IFieldsRegister>({
@@ -40,6 +42,8 @@ const Register = () => {
     }, 3000);
 
     console.log("[REGISTER] handleRegister: ", validFields);
+
+    rootNavigation.replace("AppTabs");
   }, [fields, type]);
 
   const handleNavigateToAddress = useCallback(() => {
@@ -53,8 +57,8 @@ const Register = () => {
 
     console.log("[REGISTER] handleNavigateToAddress: ", validFields);
 
-    navigation.navigate("Address", { fieldsData: validFields });
-  }, [navigation, fields, type]);
+    authNavigation.navigate("Address", { fieldsData: validFields });
+  }, [authNavigation, fields, type]);
 
   const isTypePersonal = type === "personal";
   const statusBarHeight = Constants.statusBarHeight;
@@ -67,7 +71,7 @@ const Register = () => {
       <View className="flex-row items-center gap-x-4 w-full py-4 mb-4">
         <TouchableOpacity
           activeOpacity={0.85}
-          onPress={() => navigation.goBack()}
+          onPress={() => authNavigation.goBack()}
         >
           <ChevronLeft size={24} color={"#131313"} />
         </TouchableOpacity>
