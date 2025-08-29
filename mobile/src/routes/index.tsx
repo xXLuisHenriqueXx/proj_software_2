@@ -25,8 +25,8 @@ const Routes = () => {
           animation: "none",
         }}
       >
-        <Stack.Screen name="AuthStack" component={AuthStack} />
         <Stack.Screen name="AppTabs" component={AppTabs} />
+        <Stack.Screen name="AuthStack" component={AuthStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );
