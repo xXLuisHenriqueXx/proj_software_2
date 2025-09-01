@@ -30,7 +30,6 @@ const SheetCode = forwardRef<BottomSheet, SheetCodeProps>(
     };
 
     const handleSheetChanges = (index: number) => {
-      console.log("handleSheetChanges", index);
       if (index === 0) {
         onClose?.();
       }

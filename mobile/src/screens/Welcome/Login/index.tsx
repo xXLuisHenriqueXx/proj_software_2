@@ -56,12 +56,10 @@ const Login = () => {
 
   const handleCloseSheetEmail = () => {
     bottomSheetEmailRef.current?.close();
-    console.log("BottomSheet fechado → resetando ações...");
   };
 
   const handleCloseSheetCode = () => {
     bottomSheetCodeRef.current?.close();
-    console.log("BottomSheet fechado → resetando ações...");
   };
 
   const handleSendEmail = () => {

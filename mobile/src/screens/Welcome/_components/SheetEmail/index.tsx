@@ -13,7 +13,6 @@ interface SheetEmailProps {
 const SheetEmail = forwardRef<BottomSheet, SheetEmailProps>(
   ({ email, setEmail, onSend, onClose }, ref) => {
     const handleSheetChanges = (index: number) => {
-      console.log("handleSheetChanges", index);
       if (index === 0) {
         onClose?.();
       }
