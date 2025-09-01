@@ -5,6 +5,7 @@ import {
   RedHatDisplay_400Regular,
   RedHatDisplay_500Medium,
   RedHatDisplay_600SemiBold,
+  RedHatDisplay_700Bold,
   useFonts,
 } from "@expo-google-fonts/red-hat-display";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -19,6 +20,7 @@ export default function App() {
     RedHatDisplay_400Regular: RedHatDisplay_400Regular,
     RedHatDisplay_500Medium: RedHatDisplay_500Medium,
     RedHatDisplay_600SemiBold: RedHatDisplay_600SemiBold,
+    RedHatDisplay_700Bold: RedHatDisplay_700Bold,
   });
 
   useEffect(() => {

@@ -25,6 +25,7 @@ module.exports = {
         redHatDisplayRegular: ["RedHatDisplay_400Regular"],
         redHatDisplayMedium: ["RedHatDisplay_500Medium"],
         redHatDisplaySemiBold: ["RedHatDisplay_600SemiBold"],
+        redHatDisplayBold: ["RedHatDisplay_700Bold"],
       },
     },
   },
