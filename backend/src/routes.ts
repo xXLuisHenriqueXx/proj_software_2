@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import { authController } from "./controllers/authController";
-import { authHeaderSchema, loginSchema, registerSchema, updateUserSchema } from "./schemas/authValidationSchemas";
+import { authHeaderSchema, loginSchema, registerSchema, updateUserSchema, updateAvatarSchema } from "./schemas/authValidationSchemas";
 import { z } from "zod";
 
 export async function routes(app: FastifyInstance) {
@@ -68,4 +68,21 @@ export async function routes(app: FastifyInstance) {
     },
       authController.login
     )
+  app.patch(
+    "/users/avatar",
+    {
+      schema: {
+        tags: ["Users"],
+        summary: "Atualizar avatar do usuário via Base64",
+        body: updateAvatarSchema,
+        headers: authHeaderSchema,
+        response: {
+          200: z.object({
+            message: z.string()
+          }).describe("Avatar atualizado com sucesso")
+        }
+      }
+    },
+    authController.updateAvatar
+  );
 }

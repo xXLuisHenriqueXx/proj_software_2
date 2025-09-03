@@ -9,8 +9,16 @@ import {
     registerSchema,
     updateUserSchema,
     authHeaderSchema,
+    updateAvatarSchema
 } from "../schemas/authValidationSchemas";
 import { passwordHelper } from "../helpers/passwordHelper";
+import sharp from 'sharp';
+import { pipeline } from "node:stream";
+import { promisify } from "node:util";
+import { randomUUID, verify } from "node:crypto";
+import { extname } from "node:path";
+import { createWriteStream } from "node:fs";
+const pump = promisify(pipeline);
 
 export const authController = {
     async register(req: FastifyRequest, reply: FastifyReply) {
@@ -59,7 +67,7 @@ export const authController = {
             if (!decoded || typeof decoded !== "object") {
                 return reply.status(401).send({ error: "Token inválido" });
             }
-            const userId = decoded.userId as string;
+            const userId = decoded.sub as string;
 
             const bodyResult = updateUserSchema.safeParse(req.body);
             if (!bodyResult.success) {
@@ -147,6 +155,43 @@ export const authController = {
         } catch (error) {
             return reply.status(500).send({ error: "Erro interno do servidor" });
         }
-    }
+    },
+    async updateAvatar(req: FastifyRequest, reply: FastifyReply) {
+        try {
+            const headerResult = authHeaderSchema.safeParse(req.headers);
+            if (!headerResult.success) {
+                return reply.status(401).send({ error: headerResult.error.issues });
+            }
+            const token = headerResult.data.authorization.replace("Bearer ", "");
+            const decoded = await tokenHelper.verifyToken(token);
+            if (!decoded || typeof decoded !== "object") {
+                return reply.status(401).send({ error: "Token inválido" });
+            }
+            const userId = decoded.userId as string;
 
+            const bodyResult = updateAvatarSchema.safeParse(req.body);
+            if (!bodyResult.success) {
+                return reply.status(400).send({ error: bodyResult.error.issues });
+            }
+            const { avatarBase64 } = bodyResult.data;
+
+            const base64Data = avatarBase64.replace(/^data:image\/\w+;base64,/, "");
+            const imageBuffer = Buffer.from(base64Data, 'base64');
+
+            const processedImageBuffer = await sharp(imageBuffer)
+                .resize(512, 512, { fit: 'inside', withoutEnlargement: true })
+                .jpeg({ quality: 80 })
+                .toBuffer();
+            
+            const optimizedBase64String = `data:image/jpeg;base64,${processedImageBuffer.toString('base64')}`;
+
+            await authService.updateAvatar(userId, optimizedBase64String);
+
+            return reply.status(200).send({ message: "Avatar atualizado com sucesso" });
+
+        } catch (error) {
+            console.error(error);
+            return reply.status(500).send({ error: "Erro interno do servidor", msg: error });
+        }
+    }
 }

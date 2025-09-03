@@ -1,3 +1,4 @@
+
 import { fastifySwagger } from "@fastify/swagger";
 import { fastifySwaggerUi } from "@fastify/swagger-ui";
 import { fastify } from "fastify";
@@ -8,11 +9,21 @@ import {
   validatorCompiler,
 } from "fastify-type-provider-zod";
 import { routes } from "./routes"
+import multipart from "@fastify/multipart";
+import fastifyStatic from "@fastify/static";
+import { resolve } from "node:path";
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
+
+app.register(multipart);
+
+app.register(fastifyStatic, {
+  root: resolve(__dirname, "..", "uploads"),
+  prefix: "/uploads",
+});
 
 app.register(fastifySwagger, {
   openapi: {

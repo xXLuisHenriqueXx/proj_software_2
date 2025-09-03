@@ -82,6 +82,12 @@ export const updateUserSchema = z.object({
     addressCep: z.string().regex(/^\d{5}-?\d{3}$/, "CEP inválido").optional()
 })
 
+export const updateAvatarSchema = z.object({
+  avatarBase64: z.string({ required_error: "A imagem em base64 é obrigatória." })
+                 .regex(/^data:image\/[a-zA-Z]+;base64,/, { message: "Formato de string base64 de imagem inválido." })
+});
+
 export const authHeaderSchema = z.object({
   authorization: z.string().regex(/^Bearer\s.+$/, "Token inválido ou ausente")
 });
+

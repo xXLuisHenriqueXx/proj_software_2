@@ -72,4 +72,21 @@ export const authService = {
       throw new Error("Erro ao atualizar usuário: " + error);
     }
   },
+  async updateAvatar(userId: string, base64String: string) {
+    try {
+      const user = await prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          avatarUrl: base64String,
+        },
+      });
+
+      return user;
+    } catch (error) {
+      console.error("Erro no serviço ao atualizar avatar:", error);
+      throw new Error("Erro ao atualizar avatar do usuário");
+    }
+  },
 };
