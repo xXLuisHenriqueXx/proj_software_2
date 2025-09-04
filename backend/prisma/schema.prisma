@@ -6,6 +6,7 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
+  binaryTargets = ["native", "windows"]
 }
 
 model User {
@@ -20,6 +21,7 @@ model User {
   cpf             String?  @unique
   cnpj            String?  @unique
   pix_key         String?  @unique
+  picture         String?  @db.Text
 
   addressDistrict String
   addressStreet   String

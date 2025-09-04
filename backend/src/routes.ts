@@ -69,7 +69,7 @@ export async function routes(app: FastifyInstance) {
       authController.login
     )
   app.patch(
-    "/users/avatar",
+    "/users/picture",
     {
       schema: {
         tags: ["Users"],
@@ -83,6 +83,6 @@ export async function routes(app: FastifyInstance) {
         }
       }
     },
-    authController.updateAvatar
+    authController.updatePicture
   );
 }

@@ -156,7 +156,7 @@ export const authController = {
             return reply.status(500).send({ error: "Erro interno do servidor" });
         }
     },
-    async updateAvatar(req: FastifyRequest, reply: FastifyReply) {
+    async updatePicture(req: FastifyRequest, reply: FastifyReply) {
         try {
             const headerResult = authHeaderSchema.safeParse(req.headers);
             if (!headerResult.success) {
@@ -185,7 +185,7 @@ export const authController = {
             
             const optimizedBase64String = `data:image/jpeg;base64,${processedImageBuffer.toString('base64')}`;
 
-            await authService.updateAvatar(userId, optimizedBase64String);
+            await authService.updatePicture(userId, optimizedBase64String);
 
             return reply.status(200).send({ message: "Avatar atualizado com sucesso" });
 
