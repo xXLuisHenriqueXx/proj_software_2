@@ -1,25 +1,24 @@
-import { View, Text, ScrollView, useWindowDimensions } from "react-native";
+import { ScrollView } from "react-native";
 import Constants from "expo-constants";
 import Featured from "./_components/Featured";
 import SearchInput from "./_components/SearchInput";
 import { useState } from "react";
 import Categories from "./_components/Categories";
 import Recent from "./_components/Recent";
+import List from "@src/components/List";
+import { productsBarbieData } from "@src/static/ProductsBarbieData";
 
 const Search = () => {
   const statusBarHeight = Constants.statusBarHeight;
-  const { height } = useWindowDimensions();
 
-  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
 
-  const openSearch = () => setIsSearchOpen(true);
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
 
-  const closeSearch = () => {
-    if (search) return;
-
-    setIsSearchOpen(false);
-  };
+  const shouldShowList = !isFocused && !!search;
+  const shouldShowFeatured = !isFocused && !search;
 
   return (
     <ScrollView
@@ -32,15 +31,21 @@ const Search = () => {
       }}
     >
       <SearchInput
-        onPress={openSearch}
-        onBlur={closeSearch}
+        onPress={handleFocus}
+        onBlur={handleBlur}
         search={search}
         setSearch={setSearch}
       />
-      {!isSearchOpen && <Featured />}
-      {!isSearchOpen && <Categories />}
+      {shouldShowFeatured && (
+        <>
+          <Featured />
+          <Categories />
+        </>
+      )}
 
-      {isSearchOpen && <Recent />}
+      {isFocused && <Recent />}
+
+      {shouldShowList && <List data={productsBarbieData} limit={4} />}
     </ScrollView>
   );
 };
