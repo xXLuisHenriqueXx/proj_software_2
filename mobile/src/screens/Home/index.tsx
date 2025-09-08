@@ -5,8 +5,10 @@ import { MessageSquareText } from "lucide-react-native";
 import HighlightScroll from "./_components/HighlightScroll";
 import Institutes from "./_components/Institutes";
 import Benefit from "./_components/Benefit";
-import Products from "./_components/Products";
+import List from "@src/components/List";
+
 import { productsBarbieData } from "@src/static/ProductsBarbieData";
+
 const Home = () => {
   const statusBarHeight = Constants.statusBarHeight;
 
@@ -32,22 +34,18 @@ const Home = () => {
 
         <Benefit />
 
-        <Products
+        <List
           title="Qual barbie é você?"
           subtitile="Descubra, colecione e imagine"
           data={productsBarbieData}
+          limit={4}
         />
 
-        <Products
+        <List
           title="Qual barbie é você?"
           subtitile="Descubra, colecione e imagine"
           data={productsBarbieData}
-        />
-
-        <Products
-          title="Qual barbie é você?"
-          subtitile="Descubra, colecione e imagine"
-          data={productsBarbieData}
+          limit={4}
         />
       </View>
     </ScrollView>
