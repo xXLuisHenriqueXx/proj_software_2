@@ -1,16 +1,26 @@
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  useWindowDimensions,
+} from "react-native";
 import Constants from "expo-constants";
 import { MessageSquareText } from "lucide-react-native";
 
-import HighlightScroll from "./_components/HighlightScroll";
 import Institutes from "./_components/Institutes";
 import Benefit from "./_components/Benefit";
 import List from "@src/components/List";
+import Carousel from "@src/components/Carousel";
 
 import { productsBarbieData } from "@src/static/ProductsBarbieData";
+import { highlightScrollData } from "@src/static/HighlightScrollData";
 
 const Home = () => {
+  const { width } = useWindowDimensions();
   const statusBarHeight = Constants.statusBarHeight;
+
+  const carouselWidth = width - 48;
 
   return (
     <ScrollView
@@ -28,7 +38,11 @@ const Home = () => {
       </View>
 
       <View className="flex-col items-center gap-y-12 w-full h-full p-6 pb-48 bg-backgroundPrimary rounded-t-3xl">
-        <HighlightScroll />
+        <Carousel
+          width={carouselWidth}
+          height={240}
+          data={highlightScrollData}
+        />
 
         <Institutes />
 

@@ -1,19 +1,21 @@
-import { highlightScrollData } from "@src/static/HighlightScrollData";
 import { useState } from "react";
 import {
-  View,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-  ScrollView,
-  useWindowDimensions,
-  TouchableOpacity,
   Image,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
-const HighlightScroll = () => {
-  const { width } = useWindowDimensions();
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+interface ICarouselProps {
+  width: number;
+  height: number;
+  data: any[];
+}
 
+const Carousel = ({ width, height, data }: ICarouselProps) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { contentOffset, layoutMeasurement } = event.nativeEvent;
 
@@ -21,8 +23,7 @@ const HighlightScroll = () => {
     setActiveIndex(index);
   };
 
-  const widthHighlight = width - 48;
-  const numberOfHighlights = highlightScrollData.length;
+  const numberOfItems = data.length;
 
   return (
     <View className="w-full">
@@ -35,11 +36,11 @@ const HighlightScroll = () => {
         onScroll={handleScroll}
         scrollEventThrottle={16}
       >
-        {highlightScrollData.map((item, index) => (
+        {data.map((item, index) => (
           <TouchableOpacity key={index} activeOpacity={0.85}>
             <Image
-              className="flex-col items-center justify-center h-60 border border-primary/5 rounded-xl"
-              style={{ width: widthHighlight }}
+              className="flex-col items-center justify-center border border-primary/5 rounded-xl"
+              style={{ width, height }}
               source={{ uri: item.src }}
               resizeMode="cover"
             />
@@ -48,13 +49,15 @@ const HighlightScroll = () => {
       </ScrollView>
 
       <View className="flex-row items-center justify-center gap-x-1 mt-2">
-        {Array(numberOfHighlights)
+        {Array(numberOfItems)
           .fill(null)
           .map((_, index) => (
             <View
               key={index}
-              className={`w-1.5 h-1.5 rounded-full ${
-                activeIndex === index ? "bg-highlight" : "bg-highlight/30"
+              className={`h-1.5 rounded-full ${
+                activeIndex === index
+                  ? "w-3 bg-highlight"
+                  : "w-1.5 bg-highlight/30"
               }`}
             />
           ))}
@@ -63,4 +66,4 @@ const HighlightScroll = () => {
   );
 };
 
-export default HighlightScroll;
+export default Carousel;
