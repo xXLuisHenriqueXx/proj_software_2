@@ -1,3 +1,4 @@
+import React from "react";
 import {
   View,
   Text,
@@ -5,9 +6,13 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React from "react";
-import { IProduct } from "@src/common/Entities/Product";
+import { useNavigation } from "@react-navigation/native";
+import { PropsAppStack } from "@src/routes/stacks/AppStack";
+
 import Header from "./Header";
+
+import { IProduct } from "@src/common/Entities/Product";
+import { formatCurrency } from "@src/utils/FormatCurrency";
 
 interface IProductProps {
   title?: string;
@@ -18,12 +23,10 @@ interface IProductProps {
 
 const List = ({ title, subtitile, data, limit }: IProductProps) => {
   const { width } = useWindowDimensions();
+  const navigation = useNavigation<PropsAppStack>();
 
-  const formatCurrency = (value: number) => {
-    return value.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
+  const handleNavigateToDetail = (item: IProduct) => {
+    navigation.navigate("Detail", { product: item });
   };
 
   const widthProduct = (width - 48 - 24) / 2;
@@ -44,9 +47,10 @@ const List = ({ title, subtitile, data, limit }: IProductProps) => {
               className="flex-col gap-y-4"
               style={{ width: widthProduct }}
               activeOpacity={0.85}
+              onPress={() => handleNavigateToDetail(item)}
             >
               <Image
-                source={{ uri: item.src }}
+                source={{ uri: item.images[0] }}
                 className="w-full aspect-square rounded-xl"
               />
 
@@ -55,11 +59,14 @@ const List = ({ title, subtitile, data, limit }: IProductProps) => {
                   {formatCurrency(item.price)}
                 </Text>
                 <View className="flex-col gap-x-1">
-                  <Text className="text-base font-redHatDisplayRegular text-primary">
+                  <Text
+                    className="text-base font-redHatDisplayRegular text-primary"
+                    numberOfLines={2}
+                  >
                     {item.name}
                   </Text>
                   <Text className="text-sm font-redHatDisplayRegular text-primary/60">
-                    {item.manufacturer}
+                    {item.brand}
                   </Text>
                 </View>
               </View>

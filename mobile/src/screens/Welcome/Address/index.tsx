@@ -122,7 +122,7 @@ const Address = ({ route }: Props) => {
 
     console.log("[ADDRESS] handleRegister: ", registerData);
 
-    navigation.replace("AppTabs");
+    navigation.replace("AppStack");
   };
 
   useEffect(() => {

@@ -5,11 +5,11 @@ import {
 } from "@react-navigation/native-stack";
 
 import AuthStack from "./stacks/AuthStack";
-import AppTabs from "./tabs/AppTabs";
+import AppStack from "./stacks/AppStack";
 
 export type RootParamList = {
   AuthStack: undefined;
-  AppTabs: undefined;
+  AppStack: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootParamList>();
@@ -25,7 +25,7 @@ const Routes = () => {
           animation: "none",
         }}
       >
-        <Stack.Screen name="AppTabs" component={AppTabs} />
+        <Stack.Screen name="AppStack" component={AppStack} />
         <Stack.Screen name="AuthStack" component={AuthStack} />
       </Stack.Navigator>
     </NavigationContainer>

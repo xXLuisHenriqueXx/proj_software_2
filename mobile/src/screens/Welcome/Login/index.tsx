@@ -47,7 +47,7 @@ const Login = () => {
 
     console.log("[LOGIN]: ", validFields);
 
-    navigation.replace("AppTabs");
+    navigation.replace("AppStack");
   };
 
   const handleOpenSheetEmail = () => {

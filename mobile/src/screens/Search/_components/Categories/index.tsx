@@ -1,5 +1,6 @@
-import { categoriesData } from "@src/static/CategoriesData";
 import { View, Text, useWindowDimensions } from "react-native";
+
+import { categoriesData } from "@src/static/CategoriesData";
 
 const Categories = () => {
   const { width } = useWindowDimensions();

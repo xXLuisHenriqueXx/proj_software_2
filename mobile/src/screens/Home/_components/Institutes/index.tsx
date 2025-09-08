@@ -1,6 +1,7 @@
-import { institutesData } from "@src/static/InstitutesData";
-import { ChevronRight } from "lucide-react-native";
 import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
+import { ChevronRight } from "lucide-react-native";
+
+import { institutesData } from "@src/static/InstitutesData";
 
 const Institutes = () => {
   return (
@@ -32,7 +33,6 @@ const Institutes = () => {
               key={index}
               className="flex-col items-center gap-y-1 w-24"
               activeOpacity={0.85}
-              onPress={item.action}
             >
               <Image
                 className="w-24 h-24 border border-primary/5 rounded-xl"

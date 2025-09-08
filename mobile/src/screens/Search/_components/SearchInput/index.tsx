@@ -1,5 +1,5 @@
-import { Search } from "lucide-react-native";
 import { View, TextInput } from "react-native";
+import { Search } from "lucide-react-native";
 
 interface SearchInputProps {
   onPress: () => void;

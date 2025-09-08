@@ -13,7 +13,7 @@ import Benefit from "./_components/Benefit";
 import List from "@src/components/List";
 import Carousel from "@src/components/Carousel";
 
-import { productsBarbieData } from "@src/static/ProductsBarbieData";
+import { productsData } from "@src/static/ProductsData";
 import { highlightScrollData } from "@src/static/HighlightScrollData";
 
 const Home = () => {
@@ -49,16 +49,16 @@ const Home = () => {
         <Benefit />
 
         <List
-          title="Qual barbie é você?"
+          title="Qual gato é você?"
           subtitile="Descubra, colecione e imagine"
-          data={productsBarbieData}
+          data={productsData}
           limit={4}
         />
 
         <List
-          title="Qual barbie é você?"
+          title="Qual gato é você?"
           subtitile="Descubra, colecione e imagine"
-          data={productsBarbieData}
+          data={productsData}
           limit={4}
         />
       </View>

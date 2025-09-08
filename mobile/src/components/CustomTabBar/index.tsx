@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { AnimatePresence, MotiText, MotiView } from "moti";
+
 import { buttonsData } from "@src/static/TabBarButtonsData";
 
 const CustomTabBar = ({

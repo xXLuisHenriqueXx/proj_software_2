@@ -43,7 +43,7 @@ const Register = () => {
 
     console.log("[REGISTER] handleRegister: ", validFields);
 
-    rootNavigation.replace("AppTabs");
+    rootNavigation.replace("AppStack");
   }, [fields, type]);
 
   const handleNavigateToAddress = useCallback(() => {

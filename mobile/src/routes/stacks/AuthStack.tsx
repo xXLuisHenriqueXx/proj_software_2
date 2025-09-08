@@ -1,14 +1,15 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { UserCreate } from "@src/common/Entities/User";
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
+
 import Access from "@src/screens/Welcome/Access";
 import Login from "@src/screens/Welcome/Login";
 import Register from "@src/screens/Welcome/Register";
 import Address from "@src/screens/Welcome/Address";
+
+import { UserCreate } from "@src/common/Entities/User";
 
 export type AuthStackParamList = {
   Access: undefined;

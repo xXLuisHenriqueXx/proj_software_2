@@ -21,6 +21,7 @@ const AppTabs = () => {
       tabBar={(props) => <CustomTabBar {...props} />}
       screenOptions={{
         headerShown: false,
+        animation: "shift",
       }}
     >
       <Tab.Screen name="Home" component={Home} />

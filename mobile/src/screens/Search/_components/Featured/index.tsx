@@ -1,5 +1,6 @@
-import { featuredData } from "@src/static/FeaturedData";
 import { View, Text } from "react-native";
+
+import { featuredData } from "@src/static/FeaturedData";
 
 const Featured = () => {
   return (

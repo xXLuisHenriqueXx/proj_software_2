@@ -1,12 +1,14 @@
+import { useState } from "react";
 import { ScrollView } from "react-native";
 import Constants from "expo-constants";
+
 import Featured from "./_components/Featured";
 import SearchInput from "./_components/SearchInput";
-import { useState } from "react";
 import Categories from "./_components/Categories";
 import Recent from "./_components/Recent";
 import List from "@src/components/List";
-import { productsBarbieData } from "@src/static/ProductsBarbieData";
+
+import { productsData } from "@src/static/ProductsData";
 
 const Search = () => {
   const statusBarHeight = Constants.statusBarHeight;
@@ -45,7 +47,7 @@ const Search = () => {
 
       {isFocused && <Recent />}
 
-      {shouldShowList && <List data={productsBarbieData} limit={4} />}
+      {shouldShowList && <List data={productsData} limit={4} />}
     </ScrollView>
   );
 };
