@@ -6,7 +6,7 @@ const Benefit = () => {
       <Image
         className="w-full h-full rounded-xl"
         source={{
-          uri: "https://ingresso-a.akamaihd.net/b2b/production/uploads/article/image/3600/693695cead3e56eef1c9ce94df4ed832.jpg",
+          uri: "https://placecats.com/300/300",
         }}
         resizeMode="cover"
       />

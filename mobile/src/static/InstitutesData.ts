@@ -6,7 +6,7 @@ export const institutesData: IHighlightScrollDataProps[] = [
   {
     id: "institute-1",
     name: "Instituto 1",
-    src: "https://img.freepik.com/vetores-gratis/logotipo-humano-colorido-gradiente_474888-2689.jpg?semt=ais_hybrid&w=740&q=80",
+    src: "https://placecats.com/300/300",
     phone: "(11) 99999-9999",
     online: "https://www.google.com.br",
     address: "Av. Paulista, 9999",
@@ -14,7 +14,7 @@ export const institutesData: IHighlightScrollDataProps[] = [
   {
     id: "institute-2",
     name: "Instituto 2",
-    src: "https://img.freepik.com/vetores-gratis/logotipo-humano-colorido-gradiente_474888-2689.jpg?semt=ais_hybrid&w=740&q=80",
+    src: "https://placecats.com/300/300",
     phone: "(11) 99999-9999",
     online: "https://www.google.com.br",
     address: "Av. Paulista, 9999",
@@ -22,7 +22,7 @@ export const institutesData: IHighlightScrollDataProps[] = [
   {
     id: "institute-3",
     name: "Instituto 3",
-    src: "https://img.freepik.com/vetores-gratis/logotipo-humano-colorido-gradiente_474888-2689.jpg?semt=ais_hybrid&w=740&q=80",
+    src: "https://placecats.com/300/300",
     phone: "(11) 99999-9999",
     online: "https://www.google.com.br",
     address: "Av. Paulista, 9999",
@@ -30,7 +30,7 @@ export const institutesData: IHighlightScrollDataProps[] = [
   {
     id: "institute-4",
     name: "Instituto 4",
-    src: "https://img.freepik.com/vetores-gratis/logotipo-humano-colorido-gradiente_474888-2689.jpg?semt=ais_hybrid&w=740&q=80",
+    src: "https://placecats.com/300/300",
     phone: "(11) 99999-9999",
     online: "https://www.google.com.br",
     address: "Av. Paulista, 9999",
@@ -38,7 +38,7 @@ export const institutesData: IHighlightScrollDataProps[] = [
   {
     id: "institute-5",
     name: "Instituto 5",
-    src: "https://img.freepik.com/vetores-gratis/logotipo-humano-colorido-gradiente_474888-2689.jpg?semt=ais_hybrid&w=740&q=80",
+    src: "https://placecats.com/300/300",
     phone: "(11) 99999-9999",
     online: "https://www.google.com.br",
     address: "Av. Paulista, 9999",
@@ -46,7 +46,7 @@ export const institutesData: IHighlightScrollDataProps[] = [
   {
     id: "institute-6",
     name: "Instituto 6",
-    src: "https://img.freepik.com/vetores-gratis/logotipo-humano-colorido-gradiente_474888-2689.jpg?semt=ais_hybrid&w=740&q=80",
+    src: "https://placecats.com/300/300",
     phone: "(11) 99999-9999",
     online: "https://www.google.com.br",
     address: "Av. Paulista, 9999",

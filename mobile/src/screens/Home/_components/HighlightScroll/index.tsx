@@ -36,16 +36,12 @@ const HighlightScroll = () => {
         scrollEventThrottle={16}
       >
         {highlightScrollData.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            activeOpacity={0.85}
-            onPress={item.action}
-          >
+          <TouchableOpacity key={index} activeOpacity={0.85}>
             <Image
               className="flex-col items-center justify-center h-60 border border-primary/5 rounded-xl"
+              style={{ width: widthHighlight }}
               source={{ uri: item.src }}
               resizeMode="cover"
-              style={{ width: widthHighlight }}
             />
           </TouchableOpacity>
         ))}
