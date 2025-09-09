@@ -43,12 +43,16 @@ export default function App() {
 }
 const AppContent = () => {
   return (
-    <GestureHandlerRootView>
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar barStyle={"dark-content"} backgroundColor={"transparent"} />
+    <SafeAreaView style={{ flex: 1 }}>
+      <GestureHandlerRootView>
+        <StatusBar
+          barStyle={"dark-content"}
+          backgroundColor="transparent"
+          translucent
+        />
 
         <Routes />
-      </SafeAreaView>
-    </GestureHandlerRootView>
+      </GestureHandlerRootView>
+    </SafeAreaView>
   );
 };
