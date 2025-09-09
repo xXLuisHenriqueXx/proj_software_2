@@ -2,8 +2,17 @@ import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { ChevronRight } from "lucide-react-native";
 
 import { institutesData } from "@src/static/InstitutesData";
+import { IInstitute } from "@src/common/Entities/Institute";
+import { useNavigation } from "@react-navigation/native";
+import { PropsAppStack } from "@src/routes/stacks/AppStack";
 
 const Institutes = () => {
+  const navigation = useNavigation<PropsAppStack>();
+
+  const handleNavigateToInstituteDetail = (institute: IInstitute) => {
+    navigation.navigate("InstituteDetail", { institute });
+  };
+
   return (
     <View className="flex-col items-center gap-y-4">
       <TouchableOpacity
@@ -33,6 +42,7 @@ const Institutes = () => {
               key={index}
               className="flex-col items-center gap-y-1 w-24"
               activeOpacity={0.85}
+              onPress={() => handleNavigateToInstituteDetail(item)}
             >
               <Image
                 className="w-24 h-24 border border-primary/5 rounded-xl"

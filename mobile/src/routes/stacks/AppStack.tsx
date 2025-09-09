@@ -5,12 +5,15 @@ import {
 
 import AppTabs from "../tabs/AppTabs";
 import ProductDetail from "@src/screens/ProductDetail";
+import InstituteDetail from "@src/screens/InstituteDetail";
 
 import { IProduct } from "@src/common/Entities/Product";
+import { IInstitute } from "@src/common/Entities/Institute";
 
 export type AppStackParamList = {
   AppTabs: undefined;
   ProductDetail: { product: IProduct };
+  InstituteDetail: { institute: IInstitute };
 };
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
@@ -24,6 +27,7 @@ export default function AppStack() {
     >
       <Stack.Screen name="AppTabs" component={AppTabs} />
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
+      <Stack.Screen name="InstituteDetail" component={InstituteDetail} />
     </Stack.Navigator>
   );
 }
