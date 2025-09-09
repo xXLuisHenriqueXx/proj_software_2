@@ -5,6 +5,7 @@ import {
   ScrollView,
   useWindowDimensions,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 import { MessageSquareText } from "lucide-react-native";
 
@@ -15,12 +16,16 @@ import Carousel from "@src/components/Carousel";
 
 import { productsData } from "@src/static/ProductsData";
 import { highlightScrollData } from "@src/static/HighlightScrollData";
+import { PropsAppStack } from "@src/routes/stacks/AppStack";
 
 const Home = () => {
   const { width } = useWindowDimensions();
   const statusBarHeight = Constants.statusBarHeight;
+  const navigation = useNavigation<PropsAppStack>();
 
   const carouselWidth = width - 48;
+
+  const handleNavigateToChats = () => navigation.replace("ChatStack");
 
   return (
     <ScrollView
@@ -33,7 +38,7 @@ const Home = () => {
           Olá, Luis
         </Text>
 
-        <TouchableOpacity activeOpacity={0.85}>
+        <TouchableOpacity activeOpacity={0.85} onPress={handleNavigateToChats}>
           <MessageSquareText size={24} color={"#316A41"} />
         </TouchableOpacity>
       </View>

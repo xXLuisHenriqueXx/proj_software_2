@@ -9,13 +9,13 @@ import Login from "@src/screens/Welcome/Login";
 import Register from "@src/screens/Welcome/Register";
 import Address from "@src/screens/Welcome/Address";
 
-import { UserCreate } from "@src/common/Entities/User";
+import { IUserCreate } from "@src/common/Entities/User";
 
 export type AuthStackParamList = {
   Access: undefined;
   Login: undefined;
   Register: undefined;
-  Address: { fieldsData: UserCreate };
+  Address: { fieldsData: IUserCreate };
 };
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
