@@ -20,12 +20,12 @@ const Access = () => {
 
   return (
     <View
-      className="relative flex-1 flex-col items-center gap-y-32 bg-backgroundPrimary"
-      style={{ paddingTop: statusBarHeight + 60 }}
+      className="relative flex-1 flex-col items-center gap-y-24 bg-backgroundPrimary"
+      style={{ paddingTop: statusBarHeight + 64 }}
     >
       <Image
-        className="w-52 h-60"
-        source={require("@assets/splash.png")}
+        className="w-72 h-72"
+        source={require("@assets/icon.png")}
         resizeMode="cover"
       />
 

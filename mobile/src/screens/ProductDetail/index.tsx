@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import Constants from "expo-constants";
 import { ArrowLeft, Heart, Share2 } from "lucide-react-native";
 
 import Carousel from "@src/components/Carousel";
@@ -21,14 +22,19 @@ const ProductDetail = ({ route }: Props) => {
   const { width } = useWindowDimensions();
 
   const navigation = useNavigation<PropsAppStack>();
+  const statusBarHeight = Constants.statusBarHeight;
 
-  const characteristicWidth = (width - 48 - 24) / 2;
+  const characteristicWidth = (width - 48 - 16) / 2;
 
   return (
     <ScrollView
       className="flex-1 bg-backgroundPrimary"
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ rowGap: 32, paddingBottom: 48 }}
+      contentContainerStyle={{
+        paddingTop: statusBarHeight,
+        paddingBottom: 32,
+        rowGap: 48,
+      }}
     >
       <View className="relative">
         <TouchableOpacity
@@ -80,7 +86,7 @@ const ProductDetail = ({ route }: Props) => {
             Características
           </Text>
 
-          <View className="flex-row flex-wrap justify-between gap-6 w-full">
+          <View className="flex-row flex-wrap justify-between gap-4 w-full">
             <View className="flex-col" style={{ width: characteristicWidth }}>
               <Text className="text-lg font-redHatDisplayRegular text-primary/60">
                 Tamanho

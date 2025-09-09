@@ -25,7 +25,8 @@ const Home = () => {
   return (
     <ScrollView
       className="relative bg-backgroundSecondary"
-      style={{ paddingTop: statusBarHeight }}
+      style={{ paddingTop: statusBarHeight + 64 }}
+      contentContainerStyle={{ paddingBottom: 64 }}
     >
       <View className="flex-row items-center justify-between w-full p-6">
         <Text className="text-2xl font-redHatDisplaySemiBold text-primary">

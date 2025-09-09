@@ -25,11 +25,10 @@ const Search = () => {
   return (
     <ScrollView
       className="relative flex-1 bg-backgroundPrimary w-full h-full px-6"
-      style={{ paddingTop: statusBarHeight }}
+      style={{ paddingTop: statusBarHeight + 64 }}
       contentContainerStyle={{
-        alignItems: "center",
+        paddingBottom: 224,
         rowGap: 48,
-        paddingBottom: 192,
       }}
     >
       <SearchInput

@@ -66,7 +66,7 @@ const Register = () => {
   return (
     <View
       className="relative flex-1 flex-col items-center px-6 bg-backgroundPrimary"
-      style={{ paddingTop: statusBarHeight }}
+      style={{ paddingTop: statusBarHeight + 32 }}
     >
       <View className="flex-row items-center gap-x-4 w-full py-4 mb-4">
         <TouchableOpacity
