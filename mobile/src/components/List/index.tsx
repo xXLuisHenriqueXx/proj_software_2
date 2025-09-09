@@ -26,7 +26,7 @@ const List = ({ title, subtitile, data, limit }: IProductProps) => {
   const navigation = useNavigation<PropsAppStack>();
 
   const handleNavigateToDetail = (item: IProduct) => {
-    navigation.navigate("Detail", { product: item });
+    navigation.navigate("ProductDetail", { product: item });
   };
 
   const widthProduct = (width - 48 - 24) / 2;

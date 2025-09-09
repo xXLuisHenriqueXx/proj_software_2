@@ -14,9 +14,9 @@ import Carousel from "@src/components/Carousel";
 import { AppStackParamList, PropsAppStack } from "@src/routes/stacks/AppStack";
 import { formatCurrency } from "@src/utils/FormatCurrency";
 
-type Props = NativeStackScreenProps<AppStackParamList, "Detail">;
+type Props = NativeStackScreenProps<AppStackParamList, "ProductDetail">;
 
-const Detail = ({ route }: Props) => {
+const ProductDetail = ({ route }: Props) => {
   const { product } = route.params || {};
   const { width } = useWindowDimensions();
 
@@ -133,4 +133,4 @@ const Detail = ({ route }: Props) => {
   );
 };
 
-export default Detail;
+export default ProductDetail;

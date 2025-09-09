@@ -4,13 +4,13 @@ import {
 } from "@react-navigation/native-stack";
 
 import AppTabs from "../tabs/AppTabs";
-import Detail from "@src/screens/Detail";
+import ProductDetail from "@src/screens/ProductDetail";
 
 import { IProduct } from "@src/common/Entities/Product";
 
 export type AppStackParamList = {
   AppTabs: undefined;
-  Detail: { product: IProduct };
+  ProductDetail: { product: IProduct };
 };
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
@@ -23,7 +23,7 @@ export default function AppStack() {
       screenOptions={{ headerShown: false, animation: "fade_from_bottom" }}
     >
       <Stack.Screen name="AppTabs" component={AppTabs} />
-      <Stack.Screen name="Detail" component={Detail} />
+      <Stack.Screen name="ProductDetail" component={ProductDetail} />
     </Stack.Navigator>
   );
 }
