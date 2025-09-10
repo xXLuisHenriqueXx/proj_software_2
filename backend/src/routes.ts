@@ -85,4 +85,5 @@ export async function routes(app: FastifyInstance) {
     },
     authController.updatePicture
   );
+    
 }
