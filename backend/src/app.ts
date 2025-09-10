@@ -9,21 +9,12 @@ import {
   validatorCompiler,
 } from "fastify-type-provider-zod";
 import { routes } from "./routes"
-import multipart from "@fastify/multipart";
-import fastifyStatic from "@fastify/static";
 import { resolve } from "node:path";
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
-
-app.register(multipart);
-
-app.register(fastifyStatic, {
-  root: resolve(__dirname, "..", "uploads"),
-  prefix: "/uploads",
-});
 
 app.register(fastifySwagger, {
   openapi: {
@@ -44,6 +35,6 @@ app.get("/ping", async () => {
 
 app.register(routes, { prefix: "/api"});
 
-app.listen({ port: 3000, host: "0.0.0.0" }).then(() => {
-  console.log("Server is running on port 3000");
-});
+//app.listen({ port: 3000, host: "0.0.0.0" }).then(() => {
+//  console.log("Server is running on port 3000");
+//});
