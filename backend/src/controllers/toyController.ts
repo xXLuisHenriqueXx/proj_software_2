@@ -7,7 +7,7 @@ import {
     authHeaderSchema,
 } from "../schemas/authValidationSchemas";
 
-import { toyCreateSchema, toyListSchema } from "../schemas/toyValidationSchemas";
+import { getToySchema, toyCreateSchema, toyListSchema } from "../schemas/toyValidationSchemas";
 import { ToyService } from "../services/toyService";
 
 export const ToyController = {
@@ -30,6 +30,7 @@ export const ToyController = {
 
             const toyData = { ...bodyResult.data }
 
+            // TROCAR PARA OBJETO COM OS DADOS (SEMELHANTE AO UPDATE) E ALTERAR SCHEMA
             const toy = ToyService.createToy(toyData.name, toyData.price, toyData.usageTime, toyData.preservation, toyData.pictures, toyData.types, userId, toyData.discount)
 
             return reply.status(200).send({ message: "Brinquedo criado com sucesso" })
@@ -110,8 +111,67 @@ export const ToyController = {
 
             return reply.status(200).send({ result })
         } catch (error) {
-            return reply.status(500).send({ error: (error as Error).message })
+            return reply.status(500).send({ error: error })
+        }
+    },
+    async getToy(req: FastifyRequest, reply: FastifyReply) {
+        try {
+            const toyResult = getToySchema.safeParse(req.params);
+
+            if (!toyResult.success) {
+                return reply.status(400).send({ error: toyResult.error.issues })
+            }
+
+            const { id: toyId } = toyResult.data;
+
+            const toy = await prisma.toy.findUnique({
+                where: { id: toyId },
+                include: {
+                    ToyPictures: {
+                        orderBy: { order: "asc" },
+                    },
+                    owner: {
+                        select: {
+                            id: true,
+                            name: true,
+                        },
+                    },
+                },
+            })
+
+            if (!toy) {
+                return reply.status(404).send({ error: "Brinquedo não encontrado" })
+            }
+
+            const response = {
+                id: toy.id,
+                name: toy.name,
+                description: toy.description,
+                price: toy.price,
+                isNew: toy.isNew,
+                canTrade: toy.canTrade,
+                canLend: toy.canLend,
+                usageTime: toy.usageTime,
+                preservation: toy.preservation,
+                type: toy.type,
+                ageGroup: toy.ageGroup,
+                pictures: toy.ToyPictures.map((p) => ({
+                    id: p.id,
+                    order: p.order,
+                    picture: p.picture,
+                })),
+                owner: {
+                    id: toy.owner.id,
+                    name: toy.owner.name,
+                    picture: toy.ToyPictures.length > 0 ? toy.ToyPictures[0].picture : null,
+                },
+            }
+
+            return reply.status(200).send(response)
+        } catch (error) {
+            return reply.status(500).send({ error: error })
         }
     }
+
 
 }

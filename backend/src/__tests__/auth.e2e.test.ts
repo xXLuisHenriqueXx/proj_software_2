@@ -120,4 +120,84 @@ describe('Auth E2E', () => {
       expect(response.status).toBe(404); 
     });
   });
+
+    describe('POST /api/auth/register', () => {
+    const uniqueEmail = `teste.e2e.${Date.now()}@exemplo.com`;
+    let token: string;
+
+    it('deve registrar um novo usuário com sucesso (Status 200)', async () => {
+      const response = await request(app.server)
+        .post('/api/auth/register')
+        .send({
+          name: "Usuario de Teste Válido",
+          email: uniqueEmail,
+          password: "Password@123",
+          passwordConfirmation: "Password@123",
+          cpf: "111.222.333-44", 
+          addressDistrict: "Bairro dos Testes",
+          addressStreet: "Rua dos Testes Automatizados",
+          addressNumber: 123,
+          addressCep: "12345-000"
+        });
+
+      expect(response.status).toBe(200);
+      expect(response.body).toHaveProperty('token');
+      token = response.body.token; // Salva o token para testes futuros
+    });
+
+    it('não deve registrar com um email já existente (Status 401)', async () => {
+      const response = await request(app.server)
+        .post('/api/auth/register')
+        .send({
+          name: "Outro Usuario",
+          email: uniqueEmail, 
+          password: "Password@123",
+          passwordConfirmation: "Password@123",
+          cpf: "555.666.777-88",
+          addressDistrict: "Bairro",
+          addressStreet: "Rua",
+          addressNumber: 1,
+          addressCep: "12345-000"
+        });
+      
+      expect(response.status).toBe(401);
+    });
+
+    it('não deve registrar se as senhas não conferem (Status 400)', async () => {
+      const response = await request(app.server)
+        .post('/api/auth/register')
+        .send({
+          name: "Usuario Senha Errada",
+          email: `outro.email.${Date.now()}@exemplo.com`,
+          password: "Password@123",
+          passwordConfirmation: "SENHA_DIFERENTE",
+          cpf: "999.888.777-66",
+          addressDistrict: "Bairro",
+          addressStreet: "Rua",
+          addressNumber: 1,
+          addressCep: "12345-000"
+        });
+      
+      expect(response.status).toBe(400);
+    });
+
+    it('não deve registrar se a senha for muito curta (Status 400)', async () => {
+      const response = await request(app.server)
+        .post('/api/auth/register')
+        .send({
+          name: "Usuario Senha Curta",
+          email: `senha.curta.${Date.now()}@exemplo.com`,
+          password: "123",
+          passwordConfirmation: "123",
+          cpf: "111.222.444-55",
+          addressDistrict: "Bairro",
+          addressStreet: "Rua",
+          addressNumber: 1,
+          addressCep: "12345-000"
+        });
+      
+      expect(response.status).toBe(400);
+    });
+  });
+
 });

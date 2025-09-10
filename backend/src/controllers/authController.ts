@@ -2,9 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { prisma } from "../prisma";
 import { authService } from "../services/authService";
 import { tokenHelper } from "../helpers/tokenHelper";
-
 import {
-    forgottenPasswordSchema,
     loginSchema,
     registerSchema,
     updateUserSchema,
@@ -12,19 +10,13 @@ import {
     updateAvatarSchema
 } from "../schemas/authValidationSchemas";
 import { passwordHelper } from "../helpers/passwordHelper";
-import sharp from 'sharp';
-import { pipeline } from "node:stream";
-import { promisify } from "node:util";
-import { randomUUID, verify } from "node:crypto";
-import { extname } from "node:path";
-import { createWriteStream } from "node:fs";
-const pump = promisify(pipeline);
+import * as sharp from 'sharp';
+import { randomUUID } from "node:crypto";
 
 export const authController = {
     async register(req: FastifyRequest, reply: FastifyReply) {
         try {
             const result = registerSchema.safeParse(req.body);
-
             if (!result.success) {
                 return reply.status(400).send({ error: result.error.issues });
             }
@@ -32,26 +24,19 @@ export const authController = {
             const data = result.data;
 
             const userExists = await prisma.user.findFirst({
-                where: {
-                    OR: [
-                        { email: data.email },
-                        { cpf: data.cpf },
-                        { cnpj: data.cnpj },
-                    ],
-                },
+                where: { OR: [{ email: data.email }, { cpf: data.cpf }] },
             });
-
             if (userExists) {
-                return reply.status(401).send({ error: "Este usuário já foi registrado" })
+                return reply.status(409).send({ error: "Este usuário já foi registrado" });
             }
 
-            const user = await authService.createUser(data)
+            const user = await authService.createUser(data);
+            const authToken = await tokenHelper.generateToken(user.id);
+            return reply.status(201).send({ message: "Usuário criado com sucesso", token: authToken });
 
-            const authToken = await tokenHelper.generateToken(user.id)
-
-            return reply.status(200).send({ message: "Usuário criado com sucesso", token: authToken })
         } catch (error) {
-            return reply.status(500).send({ error: "Erro interno do servidor", msg: error })
+            console.error("Erro no controller de registro:", error);
+            return reply.status(500).send({ error: "Erro interno do servidor" });
         }
     },
     async update(req: FastifyRequest, reply: FastifyReply) {
@@ -60,41 +45,23 @@ export const authController = {
             if (!headerResult.success) {
                 return reply.status(401).send({ error: headerResult.error.issues });
             }
-
             const token = headerResult.data.authorization.replace("Bearer ", "");
-
             const decoded = await tokenHelper.verifyToken(token);
-            if (!decoded || typeof decoded !== "object") {
-                return reply.status(401).send({ error: "Token inválido" });
+            if (!decoded || typeof decoded !== "object" || !decoded.sub) {
+                return reply.status(401).send({ error: "Token inválido ou expirado" });
             }
-            const userId = decoded.sub as string;
+            const userId = decoded.sub;
 
             const bodyResult = updateUserSchema.safeParse(req.body);
             if (!bodyResult.success) {
                 return reply.status(400).send({ error: bodyResult.error.issues });
             }
 
-            const userExists = await prisma.user.findFirst({
-                where: {
-                    OR: [
-                        { email: bodyResult.email },
-                        { cpf: bodyResult.cpf },
-                        { cnpj: bodyResult.cnpj },
-                    ],
-                },
-            });
+            await authService.updateUser(userId, bodyResult.data);
+            return reply.status(200).send({ message: "Usuário atualizado com sucesso" });
 
-            if (userExists) {
-                return reply.status(401).send({ error: "Este usuário já foi registrado" })
-            }
-
-            const updatedUser = await authService.updateUser(userId, bodyResult.data);
-
-            return reply.status(200).send({
-                message: "Usuário atualizado com sucesso",
-            });
         } catch (error) {
-            console.error(error);
+            console.error("Erro no controller de update:", error);
             return reply.status(500).send({ error: "Erro interno do servidor" });
         }
     },
@@ -104,21 +71,18 @@ export const authController = {
             if (!headerResult.success) {
                 return reply.status(401).send({ error: headerResult.error.issues });
             }
-
             const token = headerResult.data.authorization.replace("Bearer ", "");
-
             const decoded = await tokenHelper.verifyToken(token);
-            if (!decoded || typeof decoded !== "object") {
-                return reply.status(401).send({ error: "Token inválido" });
+            if (!decoded || typeof decoded !== "object" || !decoded.sub) {
+                return reply.status(401).send({ error: "Token inválido ou expirado" });
             }
-            const userId = decoded.userId as string;
+            const userId = decoded.sub;
 
-            const deletedUser = await prisma.user.delete({
-                where: { id: userId }
-            });
+            await prisma.user.delete({ where: { id: userId } });
+            return reply.status(200).send({ message: "Usuário deletado com sucesso" });
 
-            return reply.status(200).send({ message: "Usuário deletado com sucesso" })
         } catch (error) {
+            console.error("Erro no controller de delete:", error);
             return reply.status(500).send({ error: "Erro interno do servidor" });
         }
     },
@@ -128,31 +92,23 @@ export const authController = {
             if (!bodyResult.success) {
                 return reply.status(400).send({ error: bodyResult.error.issues });
             }
-
             const data = bodyResult.data;
 
             const user = await prisma.user.findFirst({
-                where: {
-                    OR: [
-                        { email: data.email },
-                        { cpf: data.cpf },
-                        { cnpj: data.cnpj },
-                    ],
-                },
+                where: { OR: [{ email: data.email }, { cpf: data.cpf }] },
             });
-
             if (!user) {
-                return reply.status(404).send({ message: "Usuário não encontrado " })
+                return reply.status(404).send({ message: "Usuário não encontrado" });
             }
 
             if (await passwordHelper.validatePassword(data.password, user.password)) {
-                const token = await tokenHelper.generateToken(user.id)
-
-                return reply.status(200).send({ message: "Usuário logado com sucesso", token: token })
+                const token = await tokenHelper.generateToken(user.id);
+                return reply.status(200).send({ message: "Usuário logado com sucesso", token });
             } else {
-                return reply.status(401).send({ message: "As senha não correspondem" })
+                return reply.status(401).send({ message: "Credenciais inválidas" });
             }
         } catch (error) {
+            console.error("Erro no controller de login:", error);
             return reply.status(500).send({ error: "Erro interno do servidor" });
         }
     },
@@ -164,10 +120,10 @@ export const authController = {
             }
             const token = headerResult.data.authorization.replace("Bearer ", "");
             const decoded = await tokenHelper.verifyToken(token);
-            if (!decoded || typeof decoded !== "object") {
-                return reply.status(401).send({ error: "Token inválido" });
+            if (!decoded || typeof decoded !== "object" || !decoded.sub) {
+                return reply.status(401).send({ error: "Token inválido ou expirado" });
             }
-            const userId = decoded.userId as string;
+            const userId = decoded.sub;
 
             const bodyResult = updateAvatarSchema.safeParse(req.body);
             if (!bodyResult.success) {
@@ -177,21 +133,19 @@ export const authController = {
 
             const base64Data = avatarBase64.replace(/^data:image\/\w+;base64,/, "");
             const imageBuffer = Buffer.from(base64Data, 'base64');
-
             const processedImageBuffer = await sharp(imageBuffer)
                 .resize(512, 512, { fit: 'inside', withoutEnlargement: true })
                 .jpeg({ quality: 80 })
                 .toBuffer();
             
             const optimizedBase64String = `data:image/jpeg;base64,${processedImageBuffer.toString('base64')}`;
-
             await authService.updatePicture(userId, optimizedBase64String);
-
-            return reply.status(200).send({ message: "Avatar atualizado com sucesso" });
+            return reply.status(200).send({ message: "Foto atualizada com sucesso" });
 
         } catch (error) {
-            console.error(error);
-            return reply.status(500).send({ error: "Erro interno do servidor", msg: error });
+            console.error("Erro no controller de updatePicture:", error);
+            return reply.status(500).send({ error: "Erro interno do servidor" });
         }
     }
 }
+

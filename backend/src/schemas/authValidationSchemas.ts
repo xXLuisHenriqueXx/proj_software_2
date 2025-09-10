@@ -83,8 +83,9 @@ export const updateUserSchema = z.object({
 })
 
 export const updateAvatarSchema = z.object({
-  avatarBase64: z.string({ required_error: "A imagem em base64 é obrigatória." })
-                 .regex(/^data:image\/[a-zA-Z]+;base64,/, { message: "Formato de string base64 de imagem inválido." })
+  avatarBase64: z.string()
+    .nonempty("A imagem em base64 é obrigatória.")
+    .regex(/^data:image\/[a-zA-Z]+;base64,/, { message: "Formato de string base64 de imagem inválido." }),
 });
 
 export const authHeaderSchema = z.object({

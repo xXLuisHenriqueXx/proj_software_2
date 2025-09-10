@@ -1,66 +1,41 @@
 import { prisma } from "../prisma";
 import { passwordHelper } from "../helpers/passwordHelper";
+import { z } from "zod";
+import { registerSchema, updateUserSchema } from "../schemas/authValidationSchemas";
+
+// Cria tipos TypeScript a partir dos schemas Zod. Eles estarão sempre em sincronia!
+type UserCreateData = z.infer<typeof registerSchema>;
+type UserUpdateData = z.infer<typeof updateUserSchema>;
 
 export const authService = {
-  async createUser(userData: {
-    email: string;
-    password: string;
-    name: string;
-    cpf?: string;
-    cnpj?: string;
-    addressStreet: string;
-    addressDistrict: string;
-    addressNumber: number;
-    addressCep: string;
-    addressDetail: string
-  }) {
+  async createUser(userData: UserCreateData) {
     try {
+      // Desestrutura para remover passwordConfirmation e pegar o resto dos dados
+      const { passwordConfirmation, ...restOfUserData } = userData;
+
       const hashedPassword = await passwordHelper.hashPassword(userData.password);
 
       const user = await prisma.user.create({
         data: {
-          email: userData.email,
-          password: hashedPassword,
-          name: userData.name,
-          cpf: userData.cpf || undefined,
-          cnpj: userData.cnpj || undefined,
-          addressDistrict: userData.addressDistrict,
-          addressStreet: userData.addressStreet,
-          addressNumber: userData.addressNumber,
-          addressCep: userData.addressCep,
-          addressDetail: userData.addressDetail
+          ...restOfUserData, // Passa apenas os dados que existem no modelo do Prisma
+          password: hashedPassword, // Sobrescreve a senha com o hash
         },
       });
 
-      return user
+      return user;
     } catch (error) {
-      throw new Error("Erro ao criar usuário", error);
+      console.error("Erro no serviço ao criar usuário:", error);
+      throw new Error(`Erro ao criar usuário: ${error}`);
     }
   },
-  async updateUser(id: string, userData: {
-    email?: string;
-    password?: string;
-    name?: string;
-    cpf?: string;
-    cnpj?: string;
-    addressStreet?: string;
-    addressDistrict?: string;
-    addressNumber?: number;
-    addressCep?: string;
-    addressDetail?: string;
-  }) {
+
+  async updateUser(id: string, userData: UserUpdateData) {
     try {
-      let updateData: any = { ...userData };
+      let updateData: Partial<UserUpdateData> = { ...userData };
 
       if (updateData.password) {
         updateData.password = await passwordHelper.hashPassword(updateData.password);
       }
-
-      Object.keys(updateData).forEach((key) => {
-        if (updateData[key] === null || updateData[key] === undefined) {
-          delete updateData[key];
-        }
-      });
 
       const user = await prisma.user.update({
         where: { id: id },
@@ -69,24 +44,26 @@ export const authService = {
 
       return user;
     } catch (error) {
-      throw new Error("Erro ao atualizar usuário: " + error);
+      console.error("Erro no serviço ao atualizar usuário:", error);
+      throw new Error(`Erro ao atualizar usuário: ${error}`);
     }
   },
-  async updateAvatar(userId: string, base64String: string) {
+
+  async updatePicture(userId: string, base64String: string) {
     try {
       const user = await prisma.user.update({
         where: {
           id: userId,
         },
         data: {
-          avatarUrl: base64String,
+          picture: base64String,
         },
       });
-
       return user;
     } catch (error) {
-      console.error("Erro no serviço ao atualizar avatar:", error);
-      throw new Error("Erro ao atualizar avatar do usuário");
+      console.error("Erro no serviço ao atualizar foto:", error);
+      throw new Error(`Erro ao atualizar foto do usuário: ${error}`);
     }
   },
 };
+

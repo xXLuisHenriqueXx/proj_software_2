@@ -1,6 +1,8 @@
 import type { FastifyInstance } from "fastify";
 import { authController } from "./controllers/authController";
-import { authHeaderSchema, loginSchema, registerSchema, updateUserSchema, updateAvatarSchema } from "./schemas/authValidationSchemas";
+import { ToyController } from "./controllers/toyController";
+import { authHeaderSchema, loginSchema, registerSchema, updateUserSchema } from "./schemas/authValidationSchemas";
+import { toyCreateSchema, toyListSchema, getToySchema, toyResponseSchema } from "./schemas/toyValidationSchemas";
 import { z } from "zod";
 
 export async function routes(app: FastifyInstance) {

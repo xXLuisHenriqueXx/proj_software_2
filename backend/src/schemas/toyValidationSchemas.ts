@@ -1,15 +1,5 @@
 import { z } from "zod"
 
-export const toyCreateSchema = z.object({
-  name: z.string(),
-  price: z.number(),
-  discount: z.number().optional(),
-  usageTime: z.number(),
-  preservation: z.number(),
-  type: z.array(z.string()),
-  pictures: z.array(z.string())
-})
-
 export const ageRangeEnum = z.enum([
   "ZERO_A_UM",
   "UM_A_TRES",
@@ -28,6 +18,18 @@ export const conditionEnum = z.enum([
   "NOVO",
   "USADO"
 ])
+
+export const toyCreateSchema = z.object({
+  name: z.string(),
+  price: z.number(),
+  description: z.string(),
+  ageRange: ageRangeEnum,
+  discount: z.number().optional(),
+  usageTime: z.number(),
+  preservation: z.number(),
+  type: z.array(z.string()),
+  pictures: z.array(z.string())
+})
 
 export const toyListSchema = z.object({
   page: z.number().min(1).optional(),
@@ -51,4 +53,36 @@ export const toyListSchema = z.object({
     lend: z.boolean().optional(),
     search: z.string().min(1).optional()
   }).optional()
+})
+
+export const getToySchema = z.object({
+    toyId: z.string()
+})
+
+export const toyPictureSchema = z.object({
+  id: z.string(),
+  order: z.number(),
+  picture: z.string()
+})
+
+export const toyOwnerSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  picture: z.string().nullable()
+})
+
+export const toyResponseSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  price: z.number(),
+  isNew: z.boolean(),
+  canTrade: z.boolean(),
+  canLend: z.boolean(),
+  usageTime: z.number(),
+  preservation: z.number(),
+  type: z.array(z.string()),
+  ageGroup: ageRangeEnum,
+  pictures: z.array(toyPictureSchema),
+  owner: toyOwnerSchema
 })
