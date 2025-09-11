@@ -1,177 +1,103 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { prisma } from "../prisma";
-import { authService } from "../services/authService";
+import { z } from "zod";
+import { ToyService } from "../services/toyService";
+import { authHeaderSchema } from "../schemas/authValidationSchemas";
+import { getToySchema, toyCreateSchema, toyUpdateSchema } from "../schemas/toyValidationSchemas";
 import { tokenHelper } from "../helpers/tokenHelper";
 
-import {
-    authHeaderSchema,
-} from "../schemas/authValidationSchemas";
-
-import { getToySchema, toyCreateSchema, toyListSchema } from "../schemas/toyValidationSchemas";
-import { ToyService } from "../services/toyService";
+type ToyCreateBody = z.infer<typeof toyCreateSchema>;
+type ToyUpdateBody = z.infer<typeof toyUpdateSchema>;
+type GetToyParams = z.infer<typeof getToySchema>;
 
 export const ToyController = {
-    async create(req: FastifyRequest, reply: FastifyReply) {
-        try {
-            const headerResult = authHeaderSchema.safeParse(req.headers);
-            if (!headerResult.success) {
-                return reply.status(401).send({ error: headerResult.error.issues });
-            }
+  async create(req: FastifyRequest<{ Body: ToyCreateBody }>, reply: FastifyReply) {
+    try {
+      const headerResult = authHeaderSchema.safeParse(req.headers);
+      if (!headerResult.success) return reply.status(401).send({ error: "Token não fornecido" });
+      
+      const token = headerResult.data.authorization.replace("Bearer ", "");
+      const decoded = await tokenHelper.verifyToken(token);
+      if (!decoded || typeof decoded !== "object" || !decoded.sub) {
+        return reply.status(401).send({ error: "Token inválido ou expirado" });
+      }
+      const userId = decoded.sub;
 
-            const token = headerResult.data.authorization.replace("Bearer ", "");
+      const toy = await ToyService.createToy(req.body, userId);
 
-            const decoded = await tokenHelper.verifyToken(token);
-            if (!decoded || typeof decoded !== "object") {
-                return reply.status(401).send({ error: "Token inválido" });
-            }
-            const userId = decoded.userId as string;
-
-            const bodyResult = toyCreateSchema.safeParse(req.body)
-
-            const toyData = { ...bodyResult.data }
-
-            // TROCAR PARA OBJETO COM OS DADOS (SEMELHANTE AO UPDATE) E ALTERAR SCHEMA
-            const toy = ToyService.createToy(toyData.name, toyData.price, toyData.usageTime, toyData.preservation, toyData.pictures, toyData.types, userId, toyData.discount)
-
-            return reply.status(200).send({ message: "Brinquedo criado com sucesso" })
-        } catch (error) {
-            return reply.status(500).send({ error: error })
-        }
-    },
-    async update(req: FastifyRequest, reply: FastifyReply) {
-        try {
-            const headerResult = authHeaderSchema.safeParse(req.headers)
-            if (!headerResult.success) {
-                return reply.status(401).send({ error: headerResult.error.issues })
-            }
-
-            const token = headerResult.data.authorization.replace("Bearer ", "")
-            const decoded = await tokenHelper.verifyToken(token)
-            if (!decoded || typeof decoded !== "object") {
-                return reply.status(401).send({ error: "Token inválido" })
-            }
-            const userId = decoded.userId as string
-
-            const toyId = (req.params as any).id
-            const body = req.body as any
-
-            const updatedToy = await ToyService.updateToy(toyId, body, userId)
-
-            return reply.status(200).send({ message: "Brinquedo atualizado com sucesso", toy: updatedToy })
-        } catch (error) {
-            return reply.status(500).send({ error: (error as Error).message })
-        }
-    },
-    async delete(req: FastifyRequest, reply: FastifyReply) {
-        try {
-            const headerResult = authHeaderSchema.safeParse(req.headers)
-            if (!headerResult.success) {
-                return reply.status(401).send({ error: headerResult.error.issues })
-            }
-
-            const token = headerResult.data.authorization.replace("Bearer ", "")
-            const decoded = await tokenHelper.verifyToken(token)
-            if (!decoded || typeof decoded !== "object") {
-                return reply.status(401).send({ error: "Token inválido" })
-            }
-            const userId = decoded.userId as string
-
-            const toyId = (req.params as any).id
-
-            const deleted = await ToyService.deleteToy(toyId, userId)
-
-            if (deleted) {
-                return reply.status(200).send({ message: "Brinquedo deletado com sucesso" })
-            }
-        } catch (error) {
-            return reply.status(500).send({ error: error })
-        }
-    },
-    async getToyList(req: FastifyRequest, reply: FastifyReply) {
-        try {
-            let userId: string | null = null
-            const headerResult = authHeaderSchema.safeParse(req.headers)
-
-            if (headerResult.success) {
-                const token = headerResult.data.authorization.replace("Bearer ", "")
-                const decoded = await tokenHelper.verifyToken(token)
-                if (decoded && typeof decoded === "object") {
-                    userId = decoded.userId as string
-                }
-            }
-
-            const bodyResult = toyListSchema.safeParse(req.body)
-            if (!bodyResult.success) {
-                return reply.status(400).send({ error: bodyResult.error.issues })
-            }
-
-            const { page, pageSize } = bodyResult.data
-
-            const result = ToyService.searchToys(userId ? userId : null, page, pageSize, bodyResult.data.filter)
-
-            return reply.status(200).send({ result })
-        } catch (error) {
-            return reply.status(500).send({ error: error })
-        }
-    },
-    async getToy(req: FastifyRequest, reply: FastifyReply) {
-        try {
-            const toyResult = getToySchema.safeParse(req.params);
-
-            if (!toyResult.success) {
-                return reply.status(400).send({ error: toyResult.error.issues })
-            }
-
-            const { id: toyId } = toyResult.data;
-
-            const toy = await prisma.toy.findUnique({
-                where: { id: toyId },
-                include: {
-                    ToyPictures: {
-                        orderBy: { order: "asc" },
-                    },
-                    owner: {
-                        select: {
-                            id: true,
-                            name: true,
-                        },
-                    },
-                },
-            })
-
-            if (!toy) {
-                return reply.status(404).send({ error: "Brinquedo não encontrado" })
-            }
-
-            const response = {
-                id: toy.id,
-                name: toy.name,
-                description: toy.description,
-                price: toy.price,
-                isNew: toy.isNew,
-                canTrade: toy.canTrade,
-                canLend: toy.canLend,
-                usageTime: toy.usageTime,
-                preservation: toy.preservation,
-                type: toy.type,
-                ageGroup: toy.ageGroup,
-                pictures: toy.ToyPictures.map((p) => ({
-                    id: p.id,
-                    order: p.order,
-                    picture: p.picture,
-                })),
-                owner: {
-                    id: toy.owner.id,
-                    name: toy.owner.name,
-                    picture: toy.ToyPictures.length > 0 ? toy.ToyPictures[0].picture : null,
-                },
-            }
-
-            return reply.status(200).send(response)
-        } catch (error) {
-            return reply.status(500).send({ error: error })
-        }
+      return reply.status(201).send(toy);
+    } catch (error) {
+      console.error("Erro ao criar brinquedo:", error);
+      return reply.status(500).send({ error: "Erro interno do servidor" });
     }
+  },
 
+  async update(req: FastifyRequest<{ Body: ToyUpdateBody, Params: { id: string } }>, reply: FastifyReply) {
+    try {
+      const headerResult = authHeaderSchema.safeParse(req.headers);
+      if (!headerResult.success) return reply.status(401).send({ error: "Token não fornecido" });
 
-}
+      const token = headerResult.data.authorization.replace("Bearer ", "");
+      const decoded = await tokenHelper.verifyToken(token);
+      if (!decoded || typeof decoded !== "object" || !decoded.sub) {
+        return reply.status(401).send({ error: "Token inválido ou expirado" });
+      }
+      const userId = decoded.sub;
+      const { id: toyId } = req.params;
+
+      const updatedToy = await ToyService.updateToy(toyId, req.body, userId);
+      
+      return reply.status(200).send({ message: "Brinquedo atualizado com sucesso", toy: updatedToy });
+    } catch (error) {
+      console.error("Erro ao atualizar brinquedo:", error);
+      return reply.status(500).send({ error: "Erro interno do servidor", msg: (error as Error).message });
+    }
+  },
+
+  async delete(req: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) {
+    try {
+      const headerResult = authHeaderSchema.safeParse(req.headers);
+      if (!headerResult.success) return reply.status(401).send({ error: "Token não fornecido" });
+
+      const token = headerResult.data.authorization.replace("Bearer ", "");
+      const decoded = await tokenHelper.verifyToken(token);
+      if (!decoded || typeof decoded !== "object" || !decoded.sub) {
+        return reply.status(401).send({ error: "Token inválido ou expirado" });
+      }
+      const userId = decoded.sub;
+      const { id: toyId } = req.params;
+
+      await ToyService.deleteToy(toyId, userId);
+
+      return reply.status(200).send({ message: "Brinquedo deletado com sucesso" });
+    } catch (error) {
+      console.error("Erro ao deletar brinquedo:", error);
+      return reply.status(500).send({ error: "Erro interno do servidor", msg: (error as Error).message });
+    }
+  },
+
+  async getToyList(req: FastifyRequest, reply: FastifyReply) {
+    try {
+      const result = await ToyService.searchToys(null, 1, 10, req.body as any);
+      return reply.status(200).send(result);
+    } catch (error) {
+       console.error("Erro ao listar brinquedos:", error);
+      return reply.status(500).send({ error: "Erro interno do servidor" });
+    }
+  },
+
+  async getToy(req: FastifyRequest<{ Params: GetToyParams }>, reply: FastifyReply) {
+    try {
+      const { toyId } = req.params;
+      const toy = await ToyService.getToyById(toyId);
+
+      if (!toy) {
+        return reply.status(404).send({ message: "Brinquedo não encontrado" });
+      }
+      return reply.status(200).send(toy);
+    } catch (error) {
+      console.error("Erro ao buscar brinquedo:", error);
+      return reply.status(500).send({ error: "Erro interno do servidor" });
+    }
+  }
+};
+

@@ -3,22 +3,20 @@ import { passwordHelper } from "../helpers/passwordHelper";
 import { z } from "zod";
 import { registerSchema, updateUserSchema } from "../schemas/authValidationSchemas";
 
-// Cria tipos TypeScript a partir dos schemas Zod. Eles estarão sempre em sincronia!
 type UserCreateData = z.infer<typeof registerSchema>;
 type UserUpdateData = z.infer<typeof updateUserSchema>;
 
 export const authService = {
   async createUser(userData: UserCreateData) {
     try {
-      // Desestrutura para remover passwordConfirmation e pegar o resto dos dados
       const { passwordConfirmation, ...restOfUserData } = userData;
 
       const hashedPassword = await passwordHelper.hashPassword(userData.password);
 
       const user = await prisma.user.create({
         data: {
-          ...restOfUserData, // Passa apenas os dados que existem no modelo do Prisma
-          password: hashedPassword, // Sobrescreve a senha com o hash
+          ...restOfUserData, 
+          password: hashedPassword, 
         },
       });
 
@@ -52,12 +50,8 @@ export const authService = {
   async updatePicture(userId: string, base64String: string) {
     try {
       const user = await prisma.user.update({
-        where: {
-          id: userId,
-        },
-        data: {
-          picture: base64String,
-        },
+        where: { id: userId },
+        data: { picture: base64String },
       });
       return user;
     } catch (error) {
@@ -66,4 +60,3 @@ export const authService = {
     }
   },
 };
-

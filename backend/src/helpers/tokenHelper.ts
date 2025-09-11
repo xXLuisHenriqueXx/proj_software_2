@@ -1,27 +1,17 @@
-import jwt from "jsonwebtoken";
+import * as jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'default-secret-for-dev';
 
 export const tokenHelper = {
-  async generateToken(userId: string) {
-    const jwtSecret = process.env.JWT_SECRET;
-
-    if (!jwtSecret) {
-      throw new Error("JWT_SECRET não definido no ambiente");
-    }
-
-    const token = jwt.sign({ userId }, jwtSecret, { expiresIn: "15d" });
-    return token;
+  async generateToken(userId: string): Promise<string> {
+    return jwt.sign({ sub: userId }, JWT_SECRET, { expiresIn: '1d' });
   },
 
-  async verifyToken(token: string) {
-    const jwtSecret = process.env.JWT_SECRET;
-
-    if (!jwtSecret) {
-      throw new Error("JWT_SECRET não definido no ambiente");
-    }
+  async verifyToken(token: string): Promise<jwt.JwtPayload | string | null> {
     try {
-      return jwt.verify(token, jwtSecret);
+      return jwt.verify(token, JWT_SECRET);
     } catch (error) {
-      return false
+      return null;
     }
   }
 };
