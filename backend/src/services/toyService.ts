@@ -13,6 +13,15 @@ interface ToyFilter {
     search?: string
 }
 
+function sortByScoreThenDate<T extends { _score?: number; createdAt?: Date }>(a: T, b: T) {
+    const sA = a._score ?? 0
+    const sB = b._score ?? 0
+    if (sB !== sA) return sB - sA
+    const dA = a.createdAt ? new Date(a.createdAt).getTime() : 0
+    const dB = b.createdAt ? new Date(b.createdAt).getTime() : 0
+    return dB - dA
+}
+
 export const ToyService = {
     async createToy(
         name: string,
@@ -75,7 +84,6 @@ export const ToyService = {
             },
         })
 
-
         return toy
     },
 
@@ -111,7 +119,6 @@ export const ToyService = {
             throw new Error("Preservação deve estar entre 0 e 5")
         }
         if (data.description && data.description.length > 300) throw new Error("A descrição do item é longa demais")
-
 
         if (data.pictures) {
             data.pictures.forEach((pic) => {
@@ -205,11 +212,9 @@ export const ToyService = {
         if (filter?.orderBy === "MENOR_PRECO") orderBy = { price: "asc" }
         if (filter?.orderBy === "MAIOR_PRECO") orderBy = { price: "desc" }
         if (filter?.orderBy === "RELEVANTES" && userId) {
-            // Inserir aqui a função de buscar por relevantes caso seja usuário autenticado no futuro
             orderBy = { createdAt: "desc" }
         }
         if (!filter?.orderBy && userId) {
-            // Não tem filtro de ordem especificado (como ao entrar na home) mas tem usuário, deve mostrar os mais relevantes por padrão
             orderBy = { createdAt: "desc" }
         }
 
@@ -231,5 +236,100 @@ export const ToyService = {
             totalPages: Math.ceil(total / pageSize),
             toys,
         }
+    },
+
+    async recordToyView(userId: string, toyId: string) {
+        const oneMinuteAgo = new Date(Date.now() - 60 * 1000)
+        const existing = await prisma.historyEntry.findFirst({
+            where: { userId, toyId, createdAt: { gte: oneMinuteAgo } },
+            select: { id: true },
+        })
+        if (!existing) {
+            await prisma.historyEntry.create({ data: { userId, toyId } })
+            return { recorded: true }
+        }
+        return { recorded: false }
+    },
+
+    async getTimelineRecommendations(
+        userId: string,
+        {
+            limit = 10,
+            excludeIds = [] as string[],
+            cursor,
+        }: { limit?: number; excludeIds?: string[]; cursor?: string | null } = {}
+    ): Promise<{ items: any[]; nextCursor?: string }> {
+        const historyWhere: any = { userId }
+        if (cursor) historyWhere.createdAt = { lt: new Date(cursor) }
+
+        const rawHistory = await prisma.historyEntry.findMany({
+            where: historyWhere,
+            orderBy: { createdAt: "desc" },
+            take: limit * 5,
+            select: { toyId: true, createdAt: true },
+        })
+
+        const seenHistoryToyIds = new Set<string>()
+        const historyDistinct: { toyId: string; createdAt: Date }[] = []
+        for (const h of rawHistory) {
+            if (!seenHistoryToyIds.has(h.toyId)) {
+                seenHistoryToyIds.add(h.toyId)
+                historyDistinct.push(h)
+            }
+        }
+
+        const historyToys = historyDistinct.length
+            ? await prisma.toy.findMany({
+                  where: { id: { in: historyDistinct.map(h => h.toyId) } },
+                  include: { ToyPictures: true },
+              })
+            : []
+
+        const typeSet = new Set<string>()
+        for (const t of historyToys) {
+            const types = (t as any).type as string[] | undefined
+            if (Array.isArray(types)) types.forEach(x => typeSet.add(x))
+        }
+
+        const baseExclusions = new Set<string>([...excludeIds, ...seenHistoryToyIds])
+        let candidates: any[] = []
+
+        if (typeSet.size > 0) {
+            const typesArr = Array.from(typeSet)
+            const cand = await prisma.toy.findMany({
+                where: {
+                    id: { notIn: Array.from(baseExclusions) },
+                    type: { hasSome: typesArr },
+                },
+                include: { ToyPictures: true },
+                take: limit * 3,
+            })
+            candidates = cand.map((t) => {
+                const toyTypes: string[] = (t as any).type ?? []
+                const overlap = toyTypes.filter(tt => typeSet.has(tt)).length
+                return { ...t, _score: overlap }
+            })
+        }
+
+        candidates.sort(sortByScoreThenDate)
+        let items = candidates.slice(0, limit)
+
+        if (items.length < limit) {
+            const need = limit - items.length
+            const fallback = await prisma.toy.findMany({
+                where: { id: { notIn: [...baseExclusions, ...items.map(i => i.id)] } },
+                orderBy: { createdAt: "desc" },
+                take: need,
+                include: { ToyPictures: true },
+            })
+            items = items.concat(fallback)
+        }
+
+        let nextCursor: string | undefined
+        if (rawHistory.length > 0) {
+            nextCursor = rawHistory[rawHistory.length - 1].createdAt.toISOString()
+        }
+
+        return { items, nextCursor }
     },
 }
