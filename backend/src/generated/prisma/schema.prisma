@@ -28,9 +28,7 @@ model User {
   addressCep      String
 
   // Relacionamentos
-  toys       Toy[]
-  lendsMade  Lend[] @relation("LendedToys")
-  lendsTaken Lend[] @relation("BorrowedToys")
+  toys Toy[]
 
   history HistoryEntry[]
 
@@ -60,39 +58,61 @@ enum Role {
 }
 
 model Toy {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  name      String
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  name        String
+  description String
 
   ownerId String
   owner   User   @relation(fields: [ownerId], references: [id])
 
-  lends   Lend[]
   history HistoryEntry[]
 
+  price Float
+
+  isNew        Boolean
+  canTrade     Boolean
+  canLend      Boolean
   usageTime    Int
   preservation Int // CHECK (preservation BETWEEN 0 AND 5)
   type         ToyType[]
+  ToyPictures  ToyPicture[] @relation("Pictures")
+  ageGroup     AgeRange
 }
 
 enum ToyType {
-  BOYS
-  GIRLS
+  MENINOS
+  MENINAS
+  ARTÍSTICO
+  AVENTURA
+  BONECOS
+  CARRINHOS
+  CARTAS
+  EDUCATIVO
+  ESPORTES
+  ESTRATÉGIA
+  PALAVRAS
+  PARA_BEBÊS
+  QUEBRA_CABEÇAS
+  SIMULAÇÃO
+  TABULEIRO
+  VIDEOGAME
 }
 
-model Lend {
-  id        String    @id @default(uuid())
-  startDate DateTime
-  endDate   DateTime?
+enum AgeRange {
+  ZERO_A_UM // 0 a 1 ano
+  UM_A_TRES // 1 a 3 anos
+  TRES_A_SEIS // 3 a 6 anos
+  SEIS_A_DOZE // 6 a 12 anos
+  DOZE_OU_MAIS // 12 anos ou mais
+}
 
-  lenderId String
-  lender   User   @relation("LendedToys", fields: [lenderId], references: [id])
-
-  borrowerId String
-  borrower   User   @relation("BorrowedToys", fields: [borrowerId], references: [id])
-
-  toyId String
-  toy   Toy    @relation(fields: [toyId], references: [id])
+model ToyPicture {
+  id      String @id @default(uuid())
+  order   Int
+  toyId   String
+  toy     Toy    @relation("Pictures", fields: [toyId], references: [id])
+  picture String
 }
 
 // Visualização de um brinquedo pelo usuário
