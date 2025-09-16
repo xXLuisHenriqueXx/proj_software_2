@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.0
- * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
+ * Prisma Client JS version: 6.14.0
+ * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
  */
 Prisma.prismaVersion = {
-  client: "6.16.0",
-  engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
+  client: "6.14.0",
+  engine: "717184b7b35ea05dfa71a3236b7af656013e1e49"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -151,23 +151,19 @@ exports.Prisma.ToyScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   name: 'name',
-  description: 'description',
   ownerId: 'ownerId',
-  price: 'price',
-  isNew: 'isNew',
-  canTrade: 'canTrade',
-  canLend: 'canLend',
   usageTime: 'usageTime',
   preservation: 'preservation',
-  type: 'type',
-  ageGroup: 'ageGroup'
+  type: 'type'
 };
 
-exports.Prisma.ToyPictureScalarFieldEnum = {
+exports.Prisma.LendScalarFieldEnum = {
   id: 'id',
-  order: 'order',
-  toyId: 'toyId',
-  picture: 'picture'
+  startDate: 'startDate',
+  endDate: 'endDate',
+  lenderId: 'lenderId',
+  borrowerId: 'borrowerId',
+  toyId: 'toyId'
 };
 
 exports.Prisma.HistoryEntryScalarFieldEnum = {
@@ -220,38 +216,16 @@ exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN'
 };
 
-exports.AgeRange = exports.$Enums.AgeRange = {
-  ZERO_A_UM: 'ZERO_A_UM',
-  UM_A_TRES: 'UM_A_TRES',
-  TRES_A_SEIS: 'TRES_A_SEIS',
-  SEIS_A_DOZE: 'SEIS_A_DOZE',
-  DOZE_OU_MAIS: 'DOZE_OU_MAIS'
-};
-
 exports.ToyType = exports.$Enums.ToyType = {
-  MENINOS: 'MENINOS',
-  MENINAS: 'MENINAS',
-  ARTÍSTICO: 'ARTÍSTICO',
-  AVENTURA: 'AVENTURA',
-  BONECOS: 'BONECOS',
-  CARRINHOS: 'CARRINHOS',
-  CARTAS: 'CARTAS',
-  EDUCATIVO: 'EDUCATIVO',
-  ESPORTES: 'ESPORTES',
-  ESTRATÉGIA: 'ESTRATÉGIA',
-  PALAVRAS: 'PALAVRAS',
-  PARA_BEBÊS: 'PARA_BEBÊS',
-  QUEBRA_CABEÇAS: 'QUEBRA_CABEÇAS',
-  SIMULAÇÃO: 'SIMULAÇÃO',
-  TABULEIRO: 'TABULEIRO',
-  VIDEOGAME: 'VIDEOGAME'
+  BOYS: 'BOYS',
+  GIRLS: 'GIRLS'
 };
 
 exports.Prisma.ModelName = {
   User: 'User',
   organizationInfo: 'organizationInfo',
   Toy: 'Toy',
-  ToyPicture: 'ToyPicture',
+  Lend: 'Lend',
   HistoryEntry: 'HistoryEntry',
   Rate: 'Rate',
   Chat: 'Chat',

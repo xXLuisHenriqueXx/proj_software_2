@@ -29,10 +29,10 @@ export type organizationInfo = $Result.DefaultSelection<Prisma.$organizationInfo
  */
 export type Toy = $Result.DefaultSelection<Prisma.$ToyPayload>
 /**
- * Model ToyPicture
+ * Model Lend
  * 
  */
-export type ToyPicture = $Result.DefaultSelection<Prisma.$ToyPicturePayload>
+export type Lend = $Result.DefaultSelection<Prisma.$LendPayload>
 /**
  * Model HistoryEntry
  * 
@@ -67,36 +67,11 @@ export type Role = (typeof Role)[keyof typeof Role]
 
 
 export const ToyType: {
-  MENINOS: 'MENINOS',
-  MENINAS: 'MENINAS',
-  ARTÍSTICO: 'ARTÍSTICO',
-  AVENTURA: 'AVENTURA',
-  BONECOS: 'BONECOS',
-  CARRINHOS: 'CARRINHOS',
-  CARTAS: 'CARTAS',
-  EDUCATIVO: 'EDUCATIVO',
-  ESPORTES: 'ESPORTES',
-  ESTRATÉGIA: 'ESTRATÉGIA',
-  PALAVRAS: 'PALAVRAS',
-  PARA_BEBÊS: 'PARA_BEBÊS',
-  QUEBRA_CABEÇAS: 'QUEBRA_CABEÇAS',
-  SIMULAÇÃO: 'SIMULAÇÃO',
-  TABULEIRO: 'TABULEIRO',
-  VIDEOGAME: 'VIDEOGAME'
+  BOYS: 'BOYS',
+  GIRLS: 'GIRLS'
 };
 
 export type ToyType = (typeof ToyType)[keyof typeof ToyType]
-
-
-export const AgeRange: {
-  ZERO_A_UM: 'ZERO_A_UM',
-  UM_A_TRES: 'UM_A_TRES',
-  TRES_A_SEIS: 'TRES_A_SEIS',
-  SEIS_A_DOZE: 'SEIS_A_DOZE',
-  DOZE_OU_MAIS: 'DOZE_OU_MAIS'
-};
-
-export type AgeRange = (typeof AgeRange)[keyof typeof AgeRange]
 
 }
 
@@ -107,10 +82,6 @@ export const Role: typeof $Enums.Role
 export type ToyType = $Enums.ToyType
 
 export const ToyType: typeof $Enums.ToyType
-
-export type AgeRange = $Enums.AgeRange
-
-export const AgeRange: typeof $Enums.AgeRange
 
 /**
  * ##  Prisma Client ʲˢ
@@ -261,14 +232,14 @@ export class PrismaClient<
   get toy(): Prisma.ToyDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.toyPicture`: Exposes CRUD operations for the **ToyPicture** model.
+   * `prisma.lend`: Exposes CRUD operations for the **Lend** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more ToyPictures
-    * const toyPictures = await prisma.toyPicture.findMany()
+    * // Fetch zero or more Lends
+    * const lends = await prisma.lend.findMany()
     * ```
     */
-  get toyPicture(): Prisma.ToyPictureDelegate<ExtArgs, ClientOptions>;
+  get lend(): Prisma.LendDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.historyEntry`: Exposes CRUD operations for the **HistoryEntry** model.
@@ -367,8 +338,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.16.0
-   * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
+   * Prisma Client JS version: 6.14.0
+   * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
    */
   export type PrismaVersion = {
     client: string
@@ -752,7 +723,7 @@ export namespace Prisma {
     User: 'User',
     organizationInfo: 'organizationInfo',
     Toy: 'Toy',
-    ToyPicture: 'ToyPicture',
+    Lend: 'Lend',
     HistoryEntry: 'HistoryEntry',
     Rate: 'Rate',
     Chat: 'Chat',
@@ -775,7 +746,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "organizationInfo" | "toy" | "toyPicture" | "historyEntry" | "rate" | "chat" | "message"
+      modelProps: "user" | "organizationInfo" | "toy" | "lend" | "historyEntry" | "rate" | "chat" | "message"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1001,77 +972,77 @@ export namespace Prisma {
           }
         }
       }
-      ToyPicture: {
-        payload: Prisma.$ToyPicturePayload<ExtArgs>
-        fields: Prisma.ToyPictureFieldRefs
+      Lend: {
+        payload: Prisma.$LendPayload<ExtArgs>
+        fields: Prisma.LendFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.ToyPictureFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload> | null
+            args: Prisma.LendFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.ToyPictureFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload>
+            args: Prisma.LendFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload>
           }
           findFirst: {
-            args: Prisma.ToyPictureFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload> | null
+            args: Prisma.LendFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.ToyPictureFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload>
+            args: Prisma.LendFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload>
           }
           findMany: {
-            args: Prisma.ToyPictureFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload>[]
+            args: Prisma.LendFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload>[]
           }
           create: {
-            args: Prisma.ToyPictureCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload>
+            args: Prisma.LendCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload>
           }
           createMany: {
-            args: Prisma.ToyPictureCreateManyArgs<ExtArgs>
+            args: Prisma.LendCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.ToyPictureCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload>[]
+            args: Prisma.LendCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload>[]
           }
           delete: {
-            args: Prisma.ToyPictureDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload>
+            args: Prisma.LendDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload>
           }
           update: {
-            args: Prisma.ToyPictureUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload>
+            args: Prisma.LendUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload>
           }
           deleteMany: {
-            args: Prisma.ToyPictureDeleteManyArgs<ExtArgs>
+            args: Prisma.LendDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.ToyPictureUpdateManyArgs<ExtArgs>
+            args: Prisma.LendUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.ToyPictureUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload>[]
+            args: Prisma.LendUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload>[]
           }
           upsert: {
-            args: Prisma.ToyPictureUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ToyPicturePayload>
+            args: Prisma.LendUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LendPayload>
           }
           aggregate: {
-            args: Prisma.ToyPictureAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateToyPicture>
+            args: Prisma.LendAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLend>
           }
           groupBy: {
-            args: Prisma.ToyPictureGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ToyPictureGroupByOutputType>[]
+            args: Prisma.LendGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LendGroupByOutputType>[]
           }
           count: {
-            args: Prisma.ToyPictureCountArgs<ExtArgs>
-            result: $Utils.Optional<ToyPictureCountAggregateOutputType> | number
+            args: Prisma.LendCountArgs<ExtArgs>
+            result: $Utils.Optional<LendCountAggregateOutputType> | number
           }
         }
       }
@@ -1447,10 +1418,6 @@ export namespace Prisma {
       isolationLevel?: Prisma.TransactionIsolationLevel
     }
     /**
-     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
-     */
-    adapter?: runtime.SqlDriverAdapterFactory | null
-    /**
      * Global configuration for omitting model fields by default.
      * 
      * @example
@@ -1470,7 +1437,7 @@ export namespace Prisma {
     user?: UserOmit
     organizationInfo?: organizationInfoOmit
     toy?: ToyOmit
-    toyPicture?: ToyPictureOmit
+    lend?: LendOmit
     historyEntry?: HistoryEntryOmit
     rate?: RateOmit
     chat?: ChatOmit
@@ -1556,6 +1523,8 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     toys: number
+    lendsMade: number
+    lendsTaken: number
     history: number
     ratings: number
     chatsAsUser1: number
@@ -1565,6 +1534,8 @@ export namespace Prisma {
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     toys?: boolean | UserCountOutputTypeCountToysArgs
+    lendsMade?: boolean | UserCountOutputTypeCountLendsMadeArgs
+    lendsTaken?: boolean | UserCountOutputTypeCountLendsTakenArgs
     history?: boolean | UserCountOutputTypeCountHistoryArgs
     ratings?: boolean | UserCountOutputTypeCountRatingsArgs
     chatsAsUser1?: boolean | UserCountOutputTypeCountChatsAsUser1Args
@@ -1588,6 +1559,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountToysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ToyWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountLendsMadeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LendWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountLendsTakenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LendWhereInput
   }
 
   /**
@@ -1631,13 +1616,13 @@ export namespace Prisma {
    */
 
   export type ToyCountOutputType = {
+    lends: number
     history: number
-    ToyPictures: number
   }
 
   export type ToyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lends?: boolean | ToyCountOutputTypeCountLendsArgs
     history?: boolean | ToyCountOutputTypeCountHistoryArgs
-    ToyPictures?: boolean | ToyCountOutputTypeCountToyPicturesArgs
   }
 
   // Custom InputTypes
@@ -1654,15 +1639,15 @@ export namespace Prisma {
   /**
    * ToyCountOutputType without action
    */
-  export type ToyCountOutputTypeCountHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: HistoryEntryWhereInput
+  export type ToyCountOutputTypeCountLendsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LendWhereInput
   }
 
   /**
    * ToyCountOutputType without action
    */
-  export type ToyCountOutputTypeCountToyPicturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ToyPictureWhereInput
+  export type ToyCountOutputTypeCountHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HistoryEntryWhereInput
   }
 
 
@@ -1988,6 +1973,8 @@ export namespace Prisma {
     addressDetail?: boolean
     addressCep?: boolean
     toys?: boolean | User$toysArgs<ExtArgs>
+    lendsMade?: boolean | User$lendsMadeArgs<ExtArgs>
+    lendsTaken?: boolean | User$lendsTakenArgs<ExtArgs>
     history?: boolean | User$historyArgs<ExtArgs>
     ratings?: boolean | User$ratingsArgs<ExtArgs>
     organizationInfo?: boolean | User$organizationInfoArgs<ExtArgs>
@@ -2057,6 +2044,8 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "email" | "password" | "name" | "role" | "parentalControl" | "active" | "cpf" | "cnpj" | "pix_key" | "addressDistrict" | "addressStreet" | "addressNumber" | "addressDetail" | "addressCep", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     toys?: boolean | User$toysArgs<ExtArgs>
+    lendsMade?: boolean | User$lendsMadeArgs<ExtArgs>
+    lendsTaken?: boolean | User$lendsTakenArgs<ExtArgs>
     history?: boolean | User$historyArgs<ExtArgs>
     ratings?: boolean | User$ratingsArgs<ExtArgs>
     organizationInfo?: boolean | User$organizationInfoArgs<ExtArgs>
@@ -2072,6 +2061,8 @@ export namespace Prisma {
     name: "User"
     objects: {
       toys: Prisma.$ToyPayload<ExtArgs>[]
+      lendsMade: Prisma.$LendPayload<ExtArgs>[]
+      lendsTaken: Prisma.$LendPayload<ExtArgs>[]
       history: Prisma.$HistoryEntryPayload<ExtArgs>[]
       ratings: Prisma.$RatePayload<ExtArgs>[]
       organizationInfo: Prisma.$organizationInfoPayload<ExtArgs> | null
@@ -2491,6 +2482,8 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     toys<T extends User$toysArgs<ExtArgs> = {}>(args?: Subset<T, User$toysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ToyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    lendsMade<T extends User$lendsMadeArgs<ExtArgs> = {}>(args?: Subset<T, User$lendsMadeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    lendsTaken<T extends User$lendsTakenArgs<ExtArgs> = {}>(args?: Subset<T, User$lendsTakenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     history<T extends User$historyArgs<ExtArgs> = {}>(args?: Subset<T, User$historyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoryEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ratings<T extends User$ratingsArgs<ExtArgs> = {}>(args?: Subset<T, User$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     organizationInfo<T extends User$organizationInfoArgs<ExtArgs> = {}>(args?: Subset<T, User$organizationInfoArgs<ExtArgs>>): Prisma__organizationInfoClient<$Result.GetResult<Prisma.$organizationInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2951,6 +2944,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ToyScalarFieldEnum | ToyScalarFieldEnum[]
+  }
+
+  /**
+   * User.lendsMade
+   */
+  export type User$lendsMadeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lend
+     */
+    select?: LendSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lend
+     */
+    omit?: LendOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LendInclude<ExtArgs> | null
+    where?: LendWhereInput
+    orderBy?: LendOrderByWithRelationInput | LendOrderByWithRelationInput[]
+    cursor?: LendWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LendScalarFieldEnum | LendScalarFieldEnum[]
+  }
+
+  /**
+   * User.lendsTaken
+   */
+  export type User$lendsTakenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lend
+     */
+    select?: LendSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lend
+     */
+    omit?: LendOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LendInclude<ExtArgs> | null
+    where?: LendWhereInput
+    orderBy?: LendOrderByWithRelationInput | LendOrderByWithRelationInput[]
+    cursor?: LendWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LendScalarFieldEnum | LendScalarFieldEnum[]
   }
 
   /**
@@ -4220,13 +4261,11 @@ export namespace Prisma {
   }
 
   export type ToyAvgAggregateOutputType = {
-    price: number | null
     usageTime: number | null
     preservation: number | null
   }
 
   export type ToySumAggregateOutputType = {
-    price: number | null
     usageTime: number | null
     preservation: number | null
   }
@@ -4235,58 +4274,38 @@ export namespace Prisma {
     id: string | null
     createdAt: Date | null
     name: string | null
-    description: string | null
     ownerId: string | null
-    price: number | null
-    isNew: boolean | null
-    canTrade: boolean | null
-    canLend: boolean | null
     usageTime: number | null
     preservation: number | null
-    ageGroup: $Enums.AgeRange | null
   }
 
   export type ToyMaxAggregateOutputType = {
     id: string | null
     createdAt: Date | null
     name: string | null
-    description: string | null
     ownerId: string | null
-    price: number | null
-    isNew: boolean | null
-    canTrade: boolean | null
-    canLend: boolean | null
     usageTime: number | null
     preservation: number | null
-    ageGroup: $Enums.AgeRange | null
   }
 
   export type ToyCountAggregateOutputType = {
     id: number
     createdAt: number
     name: number
-    description: number
     ownerId: number
-    price: number
-    isNew: number
-    canTrade: number
-    canLend: number
     usageTime: number
     preservation: number
     type: number
-    ageGroup: number
     _all: number
   }
 
 
   export type ToyAvgAggregateInputType = {
-    price?: true
     usageTime?: true
     preservation?: true
   }
 
   export type ToySumAggregateInputType = {
-    price?: true
     usageTime?: true
     preservation?: true
   }
@@ -4295,46 +4314,28 @@ export namespace Prisma {
     id?: true
     createdAt?: true
     name?: true
-    description?: true
     ownerId?: true
-    price?: true
-    isNew?: true
-    canTrade?: true
-    canLend?: true
     usageTime?: true
     preservation?: true
-    ageGroup?: true
   }
 
   export type ToyMaxAggregateInputType = {
     id?: true
     createdAt?: true
     name?: true
-    description?: true
     ownerId?: true
-    price?: true
-    isNew?: true
-    canTrade?: true
-    canLend?: true
     usageTime?: true
     preservation?: true
-    ageGroup?: true
   }
 
   export type ToyCountAggregateInputType = {
     id?: true
     createdAt?: true
     name?: true
-    description?: true
     ownerId?: true
-    price?: true
-    isNew?: true
-    canTrade?: true
-    canLend?: true
     usageTime?: true
     preservation?: true
     type?: true
-    ageGroup?: true
     _all?: true
   }
 
@@ -4428,16 +4429,10 @@ export namespace Prisma {
     id: string
     createdAt: Date
     name: string
-    description: string
     ownerId: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type: $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
     _count: ToyCountAggregateOutputType | null
     _avg: ToyAvgAggregateOutputType | null
     _sum: ToySumAggregateOutputType | null
@@ -4463,19 +4458,13 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     name?: boolean
-    description?: boolean
     ownerId?: boolean
-    price?: boolean
-    isNew?: boolean
-    canTrade?: boolean
-    canLend?: boolean
     usageTime?: boolean
     preservation?: boolean
     type?: boolean
-    ageGroup?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
+    lends?: boolean | Toy$lendsArgs<ExtArgs>
     history?: boolean | Toy$historyArgs<ExtArgs>
-    ToyPictures?: boolean | Toy$ToyPicturesArgs<ExtArgs>
     _count?: boolean | ToyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["toy"]>
 
@@ -4483,16 +4472,10 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     name?: boolean
-    description?: boolean
     ownerId?: boolean
-    price?: boolean
-    isNew?: boolean
-    canTrade?: boolean
-    canLend?: boolean
     usageTime?: boolean
     preservation?: boolean
     type?: boolean
-    ageGroup?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["toy"]>
 
@@ -4500,16 +4483,10 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     name?: boolean
-    description?: boolean
     ownerId?: boolean
-    price?: boolean
-    isNew?: boolean
-    canTrade?: boolean
-    canLend?: boolean
     usageTime?: boolean
     preservation?: boolean
     type?: boolean
-    ageGroup?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["toy"]>
 
@@ -4517,23 +4494,17 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     name?: boolean
-    description?: boolean
     ownerId?: boolean
-    price?: boolean
-    isNew?: boolean
-    canTrade?: boolean
-    canLend?: boolean
     usageTime?: boolean
     preservation?: boolean
     type?: boolean
-    ageGroup?: boolean
   }
 
-  export type ToyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "name" | "description" | "ownerId" | "price" | "isNew" | "canTrade" | "canLend" | "usageTime" | "preservation" | "type" | "ageGroup", ExtArgs["result"]["toy"]>
+  export type ToyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "name" | "ownerId" | "usageTime" | "preservation" | "type", ExtArgs["result"]["toy"]>
   export type ToyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
+    lends?: boolean | Toy$lendsArgs<ExtArgs>
     history?: boolean | Toy$historyArgs<ExtArgs>
-    ToyPictures?: boolean | Toy$ToyPicturesArgs<ExtArgs>
     _count?: boolean | ToyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ToyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4547,23 +4518,17 @@ export namespace Prisma {
     name: "Toy"
     objects: {
       owner: Prisma.$UserPayload<ExtArgs>
+      lends: Prisma.$LendPayload<ExtArgs>[]
       history: Prisma.$HistoryEntryPayload<ExtArgs>[]
-      ToyPictures: Prisma.$ToyPicturePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       createdAt: Date
       name: string
-      description: string
       ownerId: string
-      price: number
-      isNew: boolean
-      canTrade: boolean
-      canLend: boolean
       usageTime: number
       preservation: number
       type: $Enums.ToyType[]
-      ageGroup: $Enums.AgeRange
     }, ExtArgs["result"]["toy"]>
     composites: {}
   }
@@ -4959,8 +4924,8 @@ export namespace Prisma {
   export interface Prisma__ToyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    lends<T extends Toy$lendsArgs<ExtArgs> = {}>(args?: Subset<T, Toy$lendsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     history<T extends Toy$historyArgs<ExtArgs> = {}>(args?: Subset<T, Toy$historyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoryEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    ToyPictures<T extends Toy$ToyPicturesArgs<ExtArgs> = {}>(args?: Subset<T, Toy$ToyPicturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4993,16 +4958,10 @@ export namespace Prisma {
     readonly id: FieldRef<"Toy", 'String'>
     readonly createdAt: FieldRef<"Toy", 'DateTime'>
     readonly name: FieldRef<"Toy", 'String'>
-    readonly description: FieldRef<"Toy", 'String'>
     readonly ownerId: FieldRef<"Toy", 'String'>
-    readonly price: FieldRef<"Toy", 'Float'>
-    readonly isNew: FieldRef<"Toy", 'Boolean'>
-    readonly canTrade: FieldRef<"Toy", 'Boolean'>
-    readonly canLend: FieldRef<"Toy", 'Boolean'>
     readonly usageTime: FieldRef<"Toy", 'Int'>
     readonly preservation: FieldRef<"Toy", 'Int'>
     readonly type: FieldRef<"Toy", 'ToyType[]'>
-    readonly ageGroup: FieldRef<"Toy", 'AgeRange'>
   }
     
 
@@ -5399,6 +5358,30 @@ export namespace Prisma {
   }
 
   /**
+   * Toy.lends
+   */
+  export type Toy$lendsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lend
+     */
+    select?: LendSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lend
+     */
+    omit?: LendOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LendInclude<ExtArgs> | null
+    where?: LendWhereInput
+    orderBy?: LendOrderByWithRelationInput | LendOrderByWithRelationInput[]
+    cursor?: LendWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LendScalarFieldEnum | LendScalarFieldEnum[]
+  }
+
+  /**
    * Toy.history
    */
   export type Toy$historyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5423,30 +5406,6 @@ export namespace Prisma {
   }
 
   /**
-   * Toy.ToyPictures
-   */
-  export type Toy$ToyPicturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ToyPicture
-     */
-    select?: ToyPictureSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ToyPicture
-     */
-    omit?: ToyPictureOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ToyPictureInclude<ExtArgs> | null
-    where?: ToyPictureWhereInput
-    orderBy?: ToyPictureOrderByWithRelationInput | ToyPictureOrderByWithRelationInput[]
-    cursor?: ToyPictureWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ToyPictureScalarFieldEnum | ToyPictureScalarFieldEnum[]
-  }
-
-  /**
    * Toy without action
    */
   export type ToyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5466,372 +5425,376 @@ export namespace Prisma {
 
 
   /**
-   * Model ToyPicture
+   * Model Lend
    */
 
-  export type AggregateToyPicture = {
-    _count: ToyPictureCountAggregateOutputType | null
-    _avg: ToyPictureAvgAggregateOutputType | null
-    _sum: ToyPictureSumAggregateOutputType | null
-    _min: ToyPictureMinAggregateOutputType | null
-    _max: ToyPictureMaxAggregateOutputType | null
+  export type AggregateLend = {
+    _count: LendCountAggregateOutputType | null
+    _min: LendMinAggregateOutputType | null
+    _max: LendMaxAggregateOutputType | null
   }
 
-  export type ToyPictureAvgAggregateOutputType = {
-    order: number | null
-  }
-
-  export type ToyPictureSumAggregateOutputType = {
-    order: number | null
-  }
-
-  export type ToyPictureMinAggregateOutputType = {
+  export type LendMinAggregateOutputType = {
     id: string | null
-    order: number | null
+    startDate: Date | null
+    endDate: Date | null
+    lenderId: string | null
+    borrowerId: string | null
     toyId: string | null
-    picture: string | null
   }
 
-  export type ToyPictureMaxAggregateOutputType = {
+  export type LendMaxAggregateOutputType = {
     id: string | null
-    order: number | null
+    startDate: Date | null
+    endDate: Date | null
+    lenderId: string | null
+    borrowerId: string | null
     toyId: string | null
-    picture: string | null
   }
 
-  export type ToyPictureCountAggregateOutputType = {
+  export type LendCountAggregateOutputType = {
     id: number
-    order: number
+    startDate: number
+    endDate: number
+    lenderId: number
+    borrowerId: number
     toyId: number
-    picture: number
     _all: number
   }
 
 
-  export type ToyPictureAvgAggregateInputType = {
-    order?: true
-  }
-
-  export type ToyPictureSumAggregateInputType = {
-    order?: true
-  }
-
-  export type ToyPictureMinAggregateInputType = {
+  export type LendMinAggregateInputType = {
     id?: true
-    order?: true
+    startDate?: true
+    endDate?: true
+    lenderId?: true
+    borrowerId?: true
     toyId?: true
-    picture?: true
   }
 
-  export type ToyPictureMaxAggregateInputType = {
+  export type LendMaxAggregateInputType = {
     id?: true
-    order?: true
+    startDate?: true
+    endDate?: true
+    lenderId?: true
+    borrowerId?: true
     toyId?: true
-    picture?: true
   }
 
-  export type ToyPictureCountAggregateInputType = {
+  export type LendCountAggregateInputType = {
     id?: true
-    order?: true
+    startDate?: true
+    endDate?: true
+    lenderId?: true
+    borrowerId?: true
     toyId?: true
-    picture?: true
     _all?: true
   }
 
-  export type ToyPictureAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which ToyPicture to aggregate.
+     * Filter which Lend to aggregate.
      */
-    where?: ToyPictureWhereInput
+    where?: LendWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of ToyPictures to fetch.
+     * Determine the order of Lends to fetch.
      */
-    orderBy?: ToyPictureOrderByWithRelationInput | ToyPictureOrderByWithRelationInput[]
+    orderBy?: LendOrderByWithRelationInput | LendOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: ToyPictureWhereUniqueInput
+    cursor?: LendWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` ToyPictures from the position of the cursor.
+     * Take `±n` Lends from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` ToyPictures.
+     * Skip the first `n` Lends.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned ToyPictures
+     * Count returned Lends
     **/
-    _count?: true | ToyPictureCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ToyPictureAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ToyPictureSumAggregateInputType
+    _count?: true | LendCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: ToyPictureMinAggregateInputType
+    _min?: LendMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: ToyPictureMaxAggregateInputType
+    _max?: LendMaxAggregateInputType
   }
 
-  export type GetToyPictureAggregateType<T extends ToyPictureAggregateArgs> = {
-        [P in keyof T & keyof AggregateToyPicture]: P extends '_count' | 'count'
+  export type GetLendAggregateType<T extends LendAggregateArgs> = {
+        [P in keyof T & keyof AggregateLend]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateToyPicture[P]>
-      : GetScalarType<T[P], AggregateToyPicture[P]>
+        : GetScalarType<T[P], AggregateLend[P]>
+      : GetScalarType<T[P], AggregateLend[P]>
   }
 
 
 
 
-  export type ToyPictureGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ToyPictureWhereInput
-    orderBy?: ToyPictureOrderByWithAggregationInput | ToyPictureOrderByWithAggregationInput[]
-    by: ToyPictureScalarFieldEnum[] | ToyPictureScalarFieldEnum
-    having?: ToyPictureScalarWhereWithAggregatesInput
+  export type LendGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LendWhereInput
+    orderBy?: LendOrderByWithAggregationInput | LendOrderByWithAggregationInput[]
+    by: LendScalarFieldEnum[] | LendScalarFieldEnum
+    having?: LendScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: ToyPictureCountAggregateInputType | true
-    _avg?: ToyPictureAvgAggregateInputType
-    _sum?: ToyPictureSumAggregateInputType
-    _min?: ToyPictureMinAggregateInputType
-    _max?: ToyPictureMaxAggregateInputType
+    _count?: LendCountAggregateInputType | true
+    _min?: LendMinAggregateInputType
+    _max?: LendMaxAggregateInputType
   }
 
-  export type ToyPictureGroupByOutputType = {
+  export type LendGroupByOutputType = {
     id: string
-    order: number
+    startDate: Date
+    endDate: Date | null
+    lenderId: string
+    borrowerId: string
     toyId: string
-    picture: string
-    _count: ToyPictureCountAggregateOutputType | null
-    _avg: ToyPictureAvgAggregateOutputType | null
-    _sum: ToyPictureSumAggregateOutputType | null
-    _min: ToyPictureMinAggregateOutputType | null
-    _max: ToyPictureMaxAggregateOutputType | null
+    _count: LendCountAggregateOutputType | null
+    _min: LendMinAggregateOutputType | null
+    _max: LendMaxAggregateOutputType | null
   }
 
-  type GetToyPictureGroupByPayload<T extends ToyPictureGroupByArgs> = Prisma.PrismaPromise<
+  type GetLendGroupByPayload<T extends LendGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ToyPictureGroupByOutputType, T['by']> &
+      PickEnumerable<LendGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ToyPictureGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof LendGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], ToyPictureGroupByOutputType[P]>
-            : GetScalarType<T[P], ToyPictureGroupByOutputType[P]>
+              : GetScalarType<T[P], LendGroupByOutputType[P]>
+            : GetScalarType<T[P], LendGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type ToyPictureSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type LendSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    order?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    lenderId?: boolean
+    borrowerId?: boolean
     toyId?: boolean
-    picture?: boolean
+    lender?: boolean | UserDefaultArgs<ExtArgs>
+    borrower?: boolean | UserDefaultArgs<ExtArgs>
     toy?: boolean | ToyDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["toyPicture"]>
+  }, ExtArgs["result"]["lend"]>
 
-  export type ToyPictureSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type LendSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    order?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    lenderId?: boolean
+    borrowerId?: boolean
     toyId?: boolean
-    picture?: boolean
+    lender?: boolean | UserDefaultArgs<ExtArgs>
+    borrower?: boolean | UserDefaultArgs<ExtArgs>
     toy?: boolean | ToyDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["toyPicture"]>
+  }, ExtArgs["result"]["lend"]>
 
-  export type ToyPictureSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type LendSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    order?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    lenderId?: boolean
+    borrowerId?: boolean
     toyId?: boolean
-    picture?: boolean
+    lender?: boolean | UserDefaultArgs<ExtArgs>
+    borrower?: boolean | UserDefaultArgs<ExtArgs>
     toy?: boolean | ToyDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["toyPicture"]>
+  }, ExtArgs["result"]["lend"]>
 
-  export type ToyPictureSelectScalar = {
+  export type LendSelectScalar = {
     id?: boolean
-    order?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    lenderId?: boolean
+    borrowerId?: boolean
     toyId?: boolean
-    picture?: boolean
   }
 
-  export type ToyPictureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "order" | "toyId" | "picture", ExtArgs["result"]["toyPicture"]>
-  export type ToyPictureInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "startDate" | "endDate" | "lenderId" | "borrowerId" | "toyId", ExtArgs["result"]["lend"]>
+  export type LendInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lender?: boolean | UserDefaultArgs<ExtArgs>
+    borrower?: boolean | UserDefaultArgs<ExtArgs>
     toy?: boolean | ToyDefaultArgs<ExtArgs>
   }
-  export type ToyPictureIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lender?: boolean | UserDefaultArgs<ExtArgs>
+    borrower?: boolean | UserDefaultArgs<ExtArgs>
     toy?: boolean | ToyDefaultArgs<ExtArgs>
   }
-  export type ToyPictureIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lender?: boolean | UserDefaultArgs<ExtArgs>
+    borrower?: boolean | UserDefaultArgs<ExtArgs>
     toy?: boolean | ToyDefaultArgs<ExtArgs>
   }
 
-  export type $ToyPicturePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ToyPicture"
+  export type $LendPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Lend"
     objects: {
+      lender: Prisma.$UserPayload<ExtArgs>
+      borrower: Prisma.$UserPayload<ExtArgs>
       toy: Prisma.$ToyPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      order: number
+      startDate: Date
+      endDate: Date | null
+      lenderId: string
+      borrowerId: string
       toyId: string
-      picture: string
-    }, ExtArgs["result"]["toyPicture"]>
+    }, ExtArgs["result"]["lend"]>
     composites: {}
   }
 
-  type ToyPictureGetPayload<S extends boolean | null | undefined | ToyPictureDefaultArgs> = $Result.GetResult<Prisma.$ToyPicturePayload, S>
+  type LendGetPayload<S extends boolean | null | undefined | LendDefaultArgs> = $Result.GetResult<Prisma.$LendPayload, S>
 
-  type ToyPictureCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ToyPictureFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ToyPictureCountAggregateInputType | true
+  type LendCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LendFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LendCountAggregateInputType | true
     }
 
-  export interface ToyPictureDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ToyPicture'], meta: { name: 'ToyPicture' } }
+  export interface LendDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Lend'], meta: { name: 'Lend' } }
     /**
-     * Find zero or one ToyPicture that matches the filter.
-     * @param {ToyPictureFindUniqueArgs} args - Arguments to find a ToyPicture
+     * Find zero or one Lend that matches the filter.
+     * @param {LendFindUniqueArgs} args - Arguments to find a Lend
      * @example
-     * // Get one ToyPicture
-     * const toyPicture = await prisma.toyPicture.findUnique({
+     * // Get one Lend
+     * const lend = await prisma.lend.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends ToyPictureFindUniqueArgs>(args: SelectSubset<T, ToyPictureFindUniqueArgs<ExtArgs>>): Prisma__ToyPictureClient<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends LendFindUniqueArgs>(args: SelectSubset<T, LendFindUniqueArgs<ExtArgs>>): Prisma__LendClient<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one ToyPicture that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Lend that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {ToyPictureFindUniqueOrThrowArgs} args - Arguments to find a ToyPicture
+     * @param {LendFindUniqueOrThrowArgs} args - Arguments to find a Lend
      * @example
-     * // Get one ToyPicture
-     * const toyPicture = await prisma.toyPicture.findUniqueOrThrow({
+     * // Get one Lend
+     * const lend = await prisma.lend.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ToyPictureFindUniqueOrThrowArgs>(args: SelectSubset<T, ToyPictureFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ToyPictureClient<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends LendFindUniqueOrThrowArgs>(args: SelectSubset<T, LendFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LendClient<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first ToyPicture that matches the filter.
+     * Find the first Lend that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ToyPictureFindFirstArgs} args - Arguments to find a ToyPicture
+     * @param {LendFindFirstArgs} args - Arguments to find a Lend
      * @example
-     * // Get one ToyPicture
-     * const toyPicture = await prisma.toyPicture.findFirst({
+     * // Get one Lend
+     * const lend = await prisma.lend.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends ToyPictureFindFirstArgs>(args?: SelectSubset<T, ToyPictureFindFirstArgs<ExtArgs>>): Prisma__ToyPictureClient<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends LendFindFirstArgs>(args?: SelectSubset<T, LendFindFirstArgs<ExtArgs>>): Prisma__LendClient<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first ToyPicture that matches the filter or
+     * Find the first Lend that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ToyPictureFindFirstOrThrowArgs} args - Arguments to find a ToyPicture
+     * @param {LendFindFirstOrThrowArgs} args - Arguments to find a Lend
      * @example
-     * // Get one ToyPicture
-     * const toyPicture = await prisma.toyPicture.findFirstOrThrow({
+     * // Get one Lend
+     * const lend = await prisma.lend.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends ToyPictureFindFirstOrThrowArgs>(args?: SelectSubset<T, ToyPictureFindFirstOrThrowArgs<ExtArgs>>): Prisma__ToyPictureClient<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends LendFindFirstOrThrowArgs>(args?: SelectSubset<T, LendFindFirstOrThrowArgs<ExtArgs>>): Prisma__LendClient<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more ToyPictures that matches the filter.
+     * Find zero or more Lends that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ToyPictureFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {LendFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all ToyPictures
-     * const toyPictures = await prisma.toyPicture.findMany()
+     * // Get all Lends
+     * const lends = await prisma.lend.findMany()
      * 
-     * // Get first 10 ToyPictures
-     * const toyPictures = await prisma.toyPicture.findMany({ take: 10 })
+     * // Get first 10 Lends
+     * const lends = await prisma.lend.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const toyPictureWithIdOnly = await prisma.toyPicture.findMany({ select: { id: true } })
+     * const lendWithIdOnly = await prisma.lend.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends ToyPictureFindManyArgs>(args?: SelectSubset<T, ToyPictureFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends LendFindManyArgs>(args?: SelectSubset<T, LendFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a ToyPicture.
-     * @param {ToyPictureCreateArgs} args - Arguments to create a ToyPicture.
+     * Create a Lend.
+     * @param {LendCreateArgs} args - Arguments to create a Lend.
      * @example
-     * // Create one ToyPicture
-     * const ToyPicture = await prisma.toyPicture.create({
+     * // Create one Lend
+     * const Lend = await prisma.lend.create({
      *   data: {
-     *     // ... data to create a ToyPicture
+     *     // ... data to create a Lend
      *   }
      * })
      * 
      */
-    create<T extends ToyPictureCreateArgs>(args: SelectSubset<T, ToyPictureCreateArgs<ExtArgs>>): Prisma__ToyPictureClient<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends LendCreateArgs>(args: SelectSubset<T, LendCreateArgs<ExtArgs>>): Prisma__LendClient<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many ToyPictures.
-     * @param {ToyPictureCreateManyArgs} args - Arguments to create many ToyPictures.
+     * Create many Lends.
+     * @param {LendCreateManyArgs} args - Arguments to create many Lends.
      * @example
-     * // Create many ToyPictures
-     * const toyPicture = await prisma.toyPicture.createMany({
+     * // Create many Lends
+     * const lend = await prisma.lend.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends ToyPictureCreateManyArgs>(args?: SelectSubset<T, ToyPictureCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends LendCreateManyArgs>(args?: SelectSubset<T, LendCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many ToyPictures and returns the data saved in the database.
-     * @param {ToyPictureCreateManyAndReturnArgs} args - Arguments to create many ToyPictures.
+     * Create many Lends and returns the data saved in the database.
+     * @param {LendCreateManyAndReturnArgs} args - Arguments to create many Lends.
      * @example
-     * // Create many ToyPictures
-     * const toyPicture = await prisma.toyPicture.createManyAndReturn({
+     * // Create many Lends
+     * const lend = await prisma.lend.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many ToyPictures and only return the `id`
-     * const toyPictureWithIdOnly = await prisma.toyPicture.createManyAndReturn({
+     * // Create many Lends and only return the `id`
+     * const lendWithIdOnly = await prisma.lend.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -5841,28 +5804,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends ToyPictureCreateManyAndReturnArgs>(args?: SelectSubset<T, ToyPictureCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends LendCreateManyAndReturnArgs>(args?: SelectSubset<T, LendCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a ToyPicture.
-     * @param {ToyPictureDeleteArgs} args - Arguments to delete one ToyPicture.
+     * Delete a Lend.
+     * @param {LendDeleteArgs} args - Arguments to delete one Lend.
      * @example
-     * // Delete one ToyPicture
-     * const ToyPicture = await prisma.toyPicture.delete({
+     * // Delete one Lend
+     * const Lend = await prisma.lend.delete({
      *   where: {
-     *     // ... filter to delete one ToyPicture
+     *     // ... filter to delete one Lend
      *   }
      * })
      * 
      */
-    delete<T extends ToyPictureDeleteArgs>(args: SelectSubset<T, ToyPictureDeleteArgs<ExtArgs>>): Prisma__ToyPictureClient<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends LendDeleteArgs>(args: SelectSubset<T, LendDeleteArgs<ExtArgs>>): Prisma__LendClient<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one ToyPicture.
-     * @param {ToyPictureUpdateArgs} args - Arguments to update one ToyPicture.
+     * Update one Lend.
+     * @param {LendUpdateArgs} args - Arguments to update one Lend.
      * @example
-     * // Update one ToyPicture
-     * const toyPicture = await prisma.toyPicture.update({
+     * // Update one Lend
+     * const lend = await prisma.lend.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5872,30 +5835,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends ToyPictureUpdateArgs>(args: SelectSubset<T, ToyPictureUpdateArgs<ExtArgs>>): Prisma__ToyPictureClient<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends LendUpdateArgs>(args: SelectSubset<T, LendUpdateArgs<ExtArgs>>): Prisma__LendClient<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more ToyPictures.
-     * @param {ToyPictureDeleteManyArgs} args - Arguments to filter ToyPictures to delete.
+     * Delete zero or more Lends.
+     * @param {LendDeleteManyArgs} args - Arguments to filter Lends to delete.
      * @example
-     * // Delete a few ToyPictures
-     * const { count } = await prisma.toyPicture.deleteMany({
+     * // Delete a few Lends
+     * const { count } = await prisma.lend.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends ToyPictureDeleteManyArgs>(args?: SelectSubset<T, ToyPictureDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends LendDeleteManyArgs>(args?: SelectSubset<T, LendDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more ToyPictures.
+     * Update zero or more Lends.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ToyPictureUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {LendUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many ToyPictures
-     * const toyPicture = await prisma.toyPicture.updateMany({
+     * // Update many Lends
+     * const lend = await prisma.lend.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5905,14 +5868,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends ToyPictureUpdateManyArgs>(args: SelectSubset<T, ToyPictureUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends LendUpdateManyArgs>(args: SelectSubset<T, LendUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more ToyPictures and returns the data updated in the database.
-     * @param {ToyPictureUpdateManyAndReturnArgs} args - Arguments to update many ToyPictures.
+     * Update zero or more Lends and returns the data updated in the database.
+     * @param {LendUpdateManyAndReturnArgs} args - Arguments to update many Lends.
      * @example
-     * // Update many ToyPictures
-     * const toyPicture = await prisma.toyPicture.updateManyAndReturn({
+     * // Update many Lends
+     * const lend = await prisma.lend.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5921,8 +5884,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more ToyPictures and only return the `id`
-     * const toyPictureWithIdOnly = await prisma.toyPicture.updateManyAndReturn({
+     * // Update zero or more Lends and only return the `id`
+     * const lendWithIdOnly = await prisma.lend.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -5935,56 +5898,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends ToyPictureUpdateManyAndReturnArgs>(args: SelectSubset<T, ToyPictureUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends LendUpdateManyAndReturnArgs>(args: SelectSubset<T, LendUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one ToyPicture.
-     * @param {ToyPictureUpsertArgs} args - Arguments to update or create a ToyPicture.
+     * Create or update one Lend.
+     * @param {LendUpsertArgs} args - Arguments to update or create a Lend.
      * @example
-     * // Update or create a ToyPicture
-     * const toyPicture = await prisma.toyPicture.upsert({
+     * // Update or create a Lend
+     * const lend = await prisma.lend.upsert({
      *   create: {
-     *     // ... data to create a ToyPicture
+     *     // ... data to create a Lend
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the ToyPicture we want to update
+     *     // ... the filter for the Lend we want to update
      *   }
      * })
      */
-    upsert<T extends ToyPictureUpsertArgs>(args: SelectSubset<T, ToyPictureUpsertArgs<ExtArgs>>): Prisma__ToyPictureClient<$Result.GetResult<Prisma.$ToyPicturePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends LendUpsertArgs>(args: SelectSubset<T, LendUpsertArgs<ExtArgs>>): Prisma__LendClient<$Result.GetResult<Prisma.$LendPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of ToyPictures.
+     * Count the number of Lends.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ToyPictureCountArgs} args - Arguments to filter ToyPictures to count.
+     * @param {LendCountArgs} args - Arguments to filter Lends to count.
      * @example
-     * // Count the number of ToyPictures
-     * const count = await prisma.toyPicture.count({
+     * // Count the number of Lends
+     * const count = await prisma.lend.count({
      *   where: {
-     *     // ... the filter for the ToyPictures we want to count
+     *     // ... the filter for the Lends we want to count
      *   }
      * })
     **/
-    count<T extends ToyPictureCountArgs>(
-      args?: Subset<T, ToyPictureCountArgs>,
+    count<T extends LendCountArgs>(
+      args?: Subset<T, LendCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], ToyPictureCountAggregateOutputType>
+          : GetScalarType<T['select'], LendCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a ToyPicture.
+     * Allows you to perform aggregations operations on a Lend.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ToyPictureAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {LendAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -6004,13 +5967,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ToyPictureAggregateArgs>(args: Subset<T, ToyPictureAggregateArgs>): Prisma.PrismaPromise<GetToyPictureAggregateType<T>>
+    aggregate<T extends LendAggregateArgs>(args: Subset<T, LendAggregateArgs>): Prisma.PrismaPromise<GetLendAggregateType<T>>
 
     /**
-     * Group by ToyPicture.
+     * Group by Lend.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ToyPictureGroupByArgs} args - Group by arguments.
+     * @param {LendGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -6025,14 +5988,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends ToyPictureGroupByArgs,
+      T extends LendGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ToyPictureGroupByArgs['orderBy'] }
-        : { orderBy?: ToyPictureGroupByArgs['orderBy'] },
+        ? { orderBy: LendGroupByArgs['orderBy'] }
+        : { orderBy?: LendGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -6081,21 +6044,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ToyPictureGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetToyPictureGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, LendGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLendGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the ToyPicture model
+   * Fields of the Lend model
    */
-  readonly fields: ToyPictureFieldRefs;
+  readonly fields: LendFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for ToyPicture.
+   * The delegate class that acts as a "Promise-like" for Lend.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ToyPictureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__LendClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    lender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    borrower<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     toy<T extends ToyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ToyDefaultArgs<ExtArgs>>): Prisma__ToyClient<$Result.GetResult<Prisma.$ToyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6123,424 +6088,426 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the ToyPicture model
+   * Fields of the Lend model
    */
-  interface ToyPictureFieldRefs {
-    readonly id: FieldRef<"ToyPicture", 'String'>
-    readonly order: FieldRef<"ToyPicture", 'Int'>
-    readonly toyId: FieldRef<"ToyPicture", 'String'>
-    readonly picture: FieldRef<"ToyPicture", 'String'>
+  interface LendFieldRefs {
+    readonly id: FieldRef<"Lend", 'String'>
+    readonly startDate: FieldRef<"Lend", 'DateTime'>
+    readonly endDate: FieldRef<"Lend", 'DateTime'>
+    readonly lenderId: FieldRef<"Lend", 'String'>
+    readonly borrowerId: FieldRef<"Lend", 'String'>
+    readonly toyId: FieldRef<"Lend", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * ToyPicture findUnique
+   * Lend findUnique
    */
-  export type ToyPictureFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelect<ExtArgs> | null
+    select?: LendSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureInclude<ExtArgs> | null
+    include?: LendInclude<ExtArgs> | null
     /**
-     * Filter, which ToyPicture to fetch.
+     * Filter, which Lend to fetch.
      */
-    where: ToyPictureWhereUniqueInput
+    where: LendWhereUniqueInput
   }
 
   /**
-   * ToyPicture findUniqueOrThrow
+   * Lend findUniqueOrThrow
    */
-  export type ToyPictureFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelect<ExtArgs> | null
+    select?: LendSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureInclude<ExtArgs> | null
+    include?: LendInclude<ExtArgs> | null
     /**
-     * Filter, which ToyPicture to fetch.
+     * Filter, which Lend to fetch.
      */
-    where: ToyPictureWhereUniqueInput
+    where: LendWhereUniqueInput
   }
 
   /**
-   * ToyPicture findFirst
+   * Lend findFirst
    */
-  export type ToyPictureFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelect<ExtArgs> | null
+    select?: LendSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureInclude<ExtArgs> | null
+    include?: LendInclude<ExtArgs> | null
     /**
-     * Filter, which ToyPicture to fetch.
+     * Filter, which Lend to fetch.
      */
-    where?: ToyPictureWhereInput
+    where?: LendWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of ToyPictures to fetch.
+     * Determine the order of Lends to fetch.
      */
-    orderBy?: ToyPictureOrderByWithRelationInput | ToyPictureOrderByWithRelationInput[]
+    orderBy?: LendOrderByWithRelationInput | LendOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for ToyPictures.
+     * Sets the position for searching for Lends.
      */
-    cursor?: ToyPictureWhereUniqueInput
+    cursor?: LendWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` ToyPictures from the position of the cursor.
+     * Take `±n` Lends from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` ToyPictures.
+     * Skip the first `n` Lends.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of ToyPictures.
+     * Filter by unique combinations of Lends.
      */
-    distinct?: ToyPictureScalarFieldEnum | ToyPictureScalarFieldEnum[]
+    distinct?: LendScalarFieldEnum | LendScalarFieldEnum[]
   }
 
   /**
-   * ToyPicture findFirstOrThrow
+   * Lend findFirstOrThrow
    */
-  export type ToyPictureFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelect<ExtArgs> | null
+    select?: LendSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureInclude<ExtArgs> | null
+    include?: LendInclude<ExtArgs> | null
     /**
-     * Filter, which ToyPicture to fetch.
+     * Filter, which Lend to fetch.
      */
-    where?: ToyPictureWhereInput
+    where?: LendWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of ToyPictures to fetch.
+     * Determine the order of Lends to fetch.
      */
-    orderBy?: ToyPictureOrderByWithRelationInput | ToyPictureOrderByWithRelationInput[]
+    orderBy?: LendOrderByWithRelationInput | LendOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for ToyPictures.
+     * Sets the position for searching for Lends.
      */
-    cursor?: ToyPictureWhereUniqueInput
+    cursor?: LendWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` ToyPictures from the position of the cursor.
+     * Take `±n` Lends from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` ToyPictures.
+     * Skip the first `n` Lends.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of ToyPictures.
+     * Filter by unique combinations of Lends.
      */
-    distinct?: ToyPictureScalarFieldEnum | ToyPictureScalarFieldEnum[]
+    distinct?: LendScalarFieldEnum | LendScalarFieldEnum[]
   }
 
   /**
-   * ToyPicture findMany
+   * Lend findMany
    */
-  export type ToyPictureFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelect<ExtArgs> | null
+    select?: LendSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureInclude<ExtArgs> | null
+    include?: LendInclude<ExtArgs> | null
     /**
-     * Filter, which ToyPictures to fetch.
+     * Filter, which Lends to fetch.
      */
-    where?: ToyPictureWhereInput
+    where?: LendWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of ToyPictures to fetch.
+     * Determine the order of Lends to fetch.
      */
-    orderBy?: ToyPictureOrderByWithRelationInput | ToyPictureOrderByWithRelationInput[]
+    orderBy?: LendOrderByWithRelationInput | LendOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing ToyPictures.
+     * Sets the position for listing Lends.
      */
-    cursor?: ToyPictureWhereUniqueInput
+    cursor?: LendWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` ToyPictures from the position of the cursor.
+     * Take `±n` Lends from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` ToyPictures.
+     * Skip the first `n` Lends.
      */
     skip?: number
-    distinct?: ToyPictureScalarFieldEnum | ToyPictureScalarFieldEnum[]
+    distinct?: LendScalarFieldEnum | LendScalarFieldEnum[]
   }
 
   /**
-   * ToyPicture create
+   * Lend create
    */
-  export type ToyPictureCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelect<ExtArgs> | null
+    select?: LendSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureInclude<ExtArgs> | null
+    include?: LendInclude<ExtArgs> | null
     /**
-     * The data needed to create a ToyPicture.
+     * The data needed to create a Lend.
      */
-    data: XOR<ToyPictureCreateInput, ToyPictureUncheckedCreateInput>
+    data: XOR<LendCreateInput, LendUncheckedCreateInput>
   }
 
   /**
-   * ToyPicture createMany
+   * Lend createMany
    */
-  export type ToyPictureCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many ToyPictures.
+     * The data used to create many Lends.
      */
-    data: ToyPictureCreateManyInput | ToyPictureCreateManyInput[]
+    data: LendCreateManyInput | LendCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * ToyPicture createManyAndReturn
+   * Lend createManyAndReturn
    */
-  export type ToyPictureCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelectCreateManyAndReturn<ExtArgs> | null
+    select?: LendSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
-     * The data used to create many ToyPictures.
+     * The data used to create many Lends.
      */
-    data: ToyPictureCreateManyInput | ToyPictureCreateManyInput[]
+    data: LendCreateManyInput | LendCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: LendIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * ToyPicture update
+   * Lend update
    */
-  export type ToyPictureUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelect<ExtArgs> | null
+    select?: LendSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureInclude<ExtArgs> | null
+    include?: LendInclude<ExtArgs> | null
     /**
-     * The data needed to update a ToyPicture.
+     * The data needed to update a Lend.
      */
-    data: XOR<ToyPictureUpdateInput, ToyPictureUncheckedUpdateInput>
+    data: XOR<LendUpdateInput, LendUncheckedUpdateInput>
     /**
-     * Choose, which ToyPicture to update.
+     * Choose, which Lend to update.
      */
-    where: ToyPictureWhereUniqueInput
+    where: LendWhereUniqueInput
   }
 
   /**
-   * ToyPicture updateMany
+   * Lend updateMany
    */
-  export type ToyPictureUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update ToyPictures.
+     * The data used to update Lends.
      */
-    data: XOR<ToyPictureUpdateManyMutationInput, ToyPictureUncheckedUpdateManyInput>
+    data: XOR<LendUpdateManyMutationInput, LendUncheckedUpdateManyInput>
     /**
-     * Filter which ToyPictures to update
+     * Filter which Lends to update
      */
-    where?: ToyPictureWhereInput
+    where?: LendWhereInput
     /**
-     * Limit how many ToyPictures to update.
+     * Limit how many Lends to update.
      */
     limit?: number
   }
 
   /**
-   * ToyPicture updateManyAndReturn
+   * Lend updateManyAndReturn
    */
-  export type ToyPictureUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: LendSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
-     * The data used to update ToyPictures.
+     * The data used to update Lends.
      */
-    data: XOR<ToyPictureUpdateManyMutationInput, ToyPictureUncheckedUpdateManyInput>
+    data: XOR<LendUpdateManyMutationInput, LendUncheckedUpdateManyInput>
     /**
-     * Filter which ToyPictures to update
+     * Filter which Lends to update
      */
-    where?: ToyPictureWhereInput
+    where?: LendWhereInput
     /**
-     * Limit how many ToyPictures to update.
+     * Limit how many Lends to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: LendIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * ToyPicture upsert
+   * Lend upsert
    */
-  export type ToyPictureUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelect<ExtArgs> | null
+    select?: LendSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureInclude<ExtArgs> | null
+    include?: LendInclude<ExtArgs> | null
     /**
-     * The filter to search for the ToyPicture to update in case it exists.
+     * The filter to search for the Lend to update in case it exists.
      */
-    where: ToyPictureWhereUniqueInput
+    where: LendWhereUniqueInput
     /**
-     * In case the ToyPicture found by the `where` argument doesn't exist, create a new ToyPicture with this data.
+     * In case the Lend found by the `where` argument doesn't exist, create a new Lend with this data.
      */
-    create: XOR<ToyPictureCreateInput, ToyPictureUncheckedCreateInput>
+    create: XOR<LendCreateInput, LendUncheckedCreateInput>
     /**
-     * In case the ToyPicture was found with the provided `where` argument, update it with this data.
+     * In case the Lend was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<ToyPictureUpdateInput, ToyPictureUncheckedUpdateInput>
+    update: XOR<LendUpdateInput, LendUncheckedUpdateInput>
   }
 
   /**
-   * ToyPicture delete
+   * Lend delete
    */
-  export type ToyPictureDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelect<ExtArgs> | null
+    select?: LendSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureInclude<ExtArgs> | null
+    include?: LendInclude<ExtArgs> | null
     /**
-     * Filter which ToyPicture to delete.
+     * Filter which Lend to delete.
      */
-    where: ToyPictureWhereUniqueInput
+    where: LendWhereUniqueInput
   }
 
   /**
-   * ToyPicture deleteMany
+   * Lend deleteMany
    */
-  export type ToyPictureDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which ToyPictures to delete
+     * Filter which Lends to delete
      */
-    where?: ToyPictureWhereInput
+    where?: LendWhereInput
     /**
-     * Limit how many ToyPictures to delete.
+     * Limit how many Lends to delete.
      */
     limit?: number
   }
 
   /**
-   * ToyPicture without action
+   * Lend without action
    */
-  export type ToyPictureDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type LendDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ToyPicture
+     * Select specific fields to fetch from the Lend
      */
-    select?: ToyPictureSelect<ExtArgs> | null
+    select?: LendSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ToyPicture
+     * Omit specific fields from the Lend
      */
-    omit?: ToyPictureOmit<ExtArgs> | null
+    omit?: LendOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ToyPictureInclude<ExtArgs> | null
+    include?: LendInclude<ExtArgs> | null
   }
 
 
@@ -10921,29 +10888,25 @@ export namespace Prisma {
     id: 'id',
     createdAt: 'createdAt',
     name: 'name',
-    description: 'description',
     ownerId: 'ownerId',
-    price: 'price',
-    isNew: 'isNew',
-    canTrade: 'canTrade',
-    canLend: 'canLend',
     usageTime: 'usageTime',
     preservation: 'preservation',
-    type: 'type',
-    ageGroup: 'ageGroup'
+    type: 'type'
   };
 
   export type ToyScalarFieldEnum = (typeof ToyScalarFieldEnum)[keyof typeof ToyScalarFieldEnum]
 
 
-  export const ToyPictureScalarFieldEnum: {
+  export const LendScalarFieldEnum: {
     id: 'id',
-    order: 'order',
-    toyId: 'toyId',
-    picture: 'picture'
+    startDate: 'startDate',
+    endDate: 'endDate',
+    lenderId: 'lenderId',
+    borrowerId: 'borrowerId',
+    toyId: 'toyId'
   };
 
-  export type ToyPictureScalarFieldEnum = (typeof ToyPictureScalarFieldEnum)[keyof typeof ToyPictureScalarFieldEnum]
+  export type LendScalarFieldEnum = (typeof LendScalarFieldEnum)[keyof typeof LendScalarFieldEnum]
 
 
   export const HistoryEntryScalarFieldEnum: {
@@ -11082,20 +11045,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
    * Reference to a field of type 'ToyType[]'
    */
   export type ListEnumToyTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToyType[]'>
@@ -11110,16 +11059,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'AgeRange'
+   * Reference to a field of type 'Float'
    */
-  export type EnumAgeRangeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AgeRange'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'AgeRange[]'
+   * Reference to a field of type 'Float[]'
    */
-  export type ListEnumAgeRangeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AgeRange[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -11147,6 +11096,8 @@ export namespace Prisma {
     addressDetail?: StringNullableFilter<"User"> | string | null
     addressCep?: StringFilter<"User"> | string
     toys?: ToyListRelationFilter
+    lendsMade?: LendListRelationFilter
+    lendsTaken?: LendListRelationFilter
     history?: HistoryEntryListRelationFilter
     ratings?: RateListRelationFilter
     organizationInfo?: XOR<OrganizationInfoNullableScalarRelationFilter, organizationInfoWhereInput> | null
@@ -11173,6 +11124,8 @@ export namespace Prisma {
     addressDetail?: SortOrderInput | SortOrder
     addressCep?: SortOrder
     toys?: ToyOrderByRelationAggregateInput
+    lendsMade?: LendOrderByRelationAggregateInput
+    lendsTaken?: LendOrderByRelationAggregateInput
     history?: HistoryEntryOrderByRelationAggregateInput
     ratings?: RateOrderByRelationAggregateInput
     organizationInfo?: organizationInfoOrderByWithRelationInput
@@ -11202,6 +11155,8 @@ export namespace Prisma {
     addressDetail?: StringNullableFilter<"User"> | string | null
     addressCep?: StringFilter<"User"> | string
     toys?: ToyListRelationFilter
+    lendsMade?: LendListRelationFilter
+    lendsTaken?: LendListRelationFilter
     history?: HistoryEntryListRelationFilter
     ratings?: RateListRelationFilter
     organizationInfo?: XOR<OrganizationInfoNullableScalarRelationFilter, organizationInfoWhereInput> | null
@@ -11320,38 +11275,26 @@ export namespace Prisma {
     id?: StringFilter<"Toy"> | string
     createdAt?: DateTimeFilter<"Toy"> | Date | string
     name?: StringFilter<"Toy"> | string
-    description?: StringFilter<"Toy"> | string
     ownerId?: StringFilter<"Toy"> | string
-    price?: FloatFilter<"Toy"> | number
-    isNew?: BoolFilter<"Toy"> | boolean
-    canTrade?: BoolFilter<"Toy"> | boolean
-    canLend?: BoolFilter<"Toy"> | boolean
     usageTime?: IntFilter<"Toy"> | number
     preservation?: IntFilter<"Toy"> | number
     type?: EnumToyTypeNullableListFilter<"Toy">
-    ageGroup?: EnumAgeRangeFilter<"Toy"> | $Enums.AgeRange
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
+    lends?: LendListRelationFilter
     history?: HistoryEntryListRelationFilter
-    ToyPictures?: ToyPictureListRelationFilter
   }
 
   export type ToyOrderByWithRelationInput = {
     id?: SortOrder
     createdAt?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     ownerId?: SortOrder
-    price?: SortOrder
-    isNew?: SortOrder
-    canTrade?: SortOrder
-    canLend?: SortOrder
     usageTime?: SortOrder
     preservation?: SortOrder
     type?: SortOrder
-    ageGroup?: SortOrder
     owner?: UserOrderByWithRelationInput
+    lends?: LendOrderByRelationAggregateInput
     history?: HistoryEntryOrderByRelationAggregateInput
-    ToyPictures?: ToyPictureOrderByRelationAggregateInput
   }
 
   export type ToyWhereUniqueInput = Prisma.AtLeast<{
@@ -11361,35 +11304,23 @@ export namespace Prisma {
     NOT?: ToyWhereInput | ToyWhereInput[]
     createdAt?: DateTimeFilter<"Toy"> | Date | string
     name?: StringFilter<"Toy"> | string
-    description?: StringFilter<"Toy"> | string
     ownerId?: StringFilter<"Toy"> | string
-    price?: FloatFilter<"Toy"> | number
-    isNew?: BoolFilter<"Toy"> | boolean
-    canTrade?: BoolFilter<"Toy"> | boolean
-    canLend?: BoolFilter<"Toy"> | boolean
     usageTime?: IntFilter<"Toy"> | number
     preservation?: IntFilter<"Toy"> | number
     type?: EnumToyTypeNullableListFilter<"Toy">
-    ageGroup?: EnumAgeRangeFilter<"Toy"> | $Enums.AgeRange
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
+    lends?: LendListRelationFilter
     history?: HistoryEntryListRelationFilter
-    ToyPictures?: ToyPictureListRelationFilter
   }, "id">
 
   export type ToyOrderByWithAggregationInput = {
     id?: SortOrder
     createdAt?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     ownerId?: SortOrder
-    price?: SortOrder
-    isNew?: SortOrder
-    canTrade?: SortOrder
-    canLend?: SortOrder
     usageTime?: SortOrder
     preservation?: SortOrder
     type?: SortOrder
-    ageGroup?: SortOrder
     _count?: ToyCountOrderByAggregateInput
     _avg?: ToyAvgOrderByAggregateInput
     _max?: ToyMaxOrderByAggregateInput
@@ -11404,68 +11335,76 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Toy"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Toy"> | Date | string
     name?: StringWithAggregatesFilter<"Toy"> | string
-    description?: StringWithAggregatesFilter<"Toy"> | string
     ownerId?: StringWithAggregatesFilter<"Toy"> | string
-    price?: FloatWithAggregatesFilter<"Toy"> | number
-    isNew?: BoolWithAggregatesFilter<"Toy"> | boolean
-    canTrade?: BoolWithAggregatesFilter<"Toy"> | boolean
-    canLend?: BoolWithAggregatesFilter<"Toy"> | boolean
     usageTime?: IntWithAggregatesFilter<"Toy"> | number
     preservation?: IntWithAggregatesFilter<"Toy"> | number
     type?: EnumToyTypeNullableListFilter<"Toy">
-    ageGroup?: EnumAgeRangeWithAggregatesFilter<"Toy"> | $Enums.AgeRange
   }
 
-  export type ToyPictureWhereInput = {
-    AND?: ToyPictureWhereInput | ToyPictureWhereInput[]
-    OR?: ToyPictureWhereInput[]
-    NOT?: ToyPictureWhereInput | ToyPictureWhereInput[]
-    id?: StringFilter<"ToyPicture"> | string
-    order?: IntFilter<"ToyPicture"> | number
-    toyId?: StringFilter<"ToyPicture"> | string
-    picture?: StringFilter<"ToyPicture"> | string
+  export type LendWhereInput = {
+    AND?: LendWhereInput | LendWhereInput[]
+    OR?: LendWhereInput[]
+    NOT?: LendWhereInput | LendWhereInput[]
+    id?: StringFilter<"Lend"> | string
+    startDate?: DateTimeFilter<"Lend"> | Date | string
+    endDate?: DateTimeNullableFilter<"Lend"> | Date | string | null
+    lenderId?: StringFilter<"Lend"> | string
+    borrowerId?: StringFilter<"Lend"> | string
+    toyId?: StringFilter<"Lend"> | string
+    lender?: XOR<UserScalarRelationFilter, UserWhereInput>
+    borrower?: XOR<UserScalarRelationFilter, UserWhereInput>
     toy?: XOR<ToyScalarRelationFilter, ToyWhereInput>
   }
 
-  export type ToyPictureOrderByWithRelationInput = {
+  export type LendOrderByWithRelationInput = {
     id?: SortOrder
-    order?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrderInput | SortOrder
+    lenderId?: SortOrder
+    borrowerId?: SortOrder
     toyId?: SortOrder
-    picture?: SortOrder
+    lender?: UserOrderByWithRelationInput
+    borrower?: UserOrderByWithRelationInput
     toy?: ToyOrderByWithRelationInput
   }
 
-  export type ToyPictureWhereUniqueInput = Prisma.AtLeast<{
+  export type LendWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: ToyPictureWhereInput | ToyPictureWhereInput[]
-    OR?: ToyPictureWhereInput[]
-    NOT?: ToyPictureWhereInput | ToyPictureWhereInput[]
-    order?: IntFilter<"ToyPicture"> | number
-    toyId?: StringFilter<"ToyPicture"> | string
-    picture?: StringFilter<"ToyPicture"> | string
+    AND?: LendWhereInput | LendWhereInput[]
+    OR?: LendWhereInput[]
+    NOT?: LendWhereInput | LendWhereInput[]
+    startDate?: DateTimeFilter<"Lend"> | Date | string
+    endDate?: DateTimeNullableFilter<"Lend"> | Date | string | null
+    lenderId?: StringFilter<"Lend"> | string
+    borrowerId?: StringFilter<"Lend"> | string
+    toyId?: StringFilter<"Lend"> | string
+    lender?: XOR<UserScalarRelationFilter, UserWhereInput>
+    borrower?: XOR<UserScalarRelationFilter, UserWhereInput>
     toy?: XOR<ToyScalarRelationFilter, ToyWhereInput>
   }, "id">
 
-  export type ToyPictureOrderByWithAggregationInput = {
+  export type LendOrderByWithAggregationInput = {
     id?: SortOrder
-    order?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrderInput | SortOrder
+    lenderId?: SortOrder
+    borrowerId?: SortOrder
     toyId?: SortOrder
-    picture?: SortOrder
-    _count?: ToyPictureCountOrderByAggregateInput
-    _avg?: ToyPictureAvgOrderByAggregateInput
-    _max?: ToyPictureMaxOrderByAggregateInput
-    _min?: ToyPictureMinOrderByAggregateInput
-    _sum?: ToyPictureSumOrderByAggregateInput
+    _count?: LendCountOrderByAggregateInput
+    _max?: LendMaxOrderByAggregateInput
+    _min?: LendMinOrderByAggregateInput
   }
 
-  export type ToyPictureScalarWhereWithAggregatesInput = {
-    AND?: ToyPictureScalarWhereWithAggregatesInput | ToyPictureScalarWhereWithAggregatesInput[]
-    OR?: ToyPictureScalarWhereWithAggregatesInput[]
-    NOT?: ToyPictureScalarWhereWithAggregatesInput | ToyPictureScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"ToyPicture"> | string
-    order?: IntWithAggregatesFilter<"ToyPicture"> | number
-    toyId?: StringWithAggregatesFilter<"ToyPicture"> | string
-    picture?: StringWithAggregatesFilter<"ToyPicture"> | string
+  export type LendScalarWhereWithAggregatesInput = {
+    AND?: LendScalarWhereWithAggregatesInput | LendScalarWhereWithAggregatesInput[]
+    OR?: LendScalarWhereWithAggregatesInput[]
+    NOT?: LendScalarWhereWithAggregatesInput | LendScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Lend"> | string
+    startDate?: DateTimeWithAggregatesFilter<"Lend"> | Date | string
+    endDate?: DateTimeNullableWithAggregatesFilter<"Lend"> | Date | string | null
+    lenderId?: StringWithAggregatesFilter<"Lend"> | string
+    borrowerId?: StringWithAggregatesFilter<"Lend"> | string
+    toyId?: StringWithAggregatesFilter<"Lend"> | string
   }
 
   export type HistoryEntryWhereInput = {
@@ -11715,6 +11654,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryCreateNestedManyWithoutUserInput
     ratings?: RateCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
@@ -11741,6 +11682,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyUncheckedCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendUncheckedCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendUncheckedCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryUncheckedCreateNestedManyWithoutUserInput
     ratings?: RateUncheckedCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
@@ -11767,6 +11710,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUpdateManyWithoutUserNestedInput
     ratings?: RateUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
@@ -11793,6 +11738,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUncheckedUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUncheckedUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUncheckedUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUncheckedUpdateManyWithoutUserNestedInput
     ratings?: RateUncheckedUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -11917,167 +11864,137 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     name: string
-    description: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type?: ToyCreatetypeInput | $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
     owner: UserCreateNestedOneWithoutToysInput
+    lends?: LendCreateNestedManyWithoutToyInput
     history?: HistoryEntryCreateNestedManyWithoutToyInput
-    ToyPictures?: ToyPictureCreateNestedManyWithoutToyInput
   }
 
   export type ToyUncheckedCreateInput = {
     id?: string
     createdAt?: Date | string
     name: string
-    description: string
     ownerId: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type?: ToyCreatetypeInput | $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
+    lends?: LendUncheckedCreateNestedManyWithoutToyInput
     history?: HistoryEntryUncheckedCreateNestedManyWithoutToyInput
-    ToyPictures?: ToyPictureUncheckedCreateNestedManyWithoutToyInput
   }
 
   export type ToyUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
     owner?: UserUpdateOneRequiredWithoutToysNestedInput
+    lends?: LendUpdateManyWithoutToyNestedInput
     history?: HistoryEntryUpdateManyWithoutToyNestedInput
-    ToyPictures?: ToyPictureUpdateManyWithoutToyNestedInput
   }
 
   export type ToyUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
+    lends?: LendUncheckedUpdateManyWithoutToyNestedInput
     history?: HistoryEntryUncheckedUpdateManyWithoutToyNestedInput
-    ToyPictures?: ToyPictureUncheckedUpdateManyWithoutToyNestedInput
   }
 
   export type ToyCreateManyInput = {
     id?: string
     createdAt?: Date | string
     name: string
-    description: string
     ownerId: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type?: ToyCreatetypeInput | $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
   }
 
   export type ToyUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
   }
 
   export type ToyUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
   }
 
-  export type ToyPictureCreateInput = {
+  export type LendCreateInput = {
     id?: string
-    order: number
-    picture: string
-    toy: ToyCreateNestedOneWithoutToyPicturesInput
+    startDate: Date | string
+    endDate?: Date | string | null
+    lender: UserCreateNestedOneWithoutLendsMadeInput
+    borrower: UserCreateNestedOneWithoutLendsTakenInput
+    toy: ToyCreateNestedOneWithoutLendsInput
   }
 
-  export type ToyPictureUncheckedCreateInput = {
+  export type LendUncheckedCreateInput = {
     id?: string
-    order: number
+    startDate: Date | string
+    endDate?: Date | string | null
+    lenderId: string
+    borrowerId: string
     toyId: string
-    picture: string
   }
 
-  export type ToyPictureUpdateInput = {
+  export type LendUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    picture?: StringFieldUpdateOperationsInput | string
-    toy?: ToyUpdateOneRequiredWithoutToyPicturesNestedInput
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lender?: UserUpdateOneRequiredWithoutLendsMadeNestedInput
+    borrower?: UserUpdateOneRequiredWithoutLendsTakenNestedInput
+    toy?: ToyUpdateOneRequiredWithoutLendsNestedInput
   }
 
-  export type ToyPictureUncheckedUpdateInput = {
+  export type LendUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lenderId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
     toyId?: StringFieldUpdateOperationsInput | string
-    picture?: StringFieldUpdateOperationsInput | string
   }
 
-  export type ToyPictureCreateManyInput = {
+  export type LendCreateManyInput = {
     id?: string
-    order: number
+    startDate: Date | string
+    endDate?: Date | string | null
+    lenderId: string
+    borrowerId: string
     toyId: string
-    picture: string
   }
 
-  export type ToyPictureUpdateManyMutationInput = {
+  export type LendUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    picture?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ToyPictureUncheckedUpdateManyInput = {
+  export type LendUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lenderId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
     toyId?: StringFieldUpdateOperationsInput | string
-    picture?: StringFieldUpdateOperationsInput | string
   }
 
   export type HistoryEntryCreateInput = {
@@ -12364,6 +12281,12 @@ export namespace Prisma {
     none?: ToyWhereInput
   }
 
+  export type LendListRelationFilter = {
+    every?: LendWhereInput
+    some?: LendWhereInput
+    none?: LendWhereInput
+  }
+
   export type HistoryEntryListRelationFilter = {
     every?: HistoryEntryWhereInput
     some?: HistoryEntryWhereInput
@@ -12399,6 +12322,10 @@ export namespace Prisma {
   }
 
   export type ToyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LendOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12633,17 +12560,6 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type EnumToyTypeNullableListFilter<$PrismaModel = never> = {
     equals?: $Enums.ToyType[] | ListEnumToyTypeFieldRefInput<$PrismaModel> | null
     has?: $Enums.ToyType | EnumToyTypeFieldRefInput<$PrismaModel> | null
@@ -12652,41 +12568,17 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
-  export type EnumAgeRangeFilter<$PrismaModel = never> = {
-    equals?: $Enums.AgeRange | EnumAgeRangeFieldRefInput<$PrismaModel>
-    in?: $Enums.AgeRange[] | ListEnumAgeRangeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AgeRange[] | ListEnumAgeRangeFieldRefInput<$PrismaModel>
-    not?: NestedEnumAgeRangeFilter<$PrismaModel> | $Enums.AgeRange
-  }
-
-  export type ToyPictureListRelationFilter = {
-    every?: ToyPictureWhereInput
-    some?: ToyPictureWhereInput
-    none?: ToyPictureWhereInput
-  }
-
-  export type ToyPictureOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type ToyCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     ownerId?: SortOrder
-    price?: SortOrder
-    isNew?: SortOrder
-    canTrade?: SortOrder
-    canLend?: SortOrder
     usageTime?: SortOrder
     preservation?: SortOrder
     type?: SortOrder
-    ageGroup?: SortOrder
   }
 
   export type ToyAvgOrderByAggregateInput = {
-    price?: SortOrder
     usageTime?: SortOrder
     preservation?: SortOrder
   }
@@ -12695,62 +12587,34 @@ export namespace Prisma {
     id?: SortOrder
     createdAt?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     ownerId?: SortOrder
-    price?: SortOrder
-    isNew?: SortOrder
-    canTrade?: SortOrder
-    canLend?: SortOrder
     usageTime?: SortOrder
     preservation?: SortOrder
-    ageGroup?: SortOrder
   }
 
   export type ToyMinOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     ownerId?: SortOrder
-    price?: SortOrder
-    isNew?: SortOrder
-    canTrade?: SortOrder
-    canLend?: SortOrder
     usageTime?: SortOrder
     preservation?: SortOrder
-    ageGroup?: SortOrder
   }
 
   export type ToySumOrderByAggregateInput = {
-    price?: SortOrder
     usageTime?: SortOrder
     preservation?: SortOrder
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type EnumAgeRangeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AgeRange | EnumAgeRangeFieldRefInput<$PrismaModel>
-    in?: $Enums.AgeRange[] | ListEnumAgeRangeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AgeRange[] | ListEnumAgeRangeFieldRefInput<$PrismaModel>
-    not?: NestedEnumAgeRangeWithAggregatesFilter<$PrismaModel> | $Enums.AgeRange
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumAgeRangeFilter<$PrismaModel>
-    _max?: NestedEnumAgeRangeFilter<$PrismaModel>
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type ToyScalarRelationFilter = {
@@ -12758,33 +12622,45 @@ export namespace Prisma {
     isNot?: ToyWhereInput
   }
 
-  export type ToyPictureCountOrderByAggregateInput = {
+  export type LendCountOrderByAggregateInput = {
     id?: SortOrder
-    order?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    lenderId?: SortOrder
+    borrowerId?: SortOrder
     toyId?: SortOrder
-    picture?: SortOrder
   }
 
-  export type ToyPictureAvgOrderByAggregateInput = {
-    order?: SortOrder
-  }
-
-  export type ToyPictureMaxOrderByAggregateInput = {
+  export type LendMaxOrderByAggregateInput = {
     id?: SortOrder
-    order?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    lenderId?: SortOrder
+    borrowerId?: SortOrder
     toyId?: SortOrder
-    picture?: SortOrder
   }
 
-  export type ToyPictureMinOrderByAggregateInput = {
+  export type LendMinOrderByAggregateInput = {
     id?: SortOrder
-    order?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    lenderId?: SortOrder
+    borrowerId?: SortOrder
     toyId?: SortOrder
-    picture?: SortOrder
   }
 
-  export type ToyPictureSumOrderByAggregateInput = {
-    order?: SortOrder
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type UserNullableScalarRelationFilter = {
@@ -12905,6 +12781,20 @@ export namespace Prisma {
     connect?: ToyWhereUniqueInput | ToyWhereUniqueInput[]
   }
 
+  export type LendCreateNestedManyWithoutLenderInput = {
+    create?: XOR<LendCreateWithoutLenderInput, LendUncheckedCreateWithoutLenderInput> | LendCreateWithoutLenderInput[] | LendUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutLenderInput | LendCreateOrConnectWithoutLenderInput[]
+    createMany?: LendCreateManyLenderInputEnvelope
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+  }
+
+  export type LendCreateNestedManyWithoutBorrowerInput = {
+    create?: XOR<LendCreateWithoutBorrowerInput, LendUncheckedCreateWithoutBorrowerInput> | LendCreateWithoutBorrowerInput[] | LendUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutBorrowerInput | LendCreateOrConnectWithoutBorrowerInput[]
+    createMany?: LendCreateManyBorrowerInputEnvelope
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+  }
+
   export type HistoryEntryCreateNestedManyWithoutUserInput = {
     create?: XOR<HistoryEntryCreateWithoutUserInput, HistoryEntryUncheckedCreateWithoutUserInput> | HistoryEntryCreateWithoutUserInput[] | HistoryEntryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: HistoryEntryCreateOrConnectWithoutUserInput | HistoryEntryCreateOrConnectWithoutUserInput[]
@@ -12951,6 +12841,20 @@ export namespace Prisma {
     connectOrCreate?: ToyCreateOrConnectWithoutOwnerInput | ToyCreateOrConnectWithoutOwnerInput[]
     createMany?: ToyCreateManyOwnerInputEnvelope
     connect?: ToyWhereUniqueInput | ToyWhereUniqueInput[]
+  }
+
+  export type LendUncheckedCreateNestedManyWithoutLenderInput = {
+    create?: XOR<LendCreateWithoutLenderInput, LendUncheckedCreateWithoutLenderInput> | LendCreateWithoutLenderInput[] | LendUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutLenderInput | LendCreateOrConnectWithoutLenderInput[]
+    createMany?: LendCreateManyLenderInputEnvelope
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+  }
+
+  export type LendUncheckedCreateNestedManyWithoutBorrowerInput = {
+    create?: XOR<LendCreateWithoutBorrowerInput, LendUncheckedCreateWithoutBorrowerInput> | LendCreateWithoutBorrowerInput[] | LendUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutBorrowerInput | LendCreateOrConnectWithoutBorrowerInput[]
+    createMany?: LendCreateManyBorrowerInputEnvelope
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
   }
 
   export type HistoryEntryUncheckedCreateNestedManyWithoutUserInput = {
@@ -13034,6 +12938,34 @@ export namespace Prisma {
     update?: ToyUpdateWithWhereUniqueWithoutOwnerInput | ToyUpdateWithWhereUniqueWithoutOwnerInput[]
     updateMany?: ToyUpdateManyWithWhereWithoutOwnerInput | ToyUpdateManyWithWhereWithoutOwnerInput[]
     deleteMany?: ToyScalarWhereInput | ToyScalarWhereInput[]
+  }
+
+  export type LendUpdateManyWithoutLenderNestedInput = {
+    create?: XOR<LendCreateWithoutLenderInput, LendUncheckedCreateWithoutLenderInput> | LendCreateWithoutLenderInput[] | LendUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutLenderInput | LendCreateOrConnectWithoutLenderInput[]
+    upsert?: LendUpsertWithWhereUniqueWithoutLenderInput | LendUpsertWithWhereUniqueWithoutLenderInput[]
+    createMany?: LendCreateManyLenderInputEnvelope
+    set?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    disconnect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    delete?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    update?: LendUpdateWithWhereUniqueWithoutLenderInput | LendUpdateWithWhereUniqueWithoutLenderInput[]
+    updateMany?: LendUpdateManyWithWhereWithoutLenderInput | LendUpdateManyWithWhereWithoutLenderInput[]
+    deleteMany?: LendScalarWhereInput | LendScalarWhereInput[]
+  }
+
+  export type LendUpdateManyWithoutBorrowerNestedInput = {
+    create?: XOR<LendCreateWithoutBorrowerInput, LendUncheckedCreateWithoutBorrowerInput> | LendCreateWithoutBorrowerInput[] | LendUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutBorrowerInput | LendCreateOrConnectWithoutBorrowerInput[]
+    upsert?: LendUpsertWithWhereUniqueWithoutBorrowerInput | LendUpsertWithWhereUniqueWithoutBorrowerInput[]
+    createMany?: LendCreateManyBorrowerInputEnvelope
+    set?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    disconnect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    delete?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    update?: LendUpdateWithWhereUniqueWithoutBorrowerInput | LendUpdateWithWhereUniqueWithoutBorrowerInput[]
+    updateMany?: LendUpdateManyWithWhereWithoutBorrowerInput | LendUpdateManyWithWhereWithoutBorrowerInput[]
+    deleteMany?: LendScalarWhereInput | LendScalarWhereInput[]
   }
 
   export type HistoryEntryUpdateManyWithoutUserNestedInput = {
@@ -13128,6 +13060,34 @@ export namespace Prisma {
     update?: ToyUpdateWithWhereUniqueWithoutOwnerInput | ToyUpdateWithWhereUniqueWithoutOwnerInput[]
     updateMany?: ToyUpdateManyWithWhereWithoutOwnerInput | ToyUpdateManyWithWhereWithoutOwnerInput[]
     deleteMany?: ToyScalarWhereInput | ToyScalarWhereInput[]
+  }
+
+  export type LendUncheckedUpdateManyWithoutLenderNestedInput = {
+    create?: XOR<LendCreateWithoutLenderInput, LendUncheckedCreateWithoutLenderInput> | LendCreateWithoutLenderInput[] | LendUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutLenderInput | LendCreateOrConnectWithoutLenderInput[]
+    upsert?: LendUpsertWithWhereUniqueWithoutLenderInput | LendUpsertWithWhereUniqueWithoutLenderInput[]
+    createMany?: LendCreateManyLenderInputEnvelope
+    set?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    disconnect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    delete?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    update?: LendUpdateWithWhereUniqueWithoutLenderInput | LendUpdateWithWhereUniqueWithoutLenderInput[]
+    updateMany?: LendUpdateManyWithWhereWithoutLenderInput | LendUpdateManyWithWhereWithoutLenderInput[]
+    deleteMany?: LendScalarWhereInput | LendScalarWhereInput[]
+  }
+
+  export type LendUncheckedUpdateManyWithoutBorrowerNestedInput = {
+    create?: XOR<LendCreateWithoutBorrowerInput, LendUncheckedCreateWithoutBorrowerInput> | LendCreateWithoutBorrowerInput[] | LendUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutBorrowerInput | LendCreateOrConnectWithoutBorrowerInput[]
+    upsert?: LendUpsertWithWhereUniqueWithoutBorrowerInput | LendUpsertWithWhereUniqueWithoutBorrowerInput[]
+    createMany?: LendCreateManyBorrowerInputEnvelope
+    set?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    disconnect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    delete?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    update?: LendUpdateWithWhereUniqueWithoutBorrowerInput | LendUpdateWithWhereUniqueWithoutBorrowerInput[]
+    updateMany?: LendUpdateManyWithWhereWithoutBorrowerInput | LendUpdateManyWithWhereWithoutBorrowerInput[]
+    deleteMany?: LendScalarWhereInput | LendScalarWhereInput[]
   }
 
   export type HistoryEntryUncheckedUpdateManyWithoutUserNestedInput = {
@@ -13242,6 +13202,13 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type LendCreateNestedManyWithoutToyInput = {
+    create?: XOR<LendCreateWithoutToyInput, LendUncheckedCreateWithoutToyInput> | LendCreateWithoutToyInput[] | LendUncheckedCreateWithoutToyInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutToyInput | LendCreateOrConnectWithoutToyInput[]
+    createMany?: LendCreateManyToyInputEnvelope
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+  }
+
   export type HistoryEntryCreateNestedManyWithoutToyInput = {
     create?: XOR<HistoryEntryCreateWithoutToyInput, HistoryEntryUncheckedCreateWithoutToyInput> | HistoryEntryCreateWithoutToyInput[] | HistoryEntryUncheckedCreateWithoutToyInput[]
     connectOrCreate?: HistoryEntryCreateOrConnectWithoutToyInput | HistoryEntryCreateOrConnectWithoutToyInput[]
@@ -13249,11 +13216,11 @@ export namespace Prisma {
     connect?: HistoryEntryWhereUniqueInput | HistoryEntryWhereUniqueInput[]
   }
 
-  export type ToyPictureCreateNestedManyWithoutToyInput = {
-    create?: XOR<ToyPictureCreateWithoutToyInput, ToyPictureUncheckedCreateWithoutToyInput> | ToyPictureCreateWithoutToyInput[] | ToyPictureUncheckedCreateWithoutToyInput[]
-    connectOrCreate?: ToyPictureCreateOrConnectWithoutToyInput | ToyPictureCreateOrConnectWithoutToyInput[]
-    createMany?: ToyPictureCreateManyToyInputEnvelope
-    connect?: ToyPictureWhereUniqueInput | ToyPictureWhereUniqueInput[]
+  export type LendUncheckedCreateNestedManyWithoutToyInput = {
+    create?: XOR<LendCreateWithoutToyInput, LendUncheckedCreateWithoutToyInput> | LendCreateWithoutToyInput[] | LendUncheckedCreateWithoutToyInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutToyInput | LendCreateOrConnectWithoutToyInput[]
+    createMany?: LendCreateManyToyInputEnvelope
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
   }
 
   export type HistoryEntryUncheckedCreateNestedManyWithoutToyInput = {
@@ -13263,28 +13230,9 @@ export namespace Prisma {
     connect?: HistoryEntryWhereUniqueInput | HistoryEntryWhereUniqueInput[]
   }
 
-  export type ToyPictureUncheckedCreateNestedManyWithoutToyInput = {
-    create?: XOR<ToyPictureCreateWithoutToyInput, ToyPictureUncheckedCreateWithoutToyInput> | ToyPictureCreateWithoutToyInput[] | ToyPictureUncheckedCreateWithoutToyInput[]
-    connectOrCreate?: ToyPictureCreateOrConnectWithoutToyInput | ToyPictureCreateOrConnectWithoutToyInput[]
-    createMany?: ToyPictureCreateManyToyInputEnvelope
-    connect?: ToyPictureWhereUniqueInput | ToyPictureWhereUniqueInput[]
-  }
-
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type ToyUpdatetypeInput = {
     set?: $Enums.ToyType[]
     push?: $Enums.ToyType | $Enums.ToyType[]
-  }
-
-  export type EnumAgeRangeFieldUpdateOperationsInput = {
-    set?: $Enums.AgeRange
   }
 
   export type UserUpdateOneRequiredWithoutToysNestedInput = {
@@ -13293,6 +13241,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutToysInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutToysInput, UserUpdateWithoutToysInput>, UserUncheckedUpdateWithoutToysInput>
+  }
+
+  export type LendUpdateManyWithoutToyNestedInput = {
+    create?: XOR<LendCreateWithoutToyInput, LendUncheckedCreateWithoutToyInput> | LendCreateWithoutToyInput[] | LendUncheckedCreateWithoutToyInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutToyInput | LendCreateOrConnectWithoutToyInput[]
+    upsert?: LendUpsertWithWhereUniqueWithoutToyInput | LendUpsertWithWhereUniqueWithoutToyInput[]
+    createMany?: LendCreateManyToyInputEnvelope
+    set?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    disconnect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    delete?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    update?: LendUpdateWithWhereUniqueWithoutToyInput | LendUpdateWithWhereUniqueWithoutToyInput[]
+    updateMany?: LendUpdateManyWithWhereWithoutToyInput | LendUpdateManyWithWhereWithoutToyInput[]
+    deleteMany?: LendScalarWhereInput | LendScalarWhereInput[]
   }
 
   export type HistoryEntryUpdateManyWithoutToyNestedInput = {
@@ -13309,18 +13271,18 @@ export namespace Prisma {
     deleteMany?: HistoryEntryScalarWhereInput | HistoryEntryScalarWhereInput[]
   }
 
-  export type ToyPictureUpdateManyWithoutToyNestedInput = {
-    create?: XOR<ToyPictureCreateWithoutToyInput, ToyPictureUncheckedCreateWithoutToyInput> | ToyPictureCreateWithoutToyInput[] | ToyPictureUncheckedCreateWithoutToyInput[]
-    connectOrCreate?: ToyPictureCreateOrConnectWithoutToyInput | ToyPictureCreateOrConnectWithoutToyInput[]
-    upsert?: ToyPictureUpsertWithWhereUniqueWithoutToyInput | ToyPictureUpsertWithWhereUniqueWithoutToyInput[]
-    createMany?: ToyPictureCreateManyToyInputEnvelope
-    set?: ToyPictureWhereUniqueInput | ToyPictureWhereUniqueInput[]
-    disconnect?: ToyPictureWhereUniqueInput | ToyPictureWhereUniqueInput[]
-    delete?: ToyPictureWhereUniqueInput | ToyPictureWhereUniqueInput[]
-    connect?: ToyPictureWhereUniqueInput | ToyPictureWhereUniqueInput[]
-    update?: ToyPictureUpdateWithWhereUniqueWithoutToyInput | ToyPictureUpdateWithWhereUniqueWithoutToyInput[]
-    updateMany?: ToyPictureUpdateManyWithWhereWithoutToyInput | ToyPictureUpdateManyWithWhereWithoutToyInput[]
-    deleteMany?: ToyPictureScalarWhereInput | ToyPictureScalarWhereInput[]
+  export type LendUncheckedUpdateManyWithoutToyNestedInput = {
+    create?: XOR<LendCreateWithoutToyInput, LendUncheckedCreateWithoutToyInput> | LendCreateWithoutToyInput[] | LendUncheckedCreateWithoutToyInput[]
+    connectOrCreate?: LendCreateOrConnectWithoutToyInput | LendCreateOrConnectWithoutToyInput[]
+    upsert?: LendUpsertWithWhereUniqueWithoutToyInput | LendUpsertWithWhereUniqueWithoutToyInput[]
+    createMany?: LendCreateManyToyInputEnvelope
+    set?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    disconnect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    delete?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    connect?: LendWhereUniqueInput | LendWhereUniqueInput[]
+    update?: LendUpdateWithWhereUniqueWithoutToyInput | LendUpdateWithWhereUniqueWithoutToyInput[]
+    updateMany?: LendUpdateManyWithWhereWithoutToyInput | LendUpdateManyWithWhereWithoutToyInput[]
+    deleteMany?: LendScalarWhereInput | LendScalarWhereInput[]
   }
 
   export type HistoryEntryUncheckedUpdateManyWithoutToyNestedInput = {
@@ -13337,32 +13299,50 @@ export namespace Prisma {
     deleteMany?: HistoryEntryScalarWhereInput | HistoryEntryScalarWhereInput[]
   }
 
-  export type ToyPictureUncheckedUpdateManyWithoutToyNestedInput = {
-    create?: XOR<ToyPictureCreateWithoutToyInput, ToyPictureUncheckedCreateWithoutToyInput> | ToyPictureCreateWithoutToyInput[] | ToyPictureUncheckedCreateWithoutToyInput[]
-    connectOrCreate?: ToyPictureCreateOrConnectWithoutToyInput | ToyPictureCreateOrConnectWithoutToyInput[]
-    upsert?: ToyPictureUpsertWithWhereUniqueWithoutToyInput | ToyPictureUpsertWithWhereUniqueWithoutToyInput[]
-    createMany?: ToyPictureCreateManyToyInputEnvelope
-    set?: ToyPictureWhereUniqueInput | ToyPictureWhereUniqueInput[]
-    disconnect?: ToyPictureWhereUniqueInput | ToyPictureWhereUniqueInput[]
-    delete?: ToyPictureWhereUniqueInput | ToyPictureWhereUniqueInput[]
-    connect?: ToyPictureWhereUniqueInput | ToyPictureWhereUniqueInput[]
-    update?: ToyPictureUpdateWithWhereUniqueWithoutToyInput | ToyPictureUpdateWithWhereUniqueWithoutToyInput[]
-    updateMany?: ToyPictureUpdateManyWithWhereWithoutToyInput | ToyPictureUpdateManyWithWhereWithoutToyInput[]
-    deleteMany?: ToyPictureScalarWhereInput | ToyPictureScalarWhereInput[]
+  export type UserCreateNestedOneWithoutLendsMadeInput = {
+    create?: XOR<UserCreateWithoutLendsMadeInput, UserUncheckedCreateWithoutLendsMadeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLendsMadeInput
+    connect?: UserWhereUniqueInput
   }
 
-  export type ToyCreateNestedOneWithoutToyPicturesInput = {
-    create?: XOR<ToyCreateWithoutToyPicturesInput, ToyUncheckedCreateWithoutToyPicturesInput>
-    connectOrCreate?: ToyCreateOrConnectWithoutToyPicturesInput
+  export type UserCreateNestedOneWithoutLendsTakenInput = {
+    create?: XOR<UserCreateWithoutLendsTakenInput, UserUncheckedCreateWithoutLendsTakenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLendsTakenInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ToyCreateNestedOneWithoutLendsInput = {
+    create?: XOR<ToyCreateWithoutLendsInput, ToyUncheckedCreateWithoutLendsInput>
+    connectOrCreate?: ToyCreateOrConnectWithoutLendsInput
     connect?: ToyWhereUniqueInput
   }
 
-  export type ToyUpdateOneRequiredWithoutToyPicturesNestedInput = {
-    create?: XOR<ToyCreateWithoutToyPicturesInput, ToyUncheckedCreateWithoutToyPicturesInput>
-    connectOrCreate?: ToyCreateOrConnectWithoutToyPicturesInput
-    upsert?: ToyUpsertWithoutToyPicturesInput
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type UserUpdateOneRequiredWithoutLendsMadeNestedInput = {
+    create?: XOR<UserCreateWithoutLendsMadeInput, UserUncheckedCreateWithoutLendsMadeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLendsMadeInput
+    upsert?: UserUpsertWithoutLendsMadeInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLendsMadeInput, UserUpdateWithoutLendsMadeInput>, UserUncheckedUpdateWithoutLendsMadeInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutLendsTakenNestedInput = {
+    create?: XOR<UserCreateWithoutLendsTakenInput, UserUncheckedCreateWithoutLendsTakenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLendsTakenInput
+    upsert?: UserUpsertWithoutLendsTakenInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLendsTakenInput, UserUpdateWithoutLendsTakenInput>, UserUncheckedUpdateWithoutLendsTakenInput>
+  }
+
+  export type ToyUpdateOneRequiredWithoutLendsNestedInput = {
+    create?: XOR<ToyCreateWithoutLendsInput, ToyUncheckedCreateWithoutLendsInput>
+    connectOrCreate?: ToyCreateOrConnectWithoutLendsInput
+    upsert?: ToyUpsertWithoutLendsInput
     connect?: ToyWhereUniqueInput
-    update?: XOR<XOR<ToyUpdateToOneWithWhereWithoutToyPicturesInput, ToyUpdateWithoutToyPicturesInput>, ToyUncheckedUpdateWithoutToyPicturesInput>
+    update?: XOR<XOR<ToyUpdateToOneWithWhereWithoutLendsInput, ToyUpdateWithoutLendsInput>, ToyUncheckedUpdateWithoutLendsInput>
   }
 
   export type UserCreateNestedOneWithoutHistoryInput = {
@@ -13700,71 +13680,51 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedEnumAgeRangeFilter<$PrismaModel = never> = {
-    equals?: $Enums.AgeRange | EnumAgeRangeFieldRefInput<$PrismaModel>
-    in?: $Enums.AgeRange[] | ListEnumAgeRangeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AgeRange[] | ListEnumAgeRangeFieldRefInput<$PrismaModel>
-    not?: NestedEnumAgeRangeFilter<$PrismaModel> | $Enums.AgeRange
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type NestedEnumAgeRangeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AgeRange | EnumAgeRangeFieldRefInput<$PrismaModel>
-    in?: $Enums.AgeRange[] | ListEnumAgeRangeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AgeRange[] | ListEnumAgeRangeFieldRefInput<$PrismaModel>
-    not?: NestedEnumAgeRangeWithAggregatesFilter<$PrismaModel> | $Enums.AgeRange
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumAgeRangeFilter<$PrismaModel>
-    _max?: NestedEnumAgeRangeFilter<$PrismaModel>
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type ToyCreateWithoutOwnerInput = {
     id?: string
     createdAt?: Date | string
     name: string
-    description: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type?: ToyCreatetypeInput | $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
+    lends?: LendCreateNestedManyWithoutToyInput
     history?: HistoryEntryCreateNestedManyWithoutToyInput
-    ToyPictures?: ToyPictureCreateNestedManyWithoutToyInput
   }
 
   export type ToyUncheckedCreateWithoutOwnerInput = {
     id?: string
     createdAt?: Date | string
     name: string
-    description: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type?: ToyCreatetypeInput | $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
+    lends?: LendUncheckedCreateNestedManyWithoutToyInput
     history?: HistoryEntryUncheckedCreateNestedManyWithoutToyInput
-    ToyPictures?: ToyPictureUncheckedCreateNestedManyWithoutToyInput
   }
 
   export type ToyCreateOrConnectWithoutOwnerInput = {
@@ -13774,6 +13734,58 @@ export namespace Prisma {
 
   export type ToyCreateManyOwnerInputEnvelope = {
     data: ToyCreateManyOwnerInput | ToyCreateManyOwnerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LendCreateWithoutLenderInput = {
+    id?: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    borrower: UserCreateNestedOneWithoutLendsTakenInput
+    toy: ToyCreateNestedOneWithoutLendsInput
+  }
+
+  export type LendUncheckedCreateWithoutLenderInput = {
+    id?: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    borrowerId: string
+    toyId: string
+  }
+
+  export type LendCreateOrConnectWithoutLenderInput = {
+    where: LendWhereUniqueInput
+    create: XOR<LendCreateWithoutLenderInput, LendUncheckedCreateWithoutLenderInput>
+  }
+
+  export type LendCreateManyLenderInputEnvelope = {
+    data: LendCreateManyLenderInput | LendCreateManyLenderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LendCreateWithoutBorrowerInput = {
+    id?: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    lender: UserCreateNestedOneWithoutLendsMadeInput
+    toy: ToyCreateNestedOneWithoutLendsInput
+  }
+
+  export type LendUncheckedCreateWithoutBorrowerInput = {
+    id?: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    lenderId: string
+    toyId: string
+  }
+
+  export type LendCreateOrConnectWithoutBorrowerInput = {
+    where: LendWhereUniqueInput
+    create: XOR<LendCreateWithoutBorrowerInput, LendUncheckedCreateWithoutBorrowerInput>
+  }
+
+  export type LendCreateManyBorrowerInputEnvelope = {
+    data: LendCreateManyBorrowerInput | LendCreateManyBorrowerInput[]
     skipDuplicates?: boolean
   }
 
@@ -13939,16 +13951,54 @@ export namespace Prisma {
     id?: StringFilter<"Toy"> | string
     createdAt?: DateTimeFilter<"Toy"> | Date | string
     name?: StringFilter<"Toy"> | string
-    description?: StringFilter<"Toy"> | string
     ownerId?: StringFilter<"Toy"> | string
-    price?: FloatFilter<"Toy"> | number
-    isNew?: BoolFilter<"Toy"> | boolean
-    canTrade?: BoolFilter<"Toy"> | boolean
-    canLend?: BoolFilter<"Toy"> | boolean
     usageTime?: IntFilter<"Toy"> | number
     preservation?: IntFilter<"Toy"> | number
     type?: EnumToyTypeNullableListFilter<"Toy">
-    ageGroup?: EnumAgeRangeFilter<"Toy"> | $Enums.AgeRange
+  }
+
+  export type LendUpsertWithWhereUniqueWithoutLenderInput = {
+    where: LendWhereUniqueInput
+    update: XOR<LendUpdateWithoutLenderInput, LendUncheckedUpdateWithoutLenderInput>
+    create: XOR<LendCreateWithoutLenderInput, LendUncheckedCreateWithoutLenderInput>
+  }
+
+  export type LendUpdateWithWhereUniqueWithoutLenderInput = {
+    where: LendWhereUniqueInput
+    data: XOR<LendUpdateWithoutLenderInput, LendUncheckedUpdateWithoutLenderInput>
+  }
+
+  export type LendUpdateManyWithWhereWithoutLenderInput = {
+    where: LendScalarWhereInput
+    data: XOR<LendUpdateManyMutationInput, LendUncheckedUpdateManyWithoutLenderInput>
+  }
+
+  export type LendScalarWhereInput = {
+    AND?: LendScalarWhereInput | LendScalarWhereInput[]
+    OR?: LendScalarWhereInput[]
+    NOT?: LendScalarWhereInput | LendScalarWhereInput[]
+    id?: StringFilter<"Lend"> | string
+    startDate?: DateTimeFilter<"Lend"> | Date | string
+    endDate?: DateTimeNullableFilter<"Lend"> | Date | string | null
+    lenderId?: StringFilter<"Lend"> | string
+    borrowerId?: StringFilter<"Lend"> | string
+    toyId?: StringFilter<"Lend"> | string
+  }
+
+  export type LendUpsertWithWhereUniqueWithoutBorrowerInput = {
+    where: LendWhereUniqueInput
+    update: XOR<LendUpdateWithoutBorrowerInput, LendUncheckedUpdateWithoutBorrowerInput>
+    create: XOR<LendCreateWithoutBorrowerInput, LendUncheckedCreateWithoutBorrowerInput>
+  }
+
+  export type LendUpdateWithWhereUniqueWithoutBorrowerInput = {
+    where: LendWhereUniqueInput
+    data: XOR<LendUpdateWithoutBorrowerInput, LendUncheckedUpdateWithoutBorrowerInput>
+  }
+
+  export type LendUpdateManyWithWhereWithoutBorrowerInput = {
+    where: LendScalarWhereInput
+    data: XOR<LendUpdateManyMutationInput, LendUncheckedUpdateManyWithoutBorrowerInput>
   }
 
   export type HistoryEntryUpsertWithWhereUniqueWithoutUserInput = {
@@ -14117,6 +14167,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryCreateNestedManyWithoutUserInput
     ratings?: RateCreateNestedManyWithoutUserInput
     chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
@@ -14142,6 +14194,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyUncheckedCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendUncheckedCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendUncheckedCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryUncheckedCreateNestedManyWithoutUserInput
     ratings?: RateUncheckedCreateNestedManyWithoutUserInput
     chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
@@ -14183,6 +14237,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUpdateManyWithoutUserNestedInput
     ratings?: RateUpdateManyWithoutUserNestedInput
     chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
@@ -14208,6 +14264,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUncheckedUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUncheckedUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUncheckedUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUncheckedUpdateManyWithoutUserNestedInput
     ratings?: RateUncheckedUpdateManyWithoutUserNestedInput
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
@@ -14232,6 +14290,8 @@ export namespace Prisma {
     addressNumber: number
     addressDetail?: string | null
     addressCep: string
+    lendsMade?: LendCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryCreateNestedManyWithoutUserInput
     ratings?: RateCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
@@ -14257,6 +14317,8 @@ export namespace Prisma {
     addressNumber: number
     addressDetail?: string | null
     addressCep: string
+    lendsMade?: LendUncheckedCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendUncheckedCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryUncheckedCreateNestedManyWithoutUserInput
     ratings?: RateUncheckedCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
@@ -14268,6 +14330,32 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutToysInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutToysInput, UserUncheckedCreateWithoutToysInput>
+  }
+
+  export type LendCreateWithoutToyInput = {
+    id?: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    lender: UserCreateNestedOneWithoutLendsMadeInput
+    borrower: UserCreateNestedOneWithoutLendsTakenInput
+  }
+
+  export type LendUncheckedCreateWithoutToyInput = {
+    id?: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    lenderId: string
+    borrowerId: string
+  }
+
+  export type LendCreateOrConnectWithoutToyInput = {
+    where: LendWhereUniqueInput
+    create: XOR<LendCreateWithoutToyInput, LendUncheckedCreateWithoutToyInput>
+  }
+
+  export type LendCreateManyToyInputEnvelope = {
+    data: LendCreateManyToyInput | LendCreateManyToyInput[]
+    skipDuplicates?: boolean
   }
 
   export type HistoryEntryCreateWithoutToyInput = {
@@ -14291,28 +14379,6 @@ export namespace Prisma {
 
   export type HistoryEntryCreateManyToyInputEnvelope = {
     data: HistoryEntryCreateManyToyInput | HistoryEntryCreateManyToyInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ToyPictureCreateWithoutToyInput = {
-    id?: string
-    order: number
-    picture: string
-  }
-
-  export type ToyPictureUncheckedCreateWithoutToyInput = {
-    id?: string
-    order: number
-    picture: string
-  }
-
-  export type ToyPictureCreateOrConnectWithoutToyInput = {
-    where: ToyPictureWhereUniqueInput
-    create: XOR<ToyPictureCreateWithoutToyInput, ToyPictureUncheckedCreateWithoutToyInput>
-  }
-
-  export type ToyPictureCreateManyToyInputEnvelope = {
-    data: ToyPictureCreateManyToyInput | ToyPictureCreateManyToyInput[]
     skipDuplicates?: boolean
   }
 
@@ -14344,6 +14410,8 @@ export namespace Prisma {
     addressNumber?: IntFieldUpdateOperationsInput | number
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
+    lendsMade?: LendUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUpdateManyWithoutUserNestedInput
     ratings?: RateUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
@@ -14369,12 +14437,30 @@ export namespace Prisma {
     addressNumber?: IntFieldUpdateOperationsInput | number
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
+    lendsMade?: LendUncheckedUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUncheckedUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUncheckedUpdateManyWithoutUserNestedInput
     ratings?: RateUncheckedUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
+  export type LendUpsertWithWhereUniqueWithoutToyInput = {
+    where: LendWhereUniqueInput
+    update: XOR<LendUpdateWithoutToyInput, LendUncheckedUpdateWithoutToyInput>
+    create: XOR<LendCreateWithoutToyInput, LendUncheckedCreateWithoutToyInput>
+  }
+
+  export type LendUpdateWithWhereUniqueWithoutToyInput = {
+    where: LendWhereUniqueInput
+    data: XOR<LendUpdateWithoutToyInput, LendUncheckedUpdateWithoutToyInput>
+  }
+
+  export type LendUpdateManyWithWhereWithoutToyInput = {
+    where: LendScalarWhereInput
+    data: XOR<LendUpdateManyMutationInput, LendUncheckedUpdateManyWithoutToyInput>
   }
 
   export type HistoryEntryUpsertWithWhereUniqueWithoutToyInput = {
@@ -14393,113 +14479,311 @@ export namespace Prisma {
     data: XOR<HistoryEntryUpdateManyMutationInput, HistoryEntryUncheckedUpdateManyWithoutToyInput>
   }
 
-  export type ToyPictureUpsertWithWhereUniqueWithoutToyInput = {
-    where: ToyPictureWhereUniqueInput
-    update: XOR<ToyPictureUpdateWithoutToyInput, ToyPictureUncheckedUpdateWithoutToyInput>
-    create: XOR<ToyPictureCreateWithoutToyInput, ToyPictureUncheckedCreateWithoutToyInput>
+  export type UserCreateWithoutLendsMadeInput = {
+    id?: string
+    createdAt?: Date | string
+    email: string
+    password: string
+    name: string
+    role?: $Enums.Role
+    parentalControl?: boolean
+    active?: boolean
+    cpf?: string | null
+    cnpj?: string | null
+    pix_key?: string | null
+    addressDistrict: string
+    addressStreet: string
+    addressNumber: number
+    addressDetail?: string | null
+    addressCep: string
+    toys?: ToyCreateNestedManyWithoutOwnerInput
+    lendsTaken?: LendCreateNestedManyWithoutBorrowerInput
+    history?: HistoryEntryCreateNestedManyWithoutUserInput
+    ratings?: RateCreateNestedManyWithoutUserInput
+    organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
+    chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
+    chatsAsUser2?: ChatCreateNestedManyWithoutUser2Input
+    messages?: MessageCreateNestedManyWithoutSenderInput
   }
 
-  export type ToyPictureUpdateWithWhereUniqueWithoutToyInput = {
-    where: ToyPictureWhereUniqueInput
-    data: XOR<ToyPictureUpdateWithoutToyInput, ToyPictureUncheckedUpdateWithoutToyInput>
+  export type UserUncheckedCreateWithoutLendsMadeInput = {
+    id?: string
+    createdAt?: Date | string
+    email: string
+    password: string
+    name: string
+    role?: $Enums.Role
+    parentalControl?: boolean
+    active?: boolean
+    cpf?: string | null
+    cnpj?: string | null
+    pix_key?: string | null
+    addressDistrict: string
+    addressStreet: string
+    addressNumber: number
+    addressDetail?: string | null
+    addressCep: string
+    toys?: ToyUncheckedCreateNestedManyWithoutOwnerInput
+    lendsTaken?: LendUncheckedCreateNestedManyWithoutBorrowerInput
+    history?: HistoryEntryUncheckedCreateNestedManyWithoutUserInput
+    ratings?: RateUncheckedCreateNestedManyWithoutUserInput
+    organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
+    chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
+    chatsAsUser2?: ChatUncheckedCreateNestedManyWithoutUser2Input
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
   }
 
-  export type ToyPictureUpdateManyWithWhereWithoutToyInput = {
-    where: ToyPictureScalarWhereInput
-    data: XOR<ToyPictureUpdateManyMutationInput, ToyPictureUncheckedUpdateManyWithoutToyInput>
+  export type UserCreateOrConnectWithoutLendsMadeInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLendsMadeInput, UserUncheckedCreateWithoutLendsMadeInput>
   }
 
-  export type ToyPictureScalarWhereInput = {
-    AND?: ToyPictureScalarWhereInput | ToyPictureScalarWhereInput[]
-    OR?: ToyPictureScalarWhereInput[]
-    NOT?: ToyPictureScalarWhereInput | ToyPictureScalarWhereInput[]
-    id?: StringFilter<"ToyPicture"> | string
-    order?: IntFilter<"ToyPicture"> | number
-    toyId?: StringFilter<"ToyPicture"> | string
-    picture?: StringFilter<"ToyPicture"> | string
+  export type UserCreateWithoutLendsTakenInput = {
+    id?: string
+    createdAt?: Date | string
+    email: string
+    password: string
+    name: string
+    role?: $Enums.Role
+    parentalControl?: boolean
+    active?: boolean
+    cpf?: string | null
+    cnpj?: string | null
+    pix_key?: string | null
+    addressDistrict: string
+    addressStreet: string
+    addressNumber: number
+    addressDetail?: string | null
+    addressCep: string
+    toys?: ToyCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendCreateNestedManyWithoutLenderInput
+    history?: HistoryEntryCreateNestedManyWithoutUserInput
+    ratings?: RateCreateNestedManyWithoutUserInput
+    organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
+    chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
+    chatsAsUser2?: ChatCreateNestedManyWithoutUser2Input
+    messages?: MessageCreateNestedManyWithoutSenderInput
   }
 
-  export type ToyCreateWithoutToyPicturesInput = {
+  export type UserUncheckedCreateWithoutLendsTakenInput = {
+    id?: string
+    createdAt?: Date | string
+    email: string
+    password: string
+    name: string
+    role?: $Enums.Role
+    parentalControl?: boolean
+    active?: boolean
+    cpf?: string | null
+    cnpj?: string | null
+    pix_key?: string | null
+    addressDistrict: string
+    addressStreet: string
+    addressNumber: number
+    addressDetail?: string | null
+    addressCep: string
+    toys?: ToyUncheckedCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendUncheckedCreateNestedManyWithoutLenderInput
+    history?: HistoryEntryUncheckedCreateNestedManyWithoutUserInput
+    ratings?: RateUncheckedCreateNestedManyWithoutUserInput
+    organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
+    chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
+    chatsAsUser2?: ChatUncheckedCreateNestedManyWithoutUser2Input
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserCreateOrConnectWithoutLendsTakenInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLendsTakenInput, UserUncheckedCreateWithoutLendsTakenInput>
+  }
+
+  export type ToyCreateWithoutLendsInput = {
     id?: string
     createdAt?: Date | string
     name: string
-    description: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type?: ToyCreatetypeInput | $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
     owner: UserCreateNestedOneWithoutToysInput
     history?: HistoryEntryCreateNestedManyWithoutToyInput
   }
 
-  export type ToyUncheckedCreateWithoutToyPicturesInput = {
+  export type ToyUncheckedCreateWithoutLendsInput = {
     id?: string
     createdAt?: Date | string
     name: string
-    description: string
     ownerId: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type?: ToyCreatetypeInput | $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
     history?: HistoryEntryUncheckedCreateNestedManyWithoutToyInput
   }
 
-  export type ToyCreateOrConnectWithoutToyPicturesInput = {
+  export type ToyCreateOrConnectWithoutLendsInput = {
     where: ToyWhereUniqueInput
-    create: XOR<ToyCreateWithoutToyPicturesInput, ToyUncheckedCreateWithoutToyPicturesInput>
+    create: XOR<ToyCreateWithoutLendsInput, ToyUncheckedCreateWithoutLendsInput>
   }
 
-  export type ToyUpsertWithoutToyPicturesInput = {
-    update: XOR<ToyUpdateWithoutToyPicturesInput, ToyUncheckedUpdateWithoutToyPicturesInput>
-    create: XOR<ToyCreateWithoutToyPicturesInput, ToyUncheckedCreateWithoutToyPicturesInput>
+  export type UserUpsertWithoutLendsMadeInput = {
+    update: XOR<UserUpdateWithoutLendsMadeInput, UserUncheckedUpdateWithoutLendsMadeInput>
+    create: XOR<UserCreateWithoutLendsMadeInput, UserUncheckedCreateWithoutLendsMadeInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutLendsMadeInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutLendsMadeInput, UserUncheckedUpdateWithoutLendsMadeInput>
+  }
+
+  export type UserUpdateWithoutLendsMadeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    parentalControl?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    pix_key?: NullableStringFieldUpdateOperationsInput | string | null
+    addressDistrict?: StringFieldUpdateOperationsInput | string
+    addressStreet?: StringFieldUpdateOperationsInput | string
+    addressNumber?: IntFieldUpdateOperationsInput | number
+    addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
+    addressCep?: StringFieldUpdateOperationsInput | string
+    toys?: ToyUpdateManyWithoutOwnerNestedInput
+    lendsTaken?: LendUpdateManyWithoutBorrowerNestedInput
+    history?: HistoryEntryUpdateManyWithoutUserNestedInput
+    ratings?: RateUpdateManyWithoutUserNestedInput
+    organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
+    chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
+    chatsAsUser2?: ChatUpdateManyWithoutUser2NestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutLendsMadeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    parentalControl?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    pix_key?: NullableStringFieldUpdateOperationsInput | string | null
+    addressDistrict?: StringFieldUpdateOperationsInput | string
+    addressStreet?: StringFieldUpdateOperationsInput | string
+    addressNumber?: IntFieldUpdateOperationsInput | number
+    addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
+    addressCep?: StringFieldUpdateOperationsInput | string
+    toys?: ToyUncheckedUpdateManyWithoutOwnerNestedInput
+    lendsTaken?: LendUncheckedUpdateManyWithoutBorrowerNestedInput
+    history?: HistoryEntryUncheckedUpdateManyWithoutUserNestedInput
+    ratings?: RateUncheckedUpdateManyWithoutUserNestedInput
+    organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
+    chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
+    chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserUpsertWithoutLendsTakenInput = {
+    update: XOR<UserUpdateWithoutLendsTakenInput, UserUncheckedUpdateWithoutLendsTakenInput>
+    create: XOR<UserCreateWithoutLendsTakenInput, UserUncheckedCreateWithoutLendsTakenInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutLendsTakenInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutLendsTakenInput, UserUncheckedUpdateWithoutLendsTakenInput>
+  }
+
+  export type UserUpdateWithoutLendsTakenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    parentalControl?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    pix_key?: NullableStringFieldUpdateOperationsInput | string | null
+    addressDistrict?: StringFieldUpdateOperationsInput | string
+    addressStreet?: StringFieldUpdateOperationsInput | string
+    addressNumber?: IntFieldUpdateOperationsInput | number
+    addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
+    addressCep?: StringFieldUpdateOperationsInput | string
+    toys?: ToyUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUpdateManyWithoutLenderNestedInput
+    history?: HistoryEntryUpdateManyWithoutUserNestedInput
+    ratings?: RateUpdateManyWithoutUserNestedInput
+    organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
+    chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
+    chatsAsUser2?: ChatUpdateManyWithoutUser2NestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutLendsTakenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    parentalControl?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    pix_key?: NullableStringFieldUpdateOperationsInput | string | null
+    addressDistrict?: StringFieldUpdateOperationsInput | string
+    addressStreet?: StringFieldUpdateOperationsInput | string
+    addressNumber?: IntFieldUpdateOperationsInput | number
+    addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
+    addressCep?: StringFieldUpdateOperationsInput | string
+    toys?: ToyUncheckedUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUncheckedUpdateManyWithoutLenderNestedInput
+    history?: HistoryEntryUncheckedUpdateManyWithoutUserNestedInput
+    ratings?: RateUncheckedUpdateManyWithoutUserNestedInput
+    organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
+    chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
+    chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
+  export type ToyUpsertWithoutLendsInput = {
+    update: XOR<ToyUpdateWithoutLendsInput, ToyUncheckedUpdateWithoutLendsInput>
+    create: XOR<ToyCreateWithoutLendsInput, ToyUncheckedCreateWithoutLendsInput>
     where?: ToyWhereInput
   }
 
-  export type ToyUpdateToOneWithWhereWithoutToyPicturesInput = {
+  export type ToyUpdateToOneWithWhereWithoutLendsInput = {
     where?: ToyWhereInput
-    data: XOR<ToyUpdateWithoutToyPicturesInput, ToyUncheckedUpdateWithoutToyPicturesInput>
+    data: XOR<ToyUpdateWithoutLendsInput, ToyUncheckedUpdateWithoutLendsInput>
   }
 
-  export type ToyUpdateWithoutToyPicturesInput = {
+  export type ToyUpdateWithoutLendsInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
     owner?: UserUpdateOneRequiredWithoutToysNestedInput
     history?: HistoryEntryUpdateManyWithoutToyNestedInput
   }
 
-  export type ToyUncheckedUpdateWithoutToyPicturesInput = {
+  export type ToyUncheckedUpdateWithoutLendsInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
     history?: HistoryEntryUncheckedUpdateManyWithoutToyNestedInput
   }
 
@@ -14521,6 +14805,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendCreateNestedManyWithoutBorrowerInput
     ratings?: RateCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
     chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
@@ -14546,6 +14832,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyUncheckedCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendUncheckedCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendUncheckedCreateNestedManyWithoutBorrowerInput
     ratings?: RateUncheckedCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
     chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
@@ -14562,34 +14850,22 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     name: string
-    description: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type?: ToyCreatetypeInput | $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
     owner: UserCreateNestedOneWithoutToysInput
-    ToyPictures?: ToyPictureCreateNestedManyWithoutToyInput
+    lends?: LendCreateNestedManyWithoutToyInput
   }
 
   export type ToyUncheckedCreateWithoutHistoryInput = {
     id?: string
     createdAt?: Date | string
     name: string
-    description: string
     ownerId: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type?: ToyCreatetypeInput | $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
-    ToyPictures?: ToyPictureUncheckedCreateNestedManyWithoutToyInput
+    lends?: LendUncheckedCreateNestedManyWithoutToyInput
   }
 
   export type ToyCreateOrConnectWithoutHistoryInput = {
@@ -14626,6 +14902,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUpdateManyWithoutBorrowerNestedInput
     ratings?: RateUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
     chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
@@ -14651,6 +14929,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUncheckedUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUncheckedUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUncheckedUpdateManyWithoutBorrowerNestedInput
     ratings?: RateUncheckedUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
@@ -14673,34 +14953,22 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
     owner?: UserUpdateOneRequiredWithoutToysNestedInput
-    ToyPictures?: ToyPictureUpdateManyWithoutToyNestedInput
+    lends?: LendUpdateManyWithoutToyNestedInput
   }
 
   export type ToyUncheckedUpdateWithoutHistoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
-    ToyPictures?: ToyPictureUncheckedUpdateManyWithoutToyNestedInput
+    lends?: LendUncheckedUpdateManyWithoutToyNestedInput
   }
 
   export type UserCreateWithoutRatingsInput = {
@@ -14721,6 +14989,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
     chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
@@ -14746,6 +15016,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyUncheckedCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendUncheckedCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendUncheckedCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryUncheckedCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
     chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
@@ -14787,6 +15059,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
     chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
@@ -14812,6 +15086,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUncheckedUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUncheckedUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUncheckedUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUncheckedUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
@@ -14837,6 +15113,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryCreateNestedManyWithoutUserInput
     ratings?: RateCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
@@ -14862,6 +15140,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyUncheckedCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendUncheckedCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendUncheckedCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryUncheckedCreateNestedManyWithoutUserInput
     ratings?: RateUncheckedCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
@@ -14892,6 +15172,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryCreateNestedManyWithoutUserInput
     ratings?: RateCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
@@ -14917,6 +15199,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyUncheckedCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendUncheckedCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendUncheckedCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryUncheckedCreateNestedManyWithoutUserInput
     ratings?: RateUncheckedCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
@@ -14982,6 +15266,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUpdateManyWithoutUserNestedInput
     ratings?: RateUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
@@ -15007,6 +15293,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUncheckedUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUncheckedUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUncheckedUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUncheckedUpdateManyWithoutUserNestedInput
     ratings?: RateUncheckedUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -15043,6 +15331,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUpdateManyWithoutUserNestedInput
     ratings?: RateUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
@@ -15068,6 +15358,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUncheckedUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUncheckedUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUncheckedUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUncheckedUpdateManyWithoutUserNestedInput
     ratings?: RateUncheckedUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -15109,6 +15401,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryCreateNestedManyWithoutUserInput
     ratings?: RateCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
@@ -15134,6 +15428,8 @@ export namespace Prisma {
     addressDetail?: string | null
     addressCep: string
     toys?: ToyUncheckedCreateNestedManyWithoutOwnerInput
+    lendsMade?: LendUncheckedCreateNestedManyWithoutLenderInput
+    lendsTaken?: LendUncheckedCreateNestedManyWithoutBorrowerInput
     history?: HistoryEntryUncheckedCreateNestedManyWithoutUserInput
     ratings?: RateUncheckedCreateNestedManyWithoutUserInput
     organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
@@ -15194,6 +15490,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUpdateManyWithoutUserNestedInput
     ratings?: RateUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
@@ -15219,6 +15517,8 @@ export namespace Prisma {
     addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
     addressCep?: StringFieldUpdateOperationsInput | string
     toys?: ToyUncheckedUpdateManyWithoutOwnerNestedInput
+    lendsMade?: LendUncheckedUpdateManyWithoutLenderNestedInput
+    lendsTaken?: LendUncheckedUpdateManyWithoutBorrowerNestedInput
     history?: HistoryEntryUncheckedUpdateManyWithoutUserNestedInput
     ratings?: RateUncheckedUpdateManyWithoutUserNestedInput
     organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -15255,15 +15555,25 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     name: string
-    description: string
-    price: number
-    isNew: boolean
-    canTrade: boolean
-    canLend: boolean
     usageTime: number
     preservation: number
     type?: ToyCreatetypeInput | $Enums.ToyType[]
-    ageGroup: $Enums.AgeRange
+  }
+
+  export type LendCreateManyLenderInput = {
+    id?: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    borrowerId: string
+    toyId: string
+  }
+
+  export type LendCreateManyBorrowerInput = {
+    id?: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    lenderId: string
+    toyId: string
   }
 
   export type HistoryEntryCreateManyUserInput = {
@@ -15303,49 +15613,79 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
+    lends?: LendUpdateManyWithoutToyNestedInput
     history?: HistoryEntryUpdateManyWithoutToyNestedInput
-    ToyPictures?: ToyPictureUpdateManyWithoutToyNestedInput
   }
 
   export type ToyUncheckedUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
+    lends?: LendUncheckedUpdateManyWithoutToyNestedInput
     history?: HistoryEntryUncheckedUpdateManyWithoutToyNestedInput
-    ToyPictures?: ToyPictureUncheckedUpdateManyWithoutToyNestedInput
   }
 
   export type ToyUncheckedUpdateManyWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    isNew?: BoolFieldUpdateOperationsInput | boolean
-    canTrade?: BoolFieldUpdateOperationsInput | boolean
-    canLend?: BoolFieldUpdateOperationsInput | boolean
     usageTime?: IntFieldUpdateOperationsInput | number
     preservation?: IntFieldUpdateOperationsInput | number
     type?: ToyUpdatetypeInput | $Enums.ToyType[]
-    ageGroup?: EnumAgeRangeFieldUpdateOperationsInput | $Enums.AgeRange
+  }
+
+  export type LendUpdateWithoutLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    borrower?: UserUpdateOneRequiredWithoutLendsTakenNestedInput
+    toy?: ToyUpdateOneRequiredWithoutLendsNestedInput
+  }
+
+  export type LendUncheckedUpdateWithoutLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    toyId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LendUncheckedUpdateManyWithoutLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    toyId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LendUpdateWithoutBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lender?: UserUpdateOneRequiredWithoutLendsMadeNestedInput
+    toy?: ToyUpdateOneRequiredWithoutLendsNestedInput
+  }
+
+  export type LendUncheckedUpdateWithoutBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lenderId?: StringFieldUpdateOperationsInput | string
+    toyId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LendUncheckedUpdateManyWithoutBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lenderId?: StringFieldUpdateOperationsInput | string
+    toyId?: StringFieldUpdateOperationsInput | string
   }
 
   export type HistoryEntryUpdateWithoutUserInput = {
@@ -15451,6 +15791,14 @@ export namespace Prisma {
     chatId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type LendCreateManyToyInput = {
+    id?: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    lenderId: string
+    borrowerId: string
+  }
+
   export type HistoryEntryCreateManyToyInput = {
     id?: string
     createdAt?: Date | string
@@ -15458,10 +15806,28 @@ export namespace Prisma {
     userId?: string | null
   }
 
-  export type ToyPictureCreateManyToyInput = {
-    id?: string
-    order: number
-    picture: string
+  export type LendUpdateWithoutToyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lender?: UserUpdateOneRequiredWithoutLendsMadeNestedInput
+    borrower?: UserUpdateOneRequiredWithoutLendsTakenNestedInput
+  }
+
+  export type LendUncheckedUpdateWithoutToyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lenderId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LendUncheckedUpdateManyWithoutToyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lenderId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
   }
 
   export type HistoryEntryUpdateWithoutToyInput = {
@@ -15483,24 +15849,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     visible?: BoolFieldUpdateOperationsInput | boolean
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ToyPictureUpdateWithoutToyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    picture?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ToyPictureUncheckedUpdateWithoutToyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    picture?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ToyPictureUncheckedUpdateManyWithoutToyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    picture?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageCreateManyChatInput = {

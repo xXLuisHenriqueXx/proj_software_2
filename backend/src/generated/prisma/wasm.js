@@ -5,28 +5,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 
 const {
-  PrismaClientKnownRequestError,
-  PrismaClientUnknownRequestError,
-  PrismaClientRustPanicError,
-  PrismaClientInitializationError,
-  PrismaClientValidationError,
-  getPrismaClient,
-  sqltag,
-  empty,
-  join,
-  raw,
-  skip,
   Decimal,
-  Debug,
   objectEnumValues,
   makeStrictEnum,
-  Extensions,
-  warnOnce,
-  defineDmmfProperty,
   Public,
   getRuntime,
-  createParam,
-} = require('./runtime/wasm-engine-edge.js')
+  skip
+} = require('./runtime/index-browser.js')
 
 
 const Prisma = {}
@@ -35,35 +20,79 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.0
- * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
+ * Prisma Client JS version: 6.14.0
+ * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
  */
 Prisma.prismaVersion = {
-  client: "6.16.0",
-  engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
+  client: "6.14.0",
+  engine: "717184b7b35ea05dfa71a3236b7af656013e1e49"
 }
 
-Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
-Prisma.PrismaClientUnknownRequestError = PrismaClientUnknownRequestError
-Prisma.PrismaClientRustPanicError = PrismaClientRustPanicError
-Prisma.PrismaClientInitializationError = PrismaClientInitializationError
-Prisma.PrismaClientValidationError = PrismaClientValidationError
+Prisma.PrismaClientKnownRequestError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`PrismaClientKnownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)};
+Prisma.PrismaClientUnknownRequestError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`PrismaClientUnknownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.PrismaClientRustPanicError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`PrismaClientRustPanicError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.PrismaClientInitializationError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`PrismaClientInitializationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.PrismaClientValidationError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
 Prisma.Decimal = Decimal
 
 /**
  * Re-export of sql-template-tag
  */
-Prisma.sql = sqltag
-Prisma.empty = empty
-Prisma.join = join
-Prisma.raw = raw
+Prisma.sql = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`sqltag is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.empty = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`empty is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.join = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`join is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.raw = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`raw is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
 Prisma.validator = Public.validator
 
 /**
 * Extensions
 */
-Prisma.getExtensionContext = Extensions.getExtensionContext
-Prisma.defineExtension = Extensions.defineExtension
+Prisma.getExtensionContext = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`Extensions.getExtensionContext is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.defineExtension = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`Extensions.defineExtension is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
 
 /**
  * Shorthand utilities for JSON filtering
@@ -80,11 +109,10 @@ Prisma.NullTypes = {
 
 
 
-
-
 /**
  * Enums
  */
+
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
@@ -123,23 +151,19 @@ exports.Prisma.ToyScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   name: 'name',
-  description: 'description',
   ownerId: 'ownerId',
-  price: 'price',
-  isNew: 'isNew',
-  canTrade: 'canTrade',
-  canLend: 'canLend',
   usageTime: 'usageTime',
   preservation: 'preservation',
-  type: 'type',
-  ageGroup: 'ageGroup'
+  type: 'type'
 };
 
-exports.Prisma.ToyPictureScalarFieldEnum = {
+exports.Prisma.LendScalarFieldEnum = {
   id: 'id',
-  order: 'order',
-  toyId: 'toyId',
-  picture: 'picture'
+  startDate: 'startDate',
+  endDate: 'endDate',
+  lenderId: 'lenderId',
+  borrowerId: 'borrowerId',
+  toyId: 'toyId'
 };
 
 exports.Prisma.HistoryEntryScalarFieldEnum = {
@@ -193,118 +217,48 @@ exports.Role = exports.$Enums.Role = {
 };
 
 exports.ToyType = exports.$Enums.ToyType = {
-  MENINOS: 'MENINOS',
-  MENINAS: 'MENINAS',
-  ARTÍSTICO: 'ARTÍSTICO',
-  AVENTURA: 'AVENTURA',
-  BONECOS: 'BONECOS',
-  CARRINHOS: 'CARRINHOS',
-  CARTAS: 'CARTAS',
-  EDUCATIVO: 'EDUCATIVO',
-  ESPORTES: 'ESPORTES',
-  ESTRATÉGIA: 'ESTRATÉGIA',
-  PALAVRAS: 'PALAVRAS',
-  PARA_BEBÊS: 'PARA_BEBÊS',
-  QUEBRA_CABEÇAS: 'QUEBRA_CABEÇAS',
-  SIMULAÇÃO: 'SIMULAÇÃO',
-  TABULEIRO: 'TABULEIRO',
-  VIDEOGAME: 'VIDEOGAME'
-};
-
-exports.AgeRange = exports.$Enums.AgeRange = {
-  ZERO_A_UM: 'ZERO_A_UM',
-  UM_A_TRES: 'UM_A_TRES',
-  TRES_A_SEIS: 'TRES_A_SEIS',
-  SEIS_A_DOZE: 'SEIS_A_DOZE',
-  DOZE_OU_MAIS: 'DOZE_OU_MAIS'
+  BOYS: 'BOYS',
+  GIRLS: 'GIRLS'
 };
 
 exports.Prisma.ModelName = {
   User: 'User',
   organizationInfo: 'organizationInfo',
   Toy: 'Toy',
-  ToyPicture: 'ToyPicture',
+  Lend: 'Lend',
   HistoryEntry: 'HistoryEntry',
   Rate: 'Rate',
   Chat: 'Chat',
   Message: 'Message'
 };
+
 /**
- * Create the Client
+ * This is a stub Prisma Client that will error at runtime if called.
  */
-const config = {
-  "generator": {
-    "name": "client",
-    "provider": {
-      "fromEnvVar": null,
-      "value": "prisma-client-js"
-    },
-    "output": {
-      "value": "/usr/src/app/src/generated/prisma",
-      "fromEnvVar": null
-    },
-    "config": {
-      "engineType": "library"
-    },
-    "binaryTargets": [
-      {
-        "fromEnvVar": null,
-        "value": "linux-musl-arm64-openssl-3.0.x",
-        "native": true
-      }
-    ],
-    "previewFeatures": [],
-    "sourceFilePath": "/usr/src/app/prisma/schema.prisma",
-    "isCustomOutput": true
-  },
-  "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
-  },
-  "relativePath": "../../../prisma",
-  "clientVersion": "6.16.0",
-  "engineVersion": "1c57fdcd7e44b29b9313256c76699e91c3ac3c43",
-  "datasourceNames": [
-    "db"
-  ],
-  "activeProvider": "postgresql",
-  "inlineDatasources": {
-    "db": {
-      "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": null
-      }
-    }
-  },
-  "inlineSchema": "datasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\nmodel User {\n  id              String   @id @default(uuid())\n  createdAt       DateTime @default(now())\n  email           String   @unique\n  password        String\n  name            String\n  role            Role     @default(USER)\n  parentalControl Boolean  @default(false)\n  active          Boolean  @default(true)\n  cpf             String?  @unique\n  cnpj            String?  @unique\n  pix_key         String?  @unique\n\n  addressDistrict String\n  addressStreet   String\n  addressNumber   Int\n  addressDetail   String?\n  addressCep      String\n\n  // Relacionamentos\n  toys Toy[]\n\n  history HistoryEntry[]\n\n  ratings          Rate[]\n  organizationInfo organizationInfo?\n\n  // relação com chats\n  chatsAsUser1 Chat[] @relation(\"User1Chats\")\n  chatsAsUser2 Chat[] @relation(\"User2Chats\")\n\n  // mensagens enviadas\n  messages Message[]\n}\n\nmodel organizationInfo {\n  id             String @id @default(uuid())\n  organizationId String @unique\n  organization   User   @relation(fields: [organizationId], references: [id])\n  description    String\n  phone_number1  Int\n  phone_number2  Int?\n}\n\nenum Role {\n  USER\n  ADMIN\n}\n\nmodel Toy {\n  id          String   @id @default(uuid())\n  createdAt   DateTime @default(now())\n  name        String\n  description String\n\n  ownerId String\n  owner   User   @relation(fields: [ownerId], references: [id])\n\n  history HistoryEntry[]\n\n  price Float\n\n  isNew        Boolean\n  canTrade     Boolean\n  canLend      Boolean\n  usageTime    Int\n  preservation Int // CHECK (preservation BETWEEN 0 AND 5)\n  type         ToyType[]\n  ToyPictures  ToyPicture[] @relation(\"Pictures\")\n  ageGroup     AgeRange\n}\n\nenum ToyType {\n  MENINOS\n  MENINAS\n  ARTÍSTICO\n  AVENTURA\n  BONECOS\n  CARRINHOS\n  CARTAS\n  EDUCATIVO\n  ESPORTES\n  ESTRATÉGIA\n  PALAVRAS\n  PARA_BEBÊS\n  QUEBRA_CABEÇAS\n  SIMULAÇÃO\n  TABULEIRO\n  VIDEOGAME\n}\n\nenum AgeRange {\n  ZERO_A_UM // 0 a 1 ano\n  UM_A_TRES // 1 a 3 anos\n  TRES_A_SEIS // 3 a 6 anos\n  SEIS_A_DOZE // 6 a 12 anos\n  DOZE_OU_MAIS // 12 anos ou mais\n}\n\nmodel ToyPicture {\n  id      String @id @default(uuid())\n  order   Int\n  toyId   String\n  toy     Toy    @relation(\"Pictures\", fields: [toyId], references: [id])\n  picture String\n}\n\n// Visualização de um brinquedo pelo usuário\n// - Utilizado para recomendações futuras baseado em gostos\nmodel HistoryEntry {\n  id        String   @id @default(uuid())\n  createdAt DateTime @default(now())\n  visible   Boolean  @default(true)\n\n  userId String?\n  user   User?   @relation(fields: [userId], references: [id])\n\n  toyId String\n  toy   Toy    @relation(fields: [toyId], references: [id])\n}\n\nmodel Rate {\n  id        String   @id @default(uuid())\n  createdAt DateTime @default(now())\n  value     Int // CHECK (value BETWEEN 1 AND 5)\n  comment   String?\n\n  userId String\n  user   User   @relation(fields: [userId], references: [id])\n}\n\nmodel Chat {\n  id        String   @id @default(uuid())\n  createdAt DateTime @default(now())\n\n  // participantes (2 usuários por chat)\n  user1Id String\n  user1   User   @relation(\"User1Chats\", fields: [user1Id], references: [id])\n\n  user2Id String\n  user2   User   @relation(\"User2Chats\", fields: [user2Id], references: [id])\n\n  // mensagens\n  messages Message[]\n}\n\nmodel Message {\n  id        String   @id @default(uuid())\n  createdAt DateTime @default(now())\n  content   String\n\n  // remetente\n  senderId String\n  sender   User   @relation(fields: [senderId], references: [id])\n\n  // chat em que a mensagem foi enviada\n  chatId String\n  chat   Chat   @relation(fields: [chatId], references: [id])\n}\n",
-  "inlineSchemaHash": "1f7cddeebc30dd16fbc1ffed0a7d8d018a4cc5abba81db5eae4e1dd89036642a",
-  "copyEngine": true
-}
-config.dirname = '/'
+class PrismaClient {
+  constructor() {
+    return new Proxy(this, {
+      get(target, prop) {
+        let message
+        const runtime = getRuntime()
+        if (runtime.isEdge) {
+          message = `PrismaClient is not configured to run in ${runtime.prettyName}. In order to run Prisma Client on edge runtime, either:
+- Use Prisma Accelerate: https://pris.ly/d/accelerate
+- Use Driver Adapters: https://pris.ly/d/driver-adapters
+`;
+        } else {
+          message = 'PrismaClient is unable to run in this browser environment, or has been bundled for the browser (running in `' + runtime.prettyName + '`).'
+        }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"parentalControl\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"active\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"cpf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cnpj\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pix_key\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"addressDistrict\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"addressStreet\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"addressNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"addressDetail\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"addressCep\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"toys\",\"kind\":\"object\",\"type\":\"Toy\",\"relationName\":\"ToyToUser\"},{\"name\":\"history\",\"kind\":\"object\",\"type\":\"HistoryEntry\",\"relationName\":\"HistoryEntryToUser\"},{\"name\":\"ratings\",\"kind\":\"object\",\"type\":\"Rate\",\"relationName\":\"RateToUser\"},{\"name\":\"organizationInfo\",\"kind\":\"object\",\"type\":\"organizationInfo\",\"relationName\":\"UserToorganizationInfo\"},{\"name\":\"chatsAsUser1\",\"kind\":\"object\",\"type\":\"Chat\",\"relationName\":\"User1Chats\"},{\"name\":\"chatsAsUser2\",\"kind\":\"object\",\"type\":\"Chat\",\"relationName\":\"User2Chats\"},{\"name\":\"messages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"MessageToUser\"}],\"dbName\":null},\"organizationInfo\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToorganizationInfo\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone_number1\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"phone_number2\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Toy\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ownerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"owner\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ToyToUser\"},{\"name\":\"history\",\"kind\":\"object\",\"type\":\"HistoryEntry\",\"relationName\":\"HistoryEntryToToy\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"isNew\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"canTrade\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"canLend\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"usageTime\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"preservation\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"ToyType\"},{\"name\":\"ToyPictures\",\"kind\":\"object\",\"type\":\"ToyPicture\",\"relationName\":\"Pictures\"},{\"name\":\"ageGroup\",\"kind\":\"enum\",\"type\":\"AgeRange\"}],\"dbName\":null},\"ToyPicture\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"order\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"toyId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"toy\",\"kind\":\"object\",\"type\":\"Toy\",\"relationName\":\"Pictures\"},{\"name\":\"picture\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"HistoryEntry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"visible\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"HistoryEntryToUser\"},{\"name\":\"toyId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"toy\",\"kind\":\"object\",\"type\":\"Toy\",\"relationName\":\"HistoryEntryToToy\"}],\"dbName\":null},\"Rate\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"value\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"comment\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RateToUser\"}],\"dbName\":null},\"Chat\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user1Id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user1\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"User1Chats\"},{\"name\":\"user2Id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user2\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"User2Chats\"},{\"name\":\"messages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"ChatToMessage\"}],\"dbName\":null},\"Message\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sender\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"MessageToUser\"},{\"name\":\"chatId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"chat\",\"kind\":\"object\",\"type\":\"Chat\",\"relationName\":\"ChatToMessage\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
-defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
-config.engineWasm = {
-  getRuntime: async () => require('./query_engine_bg.js'),
-  getQueryEngineWasmModule: async () => {
-    const loader = (await import('#wasm-engine-loader')).default
-    const engine = (await loader).default
-    return engine
+        message += `
+If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-report`
+
+        throw new Error(message)
+      }
+    })
   }
 }
-config.compilerWasm = undefined
 
-config.injectableEdgeEnv = () => ({
-  parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
-  }
-})
-
-if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {
-  Debug.enable(typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined)
-}
-
-const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
-Object.assign(exports, Prisma)
 
+Object.assign(exports, Prisma)
