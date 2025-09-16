@@ -1,0 +1,171 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+  binaryTargets = ["native", "windows"]
+}
+
+model User {
+  id              String   @id @default(uuid())
+  createdAt       DateTime @default(now())
+  email           String   @unique
+  password        String
+  name            String
+  role            Role     @default(USER)
+  parentalControl Boolean  @default(false)
+  active          Boolean  @default(true)
+  cpf             String?  @unique
+  cnpj            String?  @unique
+  pix_key         String?  @unique
+  picture         String?  @db.Text
+
+  addressDistrict String
+  addressStreet   String
+  addressNumber   Int
+  addressDetail   String?
+  addressCep      String
+
+  // Relacionamentos
+  toys Toy[]
+
+  history HistoryEntry[]
+
+  ratings          Rate[]
+  organizationInfo organizationInfo?
+
+  // relação com chats
+  chatsAsUser1 Chat[] @relation("User1Chats")
+  chatsAsUser2 Chat[] @relation("User2Chats")
+
+  // mensagens enviadas
+  messages Message[]
+}
+
+model organizationInfo {
+  id             String @id @default(uuid())
+  organizationId String @unique
+  organization   User   @relation(fields: [organizationId], references: [id])
+  description    String
+  phone_number1  Int
+  phone_number2  Int?
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Toy {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  name        String
+  description String
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  history HistoryEntry[]
+
+  price Float
+
+  isNew        Boolean
+  canTrade     Boolean
+  canLend      Boolean
+  usageTime    Int
+  preservation Int // CHECK (preservation BETWEEN 0 AND 5)
+  type         ToyType[]
+  ToyPictures  ToyPicture[] @relation("Pictures")
+  ageGroup     AgeRange
+}
+
+enum ToyType {
+  MENINOS
+  MENINAS
+  ARTÍSTICO
+  AVENTURA
+  BONECOS
+  CARRINHOS
+  CARTAS
+  EDUCATIVO
+  ESPORTES
+  ESTRATÉGIA
+  PALAVRAS
+  PARA_BEBÊS
+  QUEBRA_CABEÇAS
+  SIMULAÇÃO
+  TABULEIRO
+  VIDEOGAME
+}
+
+enum AgeRange {
+  ZERO_A_UM // 0 a 1 ano
+  UM_A_TRES // 1 a 3 anos
+  TRES_A_SEIS // 3 a 6 anos
+  SEIS_A_DOZE // 6 a 12 anos
+  DOZE_OU_MAIS // 12 anos ou mais
+}
+
+model ToyPicture {
+  id      String @id @default(uuid())
+  order   Int
+  toyId   String
+  toy     Toy    @relation("Pictures", fields: [toyId], references: [id])
+  picture String
+}
+
+// Visualização de um brinquedo pelo usuário
+// - Utilizado para recomendações futuras baseado em gostos
+model HistoryEntry {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  visible   Boolean  @default(true)
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  toyId String
+  toy   Toy    @relation(fields: [toyId], references: [id])
+}
+
+model Rate {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  value     Int // CHECK (value BETWEEN 1 AND 5)
+  comment   String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Chat {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // participantes (2 usuários por chat)
+  user1Id String
+  user1   User   @relation("User1Chats", fields: [user1Id], references: [id])
+
+  user2Id String
+  user2   User   @relation("User2Chats", fields: [user2Id], references: [id])
+
+  // mensagens
+  messages Message[]
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  content   String
+
+  // remetente
+  senderId String
+  sender   User   @relation(fields: [senderId], references: [id])
+
+  // chat em que a mensagem foi enviada
+  chatId String
+  chat   Chat   @relation(fields: [chatId], references: [id])
+}
