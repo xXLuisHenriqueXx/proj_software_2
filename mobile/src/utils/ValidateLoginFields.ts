@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 
-import { IFieldsLogin } from "@src/screens/Welcome/Login";
 import { EMAIL_REGEX } from "@src/constants/Regex";
+import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
 
 export const validateLoginFields = (fields: IFieldsLogin) => {
   const emailTrimmed = fields.email.trim();

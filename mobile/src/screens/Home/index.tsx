@@ -17,15 +17,19 @@ import Carousel from "@src/components/Carousel";
 import { productsData } from "@src/static/ProductsData";
 import { highlightScrollData } from "@src/static/HighlightScrollData";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
+import useAuth from "@src/hooks/useAuth";
 
 const Home = () => {
   const { width } = useWindowDimensions();
+  const { logout } = useAuth();
   const statusBarHeight = Constants.statusBarHeight;
   const navigation = useNavigation<PropsAppStack>();
 
   const carouselWidth = width - 48;
 
   const handleNavigateToChats = () => navigation.replace("ChatStack");
+
+  const handleLogout = () => logout();
 
   return (
     <ScrollView
@@ -38,7 +42,7 @@ const Home = () => {
           Olá, Luis
         </Text>
 
-        <TouchableOpacity activeOpacity={0.85} onPress={handleNavigateToChats}>
+        <TouchableOpacity activeOpacity={0.85} onPress={handleLogout}>
           <MessageSquareText size={24} color={"#316A41"} />
         </TouchableOpacity>
       </View>

@@ -6,6 +6,7 @@ import {
 
 import AuthStack from "./stacks/AuthStack";
 import AppStack from "./stacks/AppStack";
+import useAuth from "@src/hooks/useAuth";
 
 export type RootParamList = {
   AuthStack: undefined;
@@ -17,6 +18,8 @@ const Stack = createNativeStackNavigator<RootParamList>();
 export type PropsRoot = NativeStackNavigationProp<RootParamList>;
 
 const Routes = () => {
+  const { token } = useAuth();
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -24,9 +27,10 @@ const Routes = () => {
           headerShown: false,
           animation: "none",
         }}
+        initialRouteName={token ? "AppStack" : "AuthStack"}
       >
-        <Stack.Screen name="AppStack" component={AppStack} />
         <Stack.Screen name="AuthStack" component={AuthStack} />
+        <Stack.Screen name="AppStack" component={AppStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );

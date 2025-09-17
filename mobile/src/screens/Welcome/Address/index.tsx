@@ -10,15 +10,11 @@ import Fields from "./_components/Fields";
 import { validateAddressFields } from "@src/utils/ValidateAddressFields";
 import { AuthStackParamList } from "@src/routes/stacks/AuthStack";
 import { PropsRoot } from "@src/routes";
-
-export interface IFieldsAddress {
-  street: string;
-  number: string;
-  neighborhood: string;
-  extra?: string;
-  city: string;
-  state: string;
-}
+import {
+  IFieldsAddress,
+  IRegister,
+} from "@src/common/Interfaces/Auth.interface";
+import useAuth from "@src/hooks/useAuth";
 
 export interface IEditableFields {
   street: boolean;
@@ -33,6 +29,7 @@ type Props = NativeStackScreenProps<AuthStackParamList, "Address">;
 
 const Address = ({ route }: Props) => {
   const { fieldsData } = route.params || {};
+  const { register } = useAuth();
 
   const navigation = useNavigation<PropsRoot>();
 
@@ -109,20 +106,34 @@ const Address = ({ route }: Props) => {
   };
 
   const handleRegister = () => {
-    const validFields = validateAddressFields(fields);
-    if (!validFields) return;
-
     setLoading(true);
-    setTimeout(() => {
+
+    try {
+      const validFields = validateAddressFields(fields);
+      if (!validFields) return;
+
+      const params: IRegister = {
+        name: fieldsData.name,
+        email: fieldsData.email,
+        password: fieldsData.password,
+        passwordConfirmation: fieldsData.passwordConfirmation,
+        cpf: "662.59147768",
+        cnpj: fieldsData.cnpj,
+        addressDistrict: fields.neighborhood,
+        addressStreet: fields.street,
+        addressNumber: Number(fields.number),
+        addressDetail: fields.extra,
+        addressCep: cep,
+      };
+
+      register(params);
+
+      navigation.replace("AppStack");
+    } catch (error) {
+      console.error(error);
+    } finally {
       setLoading(false);
-    }, 3000);
-
-    const address = { ...validFields, cep };
-    const registerData = { user: fieldsData, address };
-
-    console.log("[ADDRESS] handleRegister: ", registerData);
-
-    navigation.replace("AppStack");
+    }
   };
 
   useEffect(() => {

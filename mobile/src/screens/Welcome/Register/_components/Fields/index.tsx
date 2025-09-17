@@ -10,15 +10,14 @@ import { Eye, EyeOff } from "lucide-react-native";
 
 import MaskedInput from "@src/components/MaskedInput";
 
-import { IFieldsRegister } from "../..";
 import { CNPJ_MASK } from "@src/constants/Masks";
+import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
 
 interface IFieldProps {
   fields: IFieldsRegister;
   setFields: (fields: IFieldsRegister) => void;
   type: "personal" | "enterprise";
   onNavigate: () => void;
-  onRegister: () => void;
 }
 
 type IInputProps = TextInputProps & {
@@ -67,17 +66,11 @@ const Input = forwardRef<any, IInputProps>((props, ref) => {
   );
 });
 
-const Fields = ({
-  fields,
-  setFields,
-  type,
-  onNavigate,
-  onRegister,
-}: IFieldProps) => {
+const Fields = ({ fields, setFields, type, onNavigate }: IFieldProps) => {
   const emailRef = useRef<TextInput>();
   const cnpjRef = useRef<TextInput>();
   const passwordRef = useRef<TextInput>();
-  const confirmPasswordRef = useRef<TextInput>();
+  const passwordConfirmationRef = useRef<TextInput>();
 
   const fieldConfigs = [
     {
@@ -115,17 +108,17 @@ const Fields = ({
       label: "Senha",
       placeholder: "Sua senha ...",
       ref: passwordRef,
-      nextRef: confirmPasswordRef,
+      nextRef: passwordConfirmationRef,
       password: true,
       instruction: "Deve conter no mínimo 8 caracteres",
       component: Input,
     },
     {
-      key: "confirmPassword",
+      key: "passwordConfirmation",
       label: "Confirmar senha",
       placeholder: "Confirme sua senha ...",
-      ref: confirmPasswordRef,
-      onSubmitEditing: type === "enterprise" ? onNavigate : onRegister,
+      ref: passwordConfirmationRef,
+      onSubmitEditing: onNavigate,
       password: true,
       component: Input,
     },
