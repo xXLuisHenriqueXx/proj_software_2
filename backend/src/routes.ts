@@ -2,7 +2,7 @@ import type { FastifyInstance } from "fastify";
 import { z } from "zod";
 
 import { authController } from "./controllers/authController";
-import { toyController } from "./controllers/toyController";
+import { ToyController } from "./controllers/toyController";
 
 import { authMiddleware } from "./middleware/authMiddleware";
 import { 
@@ -75,7 +75,7 @@ export async function routes(app: FastifyInstance) {
       body: toyCreateSchema,
       response: { 201: toyResponseSchema }
     }
-  }, toyController.create);
+  }, ToyController.create);
 
   app.get('/toys/:toyId', {
     schema: {
@@ -84,7 +84,7 @@ export async function routes(app: FastifyInstance) {
       params: getToySchema,
       response: { 200: toyResponseSchema }
     }
-  }, toyController.getToy);
+  }, ToyController.getToy);
 
   app.post('/toys/list', {
     schema: {
@@ -92,7 +92,7 @@ export async function routes(app: FastifyInstance) {
       summary: 'Lista brinquedos com filtros e paginação',
       body: toyListSchema,
     }
-  }, toyController.getToyList);
+  }, ToyController.getToyList);
 
   app.patch('/toys/:toyId', {
     onRequest: [authMiddleware],
@@ -103,7 +103,7 @@ export async function routes(app: FastifyInstance) {
       body: toyUpdateSchema,
       response: { 200: toyResponseSchema }
     }
-  }, toyController.update);
+  }, ToyController.update);
 
   app.delete('/toys/:toyId', {
     onRequest: [authMiddleware],
@@ -112,6 +112,6 @@ export async function routes(app: FastifyInstance) {
       summary: 'Deleta um brinquedo existente',
       params: getToySchema,
     }
-  }, toyController.delete);
+  }, ToyController.delete);
 }
 
