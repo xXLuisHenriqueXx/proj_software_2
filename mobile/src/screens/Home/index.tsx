@@ -21,7 +21,7 @@ import useAuth from "@src/hooks/useAuth";
 
 const Home = () => {
   const { width } = useWindowDimensions();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const statusBarHeight = Constants.statusBarHeight;
   const navigation = useNavigation<PropsAppStack>();
 
@@ -38,8 +38,11 @@ const Home = () => {
       contentContainerStyle={{ paddingBottom: 64 }}
     >
       <View className="flex-row items-center justify-between w-full p-6">
-        <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
-          Olá, Luis
+        <Text className="text-2xl font-redHatDisplayMedium text-primary">
+          Olá,{" "}
+          <Text className="font-redHatDisplayBold text-highlight">
+            {user?.name}
+          </Text>
         </Text>
 
         <TouchableOpacity activeOpacity={0.85} onPress={handleLogout}>
@@ -47,7 +50,7 @@ const Home = () => {
         </TouchableOpacity>
       </View>
 
-      <View className="flex-col items-center gap-y-12 w-full h-full p-6 pb-48 bg-backgroundPrimary rounded-t-3xl">
+      <View className="flex-col items-center gap-y-12 w-full h-full p-6 pb-48 bg-backgroundPrimary rounded-t-3xl\">
         <Carousel
           width={carouselWidth}
           height={240}
