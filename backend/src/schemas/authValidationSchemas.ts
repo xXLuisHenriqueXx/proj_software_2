@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+export const userResponseSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string(),
+  email: z.string().email(),
+  picture: z.string().nullable(),
+});
 // Regex para formato
 const cpfRegex = /^(\d{3}\.?\d{3}\.?\d{3}-?\d{2})$/;
 const cnpjRegex = /^(\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2})$/;

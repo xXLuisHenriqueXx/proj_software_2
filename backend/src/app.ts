@@ -3,7 +3,7 @@ import { ZodTypeProvider, jsonSchemaTransform, serializerCompiler, validatorComp
 import { fastifySwagger } from "@fastify/swagger";
 import { fastifySwaggerUi } from "@fastify/swagger-ui";
 import { routes } from "./routes";
-import fastifyJwt from "@fastify/jwt";
+import fastifyJwt from "@fastify/jwt";  
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>();
 

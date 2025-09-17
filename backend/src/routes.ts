@@ -1,36 +1,117 @@
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
+
 import { authController } from "./controllers/authController";
-import { ToyController } from "./controllers/toyController";
+import { toyController } from "./controllers/toyController";
+
+import { authMiddleware } from "./middleware/authMiddleware";
 import { 
-  loginSchema, 
   registerSchema, 
-  updateAvatarSchema, 
-  updateUserSchema 
+  loginSchema, 
+  updateUserSchema, 
+  updateAvatarSchema,
+  userResponseSchema
 } from "./schemas/authValidationSchemas";
 import { 
-  getToySchema, 
   toyCreateSchema, 
-  toyListSchema, 
-  toyUpdateSchema 
+  toyUpdateSchema, 
+  getToySchema, 
+  toyResponseSchema, 
+  toyListSchema 
 } from "./schemas/toyValidationSchemas";
-import { authMiddleware } from "./middleware/authMiddleware";
 
 export async function routes(app: FastifyInstance) {
 
-  app.post("/auth/register", { schema: { tags: ["Auth"], summary: "Registrar novo usuário", body: registerSchema, response: { 201: z.object({ token: z.string() }) }}}, authController.register);
-  app.post("/auth/login", { schema: { tags: ["Auth"], summary: "Login de usuário", body: loginSchema, response: { 200: z.object({ token: z.string() }) }}}, authController.login);
-  app.delete("/auth/delete", { schema: { tags: ["Auth"], summary: "Deletar usuário autenticado", security: [{ bearerAuth: [] }] }, onRequest: [authMiddleware] }, authController.delete);
-  
+  app.post('/auth/register', {
+    schema: {
+      tags: ['Auth'],
+      summary: 'Regista um novo utilizador',
+      body: registerSchema,
+      response: { 201: z.object({ user: userResponseSchema, token: z.string() }) }
+    }
+  }, authController.register);
 
-  app.patch("/users/patch", { schema: { tags: ["User"], summary: "Atualizar usuário autenticado", security: [{ bearerAuth: [] }], body: updateUserSchema }, onRequest: [authMiddleware] }, authController.update);
-  app.patch("/users/picture", { schema: { tags: ["User"], summary: "Atualizar foto do usuário", security: [{ bearerAuth: [] }], body: updateAvatarSchema }, onRequest: [authMiddleware] }, authController.updatePicture);
+  app.post('/auth/login', {
+    schema: {
+      tags: ['Auth'],
+      summary: 'Autentica um utilizador e retorna um token',
+      body: loginSchema,
+      response: { 200: z.object({ user: userResponseSchema, token: z.string() }) }
+    }
+  }, authController.login);
+
+  app.patch('/users/me', {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ['Users'],
+      summary: 'Atualiza informações do utilizador autenticado',
+      body: updateUserSchema,
+    }
+  }, authController.update);
+
+  app.patch('/users/picture', {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ['Users'],
+      summary: 'Atualiza a foto de perfil do utilizador autenticado',
+      body: updateAvatarSchema,
+    }
+  }, authController.updatePicture);
+
+  app.delete('/users/me', {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ['Users'],
+      summary: 'Deleta o utilizador autenticado',
+    }
+  }, authController.delete);
 
 
-  app.post("/toys/list", { schema: { tags: ["Toys"], summary: "Listar brinquedos com filtros", body: toyListSchema }}, ToyController.getToyList);
-  app.get("/toys/:toyId", { schema: { tags: ["Toys"], summary: "Buscar brinquedo por ID", params: getToySchema }}, ToyController.getToy);
-  app.post("/toys", { schema: { tags: ["Toys"], summary: "Criar novo brinquedo", security: [{ bearerAuth: [] }], body: toyCreateSchema }, onRequest: [authMiddleware] }, ToyController.create);
-  app.patch("/toys/:toyId", { schema: { tags: ["Toys"], summary: "Atualizar um brinquedo", security: [{ bearerAuth: [] }], params: getToySchema, body: toyUpdateSchema }, onRequest: [authMiddleware] }, ToyController.update);
-  app.delete("/toys/:toyId", { schema: { tags: ["Toys"], summary: "Deletar um brinquedo", security: [{ bearerAuth: [] }], params: getToySchema }, onRequest: [authMiddleware] }, ToyController.delete);
+  app.post('/toys', {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ['Toys'],
+      summary: 'Cria um novo brinquedo',
+      body: toyCreateSchema,
+      response: { 201: toyResponseSchema }
+    }
+  }, toyController.create);
+
+  app.get('/toys/:toyId', {
+    schema: {
+      tags: ['Toys'],
+      summary: 'Busca um brinquedo por ID',
+      params: getToySchema,
+      response: { 200: toyResponseSchema }
+    }
+  }, toyController.getToy);
+
+  app.post('/toys/list', {
+    schema: {
+      tags: ['Toys'],
+      summary: 'Lista brinquedos com filtros e paginação',
+      body: toyListSchema,
+    }
+  }, toyController.getToyList);
+
+  app.patch('/toys/:toyId', {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ['Toys'],
+      summary: 'Atualiza um brinquedo existente',
+      params: getToySchema,
+      body: toyUpdateSchema,
+      response: { 200: toyResponseSchema }
+    }
+  }, toyController.update);
+
+  app.delete('/toys/:toyId', {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ['Toys'],
+      summary: 'Deleta um brinquedo existente',
+      params: getToySchema,
+    }
+  }, toyController.delete);
 }
 
