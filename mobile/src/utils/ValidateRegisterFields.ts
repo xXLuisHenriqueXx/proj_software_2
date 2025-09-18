@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 
-import { IFieldsRegister } from "@src/screens/Welcome/Register";
 import { EMAIL_REGEX } from "@src/constants/Regex";
+import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
 
 export const validateRegisterFields = (
   fields: IFieldsRegister,
@@ -11,13 +11,13 @@ export const validateRegisterFields = (
   const cnpjTrimmed = fields.cnpj?.trim() || "";
   const emailTrimmed = fields.email.trim();
   const passwordTrimmed = fields.password.trim();
-  const confirmPasswordTrimmed = fields.confirmPassword.trim();
+  const passwordConfirmationTrimmed = fields.passwordConfirmation.trim();
 
   if (
     !nameTrimmed ||
     !emailTrimmed ||
     !passwordTrimmed ||
-    !confirmPasswordTrimmed ||
+    !passwordConfirmationTrimmed ||
     (type === "enterprise" && !cnpjTrimmed)
   ) {
     Alert.alert("Aviso", "Preencha todos os campos");
@@ -34,7 +34,7 @@ export const validateRegisterFields = (
     return null;
   }
 
-  if (passwordTrimmed !== confirmPasswordTrimmed) {
+  if (passwordTrimmed !== passwordConfirmationTrimmed) {
     Alert.alert("Aviso", "As senhas são diferentes");
     return null;
   }
@@ -43,6 +43,7 @@ export const validateRegisterFields = (
     name: nameTrimmed,
     email: emailTrimmed,
     password: passwordTrimmed,
+    passwordConfirmation: passwordConfirmationTrimmed,
     ...(type === "enterprise" ? { cnpj: cnpjTrimmed } : {}),
   };
 };

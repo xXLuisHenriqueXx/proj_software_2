@@ -14,6 +14,7 @@ import "react-native-gesture-handler";
 
 import "./global.css";
 import Routes from "@src/routes";
+import { useAuthStore } from "@src/stores/AuthStore";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,11 +23,14 @@ export default function App() {
     RedHatDisplay_600SemiBold: RedHatDisplay_600SemiBold,
     RedHatDisplay_700Bold: RedHatDisplay_700Bold,
   });
+  const { restore, isLoading } = useAuthStore();
 
   useEffect(() => {
     const prepare = async () => {
       try {
         await SplashScreen.preventAutoHideAsync();
+
+        await restore();
       } catch (error) {
         console.warn(error);
       } finally {
@@ -37,7 +41,7 @@ export default function App() {
     prepare();
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) return null;
+  if (!fontsLoaded || isLoading) return null;
 
   return <AppContent />;
 }

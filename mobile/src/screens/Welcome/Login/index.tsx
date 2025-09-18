@@ -18,13 +18,11 @@ import SheetEmail from "../_components/SheetEmail";
 import SheetCode from "../_components/SheetCode";
 import { EMAIL_REGEX } from "@src/constants/Regex";
 import { PropsRoot } from "@src/routes";
-
-export interface IFieldsLogin {
-  email: string;
-  password: string;
-}
+import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
+import useAuth from "@src/hooks/useAuth";
 
 const Login = () => {
+  const { login } = useAuth();
   const navigation = useNavigation<PropsRoot>();
   const bottomSheetEmailRef = useRef<BottomSheet>(null);
   const bottomSheetCodeRef = useRef<BottomSheet>(null);
@@ -37,17 +35,20 @@ const Login = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = () => {
-    const validFields = validateLoginFields(fields);
-    if (!validFields) return;
-
     setLoading(true);
-    setTimeout(() => {
+
+    try {
+      const validFields = validateLoginFields(fields);
+      if (!validFields) return;
+
+      login(validFields);
+
+      navigation.replace("AppStack");
+    } catch (error) {
+      console.error(error);
+    } finally {
       setLoading(false);
-    }, 3000);
-
-    console.log("[LOGIN]: ", validFields);
-
-    navigation.replace("AppStack");
+    }
   };
 
   const handleOpenSheetEmail = () => {

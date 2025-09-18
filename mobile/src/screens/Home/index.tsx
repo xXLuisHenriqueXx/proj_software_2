@@ -17,15 +17,19 @@ import Carousel from "@src/components/Carousel";
 import { productsData } from "@src/static/ProductsData";
 import { highlightScrollData } from "@src/static/HighlightScrollData";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
+import useAuth from "@src/hooks/useAuth";
 
 const Home = () => {
   const { width } = useWindowDimensions();
+  const { logout, user } = useAuth();
   const statusBarHeight = Constants.statusBarHeight;
   const navigation = useNavigation<PropsAppStack>();
 
   const carouselWidth = width - 48;
 
   const handleNavigateToChats = () => navigation.replace("ChatStack");
+
+  const handleLogout = () => logout();
 
   return (
     <ScrollView
@@ -34,16 +38,19 @@ const Home = () => {
       contentContainerStyle={{ paddingBottom: 64 }}
     >
       <View className="flex-row items-center justify-between w-full p-6">
-        <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
-          Olá, Luis
+        <Text className="text-2xl font-redHatDisplayMedium text-primary">
+          Olá,{" "}
+          <Text className="font-redHatDisplayBold text-highlight">
+            {user?.name}
+          </Text>
         </Text>
 
-        <TouchableOpacity activeOpacity={0.85} onPress={handleNavigateToChats}>
+        <TouchableOpacity activeOpacity={0.85} onPress={handleLogout}>
           <MessageSquareText size={24} color={"#316A41"} />
         </TouchableOpacity>
       </View>
 
-      <View className="flex-col items-center gap-y-12 w-full h-full p-6 pb-48 bg-backgroundPrimary rounded-t-3xl">
+      <View className="flex-col items-center gap-y-12 w-full h-full p-6 pb-48 bg-backgroundPrimary rounded-t-3xl\">
         <Carousel
           width={carouselWidth}
           height={240}

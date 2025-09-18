@@ -6,21 +6,12 @@ import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
 
-import { PropsRoot } from "@src/routes";
 import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
 import { validateRegisterFields } from "@src/utils/ValidateRegisterFields";
-
-export interface IFieldsRegister {
-  name: string;
-  cnpj?: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
 
 const Register = () => {
-  const rootNavigation = useNavigation<PropsRoot>();
-  const authNavigation = useNavigation<PropsAuthStack>();
+  const naviagtion = useNavigation<PropsAuthStack>();
 
   const [type, setType] = useState<"personal" | "enterprise">("personal");
   const [fields, setFields] = useState<IFieldsRegister>({
@@ -28,23 +19,9 @@ const Register = () => {
     cnpj: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    passwordConfirmation: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
-
-  const handleRegister = useCallback(() => {
-    const validFields = validateRegisterFields(fields, type);
-    if (!validFields) return;
-
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-
-    console.log("[REGISTER] handleRegister: ", validFields);
-
-    rootNavigation.replace("AppStack");
-  }, [fields, type]);
 
   const handleNavigateToAddress = useCallback(() => {
     const validFields = validateRegisterFields(fields, type);
@@ -57,8 +34,8 @@ const Register = () => {
 
     console.log("[REGISTER] handleNavigateToAddress: ", validFields);
 
-    authNavigation.navigate("Address", { fieldsData: validFields });
-  }, [authNavigation, fields, type]);
+    naviagtion.navigate("Address", { fieldsData: validFields });
+  }, [naviagtion, fields, type]);
 
   const isTypePersonal = type === "personal";
   const statusBarHeight = Constants.statusBarHeight;
@@ -71,7 +48,7 @@ const Register = () => {
       <View className="flex-row items-center gap-x-4 w-full py-4 mb-4">
         <TouchableOpacity
           activeOpacity={0.85}
-          onPress={() => authNavigation.goBack()}
+          onPress={() => naviagtion.goBack()}
         >
           <ChevronLeft size={24} color={"#131313"} />
         </TouchableOpacity>
@@ -120,20 +97,19 @@ const Register = () => {
         setFields={setFields}
         type={type}
         onNavigate={handleNavigateToAddress}
-        onRegister={handleRegister}
       />
 
       <TouchableOpacity
         className="absolute bottom-6 flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
         activeOpacity={0.85}
-        onPress={isTypePersonal ? handleRegister : handleNavigateToAddress}
+        onPress={handleNavigateToAddress}
         disabled={loading}
       >
         {loading ? (
           <ActivityIndicator size="small" color={"#FEFEFE"} />
         ) : (
           <Text className="text-lg font-redHatDisplayMedium text-contrast">
-            {isTypePersonal ? "Cadastrar-se" : "Avançar"}
+            {"Avançar"}
           </Text>
         )}
       </TouchableOpacity>
