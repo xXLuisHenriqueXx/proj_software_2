@@ -23,7 +23,7 @@ export default function App() {
     RedHatDisplay_600SemiBold: RedHatDisplay_600SemiBold,
     RedHatDisplay_700Bold: RedHatDisplay_700Bold,
   });
-  const { restore, isLoading } = useAuthStore();
+  const { restore, isLoading, logout } = useAuthStore();
 
   useEffect(() => {
     const prepare = async () => {

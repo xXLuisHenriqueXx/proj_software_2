@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -14,16 +15,47 @@ import Benefit from "./_components/Benefit";
 import List from "@src/components/List";
 import Carousel from "@src/components/Carousel";
 
-import { productsData } from "@src/static/ProductsData";
 import { highlightScrollData } from "@src/static/HighlightScrollData";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import useAuth from "@src/hooks/useAuth";
+import { IProduct } from "@src/common/Entities/Product";
+import { toyService } from "@src/services/ToyService";
 
 const Home = () => {
   const { width } = useWindowDimensions();
   const { logout, user } = useAuth();
   const statusBarHeight = Constants.statusBarHeight;
   const navigation = useNavigation<PropsAppStack>();
+
+  const [boyToys, setBoyToys] = useState<IProduct[]>([]);
+  const [girlToys, setGirlToys] = useState<IProduct[]>([]);
+
+  const handleFetchBoysToys = async () => {
+    const toys = await toyService.get({
+      page: 1,
+      pageSize: 4,
+    });
+
+    console.log("Boys: ", toys.data);
+
+    setBoyToys(toys.data.toys);
+  };
+
+  const handleFetchGirlsToys = async () => {
+    const toys = await toyService.get({
+      page: 2,
+      pageSize: 4,
+    });
+
+    console.log("Girls: ", toys.data);
+
+    setGirlToys(toys.data.toys);
+  };
+
+  useEffect(() => {
+    handleFetchBoysToys();
+    handleFetchGirlsToys();
+  }, []);
 
   const carouselWidth = width - 48;
 
@@ -61,19 +93,21 @@ const Home = () => {
 
         <Benefit />
 
+        {/*
         <List
-          title="Qual gato é você?"
-          subtitile="Descubra, colecione e imagine"
-          data={productsData}
+          title="Brinquedos para meninos? Temos!"
+          subtitile="Dê uma olhada nos nossos produtos"
+          data={boyToys}
           limit={4}
         />
 
         <List
-          title="Qual gato é você?"
-          subtitile="Descubra, colecione e imagine"
-          data={productsData}
+          title="Brinquedos para meninas? Temos!"
+          subtitile="Dê uma olhada nos nossos produtos"
+          data={girlToys}
           limit={4}
         />
+*/}
       </View>
     </ScrollView>
   );
