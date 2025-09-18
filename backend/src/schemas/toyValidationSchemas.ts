@@ -84,6 +84,6 @@ export const toyResponseSchema = z.object({
   preservation: z.number(),
   type: z.array(toyTypeEnum),
   ageGroup: ageRangeEnum,
-  ToyPictures: z.array(toyPictureSchema),
+  pictures: z.array(toyPictureSchema),
   owner: toyOwnerSchema
 });

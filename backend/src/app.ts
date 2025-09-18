@@ -3,12 +3,19 @@ import { ZodTypeProvider, jsonSchemaTransform, serializerCompiler, validatorComp
 import { fastifySwagger } from "@fastify/swagger";
 import { fastifySwaggerUi } from "@fastify/swagger-ui";
 import { routes } from "./routes";
-import fastifyJwt from "@fastify/jwt";  
+import fastifyJwt from "@fastify/jwt";
+import fastifyStatic from "@fastify/static"
+import * as path from 'path'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyJwt, {
-  secret: process.env.JWT_SECRET || 'supersecret-fallback-key-for-dev', 
+  secret: process.env.JWT_SECRET || 'supersecret-fallback-key-for-dev',
+});
+
+app.register(fastifyStatic, {
+  root: path.join(__dirname, "..", "static", "public"),
+  prefix: "/public/",
 });
 
 app.setValidatorCompiler(validatorCompiler);

@@ -1,5 +1,5 @@
 import { PrismaClient, ToyType, AgeRange } from '../src/generated/prisma';
-import { hash } from 'bcryptjs';
+import { passwordHelper } from '../src/helpers/passwordHelper';
 import { faker } from '@faker-js/faker/locale/pt_BR';
 
 const prisma = new PrismaClient();
@@ -7,12 +7,13 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Iniciando o processo de seed...');
 
+  await prisma.historyEntry.deleteMany();
   await prisma.toy.deleteMany();
   await prisma.user.deleteMany();
   console.log('Banco de dados limpo.');
 
   const users = [];
-  const hashedPassword = await hash('senha123', 10);
+  const hashedPassword = await passwordHelper.hashPassword('senha123', 10);
 
   for (let i = 0; i < 5; i++) {
     const user = await prisma.user.create({
@@ -37,14 +38,15 @@ async function main() {
   const allToyTypes = Object.values(ToyType);
   const allAgeRanges = Object.values(AgeRange);
 
-  for (let i = 0; i < 10; i++) {
+  const toys = [];
+  for (let i = 0; i < 30; i++) {
     const randomUser = users[Math.floor(Math.random() * users.length)];
 
-    await prisma.toy.create({
+    const toy = await prisma.toy.create({
       data: {
         name: faker.commerce.productName(),
         description: faker.commerce.productDescription(),
-        price: 0,
+        price: faker.number.int({ min: 0, max: 200 }),
         isNew: faker.datatype.boolean(),
         canTrade: faker.datatype.boolean(),
         canLend: faker.datatype.boolean(),
@@ -55,8 +57,24 @@ async function main() {
         ownerId: randomUser.id,
       },
     });
+    toys.push(toy);
   }
-  console.log('10 brinquedos criados com sucesso.');
+  console.log(`${toys.length} brinquedos criados com sucesso.`);
+
+  console.log('\nCriando histórico para cada usuário...');
+
+  for (const user of users) {
+    const randomToys = faker.helpers.arrayElements(toys, 5);
+    for (const toy of randomToys) {
+      await prisma.historyEntry.create({
+        data: {
+          userId: user.id,
+          toyId: toy.id,
+        },
+      });
+    }
+    console.log(`Histórico criado para usuário ${user.name}`);
+  }
 
   console.log('\nSeed finalizado com sucesso!');
 }
@@ -69,4 +87,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-
