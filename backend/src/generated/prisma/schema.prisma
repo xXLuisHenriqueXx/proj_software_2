@@ -43,6 +43,9 @@ model User {
 
   // mensagens enviadas
   messages Message[]
+
+  //beneficios ativos do usuario
+  userBenefits UserBenefit[]
 }
 
 model organizationInfo {
@@ -168,4 +171,46 @@ model Message {
   // chat em que a mensagem foi enviada
   chatId String
   chat   Chat   @relation(fields: [chatId], references: [id])
+}
+
+// ------------------- parte de beneficios -------------
+
+enum UserBenefitStatus {
+  ACTIVE
+  REDEEMED
+  REVOKED
+  EXPIRED
+}
+
+model Benefit {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  key          String   @unique
+  title        String
+  description  String?
+  durationDays Int?
+  active       Boolean  @default(true)
+
+  userBenefits UserBenefit[]
+}
+
+model UserBenefit {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  benefitId String
+  benefit   Benefit @relation(fields: [benefitId], references: [id], onDelete: Cascade)
+
+  startsAt DateTime
+  endsAt   DateTime?
+  status   UserBenefitStatus @default(ACTIVE)
+  source   String?
+  metadata Json?
+
+  @@index([userId, status, startsAt])
+  @@index([userId, endsAt])
 }

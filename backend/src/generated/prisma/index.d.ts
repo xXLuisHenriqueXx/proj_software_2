@@ -53,6 +53,16 @@ export type Chat = $Result.DefaultSelection<Prisma.$ChatPayload>
  * 
  */
 export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
+/**
+ * Model Benefit
+ * 
+ */
+export type Benefit = $Result.DefaultSelection<Prisma.$BenefitPayload>
+/**
+ * Model UserBenefit
+ * 
+ */
+export type UserBenefit = $Result.DefaultSelection<Prisma.$UserBenefitPayload>
 
 /**
  * Enums
@@ -98,6 +108,16 @@ export const AgeRange: {
 
 export type AgeRange = (typeof AgeRange)[keyof typeof AgeRange]
 
+
+export const UserBenefitStatus: {
+  ACTIVE: 'ACTIVE',
+  REDEEMED: 'REDEEMED',
+  REVOKED: 'REVOKED',
+  EXPIRED: 'EXPIRED'
+};
+
+export type UserBenefitStatus = (typeof UserBenefitStatus)[keyof typeof UserBenefitStatus]
+
 }
 
 export type Role = $Enums.Role
@@ -111,6 +131,10 @@ export const ToyType: typeof $Enums.ToyType
 export type AgeRange = $Enums.AgeRange
 
 export const AgeRange: typeof $Enums.AgeRange
+
+export type UserBenefitStatus = $Enums.UserBenefitStatus
+
+export const UserBenefitStatus: typeof $Enums.UserBenefitStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -309,6 +333,26 @@ export class PrismaClient<
     * ```
     */
   get message(): Prisma.MessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.benefit`: Exposes CRUD operations for the **Benefit** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Benefits
+    * const benefits = await prisma.benefit.findMany()
+    * ```
+    */
+  get benefit(): Prisma.BenefitDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userBenefit`: Exposes CRUD operations for the **UserBenefit** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserBenefits
+    * const userBenefits = await prisma.userBenefit.findMany()
+    * ```
+    */
+  get userBenefit(): Prisma.UserBenefitDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -756,7 +800,9 @@ export namespace Prisma {
     HistoryEntry: 'HistoryEntry',
     Rate: 'Rate',
     Chat: 'Chat',
-    Message: 'Message'
+    Message: 'Message',
+    Benefit: 'Benefit',
+    UserBenefit: 'UserBenefit'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -775,7 +821,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "organizationInfo" | "toy" | "toyPicture" | "historyEntry" | "rate" | "chat" | "message"
+      modelProps: "user" | "organizationInfo" | "toy" | "toyPicture" | "historyEntry" | "rate" | "chat" | "message" | "benefit" | "userBenefit"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1371,6 +1417,154 @@ export namespace Prisma {
           }
         }
       }
+      Benefit: {
+        payload: Prisma.$BenefitPayload<ExtArgs>
+        fields: Prisma.BenefitFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BenefitFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BenefitFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload>
+          }
+          findFirst: {
+            args: Prisma.BenefitFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BenefitFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload>
+          }
+          findMany: {
+            args: Prisma.BenefitFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload>[]
+          }
+          create: {
+            args: Prisma.BenefitCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload>
+          }
+          createMany: {
+            args: Prisma.BenefitCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BenefitCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload>[]
+          }
+          delete: {
+            args: Prisma.BenefitDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload>
+          }
+          update: {
+            args: Prisma.BenefitUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload>
+          }
+          deleteMany: {
+            args: Prisma.BenefitDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BenefitUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BenefitUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload>[]
+          }
+          upsert: {
+            args: Prisma.BenefitUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BenefitPayload>
+          }
+          aggregate: {
+            args: Prisma.BenefitAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBenefit>
+          }
+          groupBy: {
+            args: Prisma.BenefitGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BenefitGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BenefitCountArgs<ExtArgs>
+            result: $Utils.Optional<BenefitCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserBenefit: {
+        payload: Prisma.$UserBenefitPayload<ExtArgs>
+        fields: Prisma.UserBenefitFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserBenefitFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserBenefitFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload>
+          }
+          findFirst: {
+            args: Prisma.UserBenefitFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserBenefitFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload>
+          }
+          findMany: {
+            args: Prisma.UserBenefitFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload>[]
+          }
+          create: {
+            args: Prisma.UserBenefitCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload>
+          }
+          createMany: {
+            args: Prisma.UserBenefitCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserBenefitCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload>[]
+          }
+          delete: {
+            args: Prisma.UserBenefitDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload>
+          }
+          update: {
+            args: Prisma.UserBenefitUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserBenefitDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserBenefitUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserBenefitUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserBenefitUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBenefitPayload>
+          }
+          aggregate: {
+            args: Prisma.UserBenefitAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserBenefit>
+          }
+          groupBy: {
+            args: Prisma.UserBenefitGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserBenefitGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserBenefitCountArgs<ExtArgs>
+            result: $Utils.Optional<UserBenefitCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1471,6 +1665,8 @@ export namespace Prisma {
     rate?: RateOmit
     chat?: ChatOmit
     message?: MessageOmit
+    benefit?: BenefitOmit
+    userBenefit?: UserBenefitOmit
   }
 
   /* Types for Logging */
@@ -1557,6 +1753,7 @@ export namespace Prisma {
     chatsAsUser1: number
     chatsAsUser2: number
     messages: number
+    userBenefits: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1566,6 +1763,7 @@ export namespace Prisma {
     chatsAsUser1?: boolean | UserCountOutputTypeCountChatsAsUser1Args
     chatsAsUser2?: boolean | UserCountOutputTypeCountChatsAsUser2Args
     messages?: boolean | UserCountOutputTypeCountMessagesArgs
+    userBenefits?: boolean | UserCountOutputTypeCountUserBenefitsArgs
   }
 
   // Custom InputTypes
@@ -1619,6 +1817,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUserBenefitsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserBenefitWhereInput
   }
 
 
@@ -1690,6 +1895,37 @@ export namespace Prisma {
    */
   export type ChatCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+
+  /**
+   * Count Type BenefitCountOutputType
+   */
+
+  export type BenefitCountOutputType = {
+    userBenefits: number
+  }
+
+  export type BenefitCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    userBenefits?: boolean | BenefitCountOutputTypeCountUserBenefitsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BenefitCountOutputType without action
+   */
+  export type BenefitCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BenefitCountOutputType
+     */
+    select?: BenefitCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BenefitCountOutputType without action
+   */
+  export type BenefitCountOutputTypeCountUserBenefitsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserBenefitWhereInput
   }
 
 
@@ -1998,6 +2234,7 @@ export namespace Prisma {
     chatsAsUser1?: boolean | User$chatsAsUser1Args<ExtArgs>
     chatsAsUser2?: boolean | User$chatsAsUser2Args<ExtArgs>
     messages?: boolean | User$messagesArgs<ExtArgs>
+    userBenefits?: boolean | User$userBenefitsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2070,6 +2307,7 @@ export namespace Prisma {
     chatsAsUser1?: boolean | User$chatsAsUser1Args<ExtArgs>
     chatsAsUser2?: boolean | User$chatsAsUser2Args<ExtArgs>
     messages?: boolean | User$messagesArgs<ExtArgs>
+    userBenefits?: boolean | User$userBenefitsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2085,6 +2323,7 @@ export namespace Prisma {
       chatsAsUser1: Prisma.$ChatPayload<ExtArgs>[]
       chatsAsUser2: Prisma.$ChatPayload<ExtArgs>[]
       messages: Prisma.$MessagePayload<ExtArgs>[]
+      userBenefits: Prisma.$UserBenefitPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2505,6 +2744,7 @@ export namespace Prisma {
     chatsAsUser1<T extends User$chatsAsUser1Args<ExtArgs> = {}>(args?: Subset<T, User$chatsAsUser1Args<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     chatsAsUser2<T extends User$chatsAsUser2Args<ExtArgs> = {}>(args?: Subset<T, User$chatsAsUser2Args<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     messages<T extends User$messagesArgs<ExtArgs> = {}>(args?: Subset<T, User$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userBenefits<T extends User$userBenefitsArgs<ExtArgs> = {}>(args?: Subset<T, User$userBenefitsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3099,6 +3339,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * User.userBenefits
+   */
+  export type User$userBenefitsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    where?: UserBenefitWhereInput
+    orderBy?: UserBenefitOrderByWithRelationInput | UserBenefitOrderByWithRelationInput[]
+    cursor?: UserBenefitWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserBenefitScalarFieldEnum | UserBenefitScalarFieldEnum[]
   }
 
   /**
@@ -10880,6 +11144,2263 @@ export namespace Prisma {
 
 
   /**
+   * Model Benefit
+   */
+
+  export type AggregateBenefit = {
+    _count: BenefitCountAggregateOutputType | null
+    _avg: BenefitAvgAggregateOutputType | null
+    _sum: BenefitSumAggregateOutputType | null
+    _min: BenefitMinAggregateOutputType | null
+    _max: BenefitMaxAggregateOutputType | null
+  }
+
+  export type BenefitAvgAggregateOutputType = {
+    durationDays: number | null
+  }
+
+  export type BenefitSumAggregateOutputType = {
+    durationDays: number | null
+  }
+
+  export type BenefitMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    key: string | null
+    title: string | null
+    description: string | null
+    durationDays: number | null
+    active: boolean | null
+  }
+
+  export type BenefitMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    key: string | null
+    title: string | null
+    description: string | null
+    durationDays: number | null
+    active: boolean | null
+  }
+
+  export type BenefitCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    key: number
+    title: number
+    description: number
+    durationDays: number
+    active: number
+    _all: number
+  }
+
+
+  export type BenefitAvgAggregateInputType = {
+    durationDays?: true
+  }
+
+  export type BenefitSumAggregateInputType = {
+    durationDays?: true
+  }
+
+  export type BenefitMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    key?: true
+    title?: true
+    description?: true
+    durationDays?: true
+    active?: true
+  }
+
+  export type BenefitMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    key?: true
+    title?: true
+    description?: true
+    durationDays?: true
+    active?: true
+  }
+
+  export type BenefitCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    key?: true
+    title?: true
+    description?: true
+    durationDays?: true
+    active?: true
+    _all?: true
+  }
+
+  export type BenefitAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Benefit to aggregate.
+     */
+    where?: BenefitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Benefits to fetch.
+     */
+    orderBy?: BenefitOrderByWithRelationInput | BenefitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BenefitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Benefits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Benefits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Benefits
+    **/
+    _count?: true | BenefitCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BenefitAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BenefitSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BenefitMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BenefitMaxAggregateInputType
+  }
+
+  export type GetBenefitAggregateType<T extends BenefitAggregateArgs> = {
+        [P in keyof T & keyof AggregateBenefit]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBenefit[P]>
+      : GetScalarType<T[P], AggregateBenefit[P]>
+  }
+
+
+
+
+  export type BenefitGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BenefitWhereInput
+    orderBy?: BenefitOrderByWithAggregationInput | BenefitOrderByWithAggregationInput[]
+    by: BenefitScalarFieldEnum[] | BenefitScalarFieldEnum
+    having?: BenefitScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BenefitCountAggregateInputType | true
+    _avg?: BenefitAvgAggregateInputType
+    _sum?: BenefitSumAggregateInputType
+    _min?: BenefitMinAggregateInputType
+    _max?: BenefitMaxAggregateInputType
+  }
+
+  export type BenefitGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    key: string
+    title: string
+    description: string | null
+    durationDays: number | null
+    active: boolean
+    _count: BenefitCountAggregateOutputType | null
+    _avg: BenefitAvgAggregateOutputType | null
+    _sum: BenefitSumAggregateOutputType | null
+    _min: BenefitMinAggregateOutputType | null
+    _max: BenefitMaxAggregateOutputType | null
+  }
+
+  type GetBenefitGroupByPayload<T extends BenefitGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BenefitGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BenefitGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BenefitGroupByOutputType[P]>
+            : GetScalarType<T[P], BenefitGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BenefitSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    key?: boolean
+    title?: boolean
+    description?: boolean
+    durationDays?: boolean
+    active?: boolean
+    userBenefits?: boolean | Benefit$userBenefitsArgs<ExtArgs>
+    _count?: boolean | BenefitCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["benefit"]>
+
+  export type BenefitSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    key?: boolean
+    title?: boolean
+    description?: boolean
+    durationDays?: boolean
+    active?: boolean
+  }, ExtArgs["result"]["benefit"]>
+
+  export type BenefitSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    key?: boolean
+    title?: boolean
+    description?: boolean
+    durationDays?: boolean
+    active?: boolean
+  }, ExtArgs["result"]["benefit"]>
+
+  export type BenefitSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    key?: boolean
+    title?: boolean
+    description?: boolean
+    durationDays?: boolean
+    active?: boolean
+  }
+
+  export type BenefitOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "key" | "title" | "description" | "durationDays" | "active", ExtArgs["result"]["benefit"]>
+  export type BenefitInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    userBenefits?: boolean | Benefit$userBenefitsArgs<ExtArgs>
+    _count?: boolean | BenefitCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BenefitIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type BenefitIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $BenefitPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Benefit"
+    objects: {
+      userBenefits: Prisma.$UserBenefitPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      key: string
+      title: string
+      description: string | null
+      durationDays: number | null
+      active: boolean
+    }, ExtArgs["result"]["benefit"]>
+    composites: {}
+  }
+
+  type BenefitGetPayload<S extends boolean | null | undefined | BenefitDefaultArgs> = $Result.GetResult<Prisma.$BenefitPayload, S>
+
+  type BenefitCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BenefitFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BenefitCountAggregateInputType | true
+    }
+
+  export interface BenefitDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Benefit'], meta: { name: 'Benefit' } }
+    /**
+     * Find zero or one Benefit that matches the filter.
+     * @param {BenefitFindUniqueArgs} args - Arguments to find a Benefit
+     * @example
+     * // Get one Benefit
+     * const benefit = await prisma.benefit.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BenefitFindUniqueArgs>(args: SelectSubset<T, BenefitFindUniqueArgs<ExtArgs>>): Prisma__BenefitClient<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Benefit that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BenefitFindUniqueOrThrowArgs} args - Arguments to find a Benefit
+     * @example
+     * // Get one Benefit
+     * const benefit = await prisma.benefit.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BenefitFindUniqueOrThrowArgs>(args: SelectSubset<T, BenefitFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BenefitClient<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Benefit that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BenefitFindFirstArgs} args - Arguments to find a Benefit
+     * @example
+     * // Get one Benefit
+     * const benefit = await prisma.benefit.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BenefitFindFirstArgs>(args?: SelectSubset<T, BenefitFindFirstArgs<ExtArgs>>): Prisma__BenefitClient<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Benefit that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BenefitFindFirstOrThrowArgs} args - Arguments to find a Benefit
+     * @example
+     * // Get one Benefit
+     * const benefit = await prisma.benefit.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BenefitFindFirstOrThrowArgs>(args?: SelectSubset<T, BenefitFindFirstOrThrowArgs<ExtArgs>>): Prisma__BenefitClient<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Benefits that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BenefitFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Benefits
+     * const benefits = await prisma.benefit.findMany()
+     * 
+     * // Get first 10 Benefits
+     * const benefits = await prisma.benefit.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const benefitWithIdOnly = await prisma.benefit.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BenefitFindManyArgs>(args?: SelectSubset<T, BenefitFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Benefit.
+     * @param {BenefitCreateArgs} args - Arguments to create a Benefit.
+     * @example
+     * // Create one Benefit
+     * const Benefit = await prisma.benefit.create({
+     *   data: {
+     *     // ... data to create a Benefit
+     *   }
+     * })
+     * 
+     */
+    create<T extends BenefitCreateArgs>(args: SelectSubset<T, BenefitCreateArgs<ExtArgs>>): Prisma__BenefitClient<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Benefits.
+     * @param {BenefitCreateManyArgs} args - Arguments to create many Benefits.
+     * @example
+     * // Create many Benefits
+     * const benefit = await prisma.benefit.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BenefitCreateManyArgs>(args?: SelectSubset<T, BenefitCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Benefits and returns the data saved in the database.
+     * @param {BenefitCreateManyAndReturnArgs} args - Arguments to create many Benefits.
+     * @example
+     * // Create many Benefits
+     * const benefit = await prisma.benefit.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Benefits and only return the `id`
+     * const benefitWithIdOnly = await prisma.benefit.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BenefitCreateManyAndReturnArgs>(args?: SelectSubset<T, BenefitCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Benefit.
+     * @param {BenefitDeleteArgs} args - Arguments to delete one Benefit.
+     * @example
+     * // Delete one Benefit
+     * const Benefit = await prisma.benefit.delete({
+     *   where: {
+     *     // ... filter to delete one Benefit
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BenefitDeleteArgs>(args: SelectSubset<T, BenefitDeleteArgs<ExtArgs>>): Prisma__BenefitClient<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Benefit.
+     * @param {BenefitUpdateArgs} args - Arguments to update one Benefit.
+     * @example
+     * // Update one Benefit
+     * const benefit = await prisma.benefit.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BenefitUpdateArgs>(args: SelectSubset<T, BenefitUpdateArgs<ExtArgs>>): Prisma__BenefitClient<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Benefits.
+     * @param {BenefitDeleteManyArgs} args - Arguments to filter Benefits to delete.
+     * @example
+     * // Delete a few Benefits
+     * const { count } = await prisma.benefit.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BenefitDeleteManyArgs>(args?: SelectSubset<T, BenefitDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Benefits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BenefitUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Benefits
+     * const benefit = await prisma.benefit.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BenefitUpdateManyArgs>(args: SelectSubset<T, BenefitUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Benefits and returns the data updated in the database.
+     * @param {BenefitUpdateManyAndReturnArgs} args - Arguments to update many Benefits.
+     * @example
+     * // Update many Benefits
+     * const benefit = await prisma.benefit.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Benefits and only return the `id`
+     * const benefitWithIdOnly = await prisma.benefit.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BenefitUpdateManyAndReturnArgs>(args: SelectSubset<T, BenefitUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Benefit.
+     * @param {BenefitUpsertArgs} args - Arguments to update or create a Benefit.
+     * @example
+     * // Update or create a Benefit
+     * const benefit = await prisma.benefit.upsert({
+     *   create: {
+     *     // ... data to create a Benefit
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Benefit we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BenefitUpsertArgs>(args: SelectSubset<T, BenefitUpsertArgs<ExtArgs>>): Prisma__BenefitClient<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Benefits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BenefitCountArgs} args - Arguments to filter Benefits to count.
+     * @example
+     * // Count the number of Benefits
+     * const count = await prisma.benefit.count({
+     *   where: {
+     *     // ... the filter for the Benefits we want to count
+     *   }
+     * })
+    **/
+    count<T extends BenefitCountArgs>(
+      args?: Subset<T, BenefitCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BenefitCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Benefit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BenefitAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BenefitAggregateArgs>(args: Subset<T, BenefitAggregateArgs>): Prisma.PrismaPromise<GetBenefitAggregateType<T>>
+
+    /**
+     * Group by Benefit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BenefitGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BenefitGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BenefitGroupByArgs['orderBy'] }
+        : { orderBy?: BenefitGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BenefitGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBenefitGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Benefit model
+   */
+  readonly fields: BenefitFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Benefit.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BenefitClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    userBenefits<T extends Benefit$userBenefitsArgs<ExtArgs> = {}>(args?: Subset<T, Benefit$userBenefitsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Benefit model
+   */
+  interface BenefitFieldRefs {
+    readonly id: FieldRef<"Benefit", 'String'>
+    readonly createdAt: FieldRef<"Benefit", 'DateTime'>
+    readonly updatedAt: FieldRef<"Benefit", 'DateTime'>
+    readonly key: FieldRef<"Benefit", 'String'>
+    readonly title: FieldRef<"Benefit", 'String'>
+    readonly description: FieldRef<"Benefit", 'String'>
+    readonly durationDays: FieldRef<"Benefit", 'Int'>
+    readonly active: FieldRef<"Benefit", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Benefit findUnique
+   */
+  export type BenefitFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BenefitInclude<ExtArgs> | null
+    /**
+     * Filter, which Benefit to fetch.
+     */
+    where: BenefitWhereUniqueInput
+  }
+
+  /**
+   * Benefit findUniqueOrThrow
+   */
+  export type BenefitFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BenefitInclude<ExtArgs> | null
+    /**
+     * Filter, which Benefit to fetch.
+     */
+    where: BenefitWhereUniqueInput
+  }
+
+  /**
+   * Benefit findFirst
+   */
+  export type BenefitFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BenefitInclude<ExtArgs> | null
+    /**
+     * Filter, which Benefit to fetch.
+     */
+    where?: BenefitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Benefits to fetch.
+     */
+    orderBy?: BenefitOrderByWithRelationInput | BenefitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Benefits.
+     */
+    cursor?: BenefitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Benefits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Benefits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Benefits.
+     */
+    distinct?: BenefitScalarFieldEnum | BenefitScalarFieldEnum[]
+  }
+
+  /**
+   * Benefit findFirstOrThrow
+   */
+  export type BenefitFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BenefitInclude<ExtArgs> | null
+    /**
+     * Filter, which Benefit to fetch.
+     */
+    where?: BenefitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Benefits to fetch.
+     */
+    orderBy?: BenefitOrderByWithRelationInput | BenefitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Benefits.
+     */
+    cursor?: BenefitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Benefits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Benefits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Benefits.
+     */
+    distinct?: BenefitScalarFieldEnum | BenefitScalarFieldEnum[]
+  }
+
+  /**
+   * Benefit findMany
+   */
+  export type BenefitFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BenefitInclude<ExtArgs> | null
+    /**
+     * Filter, which Benefits to fetch.
+     */
+    where?: BenefitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Benefits to fetch.
+     */
+    orderBy?: BenefitOrderByWithRelationInput | BenefitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Benefits.
+     */
+    cursor?: BenefitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Benefits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Benefits.
+     */
+    skip?: number
+    distinct?: BenefitScalarFieldEnum | BenefitScalarFieldEnum[]
+  }
+
+  /**
+   * Benefit create
+   */
+  export type BenefitCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BenefitInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Benefit.
+     */
+    data: XOR<BenefitCreateInput, BenefitUncheckedCreateInput>
+  }
+
+  /**
+   * Benefit createMany
+   */
+  export type BenefitCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Benefits.
+     */
+    data: BenefitCreateManyInput | BenefitCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Benefit createManyAndReturn
+   */
+  export type BenefitCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * The data used to create many Benefits.
+     */
+    data: BenefitCreateManyInput | BenefitCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Benefit update
+   */
+  export type BenefitUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BenefitInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Benefit.
+     */
+    data: XOR<BenefitUpdateInput, BenefitUncheckedUpdateInput>
+    /**
+     * Choose, which Benefit to update.
+     */
+    where: BenefitWhereUniqueInput
+  }
+
+  /**
+   * Benefit updateMany
+   */
+  export type BenefitUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Benefits.
+     */
+    data: XOR<BenefitUpdateManyMutationInput, BenefitUncheckedUpdateManyInput>
+    /**
+     * Filter which Benefits to update
+     */
+    where?: BenefitWhereInput
+    /**
+     * Limit how many Benefits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Benefit updateManyAndReturn
+   */
+  export type BenefitUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * The data used to update Benefits.
+     */
+    data: XOR<BenefitUpdateManyMutationInput, BenefitUncheckedUpdateManyInput>
+    /**
+     * Filter which Benefits to update
+     */
+    where?: BenefitWhereInput
+    /**
+     * Limit how many Benefits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Benefit upsert
+   */
+  export type BenefitUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BenefitInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Benefit to update in case it exists.
+     */
+    where: BenefitWhereUniqueInput
+    /**
+     * In case the Benefit found by the `where` argument doesn't exist, create a new Benefit with this data.
+     */
+    create: XOR<BenefitCreateInput, BenefitUncheckedCreateInput>
+    /**
+     * In case the Benefit was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BenefitUpdateInput, BenefitUncheckedUpdateInput>
+  }
+
+  /**
+   * Benefit delete
+   */
+  export type BenefitDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BenefitInclude<ExtArgs> | null
+    /**
+     * Filter which Benefit to delete.
+     */
+    where: BenefitWhereUniqueInput
+  }
+
+  /**
+   * Benefit deleteMany
+   */
+  export type BenefitDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Benefits to delete
+     */
+    where?: BenefitWhereInput
+    /**
+     * Limit how many Benefits to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Benefit.userBenefits
+   */
+  export type Benefit$userBenefitsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    where?: UserBenefitWhereInput
+    orderBy?: UserBenefitOrderByWithRelationInput | UserBenefitOrderByWithRelationInput[]
+    cursor?: UserBenefitWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserBenefitScalarFieldEnum | UserBenefitScalarFieldEnum[]
+  }
+
+  /**
+   * Benefit without action
+   */
+  export type BenefitDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Benefit
+     */
+    select?: BenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Benefit
+     */
+    omit?: BenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BenefitInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserBenefit
+   */
+
+  export type AggregateUserBenefit = {
+    _count: UserBenefitCountAggregateOutputType | null
+    _min: UserBenefitMinAggregateOutputType | null
+    _max: UserBenefitMaxAggregateOutputType | null
+  }
+
+  export type UserBenefitMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    userId: string | null
+    benefitId: string | null
+    startsAt: Date | null
+    endsAt: Date | null
+    status: $Enums.UserBenefitStatus | null
+    source: string | null
+  }
+
+  export type UserBenefitMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    userId: string | null
+    benefitId: string | null
+    startsAt: Date | null
+    endsAt: Date | null
+    status: $Enums.UserBenefitStatus | null
+    source: string | null
+  }
+
+  export type UserBenefitCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    userId: number
+    benefitId: number
+    startsAt: number
+    endsAt: number
+    status: number
+    source: number
+    metadata: number
+    _all: number
+  }
+
+
+  export type UserBenefitMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    userId?: true
+    benefitId?: true
+    startsAt?: true
+    endsAt?: true
+    status?: true
+    source?: true
+  }
+
+  export type UserBenefitMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    userId?: true
+    benefitId?: true
+    startsAt?: true
+    endsAt?: true
+    status?: true
+    source?: true
+  }
+
+  export type UserBenefitCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    userId?: true
+    benefitId?: true
+    startsAt?: true
+    endsAt?: true
+    status?: true
+    source?: true
+    metadata?: true
+    _all?: true
+  }
+
+  export type UserBenefitAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserBenefit to aggregate.
+     */
+    where?: UserBenefitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserBenefits to fetch.
+     */
+    orderBy?: UserBenefitOrderByWithRelationInput | UserBenefitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserBenefitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserBenefits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserBenefits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserBenefits
+    **/
+    _count?: true | UserBenefitCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserBenefitMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserBenefitMaxAggregateInputType
+  }
+
+  export type GetUserBenefitAggregateType<T extends UserBenefitAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserBenefit]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserBenefit[P]>
+      : GetScalarType<T[P], AggregateUserBenefit[P]>
+  }
+
+
+
+
+  export type UserBenefitGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserBenefitWhereInput
+    orderBy?: UserBenefitOrderByWithAggregationInput | UserBenefitOrderByWithAggregationInput[]
+    by: UserBenefitScalarFieldEnum[] | UserBenefitScalarFieldEnum
+    having?: UserBenefitScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserBenefitCountAggregateInputType | true
+    _min?: UserBenefitMinAggregateInputType
+    _max?: UserBenefitMaxAggregateInputType
+  }
+
+  export type UserBenefitGroupByOutputType = {
+    id: string
+    createdAt: Date
+    userId: string
+    benefitId: string
+    startsAt: Date
+    endsAt: Date | null
+    status: $Enums.UserBenefitStatus
+    source: string | null
+    metadata: JsonValue | null
+    _count: UserBenefitCountAggregateOutputType | null
+    _min: UserBenefitMinAggregateOutputType | null
+    _max: UserBenefitMaxAggregateOutputType | null
+  }
+
+  type GetUserBenefitGroupByPayload<T extends UserBenefitGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserBenefitGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserBenefitGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserBenefitGroupByOutputType[P]>
+            : GetScalarType<T[P], UserBenefitGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserBenefitSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    benefitId?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    status?: boolean
+    source?: boolean
+    metadata?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    benefit?: boolean | BenefitDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userBenefit"]>
+
+  export type UserBenefitSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    benefitId?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    status?: boolean
+    source?: boolean
+    metadata?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    benefit?: boolean | BenefitDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userBenefit"]>
+
+  export type UserBenefitSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    benefitId?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    status?: boolean
+    source?: boolean
+    metadata?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    benefit?: boolean | BenefitDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userBenefit"]>
+
+  export type UserBenefitSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    benefitId?: boolean
+    startsAt?: boolean
+    endsAt?: boolean
+    status?: boolean
+    source?: boolean
+    metadata?: boolean
+  }
+
+  export type UserBenefitOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "userId" | "benefitId" | "startsAt" | "endsAt" | "status" | "source" | "metadata", ExtArgs["result"]["userBenefit"]>
+  export type UserBenefitInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    benefit?: boolean | BenefitDefaultArgs<ExtArgs>
+  }
+  export type UserBenefitIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    benefit?: boolean | BenefitDefaultArgs<ExtArgs>
+  }
+  export type UserBenefitIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    benefit?: boolean | BenefitDefaultArgs<ExtArgs>
+  }
+
+  export type $UserBenefitPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserBenefit"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      benefit: Prisma.$BenefitPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      userId: string
+      benefitId: string
+      startsAt: Date
+      endsAt: Date | null
+      status: $Enums.UserBenefitStatus
+      source: string | null
+      metadata: Prisma.JsonValue | null
+    }, ExtArgs["result"]["userBenefit"]>
+    composites: {}
+  }
+
+  type UserBenefitGetPayload<S extends boolean | null | undefined | UserBenefitDefaultArgs> = $Result.GetResult<Prisma.$UserBenefitPayload, S>
+
+  type UserBenefitCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserBenefitFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserBenefitCountAggregateInputType | true
+    }
+
+  export interface UserBenefitDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserBenefit'], meta: { name: 'UserBenefit' } }
+    /**
+     * Find zero or one UserBenefit that matches the filter.
+     * @param {UserBenefitFindUniqueArgs} args - Arguments to find a UserBenefit
+     * @example
+     * // Get one UserBenefit
+     * const userBenefit = await prisma.userBenefit.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserBenefitFindUniqueArgs>(args: SelectSubset<T, UserBenefitFindUniqueArgs<ExtArgs>>): Prisma__UserBenefitClient<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserBenefit that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserBenefitFindUniqueOrThrowArgs} args - Arguments to find a UserBenefit
+     * @example
+     * // Get one UserBenefit
+     * const userBenefit = await prisma.userBenefit.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserBenefitFindUniqueOrThrowArgs>(args: SelectSubset<T, UserBenefitFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserBenefitClient<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserBenefit that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBenefitFindFirstArgs} args - Arguments to find a UserBenefit
+     * @example
+     * // Get one UserBenefit
+     * const userBenefit = await prisma.userBenefit.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserBenefitFindFirstArgs>(args?: SelectSubset<T, UserBenefitFindFirstArgs<ExtArgs>>): Prisma__UserBenefitClient<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserBenefit that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBenefitFindFirstOrThrowArgs} args - Arguments to find a UserBenefit
+     * @example
+     * // Get one UserBenefit
+     * const userBenefit = await prisma.userBenefit.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserBenefitFindFirstOrThrowArgs>(args?: SelectSubset<T, UserBenefitFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserBenefitClient<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserBenefits that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBenefitFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserBenefits
+     * const userBenefits = await prisma.userBenefit.findMany()
+     * 
+     * // Get first 10 UserBenefits
+     * const userBenefits = await prisma.userBenefit.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userBenefitWithIdOnly = await prisma.userBenefit.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserBenefitFindManyArgs>(args?: SelectSubset<T, UserBenefitFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserBenefit.
+     * @param {UserBenefitCreateArgs} args - Arguments to create a UserBenefit.
+     * @example
+     * // Create one UserBenefit
+     * const UserBenefit = await prisma.userBenefit.create({
+     *   data: {
+     *     // ... data to create a UserBenefit
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserBenefitCreateArgs>(args: SelectSubset<T, UserBenefitCreateArgs<ExtArgs>>): Prisma__UserBenefitClient<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserBenefits.
+     * @param {UserBenefitCreateManyArgs} args - Arguments to create many UserBenefits.
+     * @example
+     * // Create many UserBenefits
+     * const userBenefit = await prisma.userBenefit.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserBenefitCreateManyArgs>(args?: SelectSubset<T, UserBenefitCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserBenefits and returns the data saved in the database.
+     * @param {UserBenefitCreateManyAndReturnArgs} args - Arguments to create many UserBenefits.
+     * @example
+     * // Create many UserBenefits
+     * const userBenefit = await prisma.userBenefit.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserBenefits and only return the `id`
+     * const userBenefitWithIdOnly = await prisma.userBenefit.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserBenefitCreateManyAndReturnArgs>(args?: SelectSubset<T, UserBenefitCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserBenefit.
+     * @param {UserBenefitDeleteArgs} args - Arguments to delete one UserBenefit.
+     * @example
+     * // Delete one UserBenefit
+     * const UserBenefit = await prisma.userBenefit.delete({
+     *   where: {
+     *     // ... filter to delete one UserBenefit
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserBenefitDeleteArgs>(args: SelectSubset<T, UserBenefitDeleteArgs<ExtArgs>>): Prisma__UserBenefitClient<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserBenefit.
+     * @param {UserBenefitUpdateArgs} args - Arguments to update one UserBenefit.
+     * @example
+     * // Update one UserBenefit
+     * const userBenefit = await prisma.userBenefit.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserBenefitUpdateArgs>(args: SelectSubset<T, UserBenefitUpdateArgs<ExtArgs>>): Prisma__UserBenefitClient<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserBenefits.
+     * @param {UserBenefitDeleteManyArgs} args - Arguments to filter UserBenefits to delete.
+     * @example
+     * // Delete a few UserBenefits
+     * const { count } = await prisma.userBenefit.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserBenefitDeleteManyArgs>(args?: SelectSubset<T, UserBenefitDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserBenefits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBenefitUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserBenefits
+     * const userBenefit = await prisma.userBenefit.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserBenefitUpdateManyArgs>(args: SelectSubset<T, UserBenefitUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserBenefits and returns the data updated in the database.
+     * @param {UserBenefitUpdateManyAndReturnArgs} args - Arguments to update many UserBenefits.
+     * @example
+     * // Update many UserBenefits
+     * const userBenefit = await prisma.userBenefit.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserBenefits and only return the `id`
+     * const userBenefitWithIdOnly = await prisma.userBenefit.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserBenefitUpdateManyAndReturnArgs>(args: SelectSubset<T, UserBenefitUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserBenefit.
+     * @param {UserBenefitUpsertArgs} args - Arguments to update or create a UserBenefit.
+     * @example
+     * // Update or create a UserBenefit
+     * const userBenefit = await prisma.userBenefit.upsert({
+     *   create: {
+     *     // ... data to create a UserBenefit
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserBenefit we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserBenefitUpsertArgs>(args: SelectSubset<T, UserBenefitUpsertArgs<ExtArgs>>): Prisma__UserBenefitClient<$Result.GetResult<Prisma.$UserBenefitPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserBenefits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBenefitCountArgs} args - Arguments to filter UserBenefits to count.
+     * @example
+     * // Count the number of UserBenefits
+     * const count = await prisma.userBenefit.count({
+     *   where: {
+     *     // ... the filter for the UserBenefits we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserBenefitCountArgs>(
+      args?: Subset<T, UserBenefitCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserBenefitCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserBenefit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBenefitAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserBenefitAggregateArgs>(args: Subset<T, UserBenefitAggregateArgs>): Prisma.PrismaPromise<GetUserBenefitAggregateType<T>>
+
+    /**
+     * Group by UserBenefit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBenefitGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserBenefitGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserBenefitGroupByArgs['orderBy'] }
+        : { orderBy?: UserBenefitGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserBenefitGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserBenefitGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserBenefit model
+   */
+  readonly fields: UserBenefitFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserBenefit.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserBenefitClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    benefit<T extends BenefitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BenefitDefaultArgs<ExtArgs>>): Prisma__BenefitClient<$Result.GetResult<Prisma.$BenefitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserBenefit model
+   */
+  interface UserBenefitFieldRefs {
+    readonly id: FieldRef<"UserBenefit", 'String'>
+    readonly createdAt: FieldRef<"UserBenefit", 'DateTime'>
+    readonly userId: FieldRef<"UserBenefit", 'String'>
+    readonly benefitId: FieldRef<"UserBenefit", 'String'>
+    readonly startsAt: FieldRef<"UserBenefit", 'DateTime'>
+    readonly endsAt: FieldRef<"UserBenefit", 'DateTime'>
+    readonly status: FieldRef<"UserBenefit", 'UserBenefitStatus'>
+    readonly source: FieldRef<"UserBenefit", 'String'>
+    readonly metadata: FieldRef<"UserBenefit", 'Json'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserBenefit findUnique
+   */
+  export type UserBenefitFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    /**
+     * Filter, which UserBenefit to fetch.
+     */
+    where: UserBenefitWhereUniqueInput
+  }
+
+  /**
+   * UserBenefit findUniqueOrThrow
+   */
+  export type UserBenefitFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    /**
+     * Filter, which UserBenefit to fetch.
+     */
+    where: UserBenefitWhereUniqueInput
+  }
+
+  /**
+   * UserBenefit findFirst
+   */
+  export type UserBenefitFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    /**
+     * Filter, which UserBenefit to fetch.
+     */
+    where?: UserBenefitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserBenefits to fetch.
+     */
+    orderBy?: UserBenefitOrderByWithRelationInput | UserBenefitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserBenefits.
+     */
+    cursor?: UserBenefitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserBenefits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserBenefits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserBenefits.
+     */
+    distinct?: UserBenefitScalarFieldEnum | UserBenefitScalarFieldEnum[]
+  }
+
+  /**
+   * UserBenefit findFirstOrThrow
+   */
+  export type UserBenefitFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    /**
+     * Filter, which UserBenefit to fetch.
+     */
+    where?: UserBenefitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserBenefits to fetch.
+     */
+    orderBy?: UserBenefitOrderByWithRelationInput | UserBenefitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserBenefits.
+     */
+    cursor?: UserBenefitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserBenefits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserBenefits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserBenefits.
+     */
+    distinct?: UserBenefitScalarFieldEnum | UserBenefitScalarFieldEnum[]
+  }
+
+  /**
+   * UserBenefit findMany
+   */
+  export type UserBenefitFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    /**
+     * Filter, which UserBenefits to fetch.
+     */
+    where?: UserBenefitWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserBenefits to fetch.
+     */
+    orderBy?: UserBenefitOrderByWithRelationInput | UserBenefitOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserBenefits.
+     */
+    cursor?: UserBenefitWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserBenefits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserBenefits.
+     */
+    skip?: number
+    distinct?: UserBenefitScalarFieldEnum | UserBenefitScalarFieldEnum[]
+  }
+
+  /**
+   * UserBenefit create
+   */
+  export type UserBenefitCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserBenefit.
+     */
+    data: XOR<UserBenefitCreateInput, UserBenefitUncheckedCreateInput>
+  }
+
+  /**
+   * UserBenefit createMany
+   */
+  export type UserBenefitCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserBenefits.
+     */
+    data: UserBenefitCreateManyInput | UserBenefitCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserBenefit createManyAndReturn
+   */
+  export type UserBenefitCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserBenefits.
+     */
+    data: UserBenefitCreateManyInput | UserBenefitCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserBenefit update
+   */
+  export type UserBenefitUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserBenefit.
+     */
+    data: XOR<UserBenefitUpdateInput, UserBenefitUncheckedUpdateInput>
+    /**
+     * Choose, which UserBenefit to update.
+     */
+    where: UserBenefitWhereUniqueInput
+  }
+
+  /**
+   * UserBenefit updateMany
+   */
+  export type UserBenefitUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserBenefits.
+     */
+    data: XOR<UserBenefitUpdateManyMutationInput, UserBenefitUncheckedUpdateManyInput>
+    /**
+     * Filter which UserBenefits to update
+     */
+    where?: UserBenefitWhereInput
+    /**
+     * Limit how many UserBenefits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserBenefit updateManyAndReturn
+   */
+  export type UserBenefitUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * The data used to update UserBenefits.
+     */
+    data: XOR<UserBenefitUpdateManyMutationInput, UserBenefitUncheckedUpdateManyInput>
+    /**
+     * Filter which UserBenefits to update
+     */
+    where?: UserBenefitWhereInput
+    /**
+     * Limit how many UserBenefits to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserBenefit upsert
+   */
+  export type UserBenefitUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserBenefit to update in case it exists.
+     */
+    where: UserBenefitWhereUniqueInput
+    /**
+     * In case the UserBenefit found by the `where` argument doesn't exist, create a new UserBenefit with this data.
+     */
+    create: XOR<UserBenefitCreateInput, UserBenefitUncheckedCreateInput>
+    /**
+     * In case the UserBenefit was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserBenefitUpdateInput, UserBenefitUncheckedUpdateInput>
+  }
+
+  /**
+   * UserBenefit delete
+   */
+  export type UserBenefitDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+    /**
+     * Filter which UserBenefit to delete.
+     */
+    where: UserBenefitWhereUniqueInput
+  }
+
+  /**
+   * UserBenefit deleteMany
+   */
+  export type UserBenefitDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserBenefits to delete
+     */
+    where?: UserBenefitWhereInput
+    /**
+     * Limit how many UserBenefits to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserBenefit without action
+   */
+  export type UserBenefitDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBenefit
+     */
+    select?: UserBenefitSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBenefit
+     */
+    omit?: UserBenefitOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBenefitInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10999,12 +13520,49 @@ export namespace Prisma {
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
+  export const BenefitScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    key: 'key',
+    title: 'title',
+    description: 'description',
+    durationDays: 'durationDays',
+    active: 'active'
+  };
+
+  export type BenefitScalarFieldEnum = (typeof BenefitScalarFieldEnum)[keyof typeof BenefitScalarFieldEnum]
+
+
+  export const UserBenefitScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    userId: 'userId',
+    benefitId: 'benefitId',
+    startsAt: 'startsAt',
+    endsAt: 'endsAt',
+    status: 'status',
+    source: 'source',
+    metadata: 'metadata'
+  };
+
+  export type UserBenefitScalarFieldEnum = (typeof UserBenefitScalarFieldEnum)[keyof typeof UserBenefitScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -11021,6 +13579,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -11131,6 +13698,34 @@ export namespace Prisma {
    */
   export type ListEnumAgeRangeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AgeRange[]'>
     
+
+
+  /**
+   * Reference to a field of type 'UserBenefitStatus'
+   */
+  export type EnumUserBenefitStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserBenefitStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserBenefitStatus[]'
+   */
+  export type ListEnumUserBenefitStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserBenefitStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
   /**
    * Deep Input Types
    */
@@ -11164,6 +13759,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatListRelationFilter
     chatsAsUser2?: ChatListRelationFilter
     messages?: MessageListRelationFilter
+    userBenefits?: UserBenefitListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11191,6 +13787,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatOrderByRelationAggregateInput
     chatsAsUser2?: ChatOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
+    userBenefits?: UserBenefitOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11221,6 +13818,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatListRelationFilter
     chatsAsUser2?: ChatListRelationFilter
     messages?: MessageListRelationFilter
+    userBenefits?: UserBenefitListRelationFilter
   }, "id" | "email" | "cpf" | "cnpj" | "pix_key">
 
   export type UserOrderByWithAggregationInput = {
@@ -11712,6 +14310,156 @@ export namespace Prisma {
     chatId?: StringWithAggregatesFilter<"Message"> | string
   }
 
+  export type BenefitWhereInput = {
+    AND?: BenefitWhereInput | BenefitWhereInput[]
+    OR?: BenefitWhereInput[]
+    NOT?: BenefitWhereInput | BenefitWhereInput[]
+    id?: StringFilter<"Benefit"> | string
+    createdAt?: DateTimeFilter<"Benefit"> | Date | string
+    updatedAt?: DateTimeFilter<"Benefit"> | Date | string
+    key?: StringFilter<"Benefit"> | string
+    title?: StringFilter<"Benefit"> | string
+    description?: StringNullableFilter<"Benefit"> | string | null
+    durationDays?: IntNullableFilter<"Benefit"> | number | null
+    active?: BoolFilter<"Benefit"> | boolean
+    userBenefits?: UserBenefitListRelationFilter
+  }
+
+  export type BenefitOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    key?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    durationDays?: SortOrderInput | SortOrder
+    active?: SortOrder
+    userBenefits?: UserBenefitOrderByRelationAggregateInput
+  }
+
+  export type BenefitWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    key?: string
+    AND?: BenefitWhereInput | BenefitWhereInput[]
+    OR?: BenefitWhereInput[]
+    NOT?: BenefitWhereInput | BenefitWhereInput[]
+    createdAt?: DateTimeFilter<"Benefit"> | Date | string
+    updatedAt?: DateTimeFilter<"Benefit"> | Date | string
+    title?: StringFilter<"Benefit"> | string
+    description?: StringNullableFilter<"Benefit"> | string | null
+    durationDays?: IntNullableFilter<"Benefit"> | number | null
+    active?: BoolFilter<"Benefit"> | boolean
+    userBenefits?: UserBenefitListRelationFilter
+  }, "id" | "key">
+
+  export type BenefitOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    key?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    durationDays?: SortOrderInput | SortOrder
+    active?: SortOrder
+    _count?: BenefitCountOrderByAggregateInput
+    _avg?: BenefitAvgOrderByAggregateInput
+    _max?: BenefitMaxOrderByAggregateInput
+    _min?: BenefitMinOrderByAggregateInput
+    _sum?: BenefitSumOrderByAggregateInput
+  }
+
+  export type BenefitScalarWhereWithAggregatesInput = {
+    AND?: BenefitScalarWhereWithAggregatesInput | BenefitScalarWhereWithAggregatesInput[]
+    OR?: BenefitScalarWhereWithAggregatesInput[]
+    NOT?: BenefitScalarWhereWithAggregatesInput | BenefitScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Benefit"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Benefit"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Benefit"> | Date | string
+    key?: StringWithAggregatesFilter<"Benefit"> | string
+    title?: StringWithAggregatesFilter<"Benefit"> | string
+    description?: StringNullableWithAggregatesFilter<"Benefit"> | string | null
+    durationDays?: IntNullableWithAggregatesFilter<"Benefit"> | number | null
+    active?: BoolWithAggregatesFilter<"Benefit"> | boolean
+  }
+
+  export type UserBenefitWhereInput = {
+    AND?: UserBenefitWhereInput | UserBenefitWhereInput[]
+    OR?: UserBenefitWhereInput[]
+    NOT?: UserBenefitWhereInput | UserBenefitWhereInput[]
+    id?: StringFilter<"UserBenefit"> | string
+    createdAt?: DateTimeFilter<"UserBenefit"> | Date | string
+    userId?: StringFilter<"UserBenefit"> | string
+    benefitId?: StringFilter<"UserBenefit"> | string
+    startsAt?: DateTimeFilter<"UserBenefit"> | Date | string
+    endsAt?: DateTimeNullableFilter<"UserBenefit"> | Date | string | null
+    status?: EnumUserBenefitStatusFilter<"UserBenefit"> | $Enums.UserBenefitStatus
+    source?: StringNullableFilter<"UserBenefit"> | string | null
+    metadata?: JsonNullableFilter<"UserBenefit">
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    benefit?: XOR<BenefitScalarRelationFilter, BenefitWhereInput>
+  }
+
+  export type UserBenefitOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    benefitId?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrderInput | SortOrder
+    status?: SortOrder
+    source?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
+    benefit?: BenefitOrderByWithRelationInput
+  }
+
+  export type UserBenefitWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UserBenefitWhereInput | UserBenefitWhereInput[]
+    OR?: UserBenefitWhereInput[]
+    NOT?: UserBenefitWhereInput | UserBenefitWhereInput[]
+    createdAt?: DateTimeFilter<"UserBenefit"> | Date | string
+    userId?: StringFilter<"UserBenefit"> | string
+    benefitId?: StringFilter<"UserBenefit"> | string
+    startsAt?: DateTimeFilter<"UserBenefit"> | Date | string
+    endsAt?: DateTimeNullableFilter<"UserBenefit"> | Date | string | null
+    status?: EnumUserBenefitStatusFilter<"UserBenefit"> | $Enums.UserBenefitStatus
+    source?: StringNullableFilter<"UserBenefit"> | string | null
+    metadata?: JsonNullableFilter<"UserBenefit">
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    benefit?: XOR<BenefitScalarRelationFilter, BenefitWhereInput>
+  }, "id">
+
+  export type UserBenefitOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    benefitId?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrderInput | SortOrder
+    status?: SortOrder
+    source?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    _count?: UserBenefitCountOrderByAggregateInput
+    _max?: UserBenefitMaxOrderByAggregateInput
+    _min?: UserBenefitMinOrderByAggregateInput
+  }
+
+  export type UserBenefitScalarWhereWithAggregatesInput = {
+    AND?: UserBenefitScalarWhereWithAggregatesInput | UserBenefitScalarWhereWithAggregatesInput[]
+    OR?: UserBenefitScalarWhereWithAggregatesInput[]
+    NOT?: UserBenefitScalarWhereWithAggregatesInput | UserBenefitScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserBenefit"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserBenefit"> | Date | string
+    userId?: StringWithAggregatesFilter<"UserBenefit"> | string
+    benefitId?: StringWithAggregatesFilter<"UserBenefit"> | string
+    startsAt?: DateTimeWithAggregatesFilter<"UserBenefit"> | Date | string
+    endsAt?: DateTimeNullableWithAggregatesFilter<"UserBenefit"> | Date | string | null
+    status?: EnumUserBenefitStatusWithAggregatesFilter<"UserBenefit"> | $Enums.UserBenefitStatus
+    source?: StringNullableWithAggregatesFilter<"UserBenefit"> | string | null
+    metadata?: JsonNullableWithAggregatesFilter<"UserBenefit">
+  }
+
   export type UserCreateInput = {
     id?: string
     createdAt?: Date | string
@@ -11737,6 +14485,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatCreateNestedManyWithoutUser2Input
     messages?: MessageCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11764,6 +14513,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatUncheckedCreateNestedManyWithoutUser2Input
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -11791,6 +14541,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUpdateManyWithoutUser2NestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11818,6 +14569,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12316,6 +15068,169 @@ export namespace Prisma {
     chatId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type BenefitCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    key: string
+    title: string
+    description?: string | null
+    durationDays?: number | null
+    active?: boolean
+    userBenefits?: UserBenefitCreateNestedManyWithoutBenefitInput
+  }
+
+  export type BenefitUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    key: string
+    title: string
+    description?: string | null
+    durationDays?: number | null
+    active?: boolean
+    userBenefits?: UserBenefitUncheckedCreateNestedManyWithoutBenefitInput
+  }
+
+  export type BenefitUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    active?: BoolFieldUpdateOperationsInput | boolean
+    userBenefits?: UserBenefitUpdateManyWithoutBenefitNestedInput
+  }
+
+  export type BenefitUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    active?: BoolFieldUpdateOperationsInput | boolean
+    userBenefits?: UserBenefitUncheckedUpdateManyWithoutBenefitNestedInput
+  }
+
+  export type BenefitCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    key: string
+    title: string
+    description?: string | null
+    durationDays?: number | null
+    active?: boolean
+  }
+
+  export type BenefitUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    active?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type BenefitUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    active?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserBenefitCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    status?: $Enums.UserBenefitStatus
+    source?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    user: UserCreateNestedOneWithoutUserBenefitsInput
+    benefit: BenefitCreateNestedOneWithoutUserBenefitsInput
+  }
+
+  export type UserBenefitUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    userId: string
+    benefitId: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    status?: $Enums.UserBenefitStatus
+    source?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type UserBenefitUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumUserBenefitStatusFieldUpdateOperationsInput | $Enums.UserBenefitStatus
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    user?: UserUpdateOneRequiredWithoutUserBenefitsNestedInput
+    benefit?: BenefitUpdateOneRequiredWithoutUserBenefitsNestedInput
+  }
+
+  export type UserBenefitUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    benefitId?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumUserBenefitStatusFieldUpdateOperationsInput | $Enums.UserBenefitStatus
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type UserBenefitCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    userId: string
+    benefitId: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    status?: $Enums.UserBenefitStatus
+    source?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type UserBenefitUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumUserBenefitStatusFieldUpdateOperationsInput | $Enums.UserBenefitStatus
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type UserBenefitUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    benefitId?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumUserBenefitStatusFieldUpdateOperationsInput | $Enums.UserBenefitStatus
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12415,6 +15330,12 @@ export namespace Prisma {
     none?: MessageWhereInput
   }
 
+  export type UserBenefitListRelationFilter = {
+    every?: UserBenefitWhereInput
+    some?: UserBenefitWhereInput
+    none?: UserBenefitWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -12437,6 +15358,10 @@ export namespace Prisma {
   }
 
   export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserBenefitOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12923,6 +15848,177 @@ export namespace Prisma {
     chatId?: SortOrder
   }
 
+  export type BenefitCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    key?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    durationDays?: SortOrder
+    active?: SortOrder
+  }
+
+  export type BenefitAvgOrderByAggregateInput = {
+    durationDays?: SortOrder
+  }
+
+  export type BenefitMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    key?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    durationDays?: SortOrder
+    active?: SortOrder
+  }
+
+  export type BenefitMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    key?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    durationDays?: SortOrder
+    active?: SortOrder
+  }
+
+  export type BenefitSumOrderByAggregateInput = {
+    durationDays?: SortOrder
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type EnumUserBenefitStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserBenefitStatus | EnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.UserBenefitStatus[] | ListEnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserBenefitStatus[] | ListEnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserBenefitStatusFilter<$PrismaModel> | $Enums.UserBenefitStatus
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type BenefitScalarRelationFilter = {
+    is?: BenefitWhereInput
+    isNot?: BenefitWhereInput
+  }
+
+  export type UserBenefitCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    benefitId?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    status?: SortOrder
+    source?: SortOrder
+    metadata?: SortOrder
+  }
+
+  export type UserBenefitMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    benefitId?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    status?: SortOrder
+    source?: SortOrder
+  }
+
+  export type UserBenefitMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    benefitId?: SortOrder
+    startsAt?: SortOrder
+    endsAt?: SortOrder
+    status?: SortOrder
+    source?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumUserBenefitStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserBenefitStatus | EnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.UserBenefitStatus[] | ListEnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserBenefitStatus[] | ListEnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserBenefitStatusWithAggregatesFilter<$PrismaModel> | $Enums.UserBenefitStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserBenefitStatusFilter<$PrismaModel>
+    _max?: NestedEnumUserBenefitStatusFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
   export type ToyCreateNestedManyWithoutOwnerInput = {
     create?: XOR<ToyCreateWithoutOwnerInput, ToyUncheckedCreateWithoutOwnerInput> | ToyCreateWithoutOwnerInput[] | ToyUncheckedCreateWithoutOwnerInput[]
     connectOrCreate?: ToyCreateOrConnectWithoutOwnerInput | ToyCreateOrConnectWithoutOwnerInput[]
@@ -12971,6 +16067,13 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
+  export type UserBenefitCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserBenefitCreateWithoutUserInput, UserBenefitUncheckedCreateWithoutUserInput> | UserBenefitCreateWithoutUserInput[] | UserBenefitUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserBenefitCreateOrConnectWithoutUserInput | UserBenefitCreateOrConnectWithoutUserInput[]
+    createMany?: UserBenefitCreateManyUserInputEnvelope
+    connect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+  }
+
   export type ToyUncheckedCreateNestedManyWithoutOwnerInput = {
     create?: XOR<ToyCreateWithoutOwnerInput, ToyUncheckedCreateWithoutOwnerInput> | ToyCreateWithoutOwnerInput[] | ToyUncheckedCreateWithoutOwnerInput[]
     connectOrCreate?: ToyCreateOrConnectWithoutOwnerInput | ToyCreateOrConnectWithoutOwnerInput[]
@@ -13017,6 +16120,13 @@ export namespace Prisma {
     connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
     createMany?: MessageCreateManySenderInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type UserBenefitUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserBenefitCreateWithoutUserInput, UserBenefitUncheckedCreateWithoutUserInput> | UserBenefitCreateWithoutUserInput[] | UserBenefitUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserBenefitCreateOrConnectWithoutUserInput | UserBenefitCreateOrConnectWithoutUserInput[]
+    createMany?: UserBenefitCreateManyUserInputEnvelope
+    connect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -13141,6 +16251,20 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type UserBenefitUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserBenefitCreateWithoutUserInput, UserBenefitUncheckedCreateWithoutUserInput> | UserBenefitCreateWithoutUserInput[] | UserBenefitUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserBenefitCreateOrConnectWithoutUserInput | UserBenefitCreateOrConnectWithoutUserInput[]
+    upsert?: UserBenefitUpsertWithWhereUniqueWithoutUserInput | UserBenefitUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserBenefitCreateManyUserInputEnvelope
+    set?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    disconnect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    delete?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    connect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    update?: UserBenefitUpdateWithWhereUniqueWithoutUserInput | UserBenefitUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserBenefitUpdateManyWithWhereWithoutUserInput | UserBenefitUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserBenefitScalarWhereInput | UserBenefitScalarWhereInput[]
+  }
+
   export type ToyUncheckedUpdateManyWithoutOwnerNestedInput = {
     create?: XOR<ToyCreateWithoutOwnerInput, ToyUncheckedCreateWithoutOwnerInput> | ToyCreateWithoutOwnerInput[] | ToyUncheckedCreateWithoutOwnerInput[]
     connectOrCreate?: ToyCreateOrConnectWithoutOwnerInput | ToyCreateOrConnectWithoutOwnerInput[]
@@ -13233,6 +16357,20 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutSenderInput | MessageUpdateWithWhereUniqueWithoutSenderInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutSenderInput | MessageUpdateManyWithWhereWithoutSenderInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type UserBenefitUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserBenefitCreateWithoutUserInput, UserBenefitUncheckedCreateWithoutUserInput> | UserBenefitCreateWithoutUserInput[] | UserBenefitUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserBenefitCreateOrConnectWithoutUserInput | UserBenefitCreateOrConnectWithoutUserInput[]
+    upsert?: UserBenefitUpsertWithWhereUniqueWithoutUserInput | UserBenefitUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserBenefitCreateManyUserInputEnvelope
+    set?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    disconnect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    delete?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    connect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    update?: UserBenefitUpdateWithWhereUniqueWithoutUserInput | UserBenefitUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserBenefitUpdateManyWithWhereWithoutUserInput | UserBenefitUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserBenefitScalarWhereInput | UserBenefitScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutOrganizationInfoInput = {
@@ -13532,6 +16670,84 @@ export namespace Prisma {
     update?: XOR<XOR<ChatUpdateToOneWithWhereWithoutMessagesInput, ChatUpdateWithoutMessagesInput>, ChatUncheckedUpdateWithoutMessagesInput>
   }
 
+  export type UserBenefitCreateNestedManyWithoutBenefitInput = {
+    create?: XOR<UserBenefitCreateWithoutBenefitInput, UserBenefitUncheckedCreateWithoutBenefitInput> | UserBenefitCreateWithoutBenefitInput[] | UserBenefitUncheckedCreateWithoutBenefitInput[]
+    connectOrCreate?: UserBenefitCreateOrConnectWithoutBenefitInput | UserBenefitCreateOrConnectWithoutBenefitInput[]
+    createMany?: UserBenefitCreateManyBenefitInputEnvelope
+    connect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+  }
+
+  export type UserBenefitUncheckedCreateNestedManyWithoutBenefitInput = {
+    create?: XOR<UserBenefitCreateWithoutBenefitInput, UserBenefitUncheckedCreateWithoutBenefitInput> | UserBenefitCreateWithoutBenefitInput[] | UserBenefitUncheckedCreateWithoutBenefitInput[]
+    connectOrCreate?: UserBenefitCreateOrConnectWithoutBenefitInput | UserBenefitCreateOrConnectWithoutBenefitInput[]
+    createMany?: UserBenefitCreateManyBenefitInputEnvelope
+    connect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+  }
+
+  export type UserBenefitUpdateManyWithoutBenefitNestedInput = {
+    create?: XOR<UserBenefitCreateWithoutBenefitInput, UserBenefitUncheckedCreateWithoutBenefitInput> | UserBenefitCreateWithoutBenefitInput[] | UserBenefitUncheckedCreateWithoutBenefitInput[]
+    connectOrCreate?: UserBenefitCreateOrConnectWithoutBenefitInput | UserBenefitCreateOrConnectWithoutBenefitInput[]
+    upsert?: UserBenefitUpsertWithWhereUniqueWithoutBenefitInput | UserBenefitUpsertWithWhereUniqueWithoutBenefitInput[]
+    createMany?: UserBenefitCreateManyBenefitInputEnvelope
+    set?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    disconnect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    delete?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    connect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    update?: UserBenefitUpdateWithWhereUniqueWithoutBenefitInput | UserBenefitUpdateWithWhereUniqueWithoutBenefitInput[]
+    updateMany?: UserBenefitUpdateManyWithWhereWithoutBenefitInput | UserBenefitUpdateManyWithWhereWithoutBenefitInput[]
+    deleteMany?: UserBenefitScalarWhereInput | UserBenefitScalarWhereInput[]
+  }
+
+  export type UserBenefitUncheckedUpdateManyWithoutBenefitNestedInput = {
+    create?: XOR<UserBenefitCreateWithoutBenefitInput, UserBenefitUncheckedCreateWithoutBenefitInput> | UserBenefitCreateWithoutBenefitInput[] | UserBenefitUncheckedCreateWithoutBenefitInput[]
+    connectOrCreate?: UserBenefitCreateOrConnectWithoutBenefitInput | UserBenefitCreateOrConnectWithoutBenefitInput[]
+    upsert?: UserBenefitUpsertWithWhereUniqueWithoutBenefitInput | UserBenefitUpsertWithWhereUniqueWithoutBenefitInput[]
+    createMany?: UserBenefitCreateManyBenefitInputEnvelope
+    set?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    disconnect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    delete?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    connect?: UserBenefitWhereUniqueInput | UserBenefitWhereUniqueInput[]
+    update?: UserBenefitUpdateWithWhereUniqueWithoutBenefitInput | UserBenefitUpdateWithWhereUniqueWithoutBenefitInput[]
+    updateMany?: UserBenefitUpdateManyWithWhereWithoutBenefitInput | UserBenefitUpdateManyWithWhereWithoutBenefitInput[]
+    deleteMany?: UserBenefitScalarWhereInput | UserBenefitScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutUserBenefitsInput = {
+    create?: XOR<UserCreateWithoutUserBenefitsInput, UserUncheckedCreateWithoutUserBenefitsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserBenefitsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type BenefitCreateNestedOneWithoutUserBenefitsInput = {
+    create?: XOR<BenefitCreateWithoutUserBenefitsInput, BenefitUncheckedCreateWithoutUserBenefitsInput>
+    connectOrCreate?: BenefitCreateOrConnectWithoutUserBenefitsInput
+    connect?: BenefitWhereUniqueInput
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type EnumUserBenefitStatusFieldUpdateOperationsInput = {
+    set?: $Enums.UserBenefitStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutUserBenefitsNestedInput = {
+    create?: XOR<UserCreateWithoutUserBenefitsInput, UserUncheckedCreateWithoutUserBenefitsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserBenefitsInput
+    upsert?: UserUpsertWithoutUserBenefitsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserBenefitsInput, UserUpdateWithoutUserBenefitsInput>, UserUncheckedUpdateWithoutUserBenefitsInput>
+  }
+
+  export type BenefitUpdateOneRequiredWithoutUserBenefitsNestedInput = {
+    create?: XOR<BenefitCreateWithoutUserBenefitsInput, BenefitUncheckedCreateWithoutUserBenefitsInput>
+    connectOrCreate?: BenefitCreateOrConnectWithoutUserBenefitsInput
+    upsert?: BenefitUpsertWithoutUserBenefitsInput
+    connect?: BenefitWhereUniqueInput
+    update?: XOR<XOR<BenefitUpdateToOneWithWhereWithoutUserBenefitsInput, BenefitUpdateWithoutUserBenefitsInput>, BenefitUncheckedUpdateWithoutUserBenefitsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -13758,6 +16974,71 @@ export namespace Prisma {
     _max?: NestedEnumAgeRangeFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumUserBenefitStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserBenefitStatus | EnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.UserBenefitStatus[] | ListEnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserBenefitStatus[] | ListEnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserBenefitStatusFilter<$PrismaModel> | $Enums.UserBenefitStatus
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumUserBenefitStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserBenefitStatus | EnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.UserBenefitStatus[] | ListEnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserBenefitStatus[] | ListEnumUserBenefitStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserBenefitStatusWithAggregatesFilter<$PrismaModel> | $Enums.UserBenefitStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserBenefitStatusFilter<$PrismaModel>
+    _max?: NestedEnumUserBenefitStatusFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type ToyCreateWithoutOwnerInput = {
     id?: string
     createdAt?: Date | string
@@ -13938,6 +17219,38 @@ export namespace Prisma {
 
   export type MessageCreateManySenderInputEnvelope = {
     data: MessageCreateManySenderInput | MessageCreateManySenderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserBenefitCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    status?: $Enums.UserBenefitStatus
+    source?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    benefit: BenefitCreateNestedOneWithoutUserBenefitsInput
+  }
+
+  export type UserBenefitUncheckedCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    benefitId: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    status?: $Enums.UserBenefitStatus
+    source?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type UserBenefitCreateOrConnectWithoutUserInput = {
+    where: UserBenefitWhereUniqueInput
+    create: XOR<UserBenefitCreateWithoutUserInput, UserBenefitUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserBenefitCreateManyUserInputEnvelope = {
+    data: UserBenefitCreateManyUserInput | UserBenefitCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -14124,6 +17437,37 @@ export namespace Prisma {
     chatId?: StringFilter<"Message"> | string
   }
 
+  export type UserBenefitUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserBenefitWhereUniqueInput
+    update: XOR<UserBenefitUpdateWithoutUserInput, UserBenefitUncheckedUpdateWithoutUserInput>
+    create: XOR<UserBenefitCreateWithoutUserInput, UserBenefitUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserBenefitUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserBenefitWhereUniqueInput
+    data: XOR<UserBenefitUpdateWithoutUserInput, UserBenefitUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserBenefitUpdateManyWithWhereWithoutUserInput = {
+    where: UserBenefitScalarWhereInput
+    data: XOR<UserBenefitUpdateManyMutationInput, UserBenefitUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserBenefitScalarWhereInput = {
+    AND?: UserBenefitScalarWhereInput | UserBenefitScalarWhereInput[]
+    OR?: UserBenefitScalarWhereInput[]
+    NOT?: UserBenefitScalarWhereInput | UserBenefitScalarWhereInput[]
+    id?: StringFilter<"UserBenefit"> | string
+    createdAt?: DateTimeFilter<"UserBenefit"> | Date | string
+    userId?: StringFilter<"UserBenefit"> | string
+    benefitId?: StringFilter<"UserBenefit"> | string
+    startsAt?: DateTimeFilter<"UserBenefit"> | Date | string
+    endsAt?: DateTimeNullableFilter<"UserBenefit"> | Date | string | null
+    status?: EnumUserBenefitStatusFilter<"UserBenefit"> | $Enums.UserBenefitStatus
+    source?: StringNullableFilter<"UserBenefit"> | string | null
+    metadata?: JsonNullableFilter<"UserBenefit">
+  }
+
   export type UserCreateWithoutOrganizationInfoInput = {
     id?: string
     createdAt?: Date | string
@@ -14148,6 +17492,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatCreateNestedManyWithoutUser2Input
     messages?: MessageCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOrganizationInfoInput = {
@@ -14174,6 +17519,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatUncheckedCreateNestedManyWithoutUser2Input
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOrganizationInfoInput = {
@@ -14216,6 +17562,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUpdateManyWithoutUser2NestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrganizationInfoInput = {
@@ -14242,6 +17589,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutToysInput = {
@@ -14268,6 +17616,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatCreateNestedManyWithoutUser2Input
     messages?: MessageCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutToysInput = {
@@ -14294,6 +17643,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatUncheckedCreateNestedManyWithoutUser2Input
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutToysInput = {
@@ -14382,6 +17732,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUpdateManyWithoutUser2NestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutToysInput = {
@@ -14408,6 +17759,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type HistoryEntryUpsertWithWhereUniqueWithoutToyInput = {
@@ -14560,6 +17912,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatCreateNestedManyWithoutUser2Input
     messages?: MessageCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHistoryInput = {
@@ -14586,6 +17939,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatUncheckedCreateNestedManyWithoutUser2Input
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHistoryInput = {
@@ -14667,6 +18021,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUpdateManyWithoutUser2NestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHistoryInput = {
@@ -14693,6 +18048,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ToyUpsertWithoutHistoryInput = {
@@ -14764,6 +18120,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatCreateNestedManyWithoutUser2Input
     messages?: MessageCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRatingsInput = {
@@ -14790,6 +18147,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatUncheckedCreateNestedManyWithoutUser2Input
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRatingsInput = {
@@ -14832,6 +18190,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUpdateManyWithoutUser2NestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRatingsInput = {
@@ -14858,6 +18217,7 @@ export namespace Prisma {
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutChatsAsUser1Input = {
@@ -14884,6 +18244,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
     chatsAsUser2?: ChatCreateNestedManyWithoutUser2Input
     messages?: MessageCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChatsAsUser1Input = {
@@ -14910,6 +18271,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
     chatsAsUser2?: ChatUncheckedCreateNestedManyWithoutUser2Input
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChatsAsUser1Input = {
@@ -14941,6 +18303,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
     chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
     messages?: MessageCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChatsAsUser2Input = {
@@ -14967,6 +18330,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
     chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    userBenefits?: UserBenefitUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChatsAsUser2Input = {
@@ -15033,6 +18397,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
     chatsAsUser2?: ChatUpdateManyWithoutUser2NestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChatsAsUser1Input = {
@@ -15059,6 +18424,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
     chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutChatsAsUser2Input = {
@@ -15096,6 +18462,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
     chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChatsAsUser2Input = {
@@ -15122,6 +18489,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    userBenefits?: UserBenefitUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageUpsertWithWhereUniqueWithoutChatInput = {
@@ -15164,6 +18532,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
     chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatCreateNestedManyWithoutUser2Input
+    userBenefits?: UserBenefitCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
@@ -15190,6 +18559,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
     chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
     chatsAsUser2?: ChatUncheckedCreateNestedManyWithoutUser2Input
+    userBenefits?: UserBenefitUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -15251,6 +18621,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
     chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUpdateManyWithoutUser2NestedInput
+    userBenefits?: UserBenefitUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
@@ -15277,6 +18648,7 @@ export namespace Prisma {
     organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
     chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
     chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
+    userBenefits?: UserBenefitUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChatUpsertWithoutMessagesInput = {
@@ -15302,6 +18674,238 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user1Id?: StringFieldUpdateOperationsInput | string
     user2Id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserBenefitCreateWithoutBenefitInput = {
+    id?: string
+    createdAt?: Date | string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    status?: $Enums.UserBenefitStatus
+    source?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    user: UserCreateNestedOneWithoutUserBenefitsInput
+  }
+
+  export type UserBenefitUncheckedCreateWithoutBenefitInput = {
+    id?: string
+    createdAt?: Date | string
+    userId: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    status?: $Enums.UserBenefitStatus
+    source?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type UserBenefitCreateOrConnectWithoutBenefitInput = {
+    where: UserBenefitWhereUniqueInput
+    create: XOR<UserBenefitCreateWithoutBenefitInput, UserBenefitUncheckedCreateWithoutBenefitInput>
+  }
+
+  export type UserBenefitCreateManyBenefitInputEnvelope = {
+    data: UserBenefitCreateManyBenefitInput | UserBenefitCreateManyBenefitInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserBenefitUpsertWithWhereUniqueWithoutBenefitInput = {
+    where: UserBenefitWhereUniqueInput
+    update: XOR<UserBenefitUpdateWithoutBenefitInput, UserBenefitUncheckedUpdateWithoutBenefitInput>
+    create: XOR<UserBenefitCreateWithoutBenefitInput, UserBenefitUncheckedCreateWithoutBenefitInput>
+  }
+
+  export type UserBenefitUpdateWithWhereUniqueWithoutBenefitInput = {
+    where: UserBenefitWhereUniqueInput
+    data: XOR<UserBenefitUpdateWithoutBenefitInput, UserBenefitUncheckedUpdateWithoutBenefitInput>
+  }
+
+  export type UserBenefitUpdateManyWithWhereWithoutBenefitInput = {
+    where: UserBenefitScalarWhereInput
+    data: XOR<UserBenefitUpdateManyMutationInput, UserBenefitUncheckedUpdateManyWithoutBenefitInput>
+  }
+
+  export type UserCreateWithoutUserBenefitsInput = {
+    id?: string
+    createdAt?: Date | string
+    email: string
+    password: string
+    name: string
+    role?: $Enums.Role
+    parentalControl?: boolean
+    active?: boolean
+    cpf?: string | null
+    cnpj?: string | null
+    pix_key?: string | null
+    picture?: string | null
+    addressDistrict: string
+    addressStreet: string
+    addressNumber: number
+    addressDetail?: string | null
+    addressCep: string
+    toys?: ToyCreateNestedManyWithoutOwnerInput
+    history?: HistoryEntryCreateNestedManyWithoutUserInput
+    ratings?: RateCreateNestedManyWithoutUserInput
+    organizationInfo?: organizationInfoCreateNestedOneWithoutOrganizationInput
+    chatsAsUser1?: ChatCreateNestedManyWithoutUser1Input
+    chatsAsUser2?: ChatCreateNestedManyWithoutUser2Input
+    messages?: MessageCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserUncheckedCreateWithoutUserBenefitsInput = {
+    id?: string
+    createdAt?: Date | string
+    email: string
+    password: string
+    name: string
+    role?: $Enums.Role
+    parentalControl?: boolean
+    active?: boolean
+    cpf?: string | null
+    cnpj?: string | null
+    pix_key?: string | null
+    picture?: string | null
+    addressDistrict: string
+    addressStreet: string
+    addressNumber: number
+    addressDetail?: string | null
+    addressCep: string
+    toys?: ToyUncheckedCreateNestedManyWithoutOwnerInput
+    history?: HistoryEntryUncheckedCreateNestedManyWithoutUserInput
+    ratings?: RateUncheckedCreateNestedManyWithoutUserInput
+    organizationInfo?: organizationInfoUncheckedCreateNestedOneWithoutOrganizationInput
+    chatsAsUser1?: ChatUncheckedCreateNestedManyWithoutUser1Input
+    chatsAsUser2?: ChatUncheckedCreateNestedManyWithoutUser2Input
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserCreateOrConnectWithoutUserBenefitsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUserBenefitsInput, UserUncheckedCreateWithoutUserBenefitsInput>
+  }
+
+  export type BenefitCreateWithoutUserBenefitsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    key: string
+    title: string
+    description?: string | null
+    durationDays?: number | null
+    active?: boolean
+  }
+
+  export type BenefitUncheckedCreateWithoutUserBenefitsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    key: string
+    title: string
+    description?: string | null
+    durationDays?: number | null
+    active?: boolean
+  }
+
+  export type BenefitCreateOrConnectWithoutUserBenefitsInput = {
+    where: BenefitWhereUniqueInput
+    create: XOR<BenefitCreateWithoutUserBenefitsInput, BenefitUncheckedCreateWithoutUserBenefitsInput>
+  }
+
+  export type UserUpsertWithoutUserBenefitsInput = {
+    update: XOR<UserUpdateWithoutUserBenefitsInput, UserUncheckedUpdateWithoutUserBenefitsInput>
+    create: XOR<UserCreateWithoutUserBenefitsInput, UserUncheckedCreateWithoutUserBenefitsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUserBenefitsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUserBenefitsInput, UserUncheckedUpdateWithoutUserBenefitsInput>
+  }
+
+  export type UserUpdateWithoutUserBenefitsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    parentalControl?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    pix_key?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    addressDistrict?: StringFieldUpdateOperationsInput | string
+    addressStreet?: StringFieldUpdateOperationsInput | string
+    addressNumber?: IntFieldUpdateOperationsInput | number
+    addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
+    addressCep?: StringFieldUpdateOperationsInput | string
+    toys?: ToyUpdateManyWithoutOwnerNestedInput
+    history?: HistoryEntryUpdateManyWithoutUserNestedInput
+    ratings?: RateUpdateManyWithoutUserNestedInput
+    organizationInfo?: organizationInfoUpdateOneWithoutOrganizationNestedInput
+    chatsAsUser1?: ChatUpdateManyWithoutUser1NestedInput
+    chatsAsUser2?: ChatUpdateManyWithoutUser2NestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUserBenefitsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    parentalControl?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    pix_key?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    addressDistrict?: StringFieldUpdateOperationsInput | string
+    addressStreet?: StringFieldUpdateOperationsInput | string
+    addressNumber?: IntFieldUpdateOperationsInput | number
+    addressDetail?: NullableStringFieldUpdateOperationsInput | string | null
+    addressCep?: StringFieldUpdateOperationsInput | string
+    toys?: ToyUncheckedUpdateManyWithoutOwnerNestedInput
+    history?: HistoryEntryUncheckedUpdateManyWithoutUserNestedInput
+    ratings?: RateUncheckedUpdateManyWithoutUserNestedInput
+    organizationInfo?: organizationInfoUncheckedUpdateOneWithoutOrganizationNestedInput
+    chatsAsUser1?: ChatUncheckedUpdateManyWithoutUser1NestedInput
+    chatsAsUser2?: ChatUncheckedUpdateManyWithoutUser2NestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
+  export type BenefitUpsertWithoutUserBenefitsInput = {
+    update: XOR<BenefitUpdateWithoutUserBenefitsInput, BenefitUncheckedUpdateWithoutUserBenefitsInput>
+    create: XOR<BenefitCreateWithoutUserBenefitsInput, BenefitUncheckedCreateWithoutUserBenefitsInput>
+    where?: BenefitWhereInput
+  }
+
+  export type BenefitUpdateToOneWithWhereWithoutUserBenefitsInput = {
+    where?: BenefitWhereInput
+    data: XOR<BenefitUpdateWithoutUserBenefitsInput, BenefitUncheckedUpdateWithoutUserBenefitsInput>
+  }
+
+  export type BenefitUpdateWithoutUserBenefitsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    active?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type BenefitUncheckedUpdateWithoutUserBenefitsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationDays?: NullableIntFieldUpdateOperationsInput | number | null
+    active?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ToyCreateManyOwnerInput = {
@@ -15350,6 +18954,17 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     chatId: string
+  }
+
+  export type UserBenefitCreateManyUserInput = {
+    id?: string
+    createdAt?: Date | string
+    benefitId: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    status?: $Enums.UserBenefitStatus
+    source?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ToyUpdateWithoutOwnerInput = {
@@ -15504,6 +19119,39 @@ export namespace Prisma {
     chatId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type UserBenefitUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumUserBenefitStatusFieldUpdateOperationsInput | $Enums.UserBenefitStatus
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    benefit?: BenefitUpdateOneRequiredWithoutUserBenefitsNestedInput
+  }
+
+  export type UserBenefitUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    benefitId?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumUserBenefitStatusFieldUpdateOperationsInput | $Enums.UserBenefitStatus
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type UserBenefitUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    benefitId?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumUserBenefitStatusFieldUpdateOperationsInput | $Enums.UserBenefitStatus
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
   export type HistoryEntryCreateManyToyInput = {
     id?: string
     createdAt?: Date | string
@@ -15582,6 +19230,50 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserBenefitCreateManyBenefitInput = {
+    id?: string
+    createdAt?: Date | string
+    userId: string
+    startsAt: Date | string
+    endsAt?: Date | string | null
+    status?: $Enums.UserBenefitStatus
+    source?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type UserBenefitUpdateWithoutBenefitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumUserBenefitStatusFieldUpdateOperationsInput | $Enums.UserBenefitStatus
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    user?: UserUpdateOneRequiredWithoutUserBenefitsNestedInput
+  }
+
+  export type UserBenefitUncheckedUpdateWithoutBenefitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumUserBenefitStatusFieldUpdateOperationsInput | $Enums.UserBenefitStatus
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type UserBenefitUncheckedUpdateManyWithoutBenefitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumUserBenefitStatusFieldUpdateOperationsInput | $Enums.UserBenefitStatus
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
 

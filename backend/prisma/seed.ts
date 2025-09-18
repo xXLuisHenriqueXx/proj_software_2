@@ -1,72 +1,83 @@
-import { PrismaClient, ToyType, AgeRange } from '../src/generated/prisma';
-import { hash } from 'bcryptjs';
-import { faker } from '@faker-js/faker/locale/pt_BR';
+// prisma/seed.ts
+import { PrismaClient } from '../src/generated/prisma'
+import { hash } from 'bcryptjs'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 async function main() {
-  console.log('Iniciando o processo de seed...');
+  console.log('Iniciando seed sem Faker...')
 
-  await prisma.toy.deleteMany();
-  await prisma.user.deleteMany();
-  console.log('Banco de dados limpo.');
+  await prisma.toy.deleteMany()
+  await prisma.user.deleteMany()
+  await prisma.benefit.deleteMany()
+  await prisma.userBenefit.deleteMany()
 
-  const users = [];
-  const hashedPassword = await hash('senha123', 10);
+  const hashedPassword = await hash('senha123', 10)
 
-  for (let i = 0; i < 5; i++) {
-    const user = await prisma.user.create({
-      data: {
-        name: faker.person.fullName(),
-        email: faker.internet.email().toLowerCase(),
-        password: hashedPassword,
-        cpf: faker.helpers.replaceSymbols('###.###.###-##'),
-        addressStreet: faker.location.streetAddress(),
-        addressDistrict: faker.location.county(),
-        addressNumber: faker.number.int({ min: 1, max: 2000 }),
-        addressCep: faker.location.zipCode('#####-###'),
-        addressDetail: faker.location.secondaryAddress(),
-      },
-    });
-    users.push(user);
-    console.log(`Usuário criado: ${user.name} (${user.email})`);
-  }
+  // cria usuários fixos
+  const alice = await prisma.user.create({
+    data: {
+      name: 'Alice Teste',
+      email: 'alice@example.com',
+      password: hashedPassword,
+      cpf: '123.456.789-00',
+      addressStreet: 'Rua das Flores',
+      addressDistrict: 'Centro',
+      addressNumber: 100,
+      addressCep: '97000-000',
+      addressDetail: 'Ap 101',
+    },
+  })
 
-  console.log('\nCriando brinquedos...');
+  const bob = await prisma.user.create({
+    data: {
+      name: 'Bob Teste',
+      email: 'bob@example.com',
+      password: hashedPassword,
+      cpf: '987.654.321-00',
+      addressStreet: 'Rua das Palmeiras',
+      addressDistrict: 'Bairro Norte',
+      addressNumber: 200,
+      addressCep: '97100-000',
+      addressDetail: 'Casa',
+    },
+  })
 
-  const allToyTypes = Object.values(ToyType);
-  const allAgeRanges = Object.values(AgeRange);
+  // cria um benefício fixo
+  const benefit = await prisma.benefit.create({
+    data: {
+      key: 'CLUBE_30_DIAS',
+      title: '30 dias de Clube do Brinquedo grátis',
+      description: 'Teste inicial da assinatura gratuita por 30 dias',
+      durationDays: 30,
+      active: true,
+    },
+  })
 
-  for (let i = 0; i < 10; i++) {
-    const randomUser = users[Math.floor(Math.random() * users.length)];
+  // concede benefício à Alice
+  const startsAt = new Date()
+  const endsAt = new Date()
+  endsAt.setDate(startsAt.getDate() + 30)
 
-    await prisma.toy.create({
-      data: {
-        name: faker.commerce.productName(),
-        description: faker.commerce.productDescription(),
-        price: 0,
-        isNew: faker.datatype.boolean(),
-        canTrade: faker.datatype.boolean(),
-        canLend: faker.datatype.boolean(),
-        usageTime: faker.number.int({ min: 1, max: 48 }),
-        preservation: faker.number.int({ min: 1, max: 5 }),
-        type: faker.helpers.arrayElements(allToyTypes, { min: 1, max: 2 }),
-        ageGroup: faker.helpers.arrayElement(allAgeRanges),
-        ownerId: randomUser.id,
-      },
-    });
-  }
-  console.log('10 brinquedos criados com sucesso.');
+  await prisma.userBenefit.create({
+    data: {
+      userId: alice.id,
+      benefitId: benefit.id,
+      startsAt,
+      endsAt,
+      status: 'ACTIVE',
+      source: 'SEED',
+    },
+  })
 
-  console.log('\nSeed finalizado com sucesso!');
+  console.log('Seed finalizado sem Faker!')
 }
 
 main()
   .catch((e) => {
-    console.error(e);
-    process.exit(1);
+    console.error(e)
+    process.exit(1)
   })
   .finally(async () => {
-    await prisma.$disconnect();
-  });
-
+    await prisma.$disconnect()
+  })

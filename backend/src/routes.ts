@@ -3,25 +3,34 @@ import { z } from "zod";
 
 import { authController } from "./controllers/authController";
 import { ToyController } from "./controllers/toyController";
+import { BenefitController } from "./controllers/benefitController"; // 👈 novo
 
 import { authMiddleware } from "./middleware/authMiddleware";
-import { 
-  registerSchema, 
-  loginSchema, 
-  updateUserSchema, 
+import {
+  registerSchema,
+  loginSchema,
+  updateUserSchema,
   updateAvatarSchema,
   userResponseSchema
 } from "./schemas/authValidationSchemas";
-import { 
-  toyCreateSchema, 
-  toyUpdateSchema, 
-  getToySchema, 
-  toyResponseSchema, 
-  toyListSchema 
+import {
+  toyCreateSchema,
+  toyUpdateSchema,
+  getToySchema,
+  toyResponseSchema,
+  toyListSchema
 } from "./schemas/toyValidationSchemas";
+import {
+  benefitCreateSchema,          // 👈 novo
+  benefitUpdateSchema,          // 👈 novo
+  grantBenefitSchema,           // 👈 novo
+  userIdParamSchema,            // 👈 novo
+  idParamSchema,                // 👈 novo
+} from "./schemas/benefitSchemas";
 
 export async function routes(app: FastifyInstance) {
 
+  // ===== Auth =====
   app.post('/auth/register', {
     schema: {
       tags: ['Auth'],
@@ -66,7 +75,7 @@ export async function routes(app: FastifyInstance) {
     }
   }, authController.delete);
 
-
+  // ===== Toys =====
   app.post('/toys', {
     onRequest: [authMiddleware],
     schema: {
@@ -113,5 +122,54 @@ export async function routes(app: FastifyInstance) {
       params: getToySchema,
     }
   }, ToyController.delete);
-}
 
+  // ===== Benefits (novo) =====
+  // Lista benefícios ativos do utilizador (endpoint que o front vai consumir)
+  app.get('/users/:userId/benefits/active', {
+    schema: {
+      tags: ['Benefits'],
+      summary: 'Lista benefícios ativos do utilizador',
+      params: userIdParamSchema,
+    }
+  }, BenefitController.listActiveForUser);
+
+  // Catálogo: listar
+  app.get('/benefits', {
+    schema: {
+      tags: ['Benefits'],
+      summary: 'Lista catálogo de benefícios',
+    }
+  }, BenefitController.list);
+
+  // Catálogo: criar (recomendo proteger com auth/role)
+  app.post('/benefits', {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ['Benefits'],
+      summary: 'Cria um benefício no catálogo',
+      body: benefitCreateSchema,
+    }
+  }, BenefitController.create);
+
+  // Catálogo: atualizar (recomendo proteger com auth/role)
+  app.patch('/benefits/:id', {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ['Benefits'],
+      summary: 'Atualiza um benefício do catálogo',
+      params: idParamSchema,
+      body: benefitUpdateSchema,
+    }
+  }, BenefitController.update);
+
+  // Conceder benefício a um utilizador (recomendo proteger com auth/role)
+  app.post('/users/:userId/benefits/grant', {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ['Benefits'],
+      summary: 'Concede um benefício a um utilizador',
+      params: userIdParamSchema,
+      body: grantBenefitSchema,
+    }
+  }, BenefitController.grant);
+}

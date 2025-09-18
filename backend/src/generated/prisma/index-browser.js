@@ -202,9 +202,37 @@ exports.Prisma.MessageScalarFieldEnum = {
   chatId: 'chatId'
 };
 
+exports.Prisma.BenefitScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  key: 'key',
+  title: 'title',
+  description: 'description',
+  durationDays: 'durationDays',
+  active: 'active'
+};
+
+exports.Prisma.UserBenefitScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  userId: 'userId',
+  benefitId: 'benefitId',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  status: 'status',
+  source: 'source',
+  metadata: 'metadata'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -215,6 +243,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
@@ -248,6 +282,13 @@ exports.ToyType = exports.$Enums.ToyType = {
   VIDEOGAME: 'VIDEOGAME'
 };
 
+exports.UserBenefitStatus = exports.$Enums.UserBenefitStatus = {
+  ACTIVE: 'ACTIVE',
+  REDEEMED: 'REDEEMED',
+  REVOKED: 'REVOKED',
+  EXPIRED: 'EXPIRED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   organizationInfo: 'organizationInfo',
@@ -256,7 +297,9 @@ exports.Prisma.ModelName = {
   HistoryEntry: 'HistoryEntry',
   Rate: 'Rate',
   Chat: 'Chat',
-  Message: 'Message'
+  Message: 'Message',
+  Benefit: 'Benefit',
+  UserBenefit: 'UserBenefit'
 };
 
 /**
