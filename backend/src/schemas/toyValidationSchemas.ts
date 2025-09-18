@@ -38,6 +38,7 @@ export const toyListSchema = z.object({
   filter: z.object({
     orderBy: orderByEnum.optional(),
     condition: conditionEnum.optional(),
+    type: toyTypeEnum.optional(),
     ageRange: ageRangeEnum.optional(),
     priceRange: z
       .object({

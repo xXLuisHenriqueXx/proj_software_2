@@ -159,6 +159,12 @@ export const ToyService = {
       where.isNew = filter.condition === "NOVO";
     }
 
+    if (filter?.type) {
+      where.type = {
+        has: filter.type,
+      };
+    }
+
     if (filter?.ageRange) {
       where.ageGroup = filter.ageRange;
     }
@@ -223,7 +229,7 @@ export const ToyService = {
       };
 
       toys = toys
-        .map((toy) => ({...toy, _score: ToyHelper.computeToyRelevance(toy, userProfile),})).sort((a, b) => b._score - a._score);
+        .map((toy) => ({ ...toy, _score: ToyHelper.computeToyRelevance(toy, userProfile), })).sort((a, b) => b._score - a._score);
 
       toys = toys.slice(skip, skip + take);
     } else {
