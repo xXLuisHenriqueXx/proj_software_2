@@ -21,18 +21,10 @@ const Register = () => {
     password: "",
     passwordConfirmation: "",
   });
-  const [loading, setLoading] = useState<boolean>(false);
 
   const handleNavigateToAddress = useCallback(() => {
     const validFields = validateRegisterFields(fields, type);
     if (!validFields) return;
-
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-
-    console.log("[REGISTER] handleNavigateToAddress: ", validFields);
 
     naviagtion.navigate("Address", { fieldsData: validFields });
   }, [naviagtion, fields, type]);
@@ -103,15 +95,10 @@ const Register = () => {
         className="absolute bottom-6 flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
         activeOpacity={0.85}
         onPress={handleNavigateToAddress}
-        disabled={loading}
       >
-        {loading ? (
-          <ActivityIndicator size="small" color={"#FEFEFE"} />
-        ) : (
-          <Text className="text-lg font-redHatDisplayMedium text-contrast">
-            {"Avançar"}
-          </Text>
-        )}
+        <Text className="text-lg font-redHatDisplayMedium text-contrast">
+          Avançar
+        </Text>
       </TouchableOpacity>
     </View>
   );

@@ -20,6 +20,7 @@ import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import useAuth from "@src/hooks/useAuth";
 import { IProduct } from "@src/common/Entities/Product";
 import { toyService } from "@src/services/ToyService";
+import { EToyType } from "@src/common/Interfaces/Toy.interface";
 
 const Home = () => {
   const { width } = useWindowDimensions();
@@ -29,32 +30,51 @@ const Home = () => {
 
   const [boyToys, setBoyToys] = useState<IProduct[]>([]);
   const [girlToys, setGirlToys] = useState<IProduct[]>([]);
+  const [babyToys, setBabyToys] = useState<IProduct[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleFetchBoysToys = async () => {
     const toys = await toyService.get({
       page: 1,
       pageSize: 4,
+      filter: { type: EToyType.MENINOS },
     });
-
-    console.log("Boys: ", toys.data);
 
     setBoyToys(toys.data.toys);
   };
 
   const handleFetchGirlsToys = async () => {
     const toys = await toyService.get({
-      page: 2,
+      page: 1,
       pageSize: 4,
+      filter: { type: EToyType.MENINAS },
     });
-
-    console.log("Girls: ", toys.data);
 
     setGirlToys(toys.data.toys);
   };
 
+  const handleFetchBabyToys = async () => {
+    const toys = await toyService.get({
+      page: 3,
+      pageSize: 1,
+      filter: { type: EToyType.PARA_BEBÊS },
+    });
+
+    setBabyToys(toys.data.toys);
+  };
+
   useEffect(() => {
-    handleFetchBoysToys();
-    handleFetchGirlsToys();
+    setIsLoading(true);
+
+    try {
+      handleFetchBoysToys();
+      handleFetchGirlsToys();
+      handleFetchBabyToys();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   const carouselWidth = width - 48;
@@ -62,6 +82,13 @@ const Home = () => {
   const handleNavigateToChats = () => navigation.replace("ChatStack");
 
   const handleLogout = () => logout();
+
+  if (isLoading)
+    return (
+      <View className="flex-1 items-center justify-center bg-backgroundSecondary">
+        <Text>Carregando...</Text>
+      </View>
+    );
 
   return (
     <ScrollView
@@ -93,21 +120,23 @@ const Home = () => {
 
         <Benefit />
 
-        {/*
         <List
           title="Brinquedos para meninos? Temos!"
           subtitile="Dê uma olhada nos nossos produtos"
           data={boyToys}
-          limit={4}
         />
 
         <List
           title="Brinquedos para meninas? Temos!"
           subtitile="Dê uma olhada nos nossos produtos"
           data={girlToys}
-          limit={4}
         />
-*/}
+
+        <List
+          title="Brinquedos para bebês? Temos!"
+          subtitile="Dê uma olhada nos nossos produtos"
+          data={babyToys}
+        />
       </View>
     </ScrollView>
   );

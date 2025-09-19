@@ -10,7 +10,11 @@ import { api } from "./Api";
 
 export const toyService = {
   get: async (params: IToyList) => {
-    const response = await api.get("/api/toys/list", { params });
+    const response = await api.post("/api/toys/list", {
+      page: params.page,
+      pageSize: params.pageSize,
+      filter: params.filter,
+    });
 
     return response;
   },

@@ -13,15 +13,15 @@ import Header from "./Header";
 
 import { IProduct } from "@src/common/Entities/Product";
 import { formatCurrency } from "@src/utils/FormatCurrency";
+import { CameraOff } from "lucide-react-native";
 
 interface IProductProps {
   title?: string;
   subtitile?: string;
   data: IProduct[];
-  limit: number;
 }
 
-const List = ({ title, subtitile, data, limit }: IProductProps) => {
+const List = ({ title, subtitile, data }: IProductProps) => {
   const { width } = useWindowDimensions();
   const navigation = useNavigation<PropsAppStack>();
 
@@ -34,13 +34,11 @@ const List = ({ title, subtitile, data, limit }: IProductProps) => {
   const hasHeader = title && subtitile;
 
   return (
-    <View className="flex-col items-center gap-y-4">
+    <View className="flex-col gap-y-4">
       {hasHeader && <Header title={title} subtitile={subtitile} />}
 
       <View className="flex-row flex-wrap justify-between gap-y-6">
         {data.map((item, index) => {
-          if (index >= limit) return null;
-
           return (
             <TouchableOpacity
               key={index}
@@ -49,26 +47,27 @@ const List = ({ title, subtitile, data, limit }: IProductProps) => {
               activeOpacity={0.85}
               onPress={() => handleNavigateToDetail(item)}
             >
-              <Image
-                source={{ uri: item.images[0] }}
-                className="w-full aspect-square rounded-xl"
-              />
+              {item?.pictures?.[0]?.picture ? (
+                <Image
+                  source={{ uri: item.pictures[0].picture }}
+                  className="w-full aspect-square rounded-xl"
+                />
+              ) : (
+                <View className="flex-col items-center justify-center w-full aspect-square rounded-xl bg-backgroundSecondary">
+                  <CameraOff size={24} color={"#316A41"} />
+                </View>
+              )}
 
-              <View className="flex-col gap-y-2">
+              <View className="flex-col gap-y-1">
                 <Text className="text-base font-redHatDisplayBold text-primary">
                   {formatCurrency(item.price)}
                 </Text>
-                <View className="flex-col gap-x-1">
-                  <Text
-                    className="text-base font-redHatDisplayRegular text-primary"
-                    numberOfLines={2}
-                  >
-                    {item.name}
-                  </Text>
-                  <Text className="text-sm font-redHatDisplayRegular text-primary/60">
-                    {item.brand}
-                  </Text>
-                </View>
+                <Text
+                  className="text-base font-redHatDisplayRegular text-primary"
+                  numberOfLines={2}
+                >
+                  {item.name}
+                </Text>
               </View>
             </TouchableOpacity>
           );

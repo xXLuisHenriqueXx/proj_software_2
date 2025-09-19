@@ -41,6 +41,7 @@ interface IMinMax {
 interface IFilter {
   orderBy?: EOrderBy;
   condition?: EToyCondition;
+  type?: EToyType;
   ageRange?: EAgeRange;
   priceRange?: IMinMax;
   donation?: boolean;
