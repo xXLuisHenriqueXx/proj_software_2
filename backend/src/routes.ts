@@ -4,6 +4,9 @@ import { z } from "zod";
 import { authController } from "./controllers/authController";
 import { ToyController } from "./controllers/toyController";
 
+import { HighlightController } from "./controllers/highlightController";
+import { highlightResponseSchema, highlightListSchema } from "./schemas/highlightsValidationSchema";
+
 import { authMiddleware } from "./middleware/authMiddleware";
 import { 
   registerSchema, 
@@ -113,5 +116,21 @@ export async function routes(app: FastifyInstance) {
       params: getToySchema,
     }
   }, ToyController.delete);
+   app.get('/highlights', {
+    schema: {
+      tags: ['Highlights'],
+      summary: 'Lista todos os highlights disponíveis',
+      response: {200: highlightListSchema }
+    }
+  }, HighlightController.getHighlights);
+
+  app.get('/highlights/:id', {
+    schema: {
+      tags: ['Highlights'],
+      summary: 'Busca um highlight por ID e retorna brinquedos associados',
+      params: z.object({ id: z.string() }),
+      response: { 200: highlightResponseSchema }
+    }
+  }, HighlightController.getHighlight);
 }
 

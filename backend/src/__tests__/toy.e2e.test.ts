@@ -66,7 +66,6 @@ describe('Toy E2E', () => {
         canTrade: false,
         canLend: true,
         usageTime: 0,
-        preservation: 5,
         type: [ToyType.QUEBRA_CABEÇAS, ToyType.EDUCATIVO],
         ageGroup: AgeRange.SEIS_A_DOZE,
         pictures: ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/epv2AAAAABJRU5ErkJggg=="]
@@ -84,7 +83,6 @@ describe('Toy E2E', () => {
         canTrade: false,
         canLend: true,
         usageTime: 0,
-        preservation: 5,
         type: [ToyType.QUEBRA_CABEÇAS, ToyType.EDUCATIVO],
         ageGroup: AgeRange.SEIS_A_DOZE,
         pictures: ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/epv2AAAAABJRU5ErkJggg=="]
@@ -111,7 +109,6 @@ describe('Toy E2E', () => {
         canTrade: false,
         canLend: true,
         usageTime: 0,
-        preservation: 5,
         type: [ToyType.QUEBRA_CABEÇAS, ToyType.EDUCATIVO],
         ageGroup: AgeRange.SEIS_A_DOZE,
         pictures: ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/epv2AAAAABJRU5ErkJggg=="]
@@ -146,7 +143,6 @@ describe('Toy E2E', () => {
           canTrade: true,
           canLend: true,
           usageTime: 0,
-          preservation: 5,
           type: [ToyType.QUEBRA_CABEÇAS, ToyType.EDUCATIVO],
           ageGroup: AgeRange.SEIS_A_DOZE,
           ownerId: userId,
@@ -160,7 +156,6 @@ describe('Toy E2E', () => {
           canTrade: false,
           canLend: true,
           usageTime: 12,
-          preservation: 4,
           type: [ToyType.TABULEIRO],
           ageGroup: AgeRange.DOZE_OU_MAIS,
           ownerId: userId,

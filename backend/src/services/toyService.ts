@@ -104,7 +104,6 @@ export const ToyService = {
         canTrade: toy.canTrade,
         canLend: toy.canLend,
         usageTime: toy.usageTime,
-        preservation: toy.preservation,
         type: toy.type,
         ageGroup: toy.ageGroup,
         pictures: toy.ToyPictures.map((p) => ({

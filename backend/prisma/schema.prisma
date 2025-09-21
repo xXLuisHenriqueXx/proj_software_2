@@ -77,7 +77,6 @@ model Toy {
   canTrade     Boolean
   canLend      Boolean
   usageTime    Int
-  preservation Int // CHECK (preservation BETWEEN 0 AND 5)
   type         ToyType[]
   ToyPictures  ToyPicture[] @relation("Pictures")
   ageGroup     AgeRange
@@ -156,6 +155,26 @@ model Chat {
   // mensagens
   messages Message[]
 }
+
+
+enum HighlightType {
+  FREE        // Brinquedos gratuitos (price = 0)
+  NEARBY      // Mais perto do usuário logado
+  POPULAR     // Mais visualizados
+  RECENT      // Últimos adicionados
+  NEW         // Brinquedos novos
+}
+
+model Highlight {
+  id          String         @id @default(uuid())
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  name        String
+  description String?
+  type        HighlightType
+  picture       String?        @db.Text
+}
+
 
 model Message {
   id        String   @id @default(uuid())

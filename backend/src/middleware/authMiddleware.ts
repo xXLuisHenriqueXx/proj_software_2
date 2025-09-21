@@ -10,7 +10,7 @@ export async function authMiddleware(request: FastifyRequest, reply: FastifyRepl
     const token = headerResult.data.authorization.replace("Bearer ", "");
     const decoded = await tokenHelper.verifyToken(token);
 
-    if (!decoded || typeof decoded !== "object" || !decoded.userId) {
+    if (!decoded || typeof decoded !== "object" || !decoded.userId || !decoded.role) {
       return reply.status(401).send({ error: "Token inválido ou expirado" });
     }
 

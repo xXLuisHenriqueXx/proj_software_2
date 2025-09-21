@@ -1,17 +1,24 @@
-import { PrismaClient, ToyType, AgeRange } from '../src/generated/prisma';
+import { PrismaClient, ToyType, AgeRange, HighlightType } from '../src/generated/prisma';
 import { passwordHelper } from '../src/helpers/passwordHelper';
 import { faker } from '@faker-js/faker/locale/pt_BR';
+import { base64 } from './base64_test';
 
 const prisma = new PrismaClient();
+
+// Base64 genérico (1x1 px branco)
+const base64Placeholder = base64;
 
 async function main() {
   console.log('Iniciando o processo de seed...');
 
+  // Limpeza do banco
   await prisma.historyEntry.deleteMany();
   await prisma.toy.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.highlight.deleteMany();
   console.log('Banco de dados limpo.');
 
+  // ======== USUÁRIOS ========
   const users = [];
   const hashedPassword = await passwordHelper.hashPassword('senha123', 10);
 
@@ -33,8 +40,8 @@ async function main() {
     console.log(`Usuário criado: ${user.name} (${user.email})`);
   }
 
+  // ======== BRINQUEDOS ========
   console.log('\nCriando brinquedos...');
-
   const allToyTypes = Object.values(ToyType);
   const allAgeRanges = Object.values(AgeRange);
 
@@ -51,7 +58,6 @@ async function main() {
         canTrade: faker.datatype.boolean(),
         canLend: faker.datatype.boolean(),
         usageTime: faker.number.int({ min: 1, max: 48 }),
-        preservation: faker.number.int({ min: 1, max: 5 }),
         type: faker.helpers.arrayElements(allToyTypes, { min: 1, max: 2 }),
         ageGroup: faker.helpers.arrayElement(allAgeRanges),
         ownerId: randomUser.id,
@@ -61,8 +67,8 @@ async function main() {
   }
   console.log(`${toys.length} brinquedos criados com sucesso.`);
 
+  // ======== HISTÓRICO ========
   console.log('\nCriando histórico para cada usuário...');
-
   for (const user of users) {
     const randomToys = faker.helpers.arrayElements(toys, 5);
     for (const toy of randomToys) {
@@ -74,6 +80,45 @@ async function main() {
       });
     }
     console.log(`Histórico criado para usuário ${user.name}`);
+  }
+
+  console.log('\nCriando highlights...');
+  const highlightsData = [
+    {
+      name: 'Brinquedos Gratuitos',
+      type: HighlightType.FREE,
+      description: 'Brinquedos disponíveis para doação ou gratuitos.',
+      picture: base64Placeholder,
+    },
+    {
+      name: 'Mais Perto de Você',
+      type: HighlightType.NEARBY,
+      description: 'Brinquedos próximos à sua localização.',
+      picture: base64Placeholder,
+    },
+    {
+      name: 'Mais Populares',
+      type: HighlightType.POPULAR,
+      description: 'Brinquedos mais visualizados por outros usuários.',
+      picture: base64Placeholder,
+    },
+    {
+      name: 'Últimos Adicionados',
+      type: HighlightType.RECENT,
+      description: 'Brinquedos recém adicionados na plataforma.',
+      picture: base64Placeholder,
+    },
+    {
+      name: 'Brinquedos Novos',
+      type: HighlightType.NEW,
+      description: 'Brinquedos que estão como novos.',
+      picture: base64Placeholder,
+    },
+  ];
+
+  for (const data of highlightsData) {
+    const highlight = await prisma.highlight.create({ data });
+    console.log(`Highlight criado: ${highlight.name}`);
   }
 
   console.log('\nSeed finalizado com sucesso!');

@@ -11,6 +11,7 @@ import {
   loginSchema,
 } from "../schemas/authValidationSchemas";
 import { passwordHelper } from "../helpers/passwordHelper";
+import { Role } from '../generated/prisma'
 
 type RegisterBody = z.infer<typeof registerSchema>;
 type LoginBody = z.infer<typeof loginSchema>;
@@ -43,7 +44,7 @@ export const authController = {
           .send({ message: "Este usuário já foi registrado" });
       }
       const user = await authService.createUser(data);
-      const token = await tokenHelper.generateToken(user.id);
+      const token = await tokenHelper.generateToken(user.id, Role.USER);
       return reply.status(201).send({ user: safeUser(user), token });
     } catch (error) {
       console.error("Erro no controller de registro:", error);
@@ -90,7 +91,7 @@ export const authController = {
       if (!user) {
         return reply.status(404).send({ message: "Usuário não encontrado" });
       }
-      const token = await tokenHelper.generateToken(user.id);
+      const token = await tokenHelper.generateToken(user.id, Role.USER);
       if (await passwordHelper.validatePassword(data.password, user.password)) {
         return reply.status(200).send({ user: safeUser(user), token });
       } else {
