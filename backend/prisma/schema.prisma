@@ -84,30 +84,30 @@ model Toy {
 }
 
 enum ToyType {
-  MENINOS
-  MENINAS
-  ARTÍSTICO
-  AVENTURA
-  BONECOS
-  CARRINHOS
-  CARTAS
-  EDUCATIVO
-  ESPORTES
-  ESTRATÉGIA
-  PALAVRAS
-  PARA_BEBÊS
-  QUEBRA_CABEÇAS
-  SIMULAÇÃO
-  TABULEIRO
+  BOYS
+  GIRLS
+  ARTISTIC
+  ADVENTURE
+  DOLLS
+  CARS
+  CARDS
+  EDUCATIONAL
+  SPORTS
+  STRATEGY
+  WORDS
+  BABIES
+  PUZZLES
+  SIMULATION
+  BOARD
   VIDEOGAME
 }
 
 enum AgeRange {
-  ZERO_A_UM // 0 a 1 ano
-  UM_A_TRES // 1 a 3 anos
-  TRES_A_SEIS // 3 a 6 anos
-  SEIS_A_DOZE // 6 a 12 anos
-  DOZE_OU_MAIS // 12 anos ou mais
+  ZERO_TO_ONE // 0 to 1 year
+  ONE_TO_THREE // 1 to 3 years
+  THREE_TO_SIX // 3 to 6 years
+  SIX_TO_TWELVE // 6 to 12 years
+  TWELVE_OR_MORE // 12 years or more
 }
 
 model ToyPicture {

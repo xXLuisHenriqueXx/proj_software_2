@@ -5,15 +5,16 @@ export const ageRangeEnum = z.nativeEnum(AgeRange);
 export const toyTypeEnum = z.nativeEnum(ToyType);
 
 export const orderByEnum = z.enum([
-  "RELEVANTES",
-  "MENOR_PRECO",
-  "MAIOR_PRECO"
+  "RELEVANT",
+  "LOWEST_PRICE",
+  "HIGHEST_PRICE"
 ]);
 
 export const conditionEnum = z.enum([
-  "NOVO",
-  "USADO"
+  "NEW",
+  "USED"
 ]);
+
 
 export const toyCreateSchema = z.object({
   name: z.string().min(1, "O nome é obrigatório.").max(50, "O nome não pode ter mais de 50 caracteres."),
