@@ -15,12 +15,13 @@ import Benefit from "./_components/Benefit";
 import List from "@src/components/List";
 import Carousel from "@src/components/Carousel";
 
-import { highlightScrollData } from "@src/static/HighlightScrollData";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import useAuth from "@src/hooks/useAuth";
 import { IProduct } from "@src/common/Entities/Product";
 import { toyService } from "@src/services/ToyService";
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
+import { IHighlight } from "@src/common/Entities/Highlight";
+import { highlightService } from "@src/services/HighlightService";
 
 const Home = () => {
   const { width } = useWindowDimensions();
@@ -28,16 +29,23 @@ const Home = () => {
   const statusBarHeight = Constants.statusBarHeight;
   const navigation = useNavigation<PropsAppStack>();
 
+  const [highlights, setHighlights] = useState<IHighlight[]>([]);
   const [boyToys, setBoyToys] = useState<IProduct[]>([]);
   const [girlToys, setGirlToys] = useState<IProduct[]>([]);
   const [babyToys, setBabyToys] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const handleFetchHighlights = async () => {
+    const highlights = await highlightService.get();
+
+    setHighlights(highlights.data);
+  };
+
   const handleFetchBoysToys = async () => {
     const toys = await toyService.get({
       page: 1,
       pageSize: 4,
-      filter: { type: EToyType.MENINOS },
+      filter: { type: EToyType.BOYS },
     });
 
     setBoyToys(toys.data.toys);
@@ -47,7 +55,7 @@ const Home = () => {
     const toys = await toyService.get({
       page: 1,
       pageSize: 4,
-      filter: { type: EToyType.MENINAS },
+      filter: { type: EToyType.GIRLS },
     });
 
     setGirlToys(toys.data.toys);
@@ -57,7 +65,7 @@ const Home = () => {
     const toys = await toyService.get({
       page: 3,
       pageSize: 1,
-      filter: { type: EToyType.PARA_BEBÊS },
+      filter: { type: EToyType.BABIES },
     });
 
     setBabyToys(toys.data.toys);
@@ -67,6 +75,7 @@ const Home = () => {
     setIsLoading(true);
 
     try {
+      handleFetchHighlights();
       handleFetchBoysToys();
       handleFetchGirlsToys();
       handleFetchBabyToys();
@@ -110,11 +119,7 @@ const Home = () => {
       </View>
 
       <View className="flex-col items-center gap-y-12 w-full h-full p-6 pb-48 bg-backgroundPrimary rounded-t-3xl\">
-        <Carousel
-          width={carouselWidth}
-          height={240}
-          data={highlightScrollData}
-        />
+        <Carousel width={carouselWidth} height={240} data={highlights} />
 
         <Institutes />
 
