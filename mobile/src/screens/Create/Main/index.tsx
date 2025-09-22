@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useState } from "react";
 import {
   View,
   Text,
@@ -35,7 +35,7 @@ const Main = () => {
     canTrade: false,
     canLend: false,
     usageTime: "",
-    ageGroup: EAgeRange.ZERO_A_UM,
+    ageGroup: EAgeRange.ZERO_TO_ONE,
     pictures: [],
     discount: "",
   });
@@ -66,11 +66,12 @@ const Main = () => {
     createNavigation.navigate("Categories", { fields });
   };
 
-  const formatPrice = (value: string) => {
-    return value.replace(".", "").replace(",", ".").split(" ")[1];
-  };
-
-  console.log(fields.price);
+  const formatPrice = useCallback(
+    (value: string) => {
+      return value.replace(".", "").replace(",", ".").split(" ")[1];
+    },
+    [fields.price]
+  );
 
   const bigImageWidth = (width - 48 - 16) / 2;
   const smallImageWidth = (width - 48 - 16 - 16) / 2 / 2;
@@ -357,11 +358,11 @@ const Main = () => {
 
         <View className="flex-col gap-y-4 w-full">
           {[
-            { name: "0 a 1 ano", value: EAgeRange.ZERO_A_UM },
-            { name: "1 a 3 anos", value: EAgeRange.UM_A_TRES },
-            { name: "3 a 6 anos", value: EAgeRange.TRES_A_SEIS },
-            { name: "6 a 12 anos", value: EAgeRange.SEIS_A_DOZE },
-            { name: "12 ou mais anos", value: EAgeRange.DOZE_OU_MAIS },
+            { name: "0 a 1 ano", value: EAgeRange.ZERO_TO_ONE },
+            { name: "1 a 3 anos", value: EAgeRange.ONE_TO_THREE },
+            { name: "3 a 6 anos", value: EAgeRange.THREE_TO_SIX },
+            { name: "6 a 12 anos", value: EAgeRange.SIX_TO_TWELVE },
+            { name: "12 ou mais anos", value: EAgeRange.TWELVE_OR_MORE },
           ].map((item, index) => (
             <Fragment key={index}>
               <TouchableOpacity

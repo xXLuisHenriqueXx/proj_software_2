@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { prisma } from "../prisma";
 import { authService } from "../services/authService";
 import { tokenHelper } from "../helpers/tokenHelper";
-import * as sharp from 'sharp';
+import * as sharp from "sharp";
 import { z } from "zod";
 import {
   registerSchema,
@@ -11,7 +11,7 @@ import {
   loginSchema,
 } from "../schemas/authValidationSchemas";
 import { passwordHelper } from "../helpers/passwordHelper";
-import { Role } from '../generated/prisma'
+import { Role } from "../generated/prisma";
 
 type RegisterBody = z.infer<typeof registerSchema>;
 type LoginBody = z.infer<typeof loginSchema>;
@@ -34,7 +34,7 @@ export const authController = {
   ) {
     try {
       const data = req.body;
-      console.log(data);
+
       const userExists = await prisma.user.findFirst({
         where: { OR: [{ email: data.email }, { cpf: data.cpf }] },
       });

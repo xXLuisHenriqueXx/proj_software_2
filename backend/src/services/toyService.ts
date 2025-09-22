@@ -1,14 +1,17 @@
 import { prisma } from "../prisma";
 import { z } from "zod";
-import { toyCreateSchema, toyUpdateSchema, toyListSchema } from "../schemas/toyValidationSchemas";
+import {
+  toyCreateSchema,
+  toyUpdateSchema,
+  toyListSchema,
+} from "../schemas/toyValidationSchemas";
 import { pictureHelper } from "../helpers/pictureHelpers";
 import { ToyHelper } from "../helpers/toyHelper";
 import { ToyType } from "../generated/prisma";
 
-
 type ToyCreateData = z.infer<typeof toyCreateSchema>;
 type ToyUpdateData = z.infer<typeof toyUpdateSchema>;
-type ToyFilter = z.infer<typeof toyListSchema>['filter'];
+type ToyFilter = z.infer<typeof toyListSchema>["filter"];
 
 export const ToyService = {
   async createToy(data: ToyCreateData, ownerId: string): Promise<any> {
@@ -29,21 +32,36 @@ export const ToyService = {
         ...toyData,
         ownerId,
         ToyPictures: {
-          create: pictures?.map((pic, index) => ({
-            picture: pic,
-            order: index + 1,
-          })) || [],
+          create:
+            pictures?.map((pic, index) => ({
+              picture: pic,
+              order: index + 1,
+            })) || [],
         },
       },
-      include: { ToyPictures: true, owner: true }
+      include: {
+        ToyPictures: true,
+        owner: {
+          select: {
+            id: true,
+            name: true,
+            picture: true,
+          },
+        },
+      },
     });
     return toy;
   },
 
-  async updateToy(toyId: string, data: ToyUpdateData, ownerId: string): Promise<any> {
+  async updateToy(
+    toyId: string,
+    data: ToyUpdateData,
+    ownerId: string
+  ): Promise<any> {
     const toy = await prisma.toy.findUnique({ where: { id: toyId } });
     if (!toy) throw new Error("Brinquedo não encontrado");
-    if (toy.ownerId !== ownerId) throw new Error("Você não tem permissão para atualizar este brinquedo");
+    if (toy.ownerId !== ownerId)
+      throw new Error("Você não tem permissão para atualizar este brinquedo");
 
     const { pictures, ...toyData } = data;
 
@@ -51,15 +69,17 @@ export const ToyService = {
       where: { id: toyId },
       data: {
         ...toyData,
-        ToyPictures: pictures ? {
-          deleteMany: {},
-          create: pictures.map((pic, index) => ({
-            picture: pic,
-            order: index + 1,
-          })),
-        } : undefined,
+        ToyPictures: pictures
+          ? {
+              deleteMany: {},
+              create: pictures.map((pic, index) => ({
+                picture: pic,
+                order: index + 1,
+              })),
+            }
+          : undefined,
       },
-      include: { ToyPictures: true, owner: true }
+      include: { ToyPictures: true, owner: true },
     });
     return updatedToy;
   },
@@ -67,7 +87,8 @@ export const ToyService = {
   async deleteToy(toyId: string, ownerId: string): Promise<boolean> {
     const toy = await prisma.toy.findUnique({ where: { id: toyId } });
     if (!toy) throw new Error("Brinquedo não encontrado");
-    if (toy.ownerId !== ownerId) throw new Error("Você não tem permissão para deletar este brinquedo");
+    if (toy.ownerId !== ownerId)
+      throw new Error("Você não tem permissão para deletar este brinquedo");
 
     await prisma.toy.delete({ where: { id: toyId } });
     return true;
@@ -85,14 +106,14 @@ export const ToyService = {
             select: {
               id: true,
               name: true,
-              picture: true
+              picture: true,
             },
           },
         },
-      })
+      });
 
       if (!toy) {
-        throw new Error("Brinquedo não encontrado")
+        throw new Error("Brinquedo não encontrado");
       }
 
       const response = {
@@ -116,12 +137,12 @@ export const ToyService = {
           name: toy.owner.name,
           picture: toy.owner.picture
             ? toy.owner.picture
-            : "/public/assets/avatar_not_found.webp"
+            : "/public/assets/avatar_not_found.webp",
         },
-      }
-      return (response)
+      };
+      return response;
     } catch (error) {
-      return ({ error: error })
+      return { error: error };
     }
   },
 
@@ -131,11 +152,11 @@ export const ToyService = {
         data: {
           userId: userId,
           toyId: toyId,
-        }
-      })
-      return ("Brinquedo registrado no histórico com sucesso")
+        },
+      });
+      return "Brinquedo registrado no histórico com sucesso";
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   },
 
@@ -218,7 +239,10 @@ export const ToyService = {
       const seenToyIds = history.map((h) => h.toyId);
       const favoriteTypes = history.flatMap((h) => h.toy.type);
       const favoriteAgeGroups = history.map((h) => h.toy.ageGroup);
-      const avgPrice = history.length > 0 ? history.reduce((acc, h) => acc + h.toy.price, 0) / history.length : 0;
+      const avgPrice =
+        history.length > 0
+          ? history.reduce((acc, h) => acc + h.toy.price, 0) / history.length
+          : 0;
 
       const userProfile = {
         favoriteTypes: [...new Set(favoriteTypes)],
@@ -228,7 +252,11 @@ export const ToyService = {
       };
 
       toys = toys
-        .map((toy) => ({ ...toy, _score: ToyHelper.computeToyRelevance(toy, userProfile), })).sort((a, b) => b._score - a._score);
+        .map((toy) => ({
+          ...toy,
+          _score: ToyHelper.computeToyRelevance(toy, userProfile),
+        }))
+        .sort((a, b) => b._score - a._score);
 
       toys = toys.slice(skip, skip + take);
     } else {
@@ -254,6 +282,5 @@ export const ToyService = {
       totalPages: Math.ceil(total / pageSize),
       toys,
     };
-  }
+  },
 };
-

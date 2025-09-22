@@ -57,8 +57,6 @@ const Categories = ({ route }: Props) => {
         discount: 0,
       };
 
-      console.log(params);
-
       await toyService.create(params);
 
       rootNavigation.replace("AppTabs");
