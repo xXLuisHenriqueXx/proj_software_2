@@ -1,7 +1,12 @@
-import { PrismaClient, ToyType, AgeRange, HighlightType } from '../src/generated/prisma';
-import { passwordHelper } from '../src/helpers/passwordHelper';
-import { faker } from '@faker-js/faker/locale/pt_BR';
-import { base64 } from './base64_test';
+import {
+  PrismaClient,
+  ToyType,
+  AgeRange,
+  HighlightType,
+} from "../src/generated/prisma";
+import { passwordHelper } from "../src/helpers/passwordHelper";
+import { faker } from "@faker-js/faker/locale/pt_BR";
+import { base64 } from "./base64_test";
 
 const prisma = new PrismaClient();
 
@@ -9,18 +14,18 @@ const prisma = new PrismaClient();
 const base64Placeholder = base64;
 
 async function main() {
-  console.log('Iniciando o processo de seed...');
+  console.log("Iniciando o processo de seed...");
 
   // Limpeza do banco
   await prisma.historyEntry.deleteMany();
   await prisma.toy.deleteMany();
   await prisma.user.deleteMany();
   await prisma.highlight.deleteMany();
-  console.log('Banco de dados limpo.');
+  console.log("Banco de dados limpo.");
 
   // ======== USUÁRIOS ========
   const users = [];
-  const hashedPassword = await passwordHelper.hashPassword('senha123', 10);
+  const hashedPassword = await passwordHelper.hashPassword("senha123", 10);
 
   for (let i = 0; i < 5; i++) {
     const user = await prisma.user.create({
@@ -28,11 +33,11 @@ async function main() {
         name: faker.person.fullName(),
         email: faker.internet.email().toLowerCase(),
         password: hashedPassword,
-        cpf: faker.helpers.replaceSymbols('###.###.###-##'),
+        cpf: faker.helpers.replaceSymbols("###.###.###-##"),
         addressStreet: faker.location.streetAddress(),
         addressDistrict: faker.location.county(),
         addressNumber: faker.number.int({ min: 1, max: 2000 }),
-        addressCep: faker.location.zipCode('#####-###'),
+        addressCep: faker.location.zipCode("#####-###"),
         addressDetail: faker.location.secondaryAddress(),
       },
     });
@@ -41,7 +46,7 @@ async function main() {
   }
 
   // ======== BRINQUEDOS ========
-  console.log('\nCriando brinquedos...');
+  console.log("\nCriando brinquedos...");
   const allToyTypes = Object.values(ToyType);
   const allAgeRanges = Object.values(AgeRange);
 
@@ -60,6 +65,7 @@ async function main() {
         usageTime: faker.number.int({ min: 1, max: 48 }),
         type: faker.helpers.arrayElements(allToyTypes, { min: 1, max: 2 }),
         ageGroup: faker.helpers.arrayElement(allAgeRanges),
+        discount: faker.number.int({ min: 0, max: 100 }),
         ownerId: randomUser.id,
       },
     });
@@ -68,7 +74,7 @@ async function main() {
   console.log(`${toys.length} brinquedos criados com sucesso.`);
 
   // ======== HISTÓRICO ========
-  console.log('\nCriando histórico para cada usuário...');
+  console.log("\nCriando histórico para cada usuário...");
   for (const user of users) {
     const randomToys = faker.helpers.arrayElements(toys, 5);
     for (const toy of randomToys) {
@@ -82,36 +88,36 @@ async function main() {
     console.log(`Histórico criado para usuário ${user.name}`);
   }
 
-  console.log('\nCriando highlights...');
+  console.log("\nCriando highlights...");
   const highlightsData = [
     {
-      name: 'Brinquedos Gratuitos',
+      name: "Brinquedos Gratuitos",
       type: HighlightType.FREE,
-      description: 'Brinquedos disponíveis para doação ou gratuitos.',
+      description: "Brinquedos disponíveis para doação ou gratuitos.",
       picture: base64Placeholder,
     },
     {
-      name: 'Mais Perto de Você',
+      name: "Mais Perto de Você",
       type: HighlightType.NEARBY,
-      description: 'Brinquedos próximos à sua localização.',
+      description: "Brinquedos próximos à sua localização.",
       picture: base64Placeholder,
     },
     {
-      name: 'Mais Populares',
+      name: "Mais Populares",
       type: HighlightType.POPULAR,
-      description: 'Brinquedos mais visualizados por outros usuários.',
+      description: "Brinquedos mais visualizados por outros usuários.",
       picture: base64Placeholder,
     },
     {
-      name: 'Últimos Adicionados',
+      name: "Últimos Adicionados",
       type: HighlightType.RECENT,
-      description: 'Brinquedos recém adicionados na plataforma.',
+      description: "Brinquedos recém adicionados na plataforma.",
       picture: base64Placeholder,
     },
     {
-      name: 'Brinquedos Novos',
+      name: "Brinquedos Novos",
       type: HighlightType.NEW,
-      description: 'Brinquedos que estão como novos.',
+      description: "Brinquedos que estão como novos.",
       picture: base64Placeholder,
     },
   ];
@@ -121,7 +127,7 @@ async function main() {
     console.log(`Highlight criado: ${highlight.name}`);
   }
 
-  console.log('\nSeed finalizado com sucesso!');
+  console.log("\nSeed finalizado com sucesso!");
 }
 
 main()

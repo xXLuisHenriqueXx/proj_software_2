@@ -4,6 +4,7 @@ import {
 } from "@react-navigation/native-stack";
 
 import AppTabs from "../tabs/AppTabs";
+import CreateStack from "./CreateStack";
 import ChatStack from "./ChatStack";
 import ProductDetail from "@src/screens/ProductDetail";
 import InstituteDetail from "@src/screens/InstituteDetail";
@@ -13,6 +14,7 @@ import { IInstitute } from "@src/common/Entities/Institute";
 
 export type AppStackParamList = {
   AppTabs: undefined;
+  CreateStack: undefined;
   ChatStack: undefined;
   ProductDetail: { product: IProduct };
   InstituteDetail: { institute: IInstitute };
@@ -28,6 +30,7 @@ export default function AppStack() {
       screenOptions={{ headerShown: false, animation: "fade_from_bottom" }}
     >
       <Stack.Screen name="AppTabs" component={AppTabs} />
+      <Stack.Screen name="CreateStack" component={CreateStack} />
       <Stack.Screen name="ChatStack" component={ChatStack} />
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="InstituteDetail" component={InstituteDetail} />

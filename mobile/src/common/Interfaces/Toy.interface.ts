@@ -80,10 +80,9 @@ export interface IToyCreate {
   canTrade: boolean;
   canLend: boolean;
   usageTime: number;
-  preservation: number;
   type: EToyType[];
   ageGroup: EAgeRange;
-  pictures?: string[];
+  pictures: (string | null | undefined)[];
   discount?: number;
 }
 
@@ -96,7 +95,7 @@ export interface IToyUpdate {
   canTrade?: boolean;
   canLend?: boolean;
   usageTime?: number;
-  preservation?: number;
+  condition?: EToyCondition;
   type?: EToyType[];
   ageGroup?: EAgeRange;
   pictures?: string[];
@@ -105,4 +104,21 @@ export interface IToyUpdate {
 
 export interface IToyDelete {
   id: string;
+}
+
+export interface IFieldsToyCreateMain {
+  name: string;
+  description: string;
+  price: string;
+  isNew: boolean;
+  canTrade: boolean;
+  canLend: boolean;
+  usageTime: string;
+  ageGroup: EAgeRange;
+  pictures: (string | null | undefined)[];
+  discount?: string;
+}
+
+export interface IFieldsToyCreateCategory {
+  type: EToyType[];
 }

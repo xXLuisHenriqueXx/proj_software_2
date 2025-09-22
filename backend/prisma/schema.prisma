@@ -80,6 +80,7 @@ model Toy {
   type         ToyType[]
   ToyPictures  ToyPicture[] @relation("Pictures")
   ageGroup     AgeRange
+  discount     Int
 }
 
 enum ToyType {

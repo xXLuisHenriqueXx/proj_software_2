@@ -27,7 +27,7 @@ const Search = () => {
       className="relative flex-1 bg-backgroundPrimary w-full h-full px-6"
       style={{ paddingTop: statusBarHeight + 64 }}
       contentContainerStyle={{
-        paddingBottom: 224,
+        paddingBottom: 264,
         rowGap: 48,
       }}
     >

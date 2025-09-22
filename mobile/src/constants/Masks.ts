@@ -36,3 +36,20 @@ export const CPF_MASK = [
 ];
 
 export const CEP_MASK = [/\d/, /\d/, /\d/, /\d/, /\d/, "-", /\d/, /\d/, /\d/];
+
+export const BRL_CURRENCY_MASK = [
+  "R$ ",
+  /\d/,
+  ".",
+  /\d/,
+  /\d/,
+  /\d/,
+  ".",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  ",",
+  /\d/,
+  /\d/,
+];

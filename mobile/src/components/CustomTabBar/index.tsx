@@ -4,6 +4,7 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { AnimatePresence, MotiText, MotiView } from "moti";
 
 import { buttonsData } from "@src/static/TabBarButtonsData";
+import { Plus } from "lucide-react-native";
 
 const CustomTabBar = ({
   state,
@@ -12,8 +13,8 @@ const CustomTabBar = ({
 }: BottomTabBarProps) => {
   return (
     <View
-      className="absolute bottom-6 left-6 right-6 flex-row items-center justify-between gap-x-2 p-6 bg-contrast rounded-3xl"
-      style={{ elevation: 8, shadowColor: "#13131399" }}
+      className="absolute bottom-6 self-center flex-row items-center justify-between gap-x-6 p-6 bg-contrast rounded-3xl"
+      style={{ elevation: 2, shadowColor: "#13131399" }}
     >
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -70,6 +71,16 @@ const CustomTabBar = ({
           </TouchableOpacity>
         );
       })}
+
+      <View className="absolute -top-14 left-0 right-0 items-center justify-center">
+        <TouchableOpacity
+          className="p-4 bg-highlight border-8 border-contrast rounded-full"
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate("CreateStack")}
+        >
+          <Plus size={24} color={"#FEFEFE"} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
