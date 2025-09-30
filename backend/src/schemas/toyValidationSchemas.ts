@@ -35,12 +35,16 @@ export const toyCreateSchema = z.object({
   ageGroup: ageRangeEnum,
   pictures: z
     .array(
-      z
-        .string()
-        .regex(
-          /^data:image\/[a-zA-Z]+;base64,/,
-          "Formato de imagem Base64 inválido."
-        )
+      z.string().refine((val) => {
+        try {
+          const base64 = val.split(",")[1] ?? val;
+          const sizeInBytes = (base64.length * 3) / 4; 
+          const maxSize = 5 * 1024 * 1024;
+          return sizeInBytes <= maxSize;
+        } catch {
+          return false;
+        }
+      }, "A imagem deve ter no máximo 5MB.")
     )
     .optional(),
   discount: z.number().nonnegative().optional(),
