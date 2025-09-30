@@ -216,7 +216,7 @@ export const ToyService = {
         { description: { contains: filter.search, mode: "insensitive" } },
         {
           type: {
-            has: filter.search.toUpperCase() as ToyType,
+            has: filter.type.toUpperCase() as ToyType,
             mode: "insensitive",
           },
         },
