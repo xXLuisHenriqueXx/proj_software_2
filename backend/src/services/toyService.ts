@@ -5,7 +5,6 @@ import {
   toyUpdateSchema,
   toyListSchema,
 } from "../schemas/toyValidationSchemas";
-import { pictureHelper } from "../helpers/pictureHelpers";
 import { ToyHelper } from "../helpers/toyHelper";
 import { ToyType } from "../generated/prisma";
 
@@ -18,12 +17,6 @@ export const ToyService = {
     if (data.discount && data.discount > data.price) {
       throw new Error("Desconto não pode ser maior que o preço");
     }
-
-    data.pictures?.forEach((pic) => {
-      if (!pictureHelper.isValidBase64Image(pic)) {
-        throw new Error("A foto precisa estar no formato base64");
-      }
-    });
 
     const { pictures, ...toyData } = data;
 
