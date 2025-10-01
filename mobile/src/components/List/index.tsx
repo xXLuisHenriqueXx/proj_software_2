@@ -13,7 +13,7 @@ import Header from "./Header";
 
 import { IProduct } from "@src/common/Entities/Product";
 import { formatCurrency } from "@src/utils/FormatCurrency";
-import { CameraOff } from "lucide-react-native";
+import { CameraOff, CircleOff } from "lucide-react-native";
 
 interface IProductProps {
   title?: string;
@@ -37,9 +37,9 @@ const List = ({ title, subtitile, data }: IProductProps) => {
     <View className="flex-col gap-y-4">
       {hasHeader && <Header title={title} subtitile={subtitile} />}
 
-      <View className="flex-row flex-wrap justify-between gap-y-6">
-        {data.map((item, index) => {
-          return (
+      {data.length > 0 ? (
+        <View className="flex-row flex-wrap justify-between gap-y-6">
+          {data.map((item, index) => (
             <TouchableOpacity
               key={index}
               className="flex-col gap-y-4"
@@ -70,9 +70,16 @@ const List = ({ title, subtitile, data }: IProductProps) => {
                 </Text>
               </View>
             </TouchableOpacity>
-          );
-        })}
-      </View>
+          ))}
+        </View>
+      ) : (
+        <View className="flex-col gap-y-2 items-center justify-center w-full">
+          <CircleOff size={24} color={"#316A41"} />
+          <Text className="text-lg font-redHatDisplaySemiBold text-primary">
+            Nenhum produto encontrado
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

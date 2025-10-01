@@ -3,14 +3,14 @@ import { Search } from "lucide-react-native";
 
 interface SearchInputProps {
   onPress: () => void;
-  onBlur: () => void;
+  onEndEditing: () => void;
   search: string;
   setSearch: (value: string) => void;
 }
 
 const SearchInput = ({
   onPress,
-  onBlur,
+  onEndEditing,
   search,
   setSearch,
 }: SearchInputProps) => {
@@ -27,7 +27,8 @@ const SearchInput = ({
           setSearch(text);
         }}
         onPress={onPress}
-        onBlur={onBlur}
+        // onBlur={onBlur}
+        onEndEditing={onEndEditing}
       />
     </View>
   );

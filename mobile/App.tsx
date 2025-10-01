@@ -15,6 +15,7 @@ import "react-native-gesture-handler";
 import "./global.css";
 import Routes from "@src/routes";
 import { useAuthStore } from "@src/stores/AuthStore";
+import ErrorBoundary from "@src/components/Error";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -48,15 +49,17 @@ export default function App() {
 const AppContent = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <GestureHandlerRootView>
-        <StatusBar
-          barStyle={"dark-content"}
-          backgroundColor="transparent"
-          translucent
-        />
+      <ErrorBoundary>
+        <GestureHandlerRootView>
+          <StatusBar
+            barStyle={"dark-content"}
+            backgroundColor="transparent"
+            translucent
+          />
 
-        <Routes />
-      </GestureHandlerRootView>
+          <Routes />
+        </GestureHandlerRootView>
+      </ErrorBoundary>
     </SafeAreaView>
   );
 };
