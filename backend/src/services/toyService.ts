@@ -214,12 +214,6 @@ export const ToyService = {
       where.OR = [
         { name: { contains: filter.search, mode: "insensitive" } },
         { description: { contains: filter.search, mode: "insensitive" } },
-        {
-          type: {
-            has: filter.type.toUpperCase() as ToyType,
-            mode: "insensitive",
-          },
-        },
       ];
     }
 
