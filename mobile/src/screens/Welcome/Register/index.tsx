@@ -1,14 +1,21 @@
 import { useCallback, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  InteractionManager,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
 
 import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
-import { validateRegisterFields } from "@src/utils/ValidateRegisterFields";
 import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
 import { statusBarHeight } from "@src/constants/Values";
+import { validateForm } from "@src/utils/FormValidator";
+import { registerSchema } from "@src/utils/ValidationSchemas";
 
 const Register = () => {
   const naviagtion = useNavigation<PropsAuthStack>();
@@ -22,11 +29,23 @@ const Register = () => {
     passwordConfirmation: "",
   });
 
-  const handleNavigateToAddress = useCallback(() => {
-    const validFields = validateRegisterFields(fields, type);
-    if (!validFields) return;
+  const validateFields = useCallback(() => {
+    const { values, error } = validateForm(fields as any, registerSchema(type));
+    return { values, error };
+  }, [fields, type]);
 
-    naviagtion.navigate("Address", { fieldsData: validFields });
+  const handleNavigateToAddress = useCallback(() => {
+    const { values, error } = validateFields();
+    if (error) {
+      InteractionManager.runAfterInteractions(() => {
+        Alert.alert("Aviso", error);
+      });
+      return;
+    }
+
+    if (values) {
+      naviagtion.navigate("Address", { fieldsData: values });
+    }
   }, [naviagtion, fields, type]);
 
   const isTypePersonal = type === "personal";

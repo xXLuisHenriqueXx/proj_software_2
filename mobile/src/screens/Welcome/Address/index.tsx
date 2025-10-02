@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
 
-import { validateAddressFields } from "@src/utils/ValidateAddressFields";
 import { AuthStackParamList } from "@src/routes/stacks/AuthStack";
 import { PropsRoot } from "@src/routes";
 import {
@@ -15,6 +20,8 @@ import {
 } from "@src/common/Interfaces/Auth.interface";
 import useAuth from "@src/hooks/useAuth";
 import { statusBarHeight } from "@src/constants/Values";
+import { validateForm } from "@src/utils/FormValidator";
+import { addressSchema } from "@src/utils/ValidationSchemas";
 
 export interface IEditableFields {
   street: boolean;
@@ -105,11 +112,22 @@ const Address = ({ route }: Props) => {
     });
   };
 
+  const validateFields = useCallback(() => {
+    const { values, error } = validateForm(fields as any, addressSchema);
+    if (error) {
+      Alert.alert("Aviso", error);
+
+      return;
+    }
+
+    return values;
+  }, [fields]);
+
   const handleRegister = () => {
     setLoading(true);
 
     try {
-      const validFields = validateAddressFields(fields);
+      const validFields = validateFields();
       if (!validFields) return;
 
       const params: IRegister = {

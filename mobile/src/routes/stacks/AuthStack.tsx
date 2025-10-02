@@ -8,14 +8,13 @@ import Access from "@src/screens/Welcome/Access";
 import Login from "@src/screens/Welcome/Login";
 import Register from "@src/screens/Welcome/Register";
 import Address from "@src/screens/Welcome/Address";
-
-import { IUserCreate } from "@src/common/Entities/User";
+import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
 
 export type AuthStackParamList = {
   Access: undefined;
   Login: undefined;
   Register: undefined;
-  Address: { fieldsData: IUserCreate };
+  Address: { fieldsData: IFieldsRegister };
 };
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -14,12 +14,13 @@ import Fields from "./_components/Fields";
 import SheetEmail from "../_components/SheetEmail";
 import SheetCode from "../_components/SheetCode";
 
-import { validateLoginFields } from "@src/utils/ValidateLoginFields";
 import { EMAIL_REGEX } from "@src/constants/Regex";
 import { PropsRoot } from "@src/routes";
 import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
 import useAuth from "@src/hooks/useAuth";
 import { statusBarHeight } from "@src/constants/Values";
+import { validateForm } from "@src/utils/FormValidator";
+import { loginSchema } from "@src/utils/ValidationSchemas";
 
 const Login = () => {
   const { login } = useAuth();
@@ -34,11 +35,22 @@ const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
+  const validateFields = useCallback(() => {
+    const { values, error } = validateForm(fields as any, loginSchema);
+    if (error) {
+      Alert.alert("Aviso", error);
+
+      return;
+    }
+
+    return values;
+  }, [fields]);
+
   const handleLogin = () => {
     setLoading(true);
 
     try {
-      const validFields = validateLoginFields(fields);
+      const validFields = validateFields();
       if (!validFields) return;
 
       login(validFields);

@@ -1,20 +1,10 @@
-import { useCallback } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
-import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
 import { statusBarHeight } from "@src/constants/Values";
+import { useAccess } from "@src/hooks/useAccess";
 
 const Access = () => {
-  const navigation = useNavigation<PropsAuthStack>();
-
-  const handleNavigateToLogin = useCallback(() => {
-    navigation.navigate("Login");
-  }, [navigation]);
-
-  const handleNavigateToRegister = useCallback(() => {
-    navigation.navigate("Register");
-  }, [navigation]);
+  const { handleNavigateToLogin, handleNavigateToRegister } = useAccess();
 
   return (
     <View
