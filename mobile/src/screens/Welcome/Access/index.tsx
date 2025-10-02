@@ -1,8 +1,7 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
-
-import { statusBarHeight } from "@src/constants/Values";
-import { useAccess } from "@src/hooks/useAccess";
 import { styles } from "./styles";
+
+import { useAccess } from "@src/hooks/useAccess";
 
 const Access = () => {
   const { handleNavigateToLogin, handleNavigateToRegister } = useAccess();

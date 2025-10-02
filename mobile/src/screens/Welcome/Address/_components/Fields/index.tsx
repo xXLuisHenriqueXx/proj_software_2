@@ -6,10 +6,13 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
+import { styles } from "./styles";
 
-import { IEditableFields, IFieldsAddress } from "../..";
 import MaskedInput from "@src/components/MaskedInput";
+
+import { IEditableFields } from "../..";
 import { CEP_MASK } from "@src/constants/Masks";
+import { IFieldsAddress } from "@src/common/Interfaces/Auth.interface";
 
 interface IFieldsProps {
   cep: string;
@@ -36,16 +39,16 @@ const Fields = ({
   const cityRef = useRef<any>();
   const stateRef = useRef<any>();
 
-  const streetWidth = width * 0.7 - 28;
-  const numberWidth = width * 0.3 - 28;
-  const neighborhoodWidth = width * 0.6 - 28;
-  const extraWidth = width * 0.4 - 28;
-  const cityWidth = width * 0.8 - 28;
-  const stateWidth = width * 0.2 - 28;
+  const streetWidth = width * 0.7 - 32;
+  const numberWidth = width * 0.3 - 32;
+  const neighborhoodWidth = width * 0.6 - 32;
+  const extraWidth = width * 0.4 - 32;
+  const cityWidth = width * 0.8 - 32;
+  const stateWidth = width * 0.2 - 32;
 
   return (
     <ScrollView
-      className="w-full pt-12"
+      style={styles.container}
       contentContainerStyle={{ rowGap: 32, paddingBottom: 120 }}
       showsVerticalScrollIndicator={false}
     >
@@ -60,17 +63,15 @@ const Fields = ({
         mask={CEP_MASK}
       />
 
-      <View className="w-full border border-dashed border-highlight" />
+      <View style={styles.line} />
 
-      <View className="flex-row items-center gap-x-4">
-        <View className="flex-col" style={{ width: streetWidth }}>
-          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
-              Endereço*
-            </Text>
+      <View style={styles.containerInputGroup}>
+        <View style={{ flexDirection: "column", width: streetWidth }}>
+          <View style={styles.containerInput}>
+            <Text style={styles.labelText}>Endereço*</Text>
 
             <TextInput
-              className="flex-1 text-base font-redHatDisplayRegular text-primary"
+              style={styles.input}
               placeholder="Seu endereço"
               returnKeyType="next"
               onSubmitEditing={() => numberRef.current?.focus()}
@@ -84,14 +85,12 @@ const Fields = ({
           </View>
         </View>
 
-        <View className="flex-col" style={{ width: numberWidth }}>
-          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
-              Número*
-            </Text>
+        <View style={{ flexDirection: "column", width: numberWidth }}>
+          <View style={styles.containerInput}>
+            <Text style={styles.labelText}>Número*</Text>
 
             <TextInput
-              className="flex-1 text-base font-redHatDisplayRegular text-primary"
+              style={styles.input}
               placeholder="000"
               returnKeyType="next"
               onSubmitEditing={() => neighborhoodRef.current?.focus()}
@@ -106,15 +105,13 @@ const Fields = ({
         </View>
       </View>
 
-      <View className="flex-row items-center gap-x-4">
-        <View className="flex-col" style={{ width: neighborhoodWidth }}>
-          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
-              Bairro*
-            </Text>
+      <View style={styles.containerInputGroup}>
+        <View style={{ flexDirection: "column", width: neighborhoodWidth }}>
+          <View style={styles.containerInput}>
+            <Text style={styles.labelText}>Bairro*</Text>
 
             <TextInput
-              className="flex-1 text-base font-redHatDisplayRegular text-primary"
+              style={styles.input}
               placeholder="Seu bairro"
               returnKeyType="next"
               onSubmitEditing={() => extraRef.current?.focus()}
@@ -128,14 +125,12 @@ const Fields = ({
           </View>
         </View>
 
-        <View className="flex-col" style={{ width: extraWidth }}>
-          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
-              Complemento
-            </Text>
+        <View style={{ flexDirection: "column", width: extraWidth }}>
+          <View style={styles.containerInput}>
+            <Text style={styles.labelText}>Complemento</Text>
 
             <TextInput
-              className="flex-1 text-base font-redHatDisplayRegular text-primary"
+              style={styles.input}
               placeholder="Opcional"
               returnKeyType="next"
               onSubmitEditing={() => cityRef.current?.focus()}
@@ -150,15 +145,13 @@ const Fields = ({
         </View>
       </View>
 
-      <View className="flex-row items-center gap-x-4">
-        <View className="flex-col" style={{ width: cityWidth }}>
-          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
-              Cidade*
-            </Text>
+      <View style={styles.containerInputGroup}>
+        <View style={{ flexDirection: "column", width: cityWidth }}>
+          <View style={styles.containerInput}>
+            <Text style={styles.labelText}>Cidade*</Text>
 
             <TextInput
-              className="flex-1 text-base font-redHatDisplayRegular text-primary"
+              style={styles.input}
               placeholder="Sua cidade"
               returnKeyType="next"
               onSubmitEditing={() => stateRef.current?.focus()}
@@ -172,14 +165,12 @@ const Fields = ({
           </View>
         </View>
 
-        <View className="flex-col" style={{ width: stateWidth }}>
-          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-            <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
-              UF*
-            </Text>
+        <View style={{ flexDirection: "column", width: stateWidth }}>
+          <View style={styles.containerInput}>
+            <Text style={styles.labelText}>UF*</Text>
 
             <TextInput
-              className="flex-1 text-base font-redHatDisplayRegular text-primary"
+              style={styles.input}
               placeholder="XX"
               returnKeyType="next"
               onSubmitEditing={onRegister}

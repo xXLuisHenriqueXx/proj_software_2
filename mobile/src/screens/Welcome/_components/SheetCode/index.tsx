@@ -1,7 +1,10 @@
 import { forwardRef, useEffect, useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { styles } from "./styles";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { PlusSquare } from "lucide-react-native";
+
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 interface SheetCodeProps {
   onClose?: () => void;
@@ -42,44 +45,29 @@ const SheetCode = forwardRef<BottomSheet, SheetCodeProps>(
         snapPoints={["56%"]}
         onChange={handleSheetChanges}
         backgroundComponent={({ style }) => (
-          <View
-            style={[
-              style,
-              {
-                borderTopLeftRadius: 24,
-                borderTopRightRadius: 24,
-                backgroundColor: "#FEFEFE",
-                shadowColor: "#131313",
-                elevation: 30,
-              },
-            ]}
-          />
+          <View style={[style, styles.container]} />
         )}
       >
-        <BottomSheetView className="relative flex-1 flex-col items-center gap-y-12 h-full py-4 px-6">
-          <View className="flex-row items-center">
+        <BottomSheetView style={styles.containerBottom}>
+          <View style={styles.containerIcon}>
             {[1, 2, 3].map((index) => (
-              <PlusSquare key={index} size={22} color={"#316A41"} />
+              <PlusSquare key={index} size={22} color={HIGHLIGHT_COLOR} />
             ))}
           </View>
 
-          <View className="flex-col items-center gap-y-1">
-            <Text className="text-2xl font-redHatDisplaySemiBold text-primary text-center">
-              Código de confirmação
-            </Text>
+          <View style={styles.containerHeader}>
+            <Text style={styles.title}>Código de confirmação</Text>
 
-            <Text className="text-lg font-redHatDisplayRegular text-primary/60 text-center">
+            <Text style={styles.subtitle}>
               Para confirmar seu e-mail, enviamos um código para sua caixa de
               entrada em youremail@exemplo.com
             </Text>
           </View>
 
-          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-            <Text className="absolute -top-3 left-4 px-2 bg-contrast text-sm font-redHatDisplayMedium text-highlight">
-              Código
-            </Text>
+          <View style={styles.containerInput}>
+            <Text style={styles.labelText}>Código</Text>
             <TextInput
-              className="flex-1 text-base font-redHatDisplayRegular text-primary"
+              style={styles.input}
               placeholder="Seu código"
               returnKeyType="next"
               onSubmitEditing={() => onClose?.()}
@@ -90,29 +78,22 @@ const SheetCode = forwardRef<BottomSheet, SheetCodeProps>(
             />
           </View>
 
-          <View className="flex-col gap-y-4 w-full">
-            <TouchableOpacity
-              className="flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
-              activeOpacity={0.85}
-            >
-              <Text className="text-lg font-redHatDisplayMedium text-contrast">
-                Enviar
-              </Text>
+          <View style={styles.containerButtons}>
+            <TouchableOpacity style={styles.buttonSend} activeOpacity={0.85}>
+              <Text style={styles.textSend}>Enviar</Text>
             </TouchableOpacity>
 
             {showButton ? (
               <TouchableOpacity
-                className="flex-row items-center justify-center w-full h-16 border border-highlight rounded-xl"
+                style={styles.buttonResend}
                 activeOpacity={0.85}
                 onPress={handleResendCode}
               >
-                <Text className="text-lg font-redHatDisplayMedium text-highlight">
-                  Reenviar
-                </Text>
+                <Text style={styles.textResend}>Reenviar</Text>
               </TouchableOpacity>
             ) : (
-              <View className="flex-col items-center justify-center w-full h-16">
-                <Text className="text-lg font-redHatDisplayMedium text-highlight text-center">
+              <View style={styles.containerResend}>
+                <Text style={styles.textResend}>
                   Reenviar código em {remainingTime} segundos
                 </Text>
               </View>

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { ChevronLeft } from "lucide-react-native";
 
@@ -13,10 +14,8 @@ import Fields from "./_components/Fields";
 
 import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
 import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
-import { statusBarHeight } from "@src/constants/Values";
 import { validateForm } from "@src/utils/FormValidator";
 import { registerSchema } from "@src/utils/ValidationSchemas";
-import { styles } from "./styles";
 import {
   BACKGROUND_PRIMARY_COLOR,
   HIGHLIGHT_COLOR,

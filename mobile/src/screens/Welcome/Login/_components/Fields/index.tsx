@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { styles } from "./styles";
 import { Eye, EyeOff } from "lucide-react-native";
 
 import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
-import { styles } from "./styles";
 import { SECONDARY_COLOR } from "@src/constants/Colors";
 
 interface IFieldsProps {

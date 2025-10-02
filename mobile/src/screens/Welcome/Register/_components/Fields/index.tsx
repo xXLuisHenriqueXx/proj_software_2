@@ -6,13 +6,13 @@ import {
   TextInputProps,
   View,
 } from "react-native";
+import { styles } from "./styles";
 import { Eye, EyeOff } from "lucide-react-native";
 
 import MaskedInput from "@src/components/MaskedInput";
 
 import { CNPJ_MASK } from "@src/constants/Masks";
 import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
-import { styles } from "./styles";
 import { SECONDARY_COLOR } from "@src/constants/Colors";
 
 interface IFieldProps {
