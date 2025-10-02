@@ -12,7 +12,6 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 import "react-native-gesture-handler";
 
-import "./global.css";
 import Routes from "@src/routes";
 import { useAuthStore } from "@src/stores/AuthStore";
 import ErrorBoundary from "@src/components/Error";

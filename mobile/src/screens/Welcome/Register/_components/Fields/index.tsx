@@ -12,6 +12,8 @@ import MaskedInput from "@src/components/MaskedInput";
 
 import { CNPJ_MASK } from "@src/constants/Masks";
 import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
+import { styles } from "./styles";
+import { SECONDARY_COLOR } from "@src/constants/Colors";
 
 interface IFieldProps {
   fields: IFieldsRegister;
@@ -32,13 +34,11 @@ const Input = forwardRef<any, IInputProps>((props, ref) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   return (
-    <View className="flex-col">
-      <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-        <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
-          {label}
-        </Text>
+    <View style={{ flexDirection: "column" }}>
+      <View style={styles.containerInput}>
+        <Text style={styles.labelText}>{label}</Text>
         <TextInput
-          className="flex-1 text-base font-redHatDisplayRegular text-primary"
+          style={styles.input}
           ref={ref}
           secureTextEntry={password ? showPassword : false}
           {...rest}
@@ -48,20 +48,18 @@ const Input = forwardRef<any, IInputProps>((props, ref) => {
             <Eye
               onPress={() => setShowPassword(!showPassword)}
               size={24}
-              color={"#373737"}
+              color={SECONDARY_COLOR}
             />
           ) : (
             <EyeOff
               onPress={() => setShowPassword(!showPassword)}
               size={24}
-              color={"#373737"}
+              color={SECONDARY_COLOR}
             />
           ))}
       </View>
 
-      <Text className="mt-1 text-sm font-redHatDisplayRegular text-primary">
-        {instruction}
-      </Text>
+      <Text style={styles.instructionText}>{instruction}</Text>
     </View>
   );
 });
@@ -126,8 +124,8 @@ const Fields = ({ fields, setFields, type, onNavigate }: IFieldProps) => {
 
   return (
     <ScrollView
-      className="w-full pt-12"
-      contentContainerStyle={{ rowGap: 28, paddingBottom: 120 }}
+      style={styles.container}
+      contentContainerStyle={{ rowGap: 32, paddingBottom: 120 }}
       showsVerticalScrollIndicator={false}
     >
       {fieldConfigs.map((field, index) => (

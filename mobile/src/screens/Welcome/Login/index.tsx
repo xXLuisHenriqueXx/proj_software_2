@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { ChevronLeft } from "lucide-react-native";
@@ -18,9 +19,9 @@ import { EMAIL_REGEX } from "@src/constants/Regex";
 import { PropsRoot } from "@src/routes";
 import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
 import useAuth from "@src/hooks/useAuth";
-import { statusBarHeight } from "@src/constants/Values";
 import { validateForm } from "@src/utils/FormValidator";
 import { loginSchema } from "@src/utils/ValidationSchemas";
+import { CONTRAST_COLOR, PRIMARY_COLOR } from "@src/constants/Colors";
 
 const Login = () => {
   const { login } = useAuth();
@@ -86,21 +87,16 @@ const Login = () => {
   };
 
   return (
-    <View
-      className="relative flex-1 flex-col items-center px-6 bg-backgroundPrimary"
-      style={{ paddingTop: statusBarHeight + 32 }}
-    >
-      <View className="flex-row items-center gap-x-4 w-full py-4">
+    <View style={styles.container}>
+      <View style={styles.containerHeader}>
         <TouchableOpacity
           activeOpacity={0.85}
           onPress={() => navigation.goBack()}
         >
-          <ChevronLeft size={24} color={"#131313"} />
+          <ChevronLeft size={24} color={PRIMARY_COLOR} />
         </TouchableOpacity>
 
-        <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
-          Acessar conta
-        </Text>
+        <Text style={styles.title}>Acessar conta</Text>
       </View>
 
       <Fields
@@ -111,17 +107,15 @@ const Login = () => {
       />
 
       <TouchableOpacity
-        className="absolute bottom-6 flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
+        style={styles.buttonLogin}
         activeOpacity={0.85}
         onPress={handleLogin}
         disabled={loading}
       >
         {loading ? (
-          <ActivityIndicator size="small" color={"#FEFEFE"} />
+          <ActivityIndicator size="small" color={CONTRAST_COLOR} />
         ) : (
-          <Text className="text-lg font-redHatDisplayMedium text-contrast">
-            Acessar
-          </Text>
+          <Text style={styles.textLogin}>Acessar</Text>
         )}
       </TouchableOpacity>
 

@@ -8,7 +8,9 @@ import {
 } from "react-native";
 import { Eye, EyeOff } from "lucide-react-native";
 
-import { IFieldsLogin } from "../..";
+import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
+import { styles } from "./styles";
+import { SECONDARY_COLOR } from "@src/constants/Colors";
 
 interface IFieldsProps {
   fields: IFieldsLogin;
@@ -29,37 +31,31 @@ const Fields = ({
 
   return (
     <ScrollView
-      className="w-full pt-12"
-      contentContainerStyle={{ rowGap: 40, paddingBottom: 120 }}
+      style={styles.container}
+      contentContainerStyle={{ rowGap: 32, paddingBottom: 120 }}
       showsVerticalScrollIndicator={false}
     >
-      <View className="flex-col">
-        <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-          <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
-            E-mail
-          </Text>
+      <View style={styles.containerInput}>
+        <Text style={styles.labelText}>E-mail</Text>
 
-          <TextInput
-            className="flex-1 text-base font-redHatDisplayRegular text-primary"
-            placeholder="seuemail@exemplo.com"
-            returnKeyType="next"
-            onSubmitEditing={() => passwordRef.current?.focus()}
-            value={fields.email}
-            onChangeText={(text: string) => {
-              setFields({ ...fields, email: text });
-            }}
-          />
-        </View>
+        <TextInput
+          style={styles.input}
+          placeholder="seuemail@exemplo.com"
+          returnKeyType="next"
+          onSubmitEditing={() => passwordRef.current?.focus()}
+          value={fields.email}
+          onChangeText={(text: string) => {
+            setFields({ ...fields, email: text });
+          }}
+        />
       </View>
 
-      <View className="flex-col">
-        <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-          <Text className="absolute -top-3 left-4 px-2 bg-backgroundPrimary text-sm font-redHatDisplayMedium text-highlight">
-            Senha
-          </Text>
+      <View style={{ flexDirection: "column" }}>
+        <View style={styles.containerInput}>
+          <Text style={styles.labelText}>Senha</Text>
 
           <TextInput
-            className="flex-1 text-base font-redHatDisplayRegular text-primary"
+            style={styles.input}
             ref={passwordRef}
             placeholder="Sua senha"
             returnKeyType="done"
@@ -74,20 +70,18 @@ const Fields = ({
             <Eye
               onPress={() => setShowPassword(!showPassword)}
               size={24}
-              color={"#373737"}
+              color={SECONDARY_COLOR}
             />
           ) : (
             <EyeOff
               onPress={() => setShowPassword(!showPassword)}
               size={24}
-              color={"#373737"}
+              color={SECONDARY_COLOR}
             />
           )}
         </View>
         <TouchableOpacity activeOpacity={0.85} onPress={onForgotEmail}>
-          <Text className="w-full mt-2 text-base font-redHatDisplayMedium text-highlight text-right underline">
-            Esqueci a senha
-          </Text>
+          <Text style={styles.forgotText}>Esqueci a senha</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

@@ -16,6 +16,12 @@ import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
 import { statusBarHeight } from "@src/constants/Values";
 import { validateForm } from "@src/utils/FormValidator";
 import { registerSchema } from "@src/utils/ValidationSchemas";
+import { styles } from "./styles";
+import {
+  BACKGROUND_PRIMARY_COLOR,
+  HIGHLIGHT_COLOR,
+  PRIMARY_COLOR,
+} from "@src/constants/Colors";
 
 const Register = () => {
   const naviagtion = useNavigation<PropsAuthStack>();
@@ -51,51 +57,64 @@ const Register = () => {
   const isTypePersonal = type === "personal";
 
   return (
-    <View
-      className="relative flex-1 flex-col items-center px-6 bg-backgroundPrimary"
-      style={{ paddingTop: statusBarHeight + 32 }}
-    >
-      <View className="flex-row items-center gap-x-4 w-full py-4 mb-4">
+    <View style={styles.container}>
+      <View style={styles.containerHeader}>
         <TouchableOpacity
           activeOpacity={0.85}
           onPress={() => naviagtion.goBack()}
         >
-          <ChevronLeft size={24} color={"#131313"} />
+          <ChevronLeft size={24} color={PRIMARY_COLOR} />
         </TouchableOpacity>
 
-        <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
-          Criar conta
-        </Text>
+        <Text style={styles.title}>Criar conta</Text>
       </View>
 
-      <View className="flex-row items-center justify-center gap-x-2 w-full p-2 border border-primary rounded-xl">
+      <View style={styles.containerTypes}>
         <TouchableOpacity
-          className="flex-1 items-center justify-center py-2 rounded-lg"
-          style={{
-            backgroundColor: isTypePersonal ? "#316A41" : "transparent",
-          }}
+          style={[
+            styles.buttonType,
+            {
+              backgroundColor: isTypePersonal ? HIGHLIGHT_COLOR : "transparent",
+            },
+          ]}
           activeOpacity={0.85}
           onPress={() => setType("personal")}
         >
           <Text
-            className="text-lg font-redHatDisplayMedium"
-            style={{ color: isTypePersonal ? "#FAF9F6" : "#131313" }}
+            style={[
+              styles.textType,
+              {
+                color: isTypePersonal
+                  ? BACKGROUND_PRIMARY_COLOR
+                  : PRIMARY_COLOR,
+              },
+            ]}
           >
             Conta pessoal
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          className="flex-1 items-center justify-center py-2 rounded-lg"
-          style={{
-            backgroundColor: !isTypePersonal ? "#316A41" : "transparent",
-          }}
+          style={[
+            styles.buttonType,
+            {
+              backgroundColor: !isTypePersonal
+                ? HIGHLIGHT_COLOR
+                : "transparent",
+            },
+          ]}
           activeOpacity={0.85}
           onPress={() => setType("enterprise")}
         >
           <Text
-            className="text-lg font-redHatDisplayMedium"
-            style={{ color: !isTypePersonal ? "#FAF9F6" : "#131313" }}
+            style={[
+              styles.textType,
+              {
+                color: !isTypePersonal
+                  ? BACKGROUND_PRIMARY_COLOR
+                  : PRIMARY_COLOR,
+              },
+            ]}
           >
             Conta jurídica
           </Text>
@@ -110,13 +129,11 @@ const Register = () => {
       />
 
       <TouchableOpacity
-        className="absolute bottom-6 flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
+        style={styles.buttonNext}
         activeOpacity={0.85}
         onPress={handleNavigateToAddress}
       >
-        <Text className="text-lg font-redHatDisplayMedium text-contrast">
-          Avançar
-        </Text>
+        <Text style={styles.textNext}>Avançar</Text>
       </TouchableOpacity>
     </View>
   );
