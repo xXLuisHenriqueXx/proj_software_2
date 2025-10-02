@@ -8,13 +8,13 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import Constants from "expo-constants";
 import { ChevronLeft, Paperclip, SendHorizonal } from "lucide-react-native";
 
 import {
   ChatStackParamList,
   PropsChatStack,
 } from "@src/routes/stacks/ChatStack";
+import { statusBarHeight } from "@src/constants/Values";
 
 type Props = NativeStackScreenProps<ChatStackParamList, "Chat">;
 
@@ -23,7 +23,6 @@ const Chat = ({ route }: Props) => {
 
   const navigation = useNavigation<PropsChatStack>();
 
-  const statusBarHeight = Constants.statusBarHeight;
   const currentUserId = "1";
 
   return (

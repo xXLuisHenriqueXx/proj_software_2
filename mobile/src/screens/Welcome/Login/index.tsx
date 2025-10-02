@@ -8,18 +8,18 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import BottomSheet from "@gorhom/bottom-sheet";
-import Constants from "expo-constants";
 import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
-
-import { validateLoginFields } from "@src/utils/ValidateLoginFields";
 import SheetEmail from "../_components/SheetEmail";
 import SheetCode from "../_components/SheetCode";
+
+import { validateLoginFields } from "@src/utils/ValidateLoginFields";
 import { EMAIL_REGEX } from "@src/constants/Regex";
 import { PropsRoot } from "@src/routes";
 import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
 import useAuth from "@src/hooks/useAuth";
+import { statusBarHeight } from "@src/constants/Values";
 
 const Login = () => {
   const { login } = useAuth();
@@ -72,8 +72,6 @@ const Login = () => {
     bottomSheetEmailRef.current?.close();
     bottomSheetCodeRef.current?.expand();
   };
-
-  const statusBarHeight = Constants.statusBarHeight;
 
   return (
     <View

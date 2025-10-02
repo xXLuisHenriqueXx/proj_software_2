@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Constants from "expo-constants";
 import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
@@ -9,6 +8,7 @@ import Fields from "./_components/Fields";
 import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
 import { validateRegisterFields } from "@src/utils/ValidateRegisterFields";
 import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
+import { statusBarHeight } from "@src/constants/Values";
 
 const Register = () => {
   const naviagtion = useNavigation<PropsAuthStack>();
@@ -30,7 +30,6 @@ const Register = () => {
   }, [naviagtion, fields, type]);
 
   const isTypePersonal = type === "personal";
-  const statusBarHeight = Constants.statusBarHeight;
 
   return (
     <View

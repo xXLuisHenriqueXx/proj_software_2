@@ -7,13 +7,13 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import Constants from "expo-constants";
 import { ArrowLeft, Heart, Share2 } from "lucide-react-native";
 
 import Carousel from "@src/components/Carousel";
 
 import { AppStackParamList, PropsAppStack } from "@src/routes/stacks/AppStack";
 import { formatCurrency } from "@src/utils/FormatCurrency";
+import { statusBarHeight } from "@src/constants/Values";
 
 type Props = NativeStackScreenProps<AppStackParamList, "ProductDetail">;
 
@@ -22,7 +22,6 @@ const ProductDetail = ({ route }: Props) => {
   const { width } = useWindowDimensions();
 
   const navigation = useNavigation<PropsAppStack>();
-  const statusBarHeight = Constants.statusBarHeight;
 
   const characteristicWidth = (width - 48 - 16) / 2;
 
@@ -61,7 +60,7 @@ const ProductDetail = ({ route }: Props) => {
           <Heart size={20} color={"#316A41"} />
         </TouchableOpacity>
 
-        <Carousel data={product.images} width={width} height={320} />
+        <Carousel data={product.pictures} width={width} height={320} />
       </View>
 
       <View className="flex-col gap-y-6 px-6 w-full">
@@ -73,7 +72,7 @@ const ProductDetail = ({ route }: Props) => {
             {product.name}
           </Text>
           <Text className="text-base font-redHatDisplayRegular text-primary/60">
-            {product.condition}
+            {product.isNew ? "Novo" : "Usado"}
           </Text>
         </View>
 
@@ -92,7 +91,7 @@ const ProductDetail = ({ route }: Props) => {
                 Tamanho
               </Text>
               <Text className="text-lg font-redHatDisplayRegular text-primary">
-                {product.size}
+                {product.preservation}
               </Text>
             </View>
 
@@ -101,16 +100,16 @@ const ProductDetail = ({ route }: Props) => {
                 Condição
               </Text>
               <Text className="text-lg font-redHatDisplayRegular text-primary">
-                {product.condition}
+                {product.isNew ? "Novo" : "Usado"}
               </Text>
             </View>
 
             <View className="flex-col" style={{ width: characteristicWidth }}>
               <Text className="text-lg font-redHatDisplayRegular text-primary/60">
-                Marca
+                Proprietário
               </Text>
               <Text className="text-lg font-redHatDisplayRegular text-primary">
-                {product.brand}
+                {product.owner.name}
               </Text>
             </View>
 
@@ -119,7 +118,7 @@ const ProductDetail = ({ route }: Props) => {
                 Faixa etária
               </Text>
               <Text className="text-lg font-redHatDisplayRegular text-primary">
-                {product.ageRange}
+                {product.ageGroup}
               </Text>
             </View>
           </View>

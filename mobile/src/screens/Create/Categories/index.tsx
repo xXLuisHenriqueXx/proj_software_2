@@ -1,12 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { EToyType, IToyCreate } from "@src/common/Interfaces/Toy.interface";
-import { PropsAppStack } from "@src/routes/stacks/AppStack";
-import {
-  CreateStackParamList,
-  PropsCreateStack,
-} from "@src/routes/stacks/CreateStack";
-import { categoriesData } from "@src/static/CategoriesData";
 import { useState } from "react";
 import {
   ScrollView,
@@ -15,16 +6,25 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
-import Constants from "expo-constants";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ChevronLeft, X } from "lucide-react-native";
+
+import { EToyType, IToyCreate } from "@src/common/Interfaces/Toy.interface";
+import { PropsAppStack } from "@src/routes/stacks/AppStack";
+import {
+  CreateStackParamList,
+  PropsCreateStack,
+} from "@src/routes/stacks/CreateStack";
+import { categoriesData } from "@src/static/CategoriesData";
 import { toyService } from "@src/services/ToyService";
+import { statusBarHeight } from "@src/constants/Values";
 
 type Props = NativeStackScreenProps<CreateStackParamList, "Categories">;
 
 const Categories = ({ route }: Props) => {
   const { fields } = route.params;
   const { width } = useWindowDimensions();
-  const statusBarHeight = Constants.statusBarHeight;
   const rootNavigation = useNavigation<PropsAppStack>();
   const createNavigation = useNavigation<PropsCreateStack>();
 

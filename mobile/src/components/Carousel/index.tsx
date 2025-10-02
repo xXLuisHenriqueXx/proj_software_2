@@ -1,5 +1,3 @@
-import { IHighlight } from "@src/common/Entities/Highlight";
-import { Skeleton } from "moti/skeleton";
 import { useState } from "react";
 import {
   Image,
@@ -9,11 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Skeleton } from "moti/skeleton";
+
+import { IHighlight } from "@src/common/Entities/Highlight";
+import { IToyPicture } from "@src/common/Interfaces/Toy.interface";
 
 interface ICarouselProps {
   width: number;
   height: number;
-  data: IHighlight[];
+  data: IToyPicture[] | IHighlight[];
 }
 
 const Carousel = ({ width, height, data }: ICarouselProps) => {

@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Constants from "expo-constants";
 
 import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
+import { statusBarHeight } from "@src/constants/Values";
 
 const Access = () => {
   const navigation = useNavigation<PropsAuthStack>();
@@ -15,8 +15,6 @@ const Access = () => {
   const handleNavigateToRegister = useCallback(() => {
     navigation.navigate("Register");
   }, [navigation]);
-
-  const statusBarHeight = Constants.statusBarHeight;
 
   return (
     <View

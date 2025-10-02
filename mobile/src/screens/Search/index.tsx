@@ -1,20 +1,19 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
-import Constants from "expo-constants";
 
 import Featured from "./_components/Featured";
 import SearchInput from "./_components/SearchInput";
 import Categories from "./_components/Categories";
 import Recent from "./_components/Recent";
 import List from "@src/components/List";
+
 import { toyService } from "@src/services/ToyService";
 import { recentSearchService } from "@src/services/RecentSearchService";
 import { IProduct } from "@src/common/Entities/Product";
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
+import { statusBarHeight } from "@src/constants/Values";
 
 const Search = () => {
-  const statusBarHeight = Constants.statusBarHeight;
-
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [recents, setRecents] = useState<string[]>([]);

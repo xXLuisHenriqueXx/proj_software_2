@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import Constants from "expo-constants";
 import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
@@ -15,6 +14,7 @@ import {
   IRegister,
 } from "@src/common/Interfaces/Auth.interface";
 import useAuth from "@src/hooks/useAuth";
+import { statusBarHeight } from "@src/constants/Values";
 
 export interface IEditableFields {
   street: boolean;
@@ -143,8 +143,6 @@ const Address = ({ route }: Props) => {
       handleCleanAddress();
     }
   }, [cep]);
-
-  const statusBarHeight = Constants.statusBarHeight;
 
   if (loadingCep) {
     return (

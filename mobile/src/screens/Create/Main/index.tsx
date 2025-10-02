@@ -2,28 +2,27 @@ import { Fragment, useCallback, useState } from "react";
 import {
   View,
   Text,
+  TextInput,
   ScrollView,
   TouchableOpacity,
   Image,
   useWindowDimensions,
 } from "react-native";
-import Constants from "expo-constants";
+import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import { ImagePlus, X } from "lucide-react-native";
-import { TextInput } from "react-native-gesture-handler";
+
 import {
   EAgeRange,
-  EToyCondition,
   IFieldsToyCreateMain,
 } from "@src/common/Interfaces/Toy.interface";
 import MaskInput, { Masks } from "react-native-mask-input";
-import { useNavigation } from "@react-navigation/native";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { PropsCreateStack } from "@src/routes/stacks/CreateStack";
+import { statusBarHeight } from "@src/constants/Values";
 
 const Main = () => {
   const { width } = useWindowDimensions();
-  const statusBarHeight = Constants.statusBarHeight;
   const rootNavigation = useNavigation<PropsAppStack>();
   const createNavigation = useNavigation<PropsCreateStack>();
   const [images, setImages] = useState<string[]>([]);

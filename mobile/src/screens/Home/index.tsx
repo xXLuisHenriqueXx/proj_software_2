@@ -7,7 +7,6 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Constants from "expo-constants";
 import { MessageSquareText } from "lucide-react-native";
 
 import Institutes from "./_components/Institutes";
@@ -22,11 +21,11 @@ import { toyService } from "@src/services/ToyService";
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
 import { IHighlight } from "@src/common/Entities/Highlight";
 import { highlightService } from "@src/services/HighlightService";
+import { statusBarHeight } from "@src/constants/Values";
 
 const Home = () => {
   const { width } = useWindowDimensions();
   const { logout, user } = useAuth();
-  const statusBarHeight = Constants.statusBarHeight;
   const navigation = useNavigation<PropsAppStack>();
 
   const [highlights, setHighlights] = useState<IHighlight[]>([]);

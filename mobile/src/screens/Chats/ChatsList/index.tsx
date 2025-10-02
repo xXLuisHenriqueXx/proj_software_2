@@ -5,23 +5,21 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Constants from "expo-constants";
 import { Search, X } from "lucide-react-native";
 
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { chatsData } from "@src/static/chatsData";
 import { PropsChatStack } from "@src/routes/stacks/ChatStack";
 import { IChat } from "@src/common/Entities/Chat";
+import { statusBarHeight } from "@src/constants/Values";
 
 const ChatsList = () => {
   const [search, setSearch] = useState<string>("");
 
   const appNavigation = useNavigation<PropsAppStack>();
   const chatNavigation = useNavigation<PropsChatStack>();
-  const statusBarHeight = Constants.statusBarHeight;
 
   const handleNavigateToHome = () => appNavigation.replace("AppTabs");
 
@@ -76,11 +74,11 @@ const ChatsList = () => {
             activeOpacity={0.85}
             onPress={() => handleNavigateToChat(chat)}
           >
-            <Image
+            {/* <Image
               className="w-12 h-12 rounded-full"
-              source={{ uri: chat.participant.avatar }}
+              source={{ uri: chat.participant. }}
               resizeMode="cover"
-            />
+            /> */}
 
             <View className="flex-col gap-y-1">
               <Text className="text-base font-redHatDisplayRegular text-primary">

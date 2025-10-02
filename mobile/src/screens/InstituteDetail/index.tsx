@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import Constants from "expo-constants";
 import { X } from "lucide-react-native";
 
 import { AppStackParamList, PropsAppStack } from "@src/routes/stacks/AppStack";
+import { statusBarHeight } from "@src/constants/Values";
 
 type Props = NativeStackScreenProps<AppStackParamList, "InstituteDetail">;
 
@@ -20,7 +20,6 @@ const InstituteDetail = ({ route }: Props) => {
   const { width } = useWindowDimensions();
 
   const navigation = useNavigation<PropsAppStack>();
-  const statusBarHeight = Constants.statusBarHeight;
 
   const infoWidth = (width - 48 - 16) / 2;
 
