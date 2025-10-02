@@ -4,8 +4,8 @@
   "main": "src/app.ts",
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon --watch src --ext ts,js,json --exec npx tsx --env-file=.env src/server.ts",
-    "start": "npx tsx --env-file=.env src/server.ts",
+    "dev": "nodemon --watch src --ext ts,js,json --exec npx tsx src/server.ts",
+    "start": "npx tsx src/server.ts",
     "build": "tsup src/app.ts --format cjs,esm --dts --out-dir dist",
     "prisma:all": "npm run prisma:generate && npm run prisma:migrate:dev",
     "prisma:generate": "prisma generate",
