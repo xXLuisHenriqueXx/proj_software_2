@@ -24,6 +24,17 @@ import {
 } from "./schemas/toyValidationSchemas";
 
 export async function routes(app: FastifyInstance) {
+    app.get('/health', {
+    schema: {
+      tags: ['Health'],
+      summary: 'Verifica se a API está rodando',
+      response: {
+        200: z.object({ status: z.string() })
+      }
+    }
+  }, async () => {
+    return { status: "ok" };
+  }),
 
   app.post('/auth/register', {
     schema: {
