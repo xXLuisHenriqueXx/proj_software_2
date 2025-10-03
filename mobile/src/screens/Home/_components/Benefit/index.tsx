@@ -1,10 +1,11 @@
 import { TouchableOpacity, Image } from "react-native";
+import { styles } from "./styles";
 
 const Benefit = () => {
   return (
-    <TouchableOpacity className="w-full h-60 rounded-xl" activeOpacity={0.85}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.85}>
       <Image
-        className="w-full h-full rounded-xl"
+        style={styles.image}
         source={{
           uri: "https://placecats.com/300/300",
         }}

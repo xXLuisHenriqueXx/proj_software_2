@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 
@@ -14,6 +15,7 @@ import Header from "./Header";
 import { IProduct } from "@src/common/Entities/Product";
 import { formatCurrency } from "@src/utils/FormatCurrency";
 import { CameraOff, CircleOff } from "lucide-react-native";
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 interface IProductProps {
   title?: string;
@@ -34,38 +36,32 @@ const List = ({ title, subtitile, data }: IProductProps) => {
   const hasHeader = title && subtitile;
 
   return (
-    <View className="flex-col gap-y-4">
+    <View style={styles.container}>
       {hasHeader && <Header title={title} subtitile={subtitile} />}
 
       {data.length > 0 ? (
-        <View className="flex-row flex-wrap justify-between gap-y-6">
+        <View style={styles.containerContent}>
           {data.map((item, index) => (
             <TouchableOpacity
               key={index}
-              className="flex-col gap-y-4"
-              style={{ width: widthProduct }}
+              style={[styles.container, { width: widthProduct }]}
               activeOpacity={0.85}
               onPress={() => handleNavigateToDetail(item)}
             >
               {item?.pictures?.[0]?.picture ? (
                 <Image
+                  style={styles.image}
                   source={{ uri: item.pictures[0].picture }}
-                  className="w-full aspect-square rounded-xl"
                 />
               ) : (
-                <View className="flex-col items-center justify-center w-full aspect-square rounded-xl bg-backgroundSecondary">
-                  <CameraOff size={24} color={"#316A41"} />
+                <View style={styles.imagePlaceholder}>
+                  <CameraOff size={24} color={HIGHLIGHT_COLOR} />
                 </View>
               )}
 
-              <View className="flex-col gap-y-1">
-                <Text className="text-base font-redHatDisplayBold text-primary">
-                  {formatCurrency(item.price)}
-                </Text>
-                <Text
-                  className="text-base font-redHatDisplayRegular text-primary"
-                  numberOfLines={2}
-                >
+              <View style={styles.containerInfo}>
+                <Text style={styles.price}>{formatCurrency(item.price)}</Text>
+                <Text style={styles.name} numberOfLines={2}>
                   {item.name}
                 </Text>
               </View>
@@ -73,11 +69,9 @@ const List = ({ title, subtitile, data }: IProductProps) => {
           ))}
         </View>
       ) : (
-        <View className="flex-col gap-y-2 items-center justify-center w-full">
-          <CircleOff size={24} color={"#316A41"} />
-          <Text className="text-lg font-redHatDisplaySemiBold text-primary">
-            Nenhum produto encontrado
-          </Text>
+        <View style={styles.containerNotFound}>
+          <CircleOff size={24} color={HIGHLIGHT_COLOR} />
+          <Text style={styles.notFound}>Nenhum produto encontrado</Text>
         </View>
       )}
     </View>

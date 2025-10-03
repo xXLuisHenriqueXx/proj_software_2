@@ -1,4 +1,5 @@
 import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
+import { styles } from "./styles";
 import { ChevronRight } from "lucide-react-native";
 
 import { institutesData } from "@src/static/InstitutesData";
@@ -14,16 +15,11 @@ const Institutes = () => {
   };
 
   return (
-    <View className="flex-col items-center gap-y-4">
-      <TouchableOpacity
-        className="flex-row items-start justify-between gap-x-2 w-full"
-        activeOpacity={0.85}
-      >
-        <View className="flex-col">
-          <Text className="text-lg font-redHatDisplaySemiBold text-primary">
-            Instituições assistenciais
-          </Text>
-          <Text className="text-base font-redHatDisplayRegular text-primary">
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.containerHeader} activeOpacity={0.85}>
+        <View style={{ flexDirection: "column" }}>
+          <Text style={styles.title}>Instituições assistenciais</Text>
+          <Text style={styles.subtitle}>
             Explore e contribua com um mundo melhor
           </Text>
         </View>
@@ -31,7 +27,7 @@ const Institutes = () => {
         <ChevronRight size={24} color={"#131313"} />
       </TouchableOpacity>
 
-      <View className="w-full">
+      <View style={{ width: "100%" }}>
         <ScrollView
           contentContainerStyle={{ columnGap: 16 }}
           horizontal
@@ -40,19 +36,17 @@ const Institutes = () => {
           {institutesData.map((item, index) => (
             <TouchableOpacity
               key={index}
-              className="flex-col items-center gap-y-1 w-24"
+              style={styles.containerItem}
               activeOpacity={0.85}
               onPress={() => handleNavigateToInstituteDetail(item)}
             >
               <Image
-                className="w-24 h-24 border border-primary/5 rounded-xl"
+                style={styles.image}
                 source={{ uri: item.src }}
                 resizeMode="contain"
               />
 
-              <Text className="text-sm font-redHatDisplayMedium text-primary text-center">
-                {item.name}
-              </Text>
+              <Text style={styles.name}>{item.name}</Text>
             </TouchableOpacity>
           ))}
         </ScrollView>

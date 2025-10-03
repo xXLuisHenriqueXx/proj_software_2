@@ -6,27 +6,25 @@ import {
   ScrollView,
   useWindowDimensions,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { MessageSquareText } from "lucide-react-native";
+import { styles } from "./styles";
+import { LogOut } from "lucide-react-native";
 
 import Institutes from "./_components/Institutes";
 import Benefit from "./_components/Benefit";
 import List from "@src/components/List";
 import Carousel from "@src/components/Carousel";
 
-import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import useAuth from "@src/hooks/useAuth";
 import { IProduct } from "@src/common/Entities/Product";
 import { toyService } from "@src/services/ToyService";
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
 import { IHighlight } from "@src/common/Entities/Highlight";
 import { highlightService } from "@src/services/HighlightService";
-import { statusBarHeight } from "@src/constants/Values";
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 const Home = () => {
   const { width } = useWindowDimensions();
   const { logout, user } = useAuth();
-  const navigation = useNavigation<PropsAppStack>();
 
   const [highlights, setHighlights] = useState<IHighlight[]>([]);
   const [boyToys, setBoyToys] = useState<IProduct[]>([]);
@@ -87,37 +85,24 @@ const Home = () => {
 
   const carouselWidth = width - 48;
 
-  const handleNavigateToChats = () => navigation.replace("ChatStack");
-
   const handleLogout = () => logout();
-
-  if (isLoading)
-    return (
-      <View className="flex-1 items-center justify-center bg-backgroundSecondary">
-        <Text>Carregando...</Text>
-      </View>
-    );
 
   return (
     <ScrollView
-      className="relative bg-backgroundSecondary"
-      style={{ paddingTop: statusBarHeight + 64 }}
+      style={styles.container}
       contentContainerStyle={{ paddingBottom: 92 }}
     >
-      <View className="flex-row items-center justify-between w-full p-6">
-        <Text className="text-2xl font-redHatDisplayMedium text-primary">
-          Olá,{" "}
-          <Text className="font-redHatDisplayBold text-highlight">
-            {user?.name}
-          </Text>
+      <View style={styles.containerHeader}>
+        <Text style={styles.title}>
+          Olá, <Text style={styles.titleHighlight}>{user?.name}</Text>
         </Text>
 
         <TouchableOpacity activeOpacity={0.85} onPress={handleLogout}>
-          <MessageSquareText size={24} color={"#316A41"} />
+          <LogOut size={24} color={HIGHLIGHT_COLOR} />
         </TouchableOpacity>
       </View>
 
-      <View className="flex-col items-center gap-y-12 w-full h-full p-6 pb-48 bg-backgroundPrimary rounded-t-3xl\">
+      <View style={styles.containerContent}>
         <Carousel width={carouselWidth} height={240} data={highlights} />
 
         <Institutes />

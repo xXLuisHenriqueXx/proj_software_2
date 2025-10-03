@@ -7,10 +7,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { styles } from "./styles";
 import { Skeleton } from "moti/skeleton";
 
 import { IHighlight } from "@src/common/Entities/Highlight";
 import { IToyPicture } from "@src/common/Interfaces/Toy.interface";
+import {
+  BACKGROUND_SECONDARY_COLOR,
+  HIGHLIGHT_COLOR,
+  SECONDARY_COLOR,
+} from "@src/constants/Colors";
 
 interface ICarouselProps {
   width: number;
@@ -29,9 +35,13 @@ const Carousel = ({ width, height, data }: ICarouselProps) => {
   };
 
   return (
-    <Skeleton width={width} height={height} colors={["#EBEEEC", "#37373760"]}>
+    <Skeleton
+      width={width}
+      height={height}
+      colors={[BACKGROUND_SECONDARY_COLOR, SECONDARY_COLOR]}
+    >
       {data.length > 0 ? (
-        <View className="w-full">
+        <View style={{ width: "100%" }}>
           <ScrollView
             contentContainerStyle={{ columnGap: 24 }}
             horizontal
@@ -44,8 +54,7 @@ const Carousel = ({ width, height, data }: ICarouselProps) => {
             {data.map((item) => (
               <TouchableOpacity key={item.id} activeOpacity={0.85}>
                 <Image
-                  className="flex-col items-center justify-center border border-primary/5 rounded-xl"
-                  style={{ width, height }}
+                  style={[styles.image, { width, height }]}
                   source={{ uri: `data:image/jpeg;base64,${item.picture}` }}
                   resizeMode="cover"
                 />
@@ -53,15 +62,18 @@ const Carousel = ({ width, height, data }: ICarouselProps) => {
             ))}
           </ScrollView>
 
-          <View className="flex-row items-center justify-center gap-x-1 mt-2">
+          <View style={styles.containerDots}>
             {data.map((_, index) => (
               <View
                 key={index}
-                className={`h-1.5 rounded-full ${
-                  activeIndex === index
-                    ? "w-3 bg-highlight"
-                    : "w-1.5 bg-highlight/30"
-                }`}
+                style={[
+                  styles.dot,
+                  {
+                    width: index === activeIndex ? 16 : 6,
+                    backgroundColor:
+                      index === activeIndex ? HIGHLIGHT_COLOR : SECONDARY_COLOR,
+                  },
+                ]}
               />
             ))}
           </View>
