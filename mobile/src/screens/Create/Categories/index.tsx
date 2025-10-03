@@ -6,6 +6,7 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
+import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ChevronLeft, X } from "lucide-react-native";
@@ -18,7 +19,12 @@ import {
 } from "@src/routes/stacks/CreateStack";
 import { categoriesData } from "@src/static/CategoriesData";
 import { toyService } from "@src/services/ToyService";
-import { statusBarHeight } from "@src/constants/Values";
+import {
+  BACKGROUND_PRIMARY_COLOR,
+  BACKGROUND_SECONDARY_COLOR,
+  HIGHLIGHT_COLOR,
+  SECONDARY_COLOR,
+} from "@src/constants/Colors";
 
 type Props = NativeStackScreenProps<CreateStackParamList, "Categories">;
 
@@ -67,76 +73,71 @@ const Categories = ({ route }: Props) => {
     }
   };
 
-  const widthCategory = (width - 48 - 8) / 2;
+  const widthCategory = (width - 48 - 16) / 2;
   return (
     <ScrollView
-      className="relative bg-backgroundPrimary"
-      style={{ paddingTop: statusBarHeight + 64 }}
+      style={styles.container}
       contentContainerStyle={{
         paddingBottom: 124,
         rowGap: 48,
         paddingHorizontal: 24,
       }}
     >
-      <View className="flex-row items-center justify-between w-full py-4">
-        <View className="flex-row items-center gap-x-4">
+      <View style={styles.containerHeader}>
+        <View style={styles.containerTitle}>
           <TouchableOpacity
             activeOpacity={0.85}
             onPress={() => createNavigation.goBack()}
           >
-            <ChevronLeft size={20} color={"#13131399"} />
+            <ChevronLeft size={20} color={SECONDARY_COLOR} />
           </TouchableOpacity>
 
-          <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
-            Criar anúncio
-          </Text>
+          <Text style={styles.title}>Criar anúncio</Text>
         </View>
 
         <TouchableOpacity
           activeOpacity={0.85}
           onPress={() => rootNavigation.replace("AppTabs")}
         >
-          <X size={20} color={"#13131399"} />
+          <X size={20} color={SECONDARY_COLOR} />
         </TouchableOpacity>
       </View>
 
-      <View className="flex-col items-start gap-y-4">
-        <Text className="text-lg font-redHatDisplaySemiBold text-primary">
+      <View style={styles.containerContent}>
+        <Text style={styles.contentTitle}>
           Escolha as categorias do seu anúncio
         </Text>
 
-        <View className="flex-row flex-wrap justify-between gap-y-4 w-full">
+        <View style={styles.containerList}>
           {categoriesData.map((item) => (
             <TouchableOpacity
               key={item.id}
-              className="flex-row items-center justify-between px-4 py-6 bg-backgroundSecondary rounded-xl"
-              style={{
-                width: widthCategory,
-                backgroundColor: categories.includes(item.value)
-                  ? "#316A4125"
-                  : "#EBEEEC",
-              }}
+              style={[
+                styles.containerItem,
+                {
+                  width: widthCategory,
+                  backgroundColor: categories.includes(item.value)
+                    ? BACKGROUND_SECONDARY_COLOR
+                    : BACKGROUND_PRIMARY_COLOR,
+                },
+              ]}
               activeOpacity={0.85}
               onPress={() => handleSelectCategory(item.value)}
             >
-              <Text className="text-base font-redHatDisplayRegular text-primary text-center">
-                {item.name}
-              </Text>
+              <Text style={styles.name}>{item.name}</Text>
 
-              <item.icon size={20} color={"#316A41"} />
+              <item.icon size={20} color={HIGHLIGHT_COLOR} />
             </TouchableOpacity>
           ))}
         </View>
       </View>
 
       <TouchableOpacity
-        className="flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
+        style={styles.buttonSave}
         activeOpacity={0.85}
         onPress={handleCreate}
       >
-        <Text className="text-lg font-redHatDisplaySemiBold text-contrast">
-          Salvar
-        </Text>
+        <Text style={styles.saveText}>Salvar</Text>
       </TouchableOpacity>
     </ScrollView>
   );

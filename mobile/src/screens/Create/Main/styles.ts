@@ -62,10 +62,10 @@ export const styles = StyleSheet.create({
   containerTextArea: {
     position: "relative",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
     height: 192,
-    paddingHorizontal: 16,
+    padding: 16,
     borderWidth: 1,
     borderColor: HIGHLIGHT_COLOR,
     borderRadius: 12,
