@@ -1,34 +1,20 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { styles } from "./styles";
-import { ChevronLeft } from "lucide-react-native";
 
-import Fields from "./_components/Fields";
-import { PRIMARY_COLOR } from "@src/constants/Colors";
-import { useRegister } from "@src/hooks/Welcome/useRegister";
+import Header from "./_components/Header";
 import TypeButton from "./_components/TypeButton";
+import Fields from "./_components/Fields";
+import NextButton from "./_components/NextButton";
+
+import { useRegister } from "@src/hooks/Welcome/useRegister";
 
 const Register = () => {
-  const {
-    navigation,
-    type,
-    setType,
-    fields,
-    setFields,
-    handleNavigateToAddress,
-  } = useRegister();
+  const { type, setType, fields, setFields, handleNavigateToAddress } =
+    useRegister();
 
   return (
     <View style={styles.container}>
-      <View style={styles.containerHeader}>
-        <TouchableOpacity
-          activeOpacity={0.85}
-          onPress={() => navigation.goBack()}
-        >
-          <ChevronLeft size={24} color={PRIMARY_COLOR} />
-        </TouchableOpacity>
-
-        <Text style={styles.title}>Criar conta</Text>
-      </View>
+      <Header />
 
       <View style={styles.containerTypes}>
         <TypeButton
@@ -51,13 +37,7 @@ const Register = () => {
         handleNavigateToAddress={handleNavigateToAddress}
       />
 
-      <TouchableOpacity
-        style={styles.buttonNext}
-        activeOpacity={0.85}
-        onPress={handleNavigateToAddress}
-      >
-        <Text style={styles.textNext}>Avançar</Text>
-      </TouchableOpacity>
+      <NextButton onNext={handleNavigateToAddress} />
     </View>
   );
 };
