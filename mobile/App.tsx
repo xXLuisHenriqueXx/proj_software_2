@@ -9,6 +9,7 @@ import {
   useFonts,
 } from "@expo-google-fonts/red-hat-display";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Toast from "react-native-toast-message";
 import "react-native-reanimated";
 import "react-native-gesture-handler";
 
@@ -59,6 +60,8 @@ const AppContent = () => {
           <Routes />
         </GestureHandlerRootView>
       </ErrorBoundary>
+
+      <Toast />
     </SafeAreaView>
   );
 };
