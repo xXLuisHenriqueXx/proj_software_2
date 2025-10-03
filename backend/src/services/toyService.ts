@@ -6,6 +6,7 @@ import {
   toyListSchema,
 } from "../schemas/toyValidationSchemas";
 import { ToyHelper } from "../helpers/toyHelper";
+import { pictureHelper } from "../helpers/pictureHelpers";
 import { ToyType } from "../generated/prisma";
 
 type ToyCreateData = z.infer<typeof toyCreateSchema>;
@@ -43,7 +44,8 @@ export const ToyService = {
         },
       },
     });
-    return toy;
+
+    return pictureHelper.applyPicturePlaceholder([toy])[0]; // garante placeholder
   },
 
   async updateToy(
@@ -74,7 +76,8 @@ export const ToyService = {
       },
       include: { ToyPictures: true, owner: true },
     });
-    return updatedToy;
+
+    return pictureHelper.applyPicturePlaceholder([updatedToy])[0];
   },
 
   async deleteToy(toyId: string, ownerId: string): Promise<boolean> {
@@ -109,22 +112,20 @@ export const ToyService = {
         throw new Error("Brinquedo não encontrado");
       }
 
+      const toyWithPictures = pictureHelper.applyPicturePlaceholder([toy])[0];
+
       const response = {
-        id: toy.id,
-        name: toy.name,
-        description: toy.description,
-        price: toy.price,
-        isNew: toy.isNew,
-        canTrade: toy.canTrade,
-        canLend: toy.canLend,
-        usageTime: toy.usageTime,
-        type: toy.type,
-        ageGroup: toy.ageGroup,
-        pictures: toy.ToyPictures.map((p) => ({
-          id: p.id,
-          order: p.order,
-          picture: p.picture,
-        })),
+        id: toyWithPictures.id,
+        name: toyWithPictures.name,
+        description: toyWithPictures.description,
+        price: toyWithPictures.price,
+        isNew: toyWithPictures.isNew,
+        canTrade: toyWithPictures.canTrade,
+        canLend: toyWithPictures.canLend,
+        usageTime: toyWithPictures.usageTime,
+        type: toyWithPictures.type,
+        ageGroup: toyWithPictures.ageGroup,
+        pictures: toyWithPictures.ToyPictures,
         owner: {
           id: toy.owner.id,
           name: toy.owner.name,
@@ -133,6 +134,7 @@ export const ToyService = {
             : "/public/assets/avatar_not_found.webp",
         },
       };
+
       return response;
     } catch (error) {
       return { error: error };
@@ -238,14 +240,16 @@ export const ToyService = {
         seenToyIds,
       };
 
-      toys = toys
-        .map((toy) => ({
-          ...toy,
-          _score: ToyHelper.computeToyRelevance(toy, userProfile),
-        }))
-        .sort((a, b) => b._score - a._score);
+      if (toys.length > 1) {
+        toys = toys
+          .map((toy) => ({
+            ...toy,
+            _score: ToyHelper.computeToyRelevance(toy, userProfile),
+          }))
+          .sort((a, b) => b._score - a._score);
 
-      toys = toys.slice(skip, skip + take);
+        toys = toys.slice(skip, skip + take);
+      }
     } else {
       let orderBy: any = { createdAt: "desc" };
       if (filter?.orderBy === "MENOR_PRECO") orderBy = { price: "asc" };
@@ -259,6 +263,8 @@ export const ToyService = {
         include: { ToyPictures: true },
       });
     }
+
+    toys = pictureHelper.applyPicturePlaceholder(toys);
 
     const total = await prisma.toy.count({ where });
 

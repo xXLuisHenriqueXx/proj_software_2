@@ -1,6 +1,7 @@
 import { prisma } from "../prisma";
 import { Highlight } from "../generated/prisma";
 import { ToyHelper } from "../helpers/toyHelper";
+import { pictureHelper } from "../helpers/pictureHelpers";
 
 export const HighlightService = {
   async getAllHighlights() {
@@ -24,7 +25,7 @@ export const HighlightService = {
   },
 
   async getHighlightToys(highlight: Highlight, userId?: string) {
-    let toys;
+    let toys: any[] = [];
 
     switch (highlight.type) {
       case "FREE":
@@ -82,8 +83,7 @@ export const HighlightService = {
           .sort((a, b) => b._score - a._score)
           .slice(0, 10);
 
-        return toysSorted;
-
+        return pictureHelper.applyPicturePlaceholder(toysSorted);
 
       default:
         return [];
@@ -119,6 +119,6 @@ export const HighlightService = {
         .slice(0, 10);
     }
 
-    return toys;
-  },
+    return pictureHelper.applyPicturePlaceholder(toys);
+  }
 };
