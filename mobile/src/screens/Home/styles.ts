@@ -15,13 +15,6 @@ export const styles = StyleSheet.create({
     paddingTop: statusBarHeight + 64,
     backgroundColor: BACKGROUND_SECONDARY_COLOR,
   },
-  containerHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-    padding: 24,
-  },
   containerContent: {
     flexDirection: "column",
     alignItems: "center",
@@ -33,14 +26,5 @@ export const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_PRIMARY_COLOR,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-  },
-  title: {
-    fontSize: 22,
-    fontFamily: MEDIUM_FONT,
-    color: PRIMARY_COLOR,
-  },
-  titleHighlight: {
-    fontFamily: BOLD_FONT,
-    color: HIGHLIGHT_COLOR,
   },
 });
