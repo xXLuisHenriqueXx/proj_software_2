@@ -1,4 +1,3 @@
-// formValidator.ts
 export type FieldValidation<T> = {
   field: keyof T;
   rules: ((

@@ -38,7 +38,12 @@ export const registerSchema = (
     field: "passwordConfirmation",
     rules: [validationRules.required(), validationRules.match("password")],
   },
-  //   ...(type === "enterprise"
-  //     ? [{ field: "cnpj", rules: [validationRules.required()] }]
-  //     : []),
+  ...(type === "enterprise"
+    ? [
+        {
+          field: "cnpj" as keyof IFieldsRegister,
+          rules: [validationRules.required()],
+        },
+      ]
+    : []),
 ];

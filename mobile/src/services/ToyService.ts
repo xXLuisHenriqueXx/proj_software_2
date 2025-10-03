@@ -36,8 +36,6 @@ export const toyService = {
       },
     });
 
-    console.log(response.data);
-
     return response;
   },
 

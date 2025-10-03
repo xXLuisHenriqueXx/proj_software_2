@@ -13,8 +13,8 @@ export const validationRules = {
     value?.length >= min ? null : msg || `Mínimo de ${min} caracteres`,
 
   match:
-    (fieldToMatch: string, msg?: string) =>
-    (value: string, allValues: Record<string, string>) =>
+    <T extends Record<string, string>>(fieldToMatch: keyof T, msg?: string) =>
+    (value: string, allValues: T) =>
       value === allValues[fieldToMatch]
         ? null
         : msg || "Os valores não coincidem",

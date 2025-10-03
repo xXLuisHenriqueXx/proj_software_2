@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, useMemo, useRef, useState } from "react";
 import {
   ScrollView,
   Text,
@@ -11,16 +11,10 @@ import { Eye, EyeOff } from "lucide-react-native";
 
 import MaskedInput from "@src/components/MaskedInput";
 
+import { SECONDARY_COLOR } from "@src/constants/Colors";
+import { useRegister } from "@src/hooks/Welcome/useRegister";
 import { CNPJ_MASK } from "@src/constants/Masks";
 import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
-import { SECONDARY_COLOR } from "@src/constants/Colors";
-
-interface IFieldProps {
-  fields: IFieldsRegister;
-  setFields: (fields: IFieldsRegister) => void;
-  type: "personal" | "enterprise";
-  onNavigate: () => void;
-}
 
 type IInputProps = TextInputProps & {
   label: string;
@@ -28,10 +22,22 @@ type IInputProps = TextInputProps & {
   password?: boolean;
 };
 
-const Input = forwardRef<any, IInputProps>((props, ref) => {
-  const { label, instruction, password, ...rest } = props;
+export const Input = forwardRef<any, IInputProps>((props, ref) => {
+  const { label, instruction, ...rest } = props;
 
-  const [showPassword, setShowPassword] = useState<boolean>(true);
+  return (
+    <View style={{ flexDirection: "column" }}>
+      <View style={styles.containerInput}>
+        <Text style={styles.labelText}>{label}</Text>
+        <TextInput style={styles.input} ref={ref} {...rest} />
+      </View>
+    </View>
+  );
+});
+
+export const PasswordInput = forwardRef<any, IInputProps>((props, ref) => {
+  const { label, instruction, ...rest } = props;
+  const [showPassword, setShowPassword] = useState(true);
 
   return (
     <View style={{ flexDirection: "column" }}>
@@ -40,43 +46,47 @@ const Input = forwardRef<any, IInputProps>((props, ref) => {
         <TextInput
           style={styles.input}
           ref={ref}
-          secureTextEntry={password ? showPassword : false}
+          secureTextEntry={showPassword}
           {...rest}
         />
-        {password &&
-          (showPassword ? (
-            <Eye
-              onPress={() => setShowPassword(!showPassword)}
-              size={24}
-              color={SECONDARY_COLOR}
-            />
-          ) : (
-            <EyeOff
-              onPress={() => setShowPassword(!showPassword)}
-              size={24}
-              color={SECONDARY_COLOR}
-            />
-          ))}
+        {showPassword ? (
+          <Eye
+            onPress={() => setShowPassword(false)}
+            size={24}
+            color={SECONDARY_COLOR}
+          />
+        ) : (
+          <EyeOff
+            onPress={() => setShowPassword(true)}
+            size={24}
+            color={SECONDARY_COLOR}
+          />
+        )}
       </View>
-
-      <Text style={styles.instructionText}>{instruction}</Text>
+      {instruction && <Text style={styles.instructionText}>{instruction}</Text>}
     </View>
   );
 });
 
-const Fields = ({ fields, setFields, type, onNavigate }: IFieldProps) => {
-  const emailRef = useRef<TextInput>();
-  const cnpjRef = useRef<TextInput>();
-  const passwordRef = useRef<TextInput>();
-  const passwordConfirmationRef = useRef<TextInput>();
+interface IParams {
+  type: "personal" | "enterprise";
+  refs: any;
+  handleNavigateToAddress: () => void;
+}
 
-  const fieldConfigs = [
+const getFieldsRegister = ({
+  type,
+  refs,
+  handleNavigateToAddress,
+}: IParams) => {
+  const { emailRef, cnpjRef, passwordRef, passwordConfirmationRef } = refs;
+
+  return [
     {
       key: "name",
       label: type === "personal" ? "Nome completo" : "Nome da instituição",
       placeholder:
         type === "personal" ? "Seu nome ..." : "Nome da instituição ...",
-      ref: undefined,
       nextRef: type === "enterprise" ? cnpjRef : emailRef,
       component: Input,
     },
@@ -109,18 +119,43 @@ const Fields = ({ fields, setFields, type, onNavigate }: IFieldProps) => {
       nextRef: passwordConfirmationRef,
       password: true,
       instruction: "Deve conter no mínimo 8 caracteres",
-      component: Input,
+      component: PasswordInput,
     },
     {
       key: "passwordConfirmation",
       label: "Confirmar senha",
       placeholder: "Confirme sua senha ...",
       ref: passwordConfirmationRef,
-      onSubmitEditing: onNavigate,
+      onSubmitEditing: handleNavigateToAddress,
       password: true,
-      component: Input,
+      component: PasswordInput,
     },
   ];
+};
+
+interface IFieldsProps {
+  type: "personal" | "enterprise";
+  fields: IFieldsRegister;
+  setFields: (fields: IFieldsRegister) => void;
+  handleNavigateToAddress: () => void;
+}
+
+const Fields = ({
+  type,
+  fields,
+  setFields,
+  handleNavigateToAddress,
+}: IFieldsProps) => {
+  const emailRef = useRef<TextInput>();
+  const cnpjRef = useRef<TextInput>();
+  const passwordRef = useRef<TextInput>();
+  const passwordConfirmationRef = useRef<TextInput>();
+
+  const refs = { emailRef, cnpjRef, passwordRef, passwordConfirmationRef };
+  const fieldConfigs = useMemo(
+    () => getFieldsRegister({ type, refs, handleNavigateToAddress }),
+    [type, handleNavigateToAddress]
+  );
 
   return (
     <ScrollView

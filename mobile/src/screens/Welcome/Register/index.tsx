@@ -1,66 +1,28 @@
-import { useCallback, useState } from "react";
-import {
-  Alert,
-  InteractionManager,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
 import { ChevronLeft } from "lucide-react-native";
 
 import Fields from "./_components/Fields";
-
-import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
-import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
-import { validateForm } from "@src/utils/FormValidator";
-import { registerSchema } from "@src/utils/ValidationSchemas";
-import {
-  BACKGROUND_PRIMARY_COLOR,
-  HIGHLIGHT_COLOR,
-  PRIMARY_COLOR,
-} from "@src/constants/Colors";
+import { PRIMARY_COLOR } from "@src/constants/Colors";
+import { useRegister } from "@src/hooks/Welcome/useRegister";
+import TypeButton from "./_components/TypeButton";
 
 const Register = () => {
-  const naviagtion = useNavigation<PropsAuthStack>();
-
-  const [type, setType] = useState<"personal" | "enterprise">("personal");
-  const [fields, setFields] = useState<IFieldsRegister>({
-    name: "",
-    cnpj: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-  });
-
-  const validateFields = useCallback(() => {
-    const { values, error } = validateForm(fields as any, registerSchema(type));
-    return { values, error };
-  }, [fields, type]);
-
-  const handleNavigateToAddress = useCallback(() => {
-    const { values, error } = validateFields();
-    if (error) {
-      InteractionManager.runAfterInteractions(() => {
-        Alert.alert("Aviso", error);
-      });
-      return;
-    }
-
-    if (values) {
-      naviagtion.navigate("Address", { fieldsData: values });
-    }
-  }, [naviagtion, fields, type]);
-
-  const isTypePersonal = type === "personal";
+  const {
+    navigation,
+    type,
+    setType,
+    fields,
+    setFields,
+    handleNavigateToAddress,
+  } = useRegister();
 
   return (
     <View style={styles.container}>
       <View style={styles.containerHeader}>
         <TouchableOpacity
           activeOpacity={0.85}
-          onPress={() => naviagtion.goBack()}
+          onPress={() => navigation.goBack()}
         >
           <ChevronLeft size={24} color={PRIMARY_COLOR} />
         </TouchableOpacity>
@@ -69,62 +31,24 @@ const Register = () => {
       </View>
 
       <View style={styles.containerTypes}>
-        <TouchableOpacity
-          style={[
-            styles.buttonType,
-            {
-              backgroundColor: isTypePersonal ? HIGHLIGHT_COLOR : "transparent",
-            },
-          ]}
-          activeOpacity={0.85}
+        <TypeButton
+          label="Conta pessoal"
+          isActive={type === "personal"}
           onPress={() => setType("personal")}
-        >
-          <Text
-            style={[
-              styles.textType,
-              {
-                color: isTypePersonal
-                  ? BACKGROUND_PRIMARY_COLOR
-                  : PRIMARY_COLOR,
-              },
-            ]}
-          >
-            Conta pessoal
-          </Text>
-        </TouchableOpacity>
+        />
 
-        <TouchableOpacity
-          style={[
-            styles.buttonType,
-            {
-              backgroundColor: !isTypePersonal
-                ? HIGHLIGHT_COLOR
-                : "transparent",
-            },
-          ]}
-          activeOpacity={0.85}
+        <TypeButton
+          label="Conta jurídica"
+          isActive={type === "enterprise"}
           onPress={() => setType("enterprise")}
-        >
-          <Text
-            style={[
-              styles.textType,
-              {
-                color: !isTypePersonal
-                  ? BACKGROUND_PRIMARY_COLOR
-                  : PRIMARY_COLOR,
-              },
-            ]}
-          >
-            Conta jurídica
-          </Text>
-        </TouchableOpacity>
+        />
       </View>
 
       <Fields
+        type={type}
         fields={fields}
         setFields={setFields}
-        type={type}
-        onNavigate={handleNavigateToAddress}
+        handleNavigateToAddress={handleNavigateToAddress}
       />
 
       <TouchableOpacity

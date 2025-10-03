@@ -1,7 +1,7 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 
-import { useAccess } from "@src/hooks/useAccess";
+import { useAccess } from "@src/hooks/Welcome/useAccess";
 
 const Access = () => {
   const { handleNavigateToLogin, handleNavigateToRegister } = useAccess();

@@ -43,12 +43,6 @@ export const styles = StyleSheet.create({
     fontFamily: SEMIBOLD_FONT,
     color: PRIMARY_COLOR,
   },
-  buttonType: {
-    flex: 1,
-    alignItems: "center",
-    paddingVertical: 8,
-    borderRadius: 8,
-  },
   buttonNext: {
     position: "absolute",
     bottom: 24,
@@ -58,10 +52,6 @@ export const styles = StyleSheet.create({
     height: 64,
     borderRadius: 12,
     backgroundColor: HIGHLIGHT_COLOR,
-  },
-  textType: {
-    fontSize: 16,
-    fontFamily: MEDIUM_FONT,
   },
   textNext: {
     fontSize: 16,
