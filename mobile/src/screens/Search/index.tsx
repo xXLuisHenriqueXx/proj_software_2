@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
+import { styles } from "./styles";
 
 import Featured from "./_components/Featured";
 import SearchInput from "./_components/SearchInput";
@@ -11,7 +12,6 @@ import { toyService } from "@src/services/ToyService";
 import { recentSearchService } from "@src/services/RecentSearchService";
 import { IProduct } from "@src/common/Entities/Product";
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
-import { statusBarHeight } from "@src/constants/Values";
 
 const Search = () => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -55,8 +55,7 @@ const Search = () => {
 
   return (
     <ScrollView
-      className="relative flex-1 bg-backgroundPrimary w-full h-full px-6"
-      style={{ paddingTop: statusBarHeight + 64 }}
+      style={styles.container}
       contentContainerStyle={{
         paddingBottom: 264,
         rowGap: 48,

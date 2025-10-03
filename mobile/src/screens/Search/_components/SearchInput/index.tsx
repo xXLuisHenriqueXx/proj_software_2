@@ -1,5 +1,8 @@
 import { View, TextInput } from "react-native";
+import { styles } from "./styles";
 import { Search } from "lucide-react-native";
+
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 interface SearchInputProps {
   onPress: () => void;
@@ -15,11 +18,11 @@ const SearchInput = ({
   setSearch,
 }: SearchInputProps) => {
   return (
-    <View className="flex-row items-center gap-x-2 w-full h-16 px-4 bg-backgroundPrimary border border-highlight rounded-2xl">
-      <Search size={24} color={"#13131399"} />
+    <View style={styles.container}>
+      <Search size={24} color={HIGHLIGHT_COLOR} />
 
       <TextInput
-        className="flex-1 text-base font-redHatDisplayRegular text-primary"
+        style={styles.input}
         placeholder="Pesquisar"
         returnKeyType="done"
         value={search}
@@ -27,7 +30,6 @@ const SearchInput = ({
           setSearch(text);
         }}
         onPress={onPress}
-        // onBlur={onBlur}
         onEndEditing={onEndEditing}
       />
     </View>

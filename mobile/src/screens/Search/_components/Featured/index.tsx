@@ -1,20 +1,16 @@
 import { View, Text } from "react-native";
+import { styles } from "./styles";
 
 import { featuredData } from "@src/static/FeaturedData";
 
 const Featured = () => {
   return (
-    <View className="flex-col gap-y-4 w-full">
-      <Text className="text-lg font-redHatDisplaySemiBold text-primary">
-        Em destaque
-      </Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Em destaque</Text>
 
-      <View className="flex-row flex-wrap gap-3 w-full">
+      <View style={styles.containerContent}>
         {featuredData.map((item) => (
-          <Text
-            key={item.id}
-            className="px-3 py-1 rounded-md border border-primary/10 text-base font-redHatDisplayRegular text-primary"
-          >
+          <Text key={item.id} style={styles.text}>
             {item.name}
           </Text>
         ))}

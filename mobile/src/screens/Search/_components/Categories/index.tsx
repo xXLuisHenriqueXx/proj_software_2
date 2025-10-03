@@ -4,9 +4,11 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from "react-native";
+import { styles } from "./styles";
 
 import { categoriesData } from "@src/static/CategoriesData";
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 interface ICategoriesProps {
   onSearch: (value: EToyType) => void;
@@ -15,28 +17,23 @@ interface ICategoriesProps {
 const Categories = ({ onSearch }: ICategoriesProps) => {
   const { width } = useWindowDimensions();
 
-  const widthCategory = (width - 48 - 8) / 2;
+  const widthCategory = (width - 48 - 16) / 2;
 
   return (
-    <View className="flex-col gap-y-4 w-full">
-      <Text className="text-lg font-redHatDisplaySemiBold text-primary">
-        Explorar categorias
-      </Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Explorar categorias</Text>
 
-      <View className="flex-row flex-wrap justify-between gap-4 w-full">
+      <View style={styles.containerContent}>
         {categoriesData.map((item) => (
           <TouchableOpacity
             key={item.id}
-            className="flex-row items-center justify-between px-4 py-6 bg-backgroundSecondary rounded-xl"
-            style={{ width: widthCategory }}
+            style={[styles.containerItem, { width: widthCategory }]}
             activeOpacity={0.85}
             onPress={() => onSearch(item.value)}
           >
-            <Text className="text-base font-redHatDisplayRegular text-primary text-center">
-              {item.name}
-            </Text>
+            <Text style={styles.text}>{item.name}</Text>
 
-            <item.icon size={20} color={"#316A41"} />
+            <item.icon size={20} color={HIGHLIGHT_COLOR} />
           </TouchableOpacity>
         ))}
       </View>
