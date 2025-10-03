@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   containerInputGroup: {
     flexDirection: "row",
     alignItems: "center",
-    columnGap: 16,
+    columnGap: 8,
   },
   containerInput: {
     position: "relative",

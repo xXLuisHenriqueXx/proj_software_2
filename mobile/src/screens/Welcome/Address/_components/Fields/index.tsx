@@ -39,12 +39,12 @@ const Fields = ({
   const cityRef = useRef<any>();
   const stateRef = useRef<any>();
 
-  const streetWidth = width * 0.7 - 32;
-  const numberWidth = width * 0.3 - 32;
-  const neighborhoodWidth = width * 0.6 - 32;
-  const extraWidth = width * 0.4 - 32;
-  const cityWidth = width * 0.8 - 32;
-  const stateWidth = width * 0.2 - 32;
+  const streetWidth = width * 0.7 - 28;
+  const numberWidth = width * 0.3 - 28;
+  const neighborhoodWidth = width * 0.6 - 28;
+  const extraWidth = width * 0.4 - 28;
+  const cityWidth = width * 0.8 - 28;
+  const stateWidth = width * 0.2 - 28;
 
   return (
     <ScrollView
