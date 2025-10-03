@@ -1,31 +1,31 @@
-import { Fragment, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   View,
   Text,
   TextInput,
   ScrollView,
   TouchableOpacity,
-  Image,
-  useWindowDimensions,
 } from "react-native";
+import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import * as ImagePicker from "expo-image-picker";
-import { ImagePlus, X } from "lucide-react-native";
+import MaskInput, { Masks } from "react-native-mask-input";
+import { X } from "lucide-react-native";
+
+import ConditionList from "./_components/ConditionList";
+import AgeGroupList from "./_components/AgeGroupList";
+import PictureSelector from "./_components/PictureSelector";
 
 import {
   EAgeRange,
   IFieldsToyCreateMain,
 } from "@src/common/Interfaces/Toy.interface";
-import MaskInput, { Masks } from "react-native-mask-input";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { PropsCreateStack } from "@src/routes/stacks/CreateStack";
-import { statusBarHeight } from "@src/constants/Values";
+import { SECONDARY_COLOR } from "@src/constants/Colors";
 
 const Main = () => {
-  const { width } = useWindowDimensions();
   const rootNavigation = useNavigation<PropsAppStack>();
   const createNavigation = useNavigation<PropsCreateStack>();
-  const [images, setImages] = useState<string[]>([]);
   const [fields, setFields] = useState<IFieldsToyCreateMain>({
     name: "",
     description: "",
@@ -39,28 +39,6 @@ const Main = () => {
     discount: "",
   });
 
-  const pickImages = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images"],
-      allowsMultipleSelection: true,
-      quality: 1,
-      aspect: [4, 3],
-      selectionLimit: 5,
-      base64: true,
-    });
-
-    if (result.assets) {
-      const images = result.assets.slice(0, 5);
-
-      setImages(images.map((image) => image.uri));
-      setFields({ ...fields, pictures: images.map((image) => image.base64) });
-    }
-  };
-
-  const handleRemoveImage = (uri: string) => {
-    setImages(images.filter((image) => image !== uri));
-  };
-
   const handleNavigateToCategories = () => {
     createNavigation.navigate("Categories", { fields });
   };
@@ -72,116 +50,38 @@ const Main = () => {
     [fields.price]
   );
 
-  const bigImageWidth = (width - 48 - 16) / 2;
-  const smallImageWidth = (width - 48 - 16 - 16) / 2 / 2;
-
   return (
     <ScrollView
-      className="relative bg-backgroundSecondary"
-      style={{ paddingTop: statusBarHeight + 64 }}
+      style={styles.container}
       contentContainerStyle={{
-        paddingBottom: 124,
         rowGap: 48,
+        paddingBottom: 124,
         paddingHorizontal: 24,
       }}
     >
-      <View className="flex-row items-center justify-between w-full py-4">
-        <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
-          Criar anúncio
-        </Text>
+      <View style={styles.containerHeader}>
+        <Text style={styles.title}>Criar anúncio</Text>
 
         <TouchableOpacity
           activeOpacity={0.85}
           onPress={() => rootNavigation.goBack()}
         >
-          <X size={20} color={"#13131399"} />
+          <X size={20} color={SECONDARY_COLOR} />
         </TouchableOpacity>
       </View>
 
-      <View className="flex-col items-start gap-y-4">
-        <Text className="text-lg font-redHatDisplaySemiBold text-primary">
-          Escolha até 5 das suas melhores fotos
-        </Text>
-        <TouchableOpacity
-          className="flex-row items-center justify-between gap-x-4 w-full"
-          activeOpacity={0.85}
-          onPress={pickImages}
-        >
-          {images.length === 0 ? (
-            <>
-              <View
-                className="items-center justify-center border border-dashed border-secondary rounded-xl"
-                style={{ width: bigImageWidth, height: bigImageWidth }}
-              >
-                <ImagePlus size={24} color={"#316A41"} />
-              </View>
+      <PictureSelector
+        setFieldPictures={(images) =>
+          setFields({ ...fields, pictures: images })
+        }
+      />
 
-              <View className="flex-row flex-wrap gap-4 w-1/2">
-                {[1, 2, 3, 4].map((item) => (
-                  <View
-                    key={item}
-                    className="items-center justify-center border border-dashed border-secondary rounded-xl"
-                    style={{ width: smallImageWidth, height: smallImageWidth }}
-                  >
-                    <ImagePlus size={24} color={"#316A41"} />
-                  </View>
-                ))}
-              </View>
-            </>
-          ) : (
-            <>
-              <View className="relative rounded-xl">
-                <Image
-                  source={{ uri: images[0] }}
-                  className="rounded-xl"
-                  style={{
-                    width: bigImageWidth,
-                    height: bigImageWidth,
-                  }}
-                />
-                <TouchableOpacity
-                  className="absolute top-2 right-2 p-0.5 bg-backgroundPrimary rounded-full z-10"
-                  activeOpacity={0.85}
-                  onPress={() => handleRemoveImage(images[0])}
-                >
-                  <X size={20} color={"#13131399"} />
-                </TouchableOpacity>
-              </View>
-
-              <View className="flex-row flex-wrap gap-4 w-1/2">
-                {images.slice(1, 5).map((image, index) => (
-                  <View key={index} className="relative rounded-xl">
-                    <Image
-                      source={{ uri: image }}
-                      className="rounded-xl"
-                      style={{
-                        width: smallImageWidth,
-                        height: smallImageWidth,
-                      }}
-                    />
-                    <TouchableOpacity
-                      className="absolute top-2 right-2 p-0.5 bg-backgroundPrimary rounded-full z-10"
-                      activeOpacity={0.85}
-                      onPress={() => handleRemoveImage(image)}
-                    >
-                      <X size={20} color={"#13131399"} />
-                    </TouchableOpacity>
-                  </View>
-                ))}
-              </View>
-            </>
-          )}
-        </TouchableOpacity>
-      </View>
-
-      <View className="flex-col gap-y-2">
-        <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-          <Text className="absolute -top-3 left-4 px-2 bg-backgroundSecondary text-base font-redHatDisplayMedium text-highlight">
-            Título do anúncio
-          </Text>
+      <View style={styles.containerInputGroup}>
+        <View style={styles.containerInput}>
+          <Text style={styles.labelText}>Título do anúncio</Text>
 
           <TextInput
-            className="flex-1 text-base font-redHatDisplayRegular text-primary"
+            style={styles.input}
             placeholder="ex: Brinquedo Pelúcia Leãozinho"
             returnKeyType="done"
             value={fields.name}
@@ -191,26 +91,20 @@ const Main = () => {
           />
         </View>
 
-        <Text className="text-base font-redHatDisplayRegular text-primary/75 ml-4">
-          {fields.name.length} de 100
-        </Text>
+        <Text style={styles.infoText}>{fields.name.length} de 100</Text>
       </View>
 
-      <View className="flex-col items-center gap-y-4 w-full">
-        <View className="flex-col gap-y-2 w-full">
-          <View className="relative flex-row items-center justify-center h-16 px-4 border border-highlight rounded-xl">
-            <Text className="absolute -top-3 left-4 px-2 bg-backgroundSecondary text-base font-redHatDisplayMedium text-highlight">
-              Valor do anúncio
-            </Text>
+      <View style={styles.containerSelectGroup}>
+        <View style={styles.containerFree}>
+          <View style={styles.containerInput}>
+            <Text style={styles.labelText}>Valor do anúncio</Text>
 
             {fields.canLend || fields.canTrade ? (
-              <Text className="flex-1 text-base font-redHatDisplayRegular text-primary">
-                Gratuito
-              </Text>
+              <Text style={styles.input}>Gratuito</Text>
             ) : (
               <MaskInput
                 mask={Masks.BRL_CURRENCY}
-                className="flex-1 text-base font-redHatDisplayRegular text-primary"
+                style={styles.input}
                 placeholder="ex: R$ 50,00"
                 returnKeyType="done"
                 value={fields.price}
@@ -222,73 +116,67 @@ const Main = () => {
           </View>
         </View>
 
-        <View className="flex-row items-center gap-x-4">
-          <View className="w-1/3 h-[1px] bg-secondary/50" />
+        <View style={styles.containerOr}>
+          <View style={styles.line} />
 
-          <Text className="text-base font-redHatDisplayRegular text-primary">
-            ou
-          </Text>
+          <Text style={styles.orText}>ou</Text>
 
-          <View className="w-1/3 h-[1px] bg-secondary/50" />
+          <View style={styles.line} />
         </View>
 
-        <View className="flex-col gap-y-6 w-full">
+        <View style={styles.containerCheckboxes}>
           <TouchableOpacity
-            className="flex-row items-center justify-between w-full"
+            style={styles.containerCheckbox}
             activeOpacity={0.85}
             onPress={() => setFields({ ...fields, canLend: !fields.canLend })}
           >
-            <View className="flex-col gap-y-1">
-              <Text className="text-lg font-redHatDisplayRegular text-primary">
+            <View style={styles.containerCheckboxText}>
+              <Text style={styles.checkboxTitle}>
                 Disponibilizar para doação
               </Text>
-              <Text className="text-sm font-redHatDisplayRegular text-secondary/75">
+              <Text style={styles.checkboxSubtitle}>
                 Seu produto será gratuito
               </Text>
             </View>
 
             {fields.canLend ? (
-              <View className="items-center justify-center w-6 h-6 border border-highlight">
-                <View className="w-4 h-4 bg-highlight" />
+              <View style={styles.checkboxActive}>
+                <View style={styles.checkboxContent} />
               </View>
             ) : (
-              <View className="w-6 h-6 border border-highlight" />
+              <View style={styles.checkboxInactive} />
             )}
           </TouchableOpacity>
 
           <TouchableOpacity
-            className="flex-row items-center justify-between w-full"
+            style={styles.containerCheckbox}
             activeOpacity={0.85}
             onPress={() => setFields({ ...fields, canTrade: !fields.canTrade })}
           >
-            <View className="flex-col gap-y-1">
-              <Text className="text-lg font-redHatDisplayRegular text-primary">
-                Aceitar trocas
-              </Text>
-              <Text className="text-sm font-redHatDisplayRegular text-secondary/75">
+            <View style={styles.containerCheckboxText}>
+              <Text style={styles.checkboxTitle}>Aceitar trocas</Text>
+              <Text style={styles.checkboxSubtitle}>
                 Seu produto será gratuito
               </Text>
             </View>
 
             {fields.canTrade ? (
-              <View className="items-center justify-center w-6 h-6 border border-highlight">
-                <View className="w-4 h-4 bg-highlight" />
+              <View style={styles.checkboxActive}>
+                <View style={styles.checkboxContent} />
               </View>
             ) : (
-              <View className="w-6 h-6 border border-highlight" />
+              <View style={styles.checkboxInactive} />
             )}
           </TouchableOpacity>
         </View>
       </View>
 
-      <View className="flex-col gap-y-2">
-        <View className="relative flex-row items-start justify-start h-48 p-4 border border-highlight rounded-xl">
-          <Text className="absolute -top-3 left-4 px-2 bg-backgroundSecondary text-base font-redHatDisplayMedium text-highlight">
-            Descrição do anúncio
-          </Text>
+      <View style={styles.containerInputGroup}>
+        <View style={styles.containerTextArea}>
+          <Text style={styles.labelText}>Descrição do anúncio</Text>
 
           <TextInput
-            className="flex-1 text-base font-redHatDisplayRegular text-primary"
+            style={styles.input}
             placeholder="ex.: Pelúcia Leãozinho com plush macio, cor marrom clássica, antialérgico e tamanho 25cm"
             returnKeyType="done"
             multiline
@@ -299,105 +187,28 @@ const Main = () => {
           />
         </View>
 
-        <Text className="text-base font-redHatDisplayRegular text-primary/75 ml-4">
-          {fields.description.length} de 350
-        </Text>
+        <Text style={styles.infoText}>{fields.description.length} de 350</Text>
       </View>
 
-      <View className="flex-col items-start gap-y-4">
-        <Text className="text-lg font-redHatDisplaySemiBold text-primary">
-          Selecione a condição de uso do seu anúncio
-        </Text>
+      <ConditionList
+        isNew={fields.isNew}
+        onPressTrue={() => setFields({ ...fields, isNew: true })}
+        onPressFalse={() => setFields({ ...fields, isNew: false })}
+      />
 
-        <View className="flex-col gap-y-4 w-full">
-          <TouchableOpacity
-            className="flex-row items-center justify-between w-full"
-            activeOpacity={0.85}
-            onPress={() => setFields({ ...fields, isNew: true })}
-          >
-            <Text className="text-lg font-redHatDisplayRegular text-secondary">
-              Novo
-            </Text>
-
-            {fields.isNew ? (
-              <View className="items-center justify-center w-6 h-6 border border-highlight rounded-full">
-                <View className="w-4 h-4 bg-highlight rounded-full" />
-              </View>
-            ) : (
-              <View className="w-6 h-6 border border-highlight rounded-full" />
-            )}
-          </TouchableOpacity>
-
-          <View className="w-full h-[1px] bg-highlight/50" />
-
-          <TouchableOpacity
-            className="flex-row items-center justify-between w-full"
-            activeOpacity={0.85}
-            onPress={() => setFields({ ...fields, isNew: false })}
-          >
-            <Text className="text-lg font-redHatDisplayRegular text-secondary">
-              Usado
-            </Text>
-
-            {!fields.isNew ? (
-              <View className="items-center justify-center w-6 h-6 border border-highlight rounded-full">
-                <View className="w-4 h-4 bg-highlight rounded-full" />
-              </View>
-            ) : (
-              <View className="w-6 h-6 border border-highlight rounded-full" />
-            )}
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <View className="flex-col items-start gap-y-4">
-        <Text className="text-lg font-redHatDisplaySemiBold text-primary">
-          Selecione a faixa etária do seu anúncio
-        </Text>
-
-        <View className="flex-col gap-y-4 w-full">
-          {[
-            { name: "0 a 1 ano", value: EAgeRange.ZERO_TO_ONE },
-            { name: "1 a 3 anos", value: EAgeRange.ONE_TO_THREE },
-            { name: "3 a 6 anos", value: EAgeRange.THREE_TO_SIX },
-            { name: "6 a 12 anos", value: EAgeRange.SIX_TO_TWELVE },
-            { name: "12 ou mais anos", value: EAgeRange.TWELVE_OR_MORE },
-          ].map((item, index) => (
-            <Fragment key={index}>
-              <TouchableOpacity
-                className="flex-row items-center justify-between w-full"
-                activeOpacity={0.85}
-                onPress={() => setFields({ ...fields, ageGroup: item.value })}
-              >
-                <Text className="text-lg font-redHatDisplayRegular text-secondary">
-                  {item.name}
-                </Text>
-
-                {fields.ageGroup === item.value ? (
-                  <View className="items-center justify-center w-6 h-6 border border-highlight rounded-full">
-                    <View className="w-4 h-4 bg-highlight rounded-full" />
-                  </View>
-                ) : (
-                  <View className="w-6 h-6 border border-highlight rounded-full" />
-                )}
-              </TouchableOpacity>
-
-              {index !== 4 && (
-                <View className="w-full h-[1px] bg-highlight/50" />
-              )}
-            </Fragment>
-          ))}
-        </View>
-      </View>
+      <AgeGroupList
+        ageGroup={fields.ageGroup}
+        setFieldAgeGroup={(ageGroup: EAgeRange) =>
+          setFields({ ...fields, ageGroup })
+        }
+      />
 
       <TouchableOpacity
-        className="flex-row items-center justify-center w-full h-16 bg-highlight rounded-xl"
+        style={styles.buttonNext}
         activeOpacity={0.85}
         onPress={handleNavigateToCategories}
       >
-        <Text className="text-lg font-redHatDisplaySemiBold text-backgroundPrimary">
-          Continuar
-        </Text>
+        <Text style={styles.nextText}>Continuar</Text>
       </TouchableOpacity>
     </ScrollView>
   );
