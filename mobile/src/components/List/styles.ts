@@ -8,6 +8,7 @@ import { BOLD_FONT, REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: "column",
     rowGap: 16,
   },
@@ -22,11 +23,16 @@ export const styles = StyleSheet.create({
     rowGap: 4,
   },
   containerNotFound: {
+    flex: 1,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    alignSelf: "center",
     rowGap: 8,
     width: "100%",
+    padding: 32,
+    backgroundColor: BACKGROUND_SECONDARY_COLOR,
+    borderRadius: 12,
   },
   image: {
     width: "100%",

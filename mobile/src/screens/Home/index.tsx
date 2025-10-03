@@ -90,7 +90,7 @@ const Home = () => {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{ paddingBottom: 92 }}
+      contentContainerStyle={{ paddingBottom: 92, flexGrow: 1 }}
     >
       <View style={styles.containerHeader}>
         <Text style={styles.title}>

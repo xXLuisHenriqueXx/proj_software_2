@@ -39,7 +39,7 @@ const List = ({ title, subtitile, data }: IProductProps) => {
     <View style={styles.container}>
       {hasHeader && <Header title={title} subtitile={subtitile} />}
 
-      {data.length > 0 ? (
+      {data && data.length > 0 ? (
         <View style={styles.containerContent}>
           {data.map((item, index) => (
             <TouchableOpacity
