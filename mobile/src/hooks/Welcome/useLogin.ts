@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import BottomSheet from "@gorhom/bottom-sheet";
 import Toast from "react-native-toast-message";
 
-import useAuth from "./useAuth";
+import useAuth from "../useAuth";
 import { PropsRoot } from "@src/routes";
 import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
 import { validateForm } from "@src/utils/FormValidator";
@@ -39,7 +39,7 @@ export function useLogin() {
     return values;
   }, [fields]);
 
-  const handleLogin = () => {
+  const handleLogin = useCallback(() => {
     setLoading(true);
 
     try {
@@ -54,7 +54,7 @@ export function useLogin() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [login, navigation, validateFields]);
 
   const handleOpenSheetEmail = () => {
     bottomSheetEmailRef.current?.expand();
@@ -68,7 +68,7 @@ export function useLogin() {
     bottomSheetCodeRef.current?.close();
   };
 
-  const handleSendEmail = () => {
+  const handleSendEmail = useCallback(() => {
     if (!EMAIL_REGEX.test(email)) {
       Toast.show({
         type: "error",
@@ -81,7 +81,7 @@ export function useLogin() {
 
     bottomSheetEmailRef.current?.close();
     bottomSheetCodeRef.current?.expand();
-  };
+  }, [email]);
 
   return {
     fields,
@@ -90,7 +90,6 @@ export function useLogin() {
     setEmail,
     code,
     setCode,
-    navigation,
     loading,
     bottomSheetCodeRef,
     bottomSheetEmailRef,

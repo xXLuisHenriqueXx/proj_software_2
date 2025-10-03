@@ -10,10 +10,16 @@ import { styles } from "./styles";
 import { Eye, EyeOff } from "lucide-react-native";
 
 import { SECONDARY_COLOR } from "@src/constants/Colors";
-import { useLogin } from "@src/hooks/useLogin";
+import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
 
-const Fields = () => {
-  const { fields, setFields, handleLogin, handleOpenSheetEmail } = useLogin();
+interface IFieldsProps {
+  fields: IFieldsLogin;
+  setFields: (fields: IFieldsLogin) => void;
+  onLogin: () => void;
+  onForgot: () => void;
+}
+
+const Fields = ({ fields, setFields, onLogin, onForgot }: IFieldsProps) => {
   const passwordRef = useRef<any>();
 
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -48,7 +54,7 @@ const Fields = () => {
             ref={passwordRef}
             placeholder="Sua senha"
             returnKeyType="done"
-            onSubmitEditing={handleLogin}
+            onSubmitEditing={onLogin}
             secureTextEntry={showPassword}
             value={fields.password}
             onChangeText={(text: string) => {
@@ -69,7 +75,7 @@ const Fields = () => {
             />
           )}
         </View>
-        <TouchableOpacity activeOpacity={0.85} onPress={handleOpenSheetEmail}>
+        <TouchableOpacity activeOpacity={0.85} onPress={onForgot}>
           <Text style={styles.forgotText}>Esqueci a senha</Text>
         </TouchableOpacity>
       </View>
