@@ -3,10 +3,7 @@ import { StyleSheet } from "react-native";
 import {
   BACKGROUND_PRIMARY_COLOR,
   BACKGROUND_SECONDARY_COLOR,
-  HIGHLIGHT_COLOR,
-  PRIMARY_COLOR,
 } from "@src/constants/Colors";
-import { BOLD_FONT, MEDIUM_FONT } from "@src/constants/Fonts";
 import { statusBarHeight } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
