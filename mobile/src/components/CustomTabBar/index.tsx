@@ -5,6 +5,8 @@ import { AnimatePresence, MotiText, MotiView } from "moti";
 
 import { buttonsData } from "@src/static/TabBarButtonsData";
 import { Plus } from "lucide-react-native";
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
+import { styles } from "./styles";
 
 const CustomTabBar = ({
   state,
@@ -12,10 +14,7 @@ const CustomTabBar = ({
   navigation,
 }: BottomTabBarProps) => {
   return (
-    <View
-      className="absolute bottom-6 self-center flex-row items-center justify-between gap-x-6 p-6 bg-contrast rounded-3xl"
-      style={{ elevation: 2, shadowColor: "#13131399" }}
-    >
+    <View style={styles.container}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
 
@@ -43,13 +42,13 @@ const CustomTabBar = ({
         return (
           <TouchableOpacity
             key={button.key}
-            className="flex-row items-center justify-center gap-x-2 p-3 bg-highlight/15 rounded-xl"
+            style={styles.buttonNav}
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             onPress={onPress}
           >
-            <Icon size={24} color={"#316A41"} />
+            <Icon size={24} color={HIGHLIGHT_COLOR} />
             <AnimatePresence initial={false}>
               {isFocused && (
                 <MotiView
@@ -59,10 +58,7 @@ const CustomTabBar = ({
                   transition={{ type: "timing", duration: 300 }}
                   style={{ overflow: "hidden" }}
                 >
-                  <MotiText
-                    className="text-lg font-redHatDisplaySemiBold text-highlight"
-                    numberOfLines={1}
-                  >
+                  <MotiText style={styles.navText} numberOfLines={1}>
                     {button.text}
                   </MotiText>
                 </MotiView>
@@ -72,9 +68,9 @@ const CustomTabBar = ({
         );
       })}
 
-      <View className="absolute -top-14 left-0 right-0 items-center justify-center">
+      <View style={styles.containerCreate}>
         <TouchableOpacity
-          className="p-4 bg-highlight border-8 border-contrast rounded-full"
+          style={styles.buttonCreate}
           activeOpacity={0.85}
           onPress={() => navigation.navigate("CreateStack")}
         >
