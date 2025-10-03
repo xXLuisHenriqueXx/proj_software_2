@@ -1,11 +1,12 @@
 import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { styles } from "./styles";
+import { useNavigation } from "@react-navigation/native";
 import { ChevronRight } from "lucide-react-native";
 
 import { institutesData } from "@src/static/InstitutesData";
 import { IInstitute } from "@src/common/Entities/Institute";
-import { useNavigation } from "@react-navigation/native";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
+import { PRIMARY_COLOR } from "@src/constants/Colors";
 
 const Institutes = () => {
   const navigation = useNavigation<PropsAppStack>();
@@ -24,7 +25,7 @@ const Institutes = () => {
           </Text>
         </View>
 
-        <ChevronRight size={24} color={"#131313"} />
+        <ChevronRight size={24} color={PRIMARY_COLOR} />
       </TouchableOpacity>
 
       <View style={{ width: "100%" }}>

@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 import {
   BACKGROUND_SECONDARY_COLOR,
   CONTRAST_COLOR,
@@ -5,7 +7,6 @@ import {
   PRIMARY_COLOR,
 } from "@src/constants/Colors";
 import { SEMIBOLD_FONT } from "@src/constants/Fonts";
-import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {

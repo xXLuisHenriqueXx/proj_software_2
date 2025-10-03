@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { ChevronRight } from "lucide-react-native";
 
+import { PRIMARY_COLOR } from "@src/constants/Colors";
+
 interface IHeaderProps {
   title: string;
   subtitile: string;
@@ -15,7 +17,7 @@ const Header = ({ title, subtitile }: IHeaderProps) => {
         <Text style={styles.subtitle}>{subtitile}</Text>
       </View>
 
-      <ChevronRight size={24} color={"#131313"} />
+      <ChevronRight size={24} color={PRIMARY_COLOR} />
     </TouchableOpacity>
   );
 };

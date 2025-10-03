@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { Text, View } from "react-native";
-import MaskInput, { MaskInputProps } from "react-native-mask-input";
 import { styles } from "./styles";
+import MaskInput, { MaskInputProps } from "react-native-mask-input";
 
 type MaskType = (string | RegExp)[];
 

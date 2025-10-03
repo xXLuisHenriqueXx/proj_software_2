@@ -8,13 +8,13 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { PropsAppStack } from "@src/routes/stacks/AppStack";
+import { CameraOff, CircleOff } from "lucide-react-native";
 
 import Header from "./Header";
 
+import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { IProduct } from "@src/common/Entities/Product";
 import { formatCurrency } from "@src/utils/FormatCurrency";
-import { CameraOff, CircleOff } from "lucide-react-native";
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 interface IProductProps {
