@@ -11,24 +11,26 @@ import { useNavigation } from "@react-navigation/native";
 import { CameraOff, CircleOff } from "lucide-react-native";
 
 import Header from "./Header";
+import BackButton from "./BackButton";
 
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { IProduct } from "@src/common/Entities/Product";
 import { formatCurrency } from "@src/utils/FormatCurrency";
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
-interface IProductProps {
+interface IListProps {
   title?: string;
   subtitile?: string;
+  onClose?: () => void;
   data: IProduct[];
 }
 
-const List = ({ title, subtitile, data }: IProductProps) => {
+const List = ({ title, subtitile, data, onClose }: IListProps) => {
   const { width } = useWindowDimensions();
   const navigation = useNavigation<PropsAppStack>();
 
   const handleNavigateToDetail = (item: IProduct) => {
-    navigation.navigate("ProductDetail", { product: item });
+    navigation.navigate("ProductDetail", { id: item.id });
   };
 
   const widthProduct = (width - 48 - 24) / 2;
@@ -38,6 +40,7 @@ const List = ({ title, subtitile, data }: IProductProps) => {
   return (
     <View style={styles.container}>
       {hasHeader && <Header title={title} subtitile={subtitile} />}
+      {onClose && <BackButton onClose={onClose} />}
 
       {data && data.length > 0 ? (
         <View style={styles.containerContent}>

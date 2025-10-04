@@ -15,6 +15,7 @@ const Home = () => {
     handleLogout,
     carouselWidth,
     highlights,
+    forYouToys,
     boyToys,
     girlToys,
     babyToys,
@@ -33,6 +34,12 @@ const Home = () => {
         <Institutes />
 
         <Benefit />
+
+        <List
+          title="Brinquedos recomendados"
+          subtitile="Dê uma olhada nas nossas recomendações"
+          data={forYouToys}
+        />
 
         <List
           title="Brinquedos para meninos? Temos!"

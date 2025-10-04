@@ -7,6 +7,7 @@ import { PRIMARY_COLOR } from "@src/constants/Colors";
 interface IHeaderProps {
   title: string;
   subtitile: string;
+  onClose?: () => void;
 }
 
 const Header = ({ title, subtitile }: IHeaderProps) => {

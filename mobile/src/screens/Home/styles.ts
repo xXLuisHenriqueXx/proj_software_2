@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   containerContent: {
     flexDirection: "column",
     alignItems: "center",
-    rowGap: 32,
+    rowGap: 48,
     width: "100%",
     height: "100%",
     padding: 24,

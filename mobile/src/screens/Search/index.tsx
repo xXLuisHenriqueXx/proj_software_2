@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import { ActivityIndicator, ScrollView, View } from "react-native";
 import { styles } from "./styles";
 
 import Featured from "./_components/Featured";
@@ -7,51 +6,27 @@ import SearchInput from "./_components/SearchInput";
 import Categories from "./_components/Categories";
 import Recent from "./_components/Recent";
 import List from "@src/components/List";
+import Loader from "@src/components/Loader";
 
-import { toyService } from "@src/services/ToyService";
-import { recentSearchService } from "@src/services/RecentSearchService";
-import { IProduct } from "@src/common/Entities/Product";
-import { EToyType } from "@src/common/Interfaces/Toy.interface";
+import { useSearch } from "@src/hooks/useSearch";
 
 const Search = () => {
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [search, setSearch] = useState<string>("");
-  const [recents, setRecents] = useState<string[]>([]);
-  const [data, setData] = useState<IProduct[]>([]);
+  const {
+    handleFocus,
+    handleEndEditing,
+    handleSearchWithCategory,
+    handleCloseList,
+    shouldShowFeatured,
+    shouldShowList,
+    data,
+    recents,
+    search,
+    setSearch,
+    isFocused,
+    loading,
+  } = useSearch();
 
-  const handleSearch = async () => {
-    await toyService
-      .get({ filter: { search: search } })
-      .then((response) => {
-        setData(response.data.toys);
-        setRecents((prev) => [...prev, search]);
-      })
-      .catch(() => {
-        setData([]);
-      });
-
-    await recentSearchService.save(search);
-  };
-
-  const handleFocus = () => setIsFocused(true);
-  const handleEndEditing = () => {
-    setIsFocused(false);
-    handleSearch();
-  };
-
-  const handleSearchWithCategory = async (value: EToyType) => {
-    await toyService
-      .get({ filter: { type: value } })
-      .then((response) => setData(response.data.toys))
-      .catch(() => setData([]));
-  };
-
-  useEffect(() => {
-    recentSearchService.getAll().then((response) => setRecents(response));
-  }, []);
-
-  const shouldShowList = isFocused ? false : data.length > 0;
-  const shouldShowFeatured = !isFocused && data.length === 0;
+  if (loading) return <Loader />;
 
   return (
     <ScrollView
@@ -61,12 +36,14 @@ const Search = () => {
         rowGap: 48,
       }}
     >
-      <SearchInput
-        onPress={handleFocus}
-        onEndEditing={handleEndEditing}
-        search={search}
-        setSearch={setSearch}
-      />
+      {!shouldShowList && (
+        <SearchInput
+          onPress={handleFocus}
+          onEndEditing={handleEndEditing}
+          search={search}
+          setSearch={setSearch}
+        />
+      )}
 
       {shouldShowFeatured && (
         <>
@@ -77,7 +54,7 @@ const Search = () => {
 
       {isFocused && <Recent data={recents} setSearch={setSearch} />}
 
-      {shouldShowList && <List data={data} />}
+      {shouldShowList && <List data={data} onClose={handleCloseList} />}
     </ScrollView>
   );
 };
