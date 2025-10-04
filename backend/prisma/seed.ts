@@ -15,7 +15,15 @@ const base64Placeholder = base64;
 
 async function main() {
   console.log("Iniciando o processo de seed...");
-
+  
+  const userCount = await prisma.user.count();
+  if (userCount > 3) {
+    console.log("O banco de dados já está populado. Seed não será executado.");
+    return;
+  }
+  // Se não houver usuários, o script continua
+  console.log("Banco de dados vazio. Iniciando o processo de seed...");
+  
   // Limpeza do banco em ordem de dependência
   await prisma.message.deleteMany(); 
   await prisma.chat.deleteMany(); 
