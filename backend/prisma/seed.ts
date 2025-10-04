@@ -16,36 +16,59 @@ const base64Placeholder = base64;
 async function main() {
   console.log("Iniciando o processo de seed...");
 
-  // Limpeza do banco
+  // Limpeza do banco em ordem de dependência
+  await prisma.message.deleteMany(); 
+  await prisma.chat.deleteMany(); 
+  await prisma.rate.deleteMany(); 
+  await prisma.toyPicture.deleteMany(); 
   await prisma.historyEntry.deleteMany();
+  await prisma.highlight.deleteMany();
+  await prisma.organizationInfo.deleteMany(); 
   await prisma.toy.deleteMany();
   await prisma.user.deleteMany();
-  await prisma.highlight.deleteMany();
   console.log("Banco de dados limpo.");
 
   // ======== USUÁRIOS ========
   const users = [];
   const hashedPassword = await passwordHelper.hashPassword("senha123", 10);
 
-  for (let i = 0; i < 5; i++) {
+  console.log("\nCriando usuários...");
+  for (let i = 0; i < 15; i++) {
+    const isOrganization = i < 5;
+
     const user = await prisma.user.create({
       data: {
         name: faker.person.fullName(),
         email: faker.internet.email().toLowerCase(),
         password: hashedPassword,
-        cpf: faker.helpers.replaceSymbols("###.###.###-##"),
         addressStreet: faker.location.streetAddress(),
         addressDistrict: faker.location.county(),
         addressNumber: faker.number.int({ min: 1, max: 2000 }),
         addressCep: faker.location.zipCode("#####-###"),
         addressDetail: faker.location.secondaryAddress(),
+        picture: faker.image.avatar(),
+
+        cnpj: isOrganization
+          ? faker.helpers.replaceSymbols("##.###.###/####-##")
+          : null,
+        pix_key: isOrganization ? faker.finance.bic() : null,
+
+        organizationInfo: isOrganization
+          ? {
+              create: {
+                description: faker.company.catchPhrase(),
+                phone_number1: 987654321,
+                phone_number2: 987654322,
+              },
+            }
+          : undefined,
       },
     });
     users.push(user);
     console.log(`Usuário criado: ${user.name} (${user.email})`);
   }
 
-  // ======== BRINQUEDOS ========
+  // ======== BRINQUEDOS E FOTOS ========
   console.log("\nCriando brinquedos...");
   const allToyTypes = Object.values(ToyType);
   const allAgeRanges = Object.values(AgeRange);
@@ -67,6 +90,14 @@ async function main() {
         ageGroup: faker.helpers.arrayElement(allAgeRanges),
         discount: faker.number.int({ min: 0, max: 100 }),
         ownerId: randomUser.id,
+        ToyPictures: {
+          create: Array.from({
+            length: faker.number.int({ min: 1, max: 3 }),
+          }).map((_, index) => ({
+            order: index + 1,
+            picture: faker.image.urlLoremFlickr({ category: 'toys' }),
+          })),
+        },
       },
     });
     toys.push(toy);
@@ -88,6 +119,25 @@ async function main() {
     console.log(`Histórico criado para usuário ${user.name}`);
   }
 
+  // ======== AVALIAÇÕES (RATE) ========
+  console.log("\nCriando avaliações...");
+  for (const user of users) {
+    // Cada usuário avalia 3 outros usuários aleatoriamente
+    const otherUsers = users.filter((u) => u.id !== user.id);
+    const usersToRate = faker.helpers.arrayElements(otherUsers, 3);
+    for (const ratedUser of usersToRate) {
+      await prisma.rate.create({
+        data: {
+          value: faker.number.int({ min: 1, max: 5 }),
+          comment: faker.lorem.sentence(),
+          userId: ratedUser.id, // ID do usuário que está sendo avaliado
+        },
+      });
+    }
+    console.log(`Avaliações criadas pelo usuário ${user.name}`);
+  }
+
+  // ======== HIGHLIGHTS ========
   console.log("\nCriando highlights...");
   const highlightsData = [
     {
