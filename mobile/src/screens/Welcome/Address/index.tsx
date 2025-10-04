@@ -21,7 +21,7 @@ export interface IEditableFields {
 type Props = NativeStackScreenProps<AuthStackParamList, "Address">;
 
 const Address = ({ route }: Props) => {
-  const { fieldsData } = route.params || {};
+  const { fieldsData, type } = route.params || {};
 
   const {
     loadingCep,
@@ -32,7 +32,7 @@ const Address = ({ route }: Props) => {
     editableFields,
     handleRegister,
     loading,
-  } = useAddress({ fieldsData });
+  } = useAddress({ fieldsData, type });
 
   if (loadingCep) {
     return <ActivityIndicator />;

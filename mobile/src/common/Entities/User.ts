@@ -10,7 +10,6 @@ export interface IUserUpdate {
   name?: string;
   email?: string;
   password?: string;
-  cpf?: string;
   cnpj?: string;
   address?: IAddress;
 }
@@ -20,7 +19,6 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  cpf?: string;
   cnpj?: string;
   parentalControl: boolean;
   active: boolean;

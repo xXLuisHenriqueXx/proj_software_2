@@ -3,7 +3,6 @@ export interface IRegister {
   email: string;
   password: string;
   passwordConfirmation: string;
-  cpf?: string;
   cnpj?: string;
   addressDistrict?: string;
   addressStreet?: string;

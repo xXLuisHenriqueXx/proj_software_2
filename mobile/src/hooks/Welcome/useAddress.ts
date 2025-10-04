@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
@@ -13,37 +13,82 @@ import { IEditableFields } from "@src/screens/Welcome/Address";
 import { validateForm } from "@src/utils/FormValidator";
 import { addressSchema } from "@src/utils/ValidationSchemas";
 
+const EMPTY_ADDRESS: IFieldsAddress = {
+  street: "",
+  number: "",
+  neighborhood: "",
+  extra: "",
+  city: "",
+  state: "",
+};
+
 interface IParams {
   fieldsData: IFieldsRegister;
+  type: "personal" | "enterprise";
 }
 
-export function useAddress({ fieldsData }: IParams) {
+export function useAddress({ fieldsData, type }: IParams) {
   const { register } = useAuth();
-
   const navigation = useNavigation<PropsRoot>();
 
   const [cep, setCep] = useState<string>("");
-  const [fields, setFields] = useState<IFieldsAddress>({
-    street: "",
-    number: "",
-    neighborhood: "",
-    extra: "",
-    city: "",
-    state: "",
-  });
+  const [fields, setFields] = useState<IFieldsAddress>(EMPTY_ADDRESS);
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingCep, setLoadingCep] = useState<boolean>(false);
-  const [editableFields, setEditableFields] = useState<IEditableFields>({
-    street: true,
-    number: true,
-    neighborhood: true,
-    extra: true,
-    city: true,
-    state: true,
-  });
+  const editableFields = useMemo<IEditableFields>(
+    () => ({
+      street: !fields.street,
+      number: true,
+      neighborhood: !fields.neighborhood,
+      extra: true,
+      city: !fields.city,
+      state: !fields.state,
+    }),
+    [fields]
+  );
 
-  const handleFetchAddress = useCallback(async () => {
+  const validateFields = (): IFieldsAddress => {
+    const { values, error } = validateForm(fields as any, addressSchema);
+    if (error) throw new Error(error);
+
+    return values;
+  };
+
+  const handleRegister = async () => {
+    setLoading(true);
+
+    try {
+      const validFields = validateFields();
+
+      const cleanedFields = { ...fieldsData };
+      if (type !== "enterprise") delete cleanedFields.cnpj;
+
+      const params: IRegister = {
+        ...cleanedFields,
+        addressDistrict: validFields.neighborhood,
+        addressStreet: validFields.street,
+        addressNumber: Number(validFields.number),
+        addressDetail: validFields.extra,
+        addressCep: cep,
+      };
+
+      await register(params);
+
+      navigation.replace("AppStack");
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Aviso",
+        text2: error.message || "Erro ao fazer cadastro",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFetchAddress = async () => {
     setLoadingCep(true);
+
     try {
       const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
       const data = await response.json();
@@ -58,93 +103,30 @@ export function useAddress({ fieldsData }: IParams) {
       };
 
       setFields(newAddressData);
-
-      setEditableFields({
-        street: !data.logradouro,
-        number: true,
-        neighborhood: !data.bairro,
-        extra: true,
-        city: !data.localidade,
-        state: !data.uf,
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoadingCep(false);
-    }
-  }, [cep]);
-
-  const handleCleanAddress = () => {
-    setFields({
-      street: "",
-      number: "",
-      neighborhood: "",
-      extra: "",
-      city: "",
-      state: "",
-    });
-
-    setEditableFields({
-      street: true,
-      number: true,
-      neighborhood: true,
-      extra: true,
-      city: true,
-      state: true,
-    });
-  };
-
-  const validateFields = useCallback(() => {
-    const { values, error } = validateForm(fields as any, addressSchema);
-    if (error) {
+    } catch (error: any) {
       Toast.show({
         type: "error",
         text1: "Aviso",
-        text2: error,
+        text2: error.message || "Erro ao buscar CEP",
       });
+    } finally {
+      setLoadingCep(false);
+    }
+  };
+
+  const handleCleanAddress = () => setFields(EMPTY_ADDRESS);
+
+  useEffect(() => {
+    if (cep.length < 8) {
+      handleCleanAddress();
       return;
     }
 
-    return values;
-  }, [fields]);
-
-  const handleRegister = useCallback(() => {
-    setLoading(true);
-
-    try {
-      const validFields = validateFields();
-      if (!validFields) return;
-
-      const params: IRegister = {
-        name: fieldsData.name,
-        email: fieldsData.email,
-        password: fieldsData.password,
-        passwordConfirmation: fieldsData.passwordConfirmation,
-        cpf: "662.59147768",
-        cnpj: fieldsData.cnpj,
-        addressDistrict: fields.neighborhood,
-        addressStreet: fields.street,
-        addressNumber: Number(fields.number),
-        addressDetail: fields.extra,
-        addressCep: cep,
-      };
-
-      register(params);
-
-      navigation.replace("AppStack");
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }, [cep, fields, fieldsData, navigation, register, validateFields]);
-
-  useEffect(() => {
-    if (cep.length === 8) {
+    const timeout = setTimeout(() => {
       handleFetchAddress();
-    } else {
-      handleCleanAddress();
-    }
+    }, 400);
+
+    return () => clearTimeout(timeout);
   }, [cep]);
 
   return {

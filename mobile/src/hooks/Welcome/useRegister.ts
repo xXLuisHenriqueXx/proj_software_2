@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
@@ -19,29 +19,26 @@ export function useRegister() {
     passwordConfirmation: "",
   });
 
-  const validateFields = useCallback(() => {
+  const validateFields = (): IFieldsRegister => {
     const { values, error } = validateForm(fields as any, registerSchema(type));
-    return { values, error };
-  }, [fields, type]);
+    if (error) throw new Error(error);
 
-  const handleNavigateToAddress = useCallback(() => {
-    const { values, error } = validateFields();
-    if (error) {
+    return values;
+  };
+
+  const handleNavigateToAddress = async () => {
+    try {
+      const validFields = validateFields();
+
+      navigation.navigate("Address", { fieldsData: validFields, type });
+    } catch (error: any) {
       Toast.show({
         type: "error",
         text1: "Aviso",
-        text2: error,
+        text2: error.message || "Erro ao fazer cadastro",
       });
-
-      return;
     }
-
-    if (values) {
-      navigation.navigate("Address", { fieldsData: values });
-    }
-  }, [navigation, fields, type]);
-
-  const isTypePersonal = type === "personal";
+  };
 
   return {
     type,
@@ -51,6 +48,6 @@ export function useRegister() {
     navigation,
     validateFields,
     handleNavigateToAddress,
-    isTypePersonal,
+    isTypePersonal: type === "personal",
   };
 }

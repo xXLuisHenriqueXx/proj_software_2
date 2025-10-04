@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import BottomSheet from "@gorhom/bottom-sheet";
 import Toast from "react-native-toast-message";
@@ -24,51 +24,37 @@ export function useLogin() {
   const [code, setCode] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const validateFields = useCallback(() => {
+  const validateFields = (): IFieldsLogin => {
     const { values, error } = validateForm(fields as any, loginSchema);
-    if (error) {
-      Toast.show({
-        type: "error",
-        text1: "Aviso",
-        text2: error,
-      });
-
-      return;
-    }
+    if (error) throw new Error(error);
 
     return values;
-  }, [fields]);
+  };
 
-  const handleLogin = useCallback(() => {
+  const handleLogin = async () => {
     setLoading(true);
 
     try {
       const validFields = validateFields();
-      if (!validFields) return;
 
-      login(validFields);
+      await login(validFields);
 
       navigation.replace("AppStack");
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Aviso",
+        text2: error.message || "Erro ao fazer login",
+      });
     } finally {
       setLoading(false);
     }
-  }, [login, navigation, validateFields]);
-
-  const handleOpenSheetEmail = () => {
-    bottomSheetEmailRef.current?.expand();
   };
 
-  const handleCloseSheetEmail = () => {
-    bottomSheetEmailRef.current?.close();
-  };
+  const openSheet = (ref: RefObject<BottomSheet>) => ref.current?.expand();
+  const closeSheet = (ref: RefObject<BottomSheet>) => ref.current?.close();
 
-  const handleCloseSheetCode = () => {
-    bottomSheetCodeRef.current?.close();
-  };
-
-  const handleSendEmail = useCallback(() => {
+  const handleSendEmail = () => {
     if (!EMAIL_REGEX.test(email)) {
       Toast.show({
         type: "error",
@@ -81,7 +67,7 @@ export function useLogin() {
 
     bottomSheetEmailRef.current?.close();
     bottomSheetCodeRef.current?.expand();
-  }, [email]);
+  };
 
   return {
     fields,
@@ -94,9 +80,9 @@ export function useLogin() {
     bottomSheetCodeRef,
     bottomSheetEmailRef,
     handleLogin,
-    handleOpenSheetEmail,
-    handleCloseSheetEmail,
-    handleCloseSheetCode,
     handleSendEmail,
+    handleOpenSheetEmail: () => openSheet(bottomSheetEmailRef),
+    handleCloseSheetEmail: () => closeSheet(bottomSheetEmailRef),
+    handleCloseSheetCode: () => closeSheet(bottomSheetCodeRef),
   };
 }

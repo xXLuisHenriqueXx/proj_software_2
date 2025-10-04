@@ -2,7 +2,6 @@ export interface IUpdateUser {
   name?: string;
   email?: string;
   password?: string;
-  cpf?: string;
   cnpj?: string;
   addressDistrict?: string;
   addressStreet?: string;
@@ -20,7 +19,6 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  cpf?: string;
   cnpj?: string;
   addressDistrict?: string;
   addressStreet?: string;

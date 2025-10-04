@@ -14,7 +14,7 @@ export type AuthStackParamList = {
   Access: undefined;
   Login: undefined;
   Register: undefined;
-  Address: { fieldsData: IFieldsRegister };
+  Address: { fieldsData: IFieldsRegister; type: "personal" | "enterprise" };
 };
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
