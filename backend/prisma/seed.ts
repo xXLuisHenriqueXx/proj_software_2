@@ -12,6 +12,8 @@ const prisma = new PrismaClient();
 
 // Base64 genérico (1x1 px branco)
 const base64Placeholder = base64;
+const allToyTypes = Object.values(ToyType);
+const allAgeRanges = Object.values(AgeRange);
 
 async function main() {
   console.log("Iniciando o processo de seed...");
@@ -67,6 +69,9 @@ async function main() {
                 description: faker.company.catchPhrase(),
                 phone_number1: 987654321,
                 phone_number2: 987654322,
+                ageRange: faker.helpers.arrayElement(allAgeRanges),
+                website_url: faker.internet.url(),
+                approved: true
               },
             }
           : undefined,
@@ -78,8 +83,6 @@ async function main() {
 
   // ======== BRINQUEDOS E FOTOS ========
   console.log("\nCriando brinquedos...");
-  const allToyTypes = Object.values(ToyType);
-  const allAgeRanges = Object.values(AgeRange);
 
   const toys = [];
   for (let i = 0; i < 30; i++) {

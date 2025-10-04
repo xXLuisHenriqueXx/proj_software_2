@@ -6,25 +6,28 @@ import { ToyController } from "./controllers/toyController";
 
 import { HighlightController } from "./controllers/highlightController";
 import { highlightResponseSchema, highlightListSchema } from "./schemas/highlightsValidationSchema";
+import { InstituteController } from "./controllers/instituteController";
+
 
 import { authMiddleware } from "./middleware/authMiddleware";
-import { 
-  registerSchema, 
-  loginSchema, 
-  updateUserSchema, 
+import { instituteResponseSchema } from "./schemas/instituteValidationSchema";
+import {
+  registerSchema,
+  loginSchema,
+  updateUserSchema,
   updateAvatarSchema,
   userResponseSchema
 } from "./schemas/authValidationSchemas";
-import { 
-  toyCreateSchema, 
-  toyUpdateSchema, 
-  getToySchema, 
-  toyResponseSchema, 
-  toyListSchema 
+import {
+  toyCreateSchema,
+  toyUpdateSchema,
+  getToySchema,
+  toyResponseSchema,
+  toyListSchema
 } from "./schemas/toyValidationSchemas";
 
 export async function routes(app: FastifyInstance) {
-    app.get('/health', {
+  app.get('/health', {
     schema: {
       tags: ['Health'],
       summary: 'Verifica se a API está rodando',
@@ -36,14 +39,14 @@ export async function routes(app: FastifyInstance) {
     return { status: "ok" };
   }),
 
-  app.post('/auth/register', {
-    schema: {
-      tags: ['Auth'],
-      summary: 'Regista um novo utilizador',
-      body: registerSchema,
-      response: { 201: z.object({ user: userResponseSchema, token: z.string() }) }
-    }
-  }, authController.register);
+    app.post('/auth/register', {
+      schema: {
+        tags: ['Auth'],
+        summary: 'Regista um novo utilizador',
+        body: registerSchema,
+        response: { 201: z.object({ user: userResponseSchema, token: z.string() }) }
+      }
+    }, authController.register);
 
   app.post('/auth/login', {
     schema: {
@@ -127,11 +130,11 @@ export async function routes(app: FastifyInstance) {
       params: getToySchema,
     }
   }, ToyController.delete);
-   app.get('/highlights', {
+  app.get('/highlights', {
     schema: {
       tags: ['Highlights'],
       summary: 'Lista todos os highlights disponíveis',
-      response: {200: highlightListSchema }
+      response: { 200: highlightListSchema }
     }
   }, HighlightController.getHighlights);
 
@@ -143,5 +146,13 @@ export async function routes(app: FastifyInstance) {
       response: { 200: highlightResponseSchema }
     }
   }, HighlightController.getHighlight);
+  app.get('/institutes', {
+    schema: {
+      tags: ['Institutes'],
+      summary: 'Lista todas as instituições aprovadas',
+      response: { 200: instituteResponseSchema },
+    },
+  }, InstituteController.getAll);
+
 }
 
