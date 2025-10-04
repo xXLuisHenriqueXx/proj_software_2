@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const instituteResponseSchema = z.array(
+export const institutesResponseSchema = z.array(
   z.object({
     id: z.string(),
     name: z.string(),
@@ -13,3 +13,16 @@ export const instituteResponseSchema = z.array(
     pix_key: z.string(),
   })
 );
+
+export const instituteResponseSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  picture: z.string(),
+  phone: z.array(z.string()),
+  online: z.string(),
+  address: z.string(),
+  ageRange: z.string(),
+  pix_key: z.string(),
+});
+

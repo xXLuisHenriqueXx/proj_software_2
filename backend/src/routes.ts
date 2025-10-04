@@ -10,7 +10,7 @@ import { InstituteController } from "./controllers/instituteController";
 
 
 import { authMiddleware } from "./middleware/authMiddleware";
-import { instituteResponseSchema } from "./schemas/instituteValidationSchema";
+import { institutesResponseSchema, instituteResponseSchema } from "./schemas/instituteValidationSchema";
 import {
   registerSchema,
   loginSchema,
@@ -150,9 +150,16 @@ export async function routes(app: FastifyInstance) {
     schema: {
       tags: ['Institutes'],
       summary: 'Lista todas as instituições aprovadas',
-      response: { 200: instituteResponseSchema },
+      response: { 200: institutesResponseSchema },
     },
   }, InstituteController.getAll);
-
+  app.get('/institutes/:id', {
+    schema: {
+      tags: ['Institutes'],
+      summary: 'Busca uma instituição pelo ID',
+      params: z.object({ id: z.string() }),
+      response: { 200: instituteResponseSchema },
+    },
+  }, InstituteController.getById);
 }
 
