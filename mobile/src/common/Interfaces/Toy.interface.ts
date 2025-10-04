@@ -38,7 +38,7 @@ interface IMinMax {
   max: number;
 }
 
-interface IFilter {
+export interface IFilter {
   orderBy?: EOrderBy;
   condition?: EToyCondition;
   type?: EToyType;

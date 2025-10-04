@@ -6,81 +6,80 @@ import { IHighlight } from "@src/common/Entities/Highlight";
 import { IProduct } from "@src/common/Entities/Product";
 import { highlightService } from "@src/services/HighlightService";
 import { toyService } from "@src/services/ToyService";
-import { EToyType } from "@src/common/Interfaces/Toy.interface";
+import { EToyType, IFilter } from "@src/common/Interfaces/Toy.interface";
+import Toast from "react-native-toast-message";
+import { PropsRoot } from "@src/routes";
+import { useNavigation } from "@react-navigation/native";
 
 export function useHome() {
   const { width } = useWindowDimensions();
   const { logout, user } = useAuth();
 
+  const navigation = useNavigation<PropsRoot>();
+
   const [highlights, setHighlights] = useState<IHighlight[]>([]);
+  const [forYouToys, setForYouToys] = useState<IProduct[]>([]);
   const [boyToys, setBoyToys] = useState<IProduct[]>([]);
   const [girlToys, setGirlToys] = useState<IProduct[]>([]);
   const [babyToys, setBabyToys] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const fetchToys = async (
+    setToys: (toys: IProduct[]) => void,
+    filter?: IFilter
+  ) => {
+    const toys = await toyService.get({ page: 1, pageSize: 4, filter });
+
+    setToys(toys.data.toys);
+  };
+
   const handleFetchHighlights = async () => {
-    const highlights = await highlightService.get();
+    const response = await highlightService.get();
 
-    setHighlights(highlights.data);
+    setHighlights(response.data);
   };
 
-  const handleFetchBoysToys = async () => {
-    const toys = await toyService.get({
-      page: 1,
-      pageSize: 4,
-      filter: { type: EToyType.BOYS },
-    });
-
-    setBoyToys(toys.data.toys);
-  };
-
-  const handleFetchGirlsToys = async () => {
-    const toys = await toyService.get({
-      page: 1,
-      pageSize: 4,
-      filter: { type: EToyType.GIRLS },
-    });
-
-    setGirlToys(toys.data.toys);
-  };
-
-  const handleFetchBabyToys = async () => {
-    const toys = await toyService.get({
-      page: 3,
-      pageSize: 1,
-      filter: { type: EToyType.BABIES },
-    });
-
-    setBabyToys(toys.data.toys);
-  };
-
-  useEffect(() => {
+  const handleLoadData = async () => {
     setIsLoading(true);
 
     try {
-      handleFetchHighlights();
-      handleFetchBoysToys();
-      handleFetchGirlsToys();
-      handleFetchBabyToys();
-    } catch (error) {
-      console.error(error);
+      await Promise.all([
+        handleFetchHighlights(),
+        fetchToys(setForYouToys),
+        fetchToys(setBoyToys, { type: EToyType.BOYS }),
+        fetchToys(setGirlToys, { type: EToyType.GIRLS }),
+        fetchToys(setBabyToys, { type: EToyType.BABIES }),
+      ]);
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Aviso",
+        text2: error.message || "Erro ao fazer cadastro",
+      });
     } finally {
       setIsLoading(false);
     }
+  };
+
+  useEffect(() => {
+    handleLoadData();
   }, []);
 
-  const carouselWidth = width - 48;
+  const handleLogout = async () => {
+    await logout();
 
-  const handleLogout = () => logout();
+    navigation.replace("AuthStack");
+  };
 
   return {
     user,
     handleLogout,
     highlights,
+    forYouToys,
     boyToys,
     girlToys,
     babyToys,
     isLoading,
-    carouselWidth,
+    carouselWidth: width - 48,
   };
 }
