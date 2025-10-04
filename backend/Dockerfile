@@ -10,8 +10,6 @@ RUN npm install -g typescript ts-node nodemon
 
 COPY . .
 
-RUN npx prisma generate
+RUN npx prisma generate --skip-validate
 
 CMD ["npm", "run", "start"]
-
-RUN npm run prisma:all
