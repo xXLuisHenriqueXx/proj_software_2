@@ -7,7 +7,6 @@ export const userResponseSchema = z.object({
   picture: z.string().nullable(),
 });
 // Regex para formato
-const cpfRegex = /^(\d{3}\.?\d{3}\.?\d{3}-?\d{2})$/;
 const cnpjRegex = /^(\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2})$/;
 
 export const registerSchema = z.object({
@@ -27,7 +26,6 @@ export const registerSchema = z.object({
     passwordConfirmation: z.string().trim()
         .min(1, { message: "A confirmação de senha é obrigatória." }),
 
-    cpf: z.string().regex(cpfRegex, "Formato de CPF inválido").optional(),
     cnpj: z.string().regex(cnpjRegex, "Formato de CNPJ inválido").optional(),
 
     addressDistrict: z.string().trim()
@@ -51,10 +49,6 @@ export const registerSchema = z.object({
         .regex(/^\d{5}-?\d{3}$/, "CEP inválido")
         .max(9, { message: "O CEP deve ter no máximo 9 caracteres." }),
 })
-.refine((data) => data.cpf || data.cnpj, {
-    message: "É necessário informar CPF ou CNPJ.",
-    path: ["cpf"],
-})
 .refine((data) => data.password === data.passwordConfirmation, {
     message: "As senhas não conferem.",
     path: ["passwordConfirmation"],
@@ -62,18 +56,16 @@ export const registerSchema = z.object({
 
 export const loginSchema = z.object({
     email: z.string().email({ message: "Formato de e-mail inválido." }).optional(),
-    cpf: z.string().optional(),
     cnpj: z.string().optional(),
     password: z.string().trim().min(1, { message: "A senha é obrigatória." }),
-}).refine((data) => data.email || data.cpf || data.cnpj, {
-    message: "É necessário enviar pelo menos email, CPF ou CNPJ"
+}).refine((data) => data.email || data.cnpj, {
+    message: "É necessário enviar pelo menos email ou CNPJ"
 });
 
 export const updateUserSchema = z.object({
     name: z.string().trim().optional(),
     email: z.string().email().optional(),
     password: z.string().trim().optional(),
-    cpf: z.string().regex(cpfRegex, "Formato de CPF inválido").optional(),
     cnpj: z.string().regex(cnpjRegex, "Formato de CNPJ inválido").optional(),
     addressDistrict: z.string().optional(),
     addressStreet: z.string().optional(),

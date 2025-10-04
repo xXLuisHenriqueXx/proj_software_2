@@ -19,7 +19,6 @@ model User {
   role            Role     @default(USER)
   parentalControl Boolean  @default(false)
   active          Boolean  @default(true)
-  cpf             String?  @unique
   cnpj            String?  @unique
   pix_key         String?  @unique
   picture         String?  @db.Text

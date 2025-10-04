@@ -36,7 +36,7 @@ export const authController = {
       const data = req.body;
 
       const userExists = await prisma.user.findFirst({
-        where: { OR: [{ email: data.email }, { cpf: data.cpf }] },
+        where: { OR: [{ email: data.email }] },
       });
       if (userExists) {
         return reply
@@ -86,7 +86,7 @@ export const authController = {
     try {
       const data = req.body as any;
       const user = await prisma.user.findFirst({
-        where: { OR: [{ email: data.email }, { cpf: data.cpf }] },
+        where: { OR: [{ email: data.email }] },
       });
       if (!user) {
         return reply.status(404).send({ message: "Usuário não encontrado" });
