@@ -99,7 +99,6 @@ export const toyResponseSchema = z.object({
   createdAt: z.date(),
   name: z.string(),
   description: z.string(),
-  ownerId: z.string(),
   price: z.number(),
   isNew: z.boolean(),
   canTrade: z.boolean(),
@@ -108,6 +107,6 @@ export const toyResponseSchema = z.object({
   type: z.array(toyTypeEnum),
   ageGroup: ageRangeEnum,
   discount: z.number().nonnegative().optional(),
-  ToyPictures: z.array(toyPictureSchema),
+  pictures: z.array(toyPictureSchema),
   owner: toyOwnerSchema,
 });

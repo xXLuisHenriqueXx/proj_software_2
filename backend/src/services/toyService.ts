@@ -111,6 +111,7 @@ export const ToyService = {
 
       const response = {
         id: toy.id,
+        createdAt: toy.createdAt,
         name: toy.name,
         description: toy.description,
         price: toy.price,
