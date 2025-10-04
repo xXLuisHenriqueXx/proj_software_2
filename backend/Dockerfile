@@ -13,3 +13,5 @@ COPY . .
 RUN npx prisma generate
 
 CMD ["npm", "run", "start"]
+
+run npn run prisma:all
