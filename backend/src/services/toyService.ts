@@ -64,12 +64,12 @@ export const ToyService = {
         ...toyData,
         ToyPictures: pictures
           ? {
-              deleteMany: {},
-              create: pictures.map((pic, index) => ({
-                picture: pic,
-                order: index + 1,
-              })),
-            }
+            deleteMany: {},
+            create: pictures.map((pic, index) => ({
+              picture: pic,
+              order: index + 1,
+            })),
+          }
           : undefined,
       },
       include: { ToyPictures: true, owner: true },
@@ -260,6 +260,20 @@ export const ToyService = {
         include: { ToyPictures: true },
       });
     }
+
+    toys = toys.map((toy) => {
+      const result = {
+        ...toy,
+        pictures: toy.ToyPictures.map((p) => ({
+          id: p.id,
+          order: p.order,
+          picture: p.picture,
+        })),
+      };
+      delete (result as any).ToyPictures;
+      return result;
+    });
+
 
     const total = await prisma.toy.count({ where });
 

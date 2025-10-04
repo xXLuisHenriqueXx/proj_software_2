@@ -36,6 +36,7 @@ export const HighlightController = {
 
       return reply.status(200).send(highlight);
     } catch (error) {
+      console.log(error)
       return reply.status(500).send({ error: error });
     }
   }

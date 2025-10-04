@@ -15,7 +15,47 @@ export const HighlightService = {
       throw new Error("Highlight não encontrado");
     }
 
-    const toys = await this.getHighlightToys(highlight, userId);
+    var toys = await this.getHighlightToys(highlight, userId);
+
+    toys = toys.map(({ ToyPictures, owner, discount, ...toy }) => ({
+      id: toy.id,
+      createdAt: toy.createdAt,
+      name: toy.name,
+      description: toy.description,
+      price: toy.price,
+      isNew: toy.isNew,
+      canTrade: toy.canTrade,
+      canLend: toy.canLend,
+      usageTime: toy.usageTime,
+      type: toy.type,
+      ageGroup: toy.ageGroup,
+      discount: discount,
+      pictures:
+        ToyPictures && ToyPictures.length > 0
+          ? ToyPictures.map((p) => ({
+            id: p.id,
+            order: p.order,
+            picture: p.picture,
+          }))
+          : [
+            {
+              id: "placeholder",
+              order: 1,
+              picture: "/public/assets/image_not_found.jpg",
+            },
+          ],
+      owner: owner
+        ? {
+          id: owner.id,
+          name: owner.name,
+          picture: owner.picture ?? "/public/assets/avatar_not_found.webp",
+        }
+        : {
+          id: "placeholder",
+          name: "Usuário não encontrado",
+          picture: "/public/assets/avatar_not_found.webp",
+        },
+    }));
 
     return {
       ...highlight,
@@ -83,7 +123,6 @@ export const HighlightService = {
           .slice(0, 10);
 
         return toysSorted;
-
 
       default:
         return [];

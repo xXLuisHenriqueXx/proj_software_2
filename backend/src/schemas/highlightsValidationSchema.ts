@@ -33,7 +33,7 @@ export const highlightResponseSchema = z.object({
   description: z.string().nullable(),
   type: highlightTypeEnum,
   picture: z.string().nullable(),
-  toys: z.array(toyResponseSchema).optional()
+  toys: z.array(toyResponseSchema).optional(),
 });
 
 export const highlightListSchema = z.array(
