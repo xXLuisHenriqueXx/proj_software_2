@@ -8,13 +8,12 @@ import CreateStack from "./CreateStack";
 import ProductDetail from "@src/screens/ProductDetail";
 import InstituteDetail from "@src/screens/InstituteDetail";
 
-import { IProduct } from "@src/common/Entities/Product";
 import { IInstitute } from "@src/common/Entities/Institute";
 
 export type AppStackParamList = {
   AppTabs: undefined;
   CreateStack: undefined;
-  ProductDetail: { product: IProduct };
+  ProductDetail: { id: string };
   InstituteDetail: { institute: IInstitute };
 };
 

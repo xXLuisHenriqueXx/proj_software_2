@@ -55,7 +55,11 @@ const Carousel = ({ width, height, data }: ICarouselProps) => {
               <TouchableOpacity key={item.id} activeOpacity={0.85}>
                 <Image
                   style={[styles.image, { width, height }]}
-                  source={{ uri: `data:image/jpeg;base64,${item.picture}` }}
+                  source={{
+                    uri: item.picture.includes("http")
+                      ? item.picture
+                      : `data:image/jpeg;base64,${item.picture}`,
+                  }}
                   resizeMode="cover"
                 />
               </TouchableOpacity>

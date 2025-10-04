@@ -1,33 +1,29 @@
-import {
-  View,
-  ScrollView,
-  useWindowDimensions,
-  TouchableOpacity,
-  Text,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { View, ScrollView, Text, ActivityIndicator } from "react-native";
+import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { ArrowLeft, Heart, Share2 } from "lucide-react-native";
 
-import Carousel from "@src/components/Carousel";
+import Pictures from "./_components/Pictures";
 
-import { AppStackParamList, PropsAppStack } from "@src/routes/stacks/AppStack";
+import { AppStackParamList } from "@src/routes/stacks/AppStack";
 import { formatCurrency } from "@src/utils/FormatCurrency";
 import { statusBarHeight } from "@src/constants/Values";
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
+import { getAgeGroup } from "@src/utils/GetAgeGroup";
+import { useProductDetail } from "@src/hooks/useProductDetail";
 
 type Props = NativeStackScreenProps<AppStackParamList, "ProductDetail">;
 
 const ProductDetail = ({ route }: Props) => {
-  const { product } = route.params || {};
-  const { width } = useWindowDimensions();
+  const { id } = route.params || {};
+  const { product, loading, characteristicWidth, width } = useProductDetail(id);
 
-  const navigation = useNavigation<PropsAppStack>();
-
-  const characteristicWidth = (width - 48 - 16) / 2;
+  if (!product || loading) {
+    return <ActivityIndicator size={64} color={HIGHLIGHT_COLOR} />;
+  }
 
   return (
     <ScrollView
-      className="flex-1 bg-backgroundPrimary"
+      style={styles.container}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
         paddingTop: statusBarHeight,
@@ -35,103 +31,60 @@ const ProductDetail = ({ route }: Props) => {
         rowGap: 48,
       }}
     >
-      <View className="relative">
-        <TouchableOpacity
-          className="absolute top-6 left-6 p-4 bg-backgroundPrimary rounded-xl z-10"
-          onPress={() => navigation.goBack()}
-          activeOpacity={0.85}
-        >
-          <ArrowLeft size={20} color={"#316A41"} />
-        </TouchableOpacity>
+      <Pictures data={product.pictures} width={width} />
 
-        <TouchableOpacity
-          className="absolute top-6 right-6 p-4 bg-backgroundPrimary rounded-xl z-10"
-          onPress={() => navigation.goBack()}
-          activeOpacity={0.85}
-        >
-          <Share2 size={20} color={"#316A41"} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          className="absolute -bottom-2 right-6 p-4 bg-backgroundPrimary rounded-xl z-10"
-          onPress={() => navigation.goBack()}
-          activeOpacity={0.85}
-        >
-          <Heart size={20} color={"#316A41"} />
-        </TouchableOpacity>
-
-        <Carousel data={product.pictures} width={width} height={320} />
-      </View>
-
-      <View className="flex-col gap-y-6 px-6 w-full">
-        <View className="flex-col gap-y-1">
-          <Text
-            className="text-2xl font-redHatDisplaySemiBold text-primary"
-            numberOfLines={2}
-          >
+      <View style={styles.containerContent}>
+        <View>
+          <Text style={styles.name} numberOfLines={2}>
             {product.name}
           </Text>
-          <Text className="text-base font-redHatDisplayRegular text-primary/60">
+          <Text style={styles.condition}>
             {product.isNew ? "Novo" : "Usado"}
           </Text>
         </View>
 
-        <Text className="text-3xl font-redHatDisplaySemiBold text-highlight">
-          {formatCurrency(product.price)}
-        </Text>
+        <Text style={styles.price}>{formatCurrency(product.price)}</Text>
 
-        <View className="flex-col gap-y-2">
-          <Text className="text-xl font-redHatDisplaySemiBold text-primary">
-            Características
-          </Text>
+        <View style={styles.containerInfo}>
+          <Text style={styles.title}>Características</Text>
 
-          <View className="flex-row flex-wrap justify-between gap-4 w-full">
-            <View className="flex-col" style={{ width: characteristicWidth }}>
-              <Text className="text-lg font-redHatDisplayRegular text-primary/60">
-                Tamanho
-              </Text>
-              <Text className="text-lg font-redHatDisplayRegular text-primary">
-                {product.preservation}
-              </Text>
+          <View style={styles.containerCharacteristics}>
+            <View
+              style={{ flexDirection: "column", width: characteristicWidth }}
+            >
+              <Text style={styles.subtitle}>Tempo de uso</Text>
+              <Text style={styles.text}>{product.usageTime} meses</Text>
             </View>
 
-            <View className="flex-col" style={{ width: characteristicWidth }}>
-              <Text className="text-lg font-redHatDisplayRegular text-primary/60">
-                Condição
-              </Text>
-              <Text className="text-lg font-redHatDisplayRegular text-primary">
+            <View
+              style={{ flexDirection: "column", width: characteristicWidth }}
+            >
+              <Text style={styles.subtitle}>Condição</Text>
+              <Text style={styles.text}>
                 {product.isNew ? "Novo" : "Usado"}
               </Text>
             </View>
 
-            <View className="flex-col" style={{ width: characteristicWidth }}>
-              <Text className="text-lg font-redHatDisplayRegular text-primary/60">
-                Proprietário
-              </Text>
-              <Text className="text-lg font-redHatDisplayRegular text-primary">
-                {product.owner.name}
-              </Text>
+            <View
+              style={{ flexDirection: "column", width: characteristicWidth }}
+            >
+              <Text style={styles.subtitle}>Proprietário</Text>
+              <Text style={styles.text}>{product.owner.name}</Text>
             </View>
 
-            <View className="flex-col" style={{ width: characteristicWidth }}>
-              <Text className="text-lg font-redHatDisplayRegular text-primary/60">
-                Faixa etária
-              </Text>
-              <Text className="text-lg font-redHatDisplayRegular text-primary">
-                {product.ageGroup}
-              </Text>
+            <View
+              style={{ flexDirection: "column", width: characteristicWidth }}
+            >
+              <Text style={styles.subtitle}>Faixa etária</Text>
+              <Text style={styles.text}>{getAgeGroup(product.ageGroup)}</Text>
             </View>
           </View>
         </View>
 
-        <View className="flex-col gap-y-2">
-          <Text className="text-xl font-redHatDisplaySemiBold text-primary">
-            Descrição
-          </Text>
+        <View style={styles.containerInfo}>
+          <Text style={styles.title}>Descrição</Text>
 
-          <Text className="text-lg font-redHatDisplayRegular text-primary">
-            {product.description}
-          </Text>
+          <Text style={styles.text}>{product.description}</Text>
         </View>
       </View>
     </ScrollView>
