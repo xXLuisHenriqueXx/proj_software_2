@@ -54,6 +54,8 @@ model organizationInfo {
   ageRange       AgeRange
   approved       Boolean  @default(false)
   website_url    String
+  lat            Float
+  long           Float
 }
 
 enum Role {

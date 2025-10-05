@@ -28,6 +28,8 @@ export const InstituteController = {
           }, ${inst.addressDistrict}, CEP: ${inst.addressCep}`,
           ageRange: info.ageRange,
           pix_key: inst.pix_key ?? "",
+          latitude: info.lat,
+          longitude: info.long,
         };
       });
 
@@ -71,6 +73,8 @@ export const InstituteController = {
         }, ${inst.addressDistrict}, CEP: ${inst.addressCep}`,
         ageRange: info.ageRange,
         pix_key: inst.pix_key ?? "",
+        latitude: info.lat,
+        longitude: info.long,
       };
       console.log(result)
       return reply.status(200).send(result);

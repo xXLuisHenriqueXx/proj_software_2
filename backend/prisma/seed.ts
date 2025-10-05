@@ -71,7 +71,9 @@ async function main() {
                 phone_number2: 987654322,
                 ageRange: faker.helpers.arrayElement(allAgeRanges),
                 website_url: faker.internet.url(),
-                approved: true
+                approved: true,
+                lat: parseFloat(faker.location.latitude()),
+                long: parseFloat(faker.location.longitude()),
               },
             }
           : undefined,
