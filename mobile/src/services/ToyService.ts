@@ -1,3 +1,5 @@
+import * as SecureStore from "expo-secure-store";
+
 import {
   IToyCreate,
   IToyDelete,
@@ -5,7 +7,6 @@ import {
   IToyList,
   IToyUpdate,
 } from "@src/common/Interfaces/Toy.interface";
-import * as SecureStore from "expo-secure-store";
 import { api } from "./Api";
 
 export const toyService = {
@@ -35,8 +36,6 @@ export const toyService = {
         Authorization: `Bearer ${token}`,
       },
     });
-
-    console.log(response.data);
 
     return response;
   },

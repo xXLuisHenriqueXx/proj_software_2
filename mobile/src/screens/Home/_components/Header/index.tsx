@@ -3,6 +3,7 @@ import { styles } from "./styles";
 import { LogOut, User2 } from "lucide-react-native";
 
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
+import { baseURL } from "@src/services/Api";
 
 interface IHeaderProps {
   name?: string;
@@ -17,7 +18,11 @@ const Header = ({ name, picture, onLogout }: IHeaderProps) => {
         {picture ? (
           <Image
             style={styles.image}
-            source={{ uri: picture }}
+            source={{
+              uri: picture.startsWith("data:image")
+                ? picture
+                : `${baseURL}${picture}`,
+            }}
             resizeMode="cover"
           />
         ) : (

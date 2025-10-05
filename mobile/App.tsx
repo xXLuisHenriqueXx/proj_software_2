@@ -32,8 +32,12 @@ export default function App() {
         await SplashScreen.preventAutoHideAsync();
 
         await restore();
-      } catch (error) {
-        console.warn(error);
+      } catch (error: any) {
+        Toast.show({
+          type: "error",
+          text1: "Aviso",
+          text2: error.message || "Erro ao carregar o usuário",
+        });
       } finally {
         if (fontsLoaded) await SplashScreen.hideAsync();
       }

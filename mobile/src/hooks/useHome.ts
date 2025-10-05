@@ -25,13 +25,14 @@ export function useHome() {
   const [boyToys, setBoyToys] = useState<IProduct[]>([]);
   const [girlToys, setGirlToys] = useState<IProduct[]>([]);
   const [babyToys, setBabyToys] = useState<IProduct[]>([]);
+  const [carToys, setCarToys] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchToys = async (
     setToys: (toys: IProduct[]) => void,
     filter?: IFilter
   ) => {
-    const toys = await toyService.get({ page: 1, pageSize: 4, filter });
+    const toys = await toyService.get({ page: 1, pageSize: 6, filter });
 
     setToys(toys.data.toys);
   };
@@ -59,6 +60,7 @@ export function useHome() {
         fetchToys(setBoyToys, { type: EToyType.BOYS }),
         fetchToys(setGirlToys, { type: EToyType.GIRLS }),
         fetchToys(setBabyToys, { type: EToyType.BABIES }),
+        fetchToys(setCarToys, { type: EToyType.CARS }),
       ]);
     } catch (error: any) {
       Toast.show({
@@ -90,6 +92,7 @@ export function useHome() {
     boyToys,
     girlToys,
     babyToys,
+    carToys,
     isLoading,
     carouselWidth: width - 48,
   };

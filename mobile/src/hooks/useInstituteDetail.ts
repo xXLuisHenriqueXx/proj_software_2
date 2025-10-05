@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import { Linking, useWindowDimensions } from "react-native";
+import { Linking } from "react-native";
 import Toast from "react-native-toast-message";
-import * as Clipboard from 'expo-clipboard';
+import * as Clipboard from "expo-clipboard";
 
 import { IInstitute } from "@src/common/Entities/Institute";
 import { instituteService } from "@src/services/InstituteService";
 
 export function useInstituteDetail(id: string) {
-  const { width } = useWindowDimensions();
-
   const [institute, setInstitute] = useState<IInstitute | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -45,7 +43,7 @@ export function useInstituteDetail(id: string) {
   };
 
   const handleCopyPixKey = async () => {
-    await Clipboard.setStringAsync(institute?.pix_key ?? '');
+    await Clipboard.setStringAsync(institute?.pix_key ?? "");
     Toast.show({
       type: "success",
       text1: "Aviso",
@@ -53,7 +51,5 @@ export function useInstituteDetail(id: string) {
     });
   };
 
-  const infoWidth = (width - 48 - 16) / 2;
-
-  return { institute, loading, infoWidth, handleOpenSite, handleCopyPixKey };
+  return { institute, loading, handleOpenSite, handleCopyPixKey };
 }

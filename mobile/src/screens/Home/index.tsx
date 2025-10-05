@@ -20,6 +20,7 @@ const Home = () => {
     boyToys,
     girlToys,
     babyToys,
+    carToys,
   } = useHome();
 
   return (
@@ -62,6 +63,12 @@ const Home = () => {
           title="Brinquedos para bebês? Temos!"
           subtitile="Dê uma olhada nos nossos produtos"
           data={babyToys}
+        />
+
+        <List
+          title="Brinquedos de carro? Temos!"
+          subtitile="Dê uma olhada nos nossos produtos"
+          data={carToys}
         />
       </View>
     </ScrollView>

@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { useWindowDimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 
-import { EToyType, IFieldsToyCreateMain, IToyCreate } from "@src/common/Interfaces/Toy.interface";
+import {
+  EToyType,
+  IFieldsToyCreateMain,
+  IToyCreate,
+} from "@src/common/Interfaces/Toy.interface";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { PropsCreateStack } from "@src/routes/stacks/CreateStack";
 import { toyService } from "@src/services/ToyService";
 
 export function useCategories(fields: IFieldsToyCreateMain) {
-    const { width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const rootNavigation = useNavigation<PropsAppStack>();
   const createNavigation = useNavigation<PropsCreateStack>();
 
@@ -44,8 +49,12 @@ export function useCategories(fields: IFieldsToyCreateMain) {
       await toyService.create(params);
 
       rootNavigation.replace("AppTabs");
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Aviso",
+        text2: error.message || "Erro ao criar o produto",
+      });
     } finally {
       setLoading(false);
     }
@@ -53,5 +62,13 @@ export function useCategories(fields: IFieldsToyCreateMain) {
 
   const widthCategory = (width - 48 - 16) / 2;
 
-  return { categories, loading, widthCategory, createNavigation, rootNavigation, handleSelectCategory, handleCreate };
+  return {
+    categories,
+    loading,
+    widthCategory,
+    createNavigation,
+    rootNavigation,
+    handleSelectCategory,
+    handleCreate,
+  };
 }

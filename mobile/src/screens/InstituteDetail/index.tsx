@@ -1,7 +1,7 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Copy } from "lucide-react-native";
+import { Copy, Globe } from "lucide-react-native";
 
 import Header from "./Header";
 import Loader from "@src/components/Loader";
@@ -10,14 +10,18 @@ import { AppStackParamList } from "@src/routes/stacks/AppStack";
 import { statusBarHeight } from "@src/constants/Values";
 import { getAgeGroup } from "@src/utils/GetAgeGroup";
 import { useInstituteDetail } from "@src/hooks/useInstituteDetail";
-import { BACKGROUND_PRIMARY_COLOR } from "@src/constants/Colors";
+import {
+  BACKGROUND_PRIMARY_COLOR,
+  HIGHLIGHT_COLOR,
+} from "@src/constants/Colors";
+import { formatPhoneNumber } from "@src/utils/FormatPhoneNumber";
 
 type Props = NativeStackScreenProps<AppStackParamList, "InstituteDetail">;
-const mapImage = require("@assets/map.jpg")
+const mapImage = require("@assets/map.jpg");
 
 const InstituteDetail = ({ route }: Props) => {
   const { id } = route.params || {};
-  const { institute, loading, infoWidth, handleOpenSite, handleCopyPixKey } =
+  const { institute, loading, handleOpenSite, handleCopyPixKey } =
     useInstituteDetail(id);
 
   if (!institute || loading) {
@@ -57,24 +61,29 @@ const InstituteDetail = ({ route }: Props) => {
         </View>
 
         <View style={styles.containerCharacteristics}>
-          <View style={{ flexDirection: "column", width: infoWidth }}>
+          <View style={{ flexDirection: "column" }}>
             <Text style={styles.title}>Telefone</Text>
-            <Text style={styles.subtitle}>{institute.phone}</Text>
+            {institute.phone.map((item, index) => (
+              <Text key={index} style={styles.subtitle}>
+                {formatPhoneNumber(item)}
+              </Text>
+            ))}
           </View>
 
-          <TouchableOpacity
-            style={{ flexDirection: "column", width: infoWidth }}
-            activeOpacity={0.85}
-            onPress={handleOpenSite}
-          >
-            <Text style={styles.title}>Site</Text>
-            <Text style={styles.subtitle}>{institute.online}</Text>
-          </TouchableOpacity>
-
-          <View style={styles.containerBigText}>
+          <View style={{ flexDirection: "column" }}>
             <Text style={styles.title}>Endereço</Text>
             <Text style={styles.subtitle}>{institute.address}</Text>
           </View>
+
+          <TouchableOpacity
+            style={styles.buttonSite}
+            activeOpacity={0.85}
+            onPress={handleOpenSite}
+          >
+            <Text style={styles.textSite}>Acessar site</Text>
+
+            <Globe style={styles.icon} size={20} color={HIGHLIGHT_COLOR} />
+          </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.buttonCopy}
@@ -82,14 +91,15 @@ const InstituteDetail = ({ route }: Props) => {
             onPress={handleCopyPixKey}
           >
             <Text style={styles.textCopy}>Copiar chave PIX</Text>
-            <Copy style={styles.iconCopy} size={20} color={BACKGROUND_PRIMARY_COLOR} />
+            <Copy
+              style={styles.icon}
+              size={20}
+              color={BACKGROUND_PRIMARY_COLOR}
+            />
           </TouchableOpacity>
         </View>
 
-        <Image style={styles.map} 
-          source={mapImage}
-          resizeMode="cover"
-        />          
+        <Image style={styles.map} source={mapImage} resizeMode="cover" />
       </View>
     </ScrollView>
   );

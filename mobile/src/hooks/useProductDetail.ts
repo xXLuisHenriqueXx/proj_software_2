@@ -1,7 +1,9 @@
-import { IProduct } from "@src/common/Entities/Product";
-import { toyService } from "@src/services/ToyService";
 import { useEffect, useState } from "react";
 import { useWindowDimensions } from "react-native";
+import Toast from "react-native-toast-message";
+
+import { IProduct } from "@src/common/Entities/Product";
+import { toyService } from "@src/services/ToyService";
 
 export function useProductDetail(id: string) {
   const { width } = useWindowDimensions();
@@ -17,8 +19,12 @@ export function useProductDetail(id: string) {
       try {
         const response = await toyService.getByID({ id });
         if (isMounted) setProduct(response.data);
-      } catch (error) {
-        console.error("Error fetching product:", error);
+      } catch (error: any) {
+        Toast.show({
+          type: "error",
+          text1: "Aviso",
+          text2: error.message || "Erro ao carregar o produto",
+        });
       } finally {
         if (isMounted) setLoading(false);
       }

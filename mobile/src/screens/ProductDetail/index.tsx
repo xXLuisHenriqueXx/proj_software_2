@@ -1,4 +1,4 @@
-import { View, ScrollView, Text } from "react-native";
+import { View, ScrollView, Text, Image } from "react-native";
 import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -10,6 +10,8 @@ import { formatCurrency } from "@src/utils/FormatCurrency";
 import { statusBarHeight } from "@src/constants/Values";
 import { getAgeGroup } from "@src/utils/GetAgeGroup";
 import { useProductDetail } from "@src/hooks/useProductDetail";
+import { baseURL } from "@src/services/Api";
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 type Props = NativeStackScreenProps<AppStackParamList, "ProductDetail">;
 
@@ -68,10 +70,35 @@ const ProductDetail = ({ route }: Props) => {
             </View>
 
             <View
-              style={{ flexDirection: "column", width: characteristicWidth }}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                columnGap: 8,
+                width: characteristicWidth,
+              }}
             >
-              <Text style={styles.subtitle}>Proprietário</Text>
-              <Text style={styles.text}>{product.owner.name}</Text>
+              <Image
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderWidth: 0.5,
+                  borderColor: HIGHLIGHT_COLOR,
+                  borderRadius: 32,
+                }}
+                source={{
+                  uri:
+                    product.owner.picture.startsWith("data:image") ||
+                    product.owner.picture.startsWith("http")
+                      ? product.owner.picture
+                      : `${baseURL}${product.owner.picture}`,
+                }}
+                resizeMode="contain"
+              />
+
+              <View style={{ flexDirection: "column" }}>
+                <Text style={styles.subtitle}>Proprietário</Text>
+                <Text style={styles.text}>{product.owner.name}</Text>
+              </View>
             </View>
 
             <View

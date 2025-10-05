@@ -28,16 +28,11 @@ export const styles = StyleSheet.create({
     rowGap: 4,
   },
   containerCharacteristics: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    position: "relative",
+    flexDirection: "column",
     justifyContent: "space-between",
     columnGap: 16,
     rowGap: 32,
-  },
-  containerBigText: {
-    position: "relative",
-    flexDirection: "column",
-    width: "100%",
   },
   image: {
     width: 112,
@@ -58,7 +53,16 @@ export const styles = StyleSheet.create({
     backgroundColor: HIGHLIGHT_COLOR,
     borderRadius: 12,
   },
-  iconCopy: {
+  buttonSite: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: 64,
+    borderWidth: 1,
+    borderColor: HIGHLIGHT_COLOR,
+    borderRadius: 12,
+  },
+  icon: {
     position: "absolute",
     right: 16,
   },
@@ -66,6 +70,11 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: MEDIUM_FONT,
     color: BACKGROUND_PRIMARY_COLOR,
+  },
+  textSite: {
+    fontSize: 14,
+    fontFamily: MEDIUM_FONT,
+    color: HIGHLIGHT_COLOR,
   },
   name: {
     fontSize: 22,

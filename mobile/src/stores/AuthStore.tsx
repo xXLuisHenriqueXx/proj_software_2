@@ -2,6 +2,8 @@ import { Alert } from "react-native";
 import { create } from "zustand";
 import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
+
 import { ILogin, IRegister } from "@src/common/Interfaces/Auth.interface";
 import { authService } from "@src/services/AuthService";
 import { IUserResponse } from "@src/common/Entities/User";
@@ -42,8 +44,13 @@ export const useAuthStore = create<AuthState>((set) => ({
         isLoading: false,
         isSignout: !storedToken,
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Aviso",
+        text2: error.message || "Erro ao carregar o usuário",
+      });
+
       set({ isLoading: false, token: null, isSignout: true });
     }
   },

@@ -1,8 +1,8 @@
 import * as SecureStore from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { api } from "./Api";
 import { ILogin, IRegister } from "@src/common/Interfaces/Auth.interface";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const authService = {
   register: async (params: IRegister) => {
