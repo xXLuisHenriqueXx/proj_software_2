@@ -1,201 +1,155 @@
-import {
-  PrismaClient,
-  ToyType,
-  AgeRange,
-  HighlightType,
-} from "../src/generated/prisma";
+import { PrismaClient, HighlightType } from "../src/generated/prisma";
 import { passwordHelper } from "../src/helpers/passwordHelper";
-import { faker } from "@faker-js/faker/locale/pt_BR";
 import { base64 } from "./base64_test";
+import fs from "fs";
+import path from "path";
 
 const prisma = new PrismaClient();
-
-// Base64 genérico (1x1 px branco)
 const base64Placeholder = base64;
-const allToyTypes = Object.values(ToyType);
-const allAgeRanges = Object.values(AgeRange);
 
 async function main() {
-  console.log("Iniciando o processo de seed...");
-  
+  console.log("Iniciando o seed do banco...");
+
   const userCount = await prisma.user.count();
-  if (userCount > 3) {
-    console.log("O banco de dados já está populado. Seed não será executado.");
+  if (userCount >= 10) {
+    console.log("O banco já possui usuários. Seed não será executado.");
     return;
   }
-  // Se não houver usuários, o script continua
-  console.log("Banco de dados vazio. Iniciando o processo de seed...");
-  
-  // Limpeza do banco em ordem de dependência
-  await prisma.message.deleteMany(); 
-  await prisma.chat.deleteMany(); 
-  await prisma.rate.deleteMany(); 
-  await prisma.toyPicture.deleteMany(); 
-  await prisma.historyEntry.deleteMany();
-  await prisma.highlight.deleteMany();
-  await prisma.organizationInfo.deleteMany(); 
+
+  // Limpeza do banco
+  await prisma.toyPicture.deleteMany();
   await prisma.toy.deleteMany();
+  await prisma.organizationInfo.deleteMany();
   await prisma.user.deleteMany();
-  console.log("Banco de dados limpo.");
+  await prisma.highlight.deleteMany();
+  console.log("Banco limpo.");
+
+  // Caminho absoluto para os arquivos JSON
+  const seedDir = path.join(__dirname, "seed");
+  const usersJSON = JSON.parse(fs.readFileSync(path.join(seedDir, "users.json"), "utf-8")).users;
+  const toysJSON = JSON.parse(fs.readFileSync(path.join(seedDir, "toys.json"), "utf-8")).toys;
+  const orgsJSON = JSON.parse(fs.readFileSync(path.join(seedDir, "organizations.json"), "utf-8")).organizations;
 
   // ======== USUÁRIOS ========
-  const users = [];
-  const hashedPassword = await passwordHelper.hashPassword("senha123", 10);
+  console.log("Criando usuários...");
+  const userMap: Record<string, string> = {}; // id do JSON -> UUID real
 
-  console.log("\nCriando usuários...");
-  for (let i = 0; i < 15; i++) {
-    const isOrganization = i < 5;
-
-    const user = await prisma.user.create({
+  for (const u of usersJSON) {
+    const createdUser = await prisma.user.create({
       data: {
-        name: faker.person.fullName(),
-        email: faker.internet.email().toLowerCase(),
-        password: hashedPassword,
-        addressStreet: faker.location.streetAddress(),
-        addressDistrict: faker.location.county(),
-        addressNumber: faker.number.int({ min: 1, max: 2000 }),
-        addressCep: faker.location.zipCode("#####-###"),
-        addressDetail: faker.location.secondaryAddress(),
-        picture: faker.image.avatar(),
-
-        cnpj: isOrganization
-          ? faker.helpers.replaceSymbols("##.###.###/####-##")
-          : null,
-        pix_key: isOrganization ? faker.finance.bic() : null,
-
-        organizationInfo: isOrganization
-          ? {
-              create: {
-                description: faker.company.catchPhrase(),
-                phone_number1: 987654321,
-                phone_number2: 987654322,
-                ageRange: faker.helpers.arrayElement(allAgeRanges),
-                website_url: faker.internet.url(),
-                approved: true,
-                lat: parseFloat(faker.location.latitude()),
-                long: parseFloat(faker.location.longitude()),
-              },
-            }
-          : undefined,
+        name: u.name,
+        email: u.email,
+        password: await passwordHelper.hashPassword(u.password, 10),
+        picture: u.picture,
+        addressDistrict: u.address.district,
+        addressStreet: u.address.street,
+        addressNumber: u.address.number,
+        addressDetail: u.address.detail,
+        addressCep: u.address.cep,
+        parentalControl: u.parentalControl,
+        active: u.active,
       },
     });
-    users.push(user);
-    console.log(`Usuário criado: ${user.name} (${user.email})`);
+
+    userMap[u.id] = createdUser.id;
+    console.log(`Usuário criado: ${createdUser.name}`);
   }
 
-  // ======== BRINQUEDOS E FOTOS ========
-  console.log("\nCriando brinquedos...");
+  // ======== ORGANIZAÇÕES ========
+  console.log("Criando organizações...");
+  const organizationsJSON = JSON.parse(
+    fs.readFileSync(path.join(seedDir, "organizations.json"), "utf-8")
+  ).organizations;
 
-  const toys = [];
-  for (let i = 0; i < 30; i++) {
-    const randomUser = users[Math.floor(Math.random() * users.length)];
+  for (const o of organizationsJSON) {
+    // Cria o usuário da organização
+    const createdUser = await prisma.user.create({
+      data: {
+        name: o.name, // nome da organização
+        email: `${o.name.replace(/\s+/g, '').toLowerCase()}@orgfake.com`, // email fictício
+        password: await passwordHelper.hashPassword("12345678", 10),
+        picture: o.picture,
+        addressDistrict: o.addressDistrict,
+        addressStreet: o.addressStreet,
+        addressNumber: o.addressNumber,
+        addressDetail: o.addressDetail,
+        addressCep: o.addressCep,
+        parentalControl: false,
+        active: true,
+        cnpj: o.cnpj, // CNPJ fictício único
+      },
+    });
 
+    // Cria a organizaçãoInfo associada ao usuário
+    await prisma.organizationInfo.create({
+      data: {
+        organizationId: createdUser.id,
+        description: o.description,
+        phone_number1: o.phone_number1,
+        phone_number2: o.phone_number2 ?? null,
+        ageRange: o.ageRange,
+        approved: o.approved,
+        website_url: o.website_url,
+        lat: o.lat,
+        long: o.long,
+      },
+    });
+
+    console.log(`Organização criada: ${o.name}`);
+  }
+
+  // ======== BRINQUEDOS ========
+  console.log("Criando brinquedos...");
+  for (const t of toysJSON) {
     const toy = await prisma.toy.create({
       data: {
-        name: faker.commerce.productName(),
-        description: faker.commerce.productDescription(),
-        price: faker.number.int({ min: 0, max: 200 }),
-        isNew: faker.datatype.boolean(),
-        canTrade: faker.datatype.boolean(),
-        canLend: faker.datatype.boolean(),
-        usageTime: faker.number.int({ min: 1, max: 48 }),
-        type: faker.helpers.arrayElements(allToyTypes, { min: 1, max: 2 }),
-        ageGroup: faker.helpers.arrayElement(allAgeRanges),
-        discount: faker.number.int({ min: 0, max: 100 }),
-        ownerId: randomUser.id,
-        ToyPictures: {
-          create: Array.from({
-            length: faker.number.int({ min: 1, max: 3 }),
-          }).map((_, index) => ({
-            order: index + 1,
-            picture: faker.image.urlLoremFlickr({ category: 'toys' }),
-          })),
-        },
+        name: t.name,
+        description: t.description,
+        price: t.price,
+        isNew: t.isNew,
+        canTrade: t.canTrade,
+        canLend: t.canLend,
+        usageTime: t.usageTime,
+        type: t.type,
+        ageGroup: t.ageGroup,
+        discount: t.discount,
+        ownerId: userMap[t.ownerId],
       },
     });
-    toys.push(toy);
-  }
-  console.log(`${toys.length} brinquedos criados com sucesso.`);
 
-  // ======== HISTÓRICO ========
-  console.log("\nCriando histórico para cada usuário...");
-  for (const user of users) {
-    const randomToys = faker.helpers.arrayElements(toys, 5);
-    for (const toy of randomToys) {
-      await prisma.historyEntry.create({
+    for (const pic of t.pictures) {
+      await prisma.toyPicture.create({
         data: {
-          userId: user.id,
+          order: pic.order,
+          picture: pic.picture,
           toyId: toy.id,
         },
       });
     }
-    console.log(`Histórico criado para usuário ${user.name}`);
-  }
-
-  // ======== AVALIAÇÕES (RATE) ========
-  console.log("\nCriando avaliações...");
-  for (const user of users) {
-    // Cada usuário avalia 3 outros usuários aleatoriamente
-    const otherUsers = users.filter((u) => u.id !== user.id);
-    const usersToRate = faker.helpers.arrayElements(otherUsers, 3);
-    for (const ratedUser of usersToRate) {
-      await prisma.rate.create({
-        data: {
-          value: faker.number.int({ min: 1, max: 5 }),
-          comment: faker.lorem.sentence(),
-          userId: ratedUser.id, // ID do usuário que está sendo avaliado
-        },
-      });
-    }
-    console.log(`Avaliações criadas pelo usuário ${user.name}`);
+    console.log(`Brinquedo criado: ${t.name}`);
   }
 
   // ======== HIGHLIGHTS ========
-  console.log("\nCriando highlights...");
+  console.log("Criando highlights...");
   const highlightsData = [
-    {
-      name: "Brinquedos Gratuitos",
-      type: HighlightType.FREE,
-      description: "Brinquedos disponíveis para doação ou gratuitos.",
-      picture: base64Placeholder,
-    },
-    {
-      name: "Mais Perto de Você",
-      type: HighlightType.NEARBY,
-      description: "Brinquedos próximos à sua localização.",
-      picture: base64Placeholder,
-    },
-    {
-      name: "Mais Populares",
-      type: HighlightType.POPULAR,
-      description: "Brinquedos mais visualizados por outros usuários.",
-      picture: base64Placeholder,
-    },
-    {
-      name: "Últimos Adicionados",
-      type: HighlightType.RECENT,
-      description: "Brinquedos recém adicionados na plataforma.",
-      picture: base64Placeholder,
-    },
-    {
-      name: "Brinquedos Novos",
-      type: HighlightType.NEW,
-      description: "Brinquedos que estão como novos.",
-      picture: base64Placeholder,
-    },
+    { name: "Brinquedos Gratuitos", type: HighlightType.FREE, description: "Brinquedos disponíveis para doação ou gratuitos.", picture: base64Placeholder },
+    { name: "Mais Perto de Você", type: HighlightType.NEARBY, description: "Brinquedos próximos à sua localização.", picture: base64Placeholder },
+    { name: "Mais Populares", type: HighlightType.POPULAR, description: "Brinquedos mais visualizados por outros usuários.", picture: base64Placeholder },
+    { name: "Últimos Adicionados", type: HighlightType.RECENT, description: "Brinquedos recém adicionados na plataforma.", picture: base64Placeholder },
+    { name: "Brinquedos Novos", type: HighlightType.NEW, description: "Brinquedos que estão como novos.", picture: base64Placeholder },
   ];
 
-  for (const data of highlightsData) {
-    const highlight = await prisma.highlight.create({ data });
-    console.log(`Highlight criado: ${highlight.name}`);
+  for (const h of highlightsData) {
+    await prisma.highlight.create({ data: h });
+    console.log(`Highlight criado: ${h.name}`);
   }
 
-  console.log("\nSeed finalizado com sucesso!");
+  console.log("Seed finalizado com sucesso!");
 }
 
 main()
   .catch((e) => {
-    console.error(e);
+    console.error("Erro durante o seed:", e);
     process.exit(1);
   })
   .finally(async () => {

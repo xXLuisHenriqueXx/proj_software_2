@@ -1,0 +1,3347 @@
+{
+    "toys": [
+        {
+            "id": "0",
+            "ownerId": "0",
+            "name": "Carrinho LEGO Speed Champions McLaren Formula 1",
+            "description": "Explore a emoção da Fórmula 1 com este incrível LEGO! Detalhes autênticos e design marcante para fãs e colecionadores.",
+            "price": 149.9,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 12,
+            "type": [
+                "CARS",
+                "PUZZLES",
+                "BOYS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/96/963589307649308.webp"
+                }
+            ]
+        },
+        {
+            "id": "1",
+            "ownerId": "1",
+            "name": "Barbie Importada Vintage Patinadora Artistica Olimpica",
+            "description": "Prepare-se para a competição! A Barbie Olympic Skater está pronta para brilhar no gelo, com figurino deslumbrante e medalha de ouro. Uma boneca perfeita para colecionar ou presentear! Nova e perfeita, mecanisco em perfeito estado, nunca retirada da caixa.",
+            "price": 450.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "SPORTS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/32/326558215944782.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/32/323582452864168.webp"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "ownerId": "3",
+            "name": "Carro de bebê",
+            "description": "Carrinho de bebê elegante e confortável, perfeito para passeios com seu filho. Design moderno e funcional, com materiais de alta qualidade. Aceitamos cartões, preço negociável ,vamos entrega",
+            "price": 250.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 18,
+            "type": [
+                "SIMULATION",
+                "BABIES"
+            ],
+            "ageGroup": "ZERO_TO_ONE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/98/982594339505917.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/13/130521818512360.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/10/109580818458410.webp"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "ownerId": "4",
+            "name": "Action figure",
+            "description": "Bonecos de ação Vários personagens Consulte disponibilidade",
+            "price": 80.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 24,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/63/635516854640968.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/61/612556377912231.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/62/624569373397113.webp"
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "ownerId": "5",
+            "name": "Naruto Shippuden Boneco Kakashi Gaara Itachi Jiraya anime hq figura brinquedo",
+            "description": "Naruto Shippuden Boneco Kakashi Gaara Itachi Jiraya anime hq figura brinquedo, novo na caixa... Tamanho aproximadamente 18 centímetros.",
+            "price": 120.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/43/439467642984890.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/99/992486760605905.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/99/999435521360388.webp"
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "ownerId": "6",
+            "name": "Lego City 4204 The Mine 748pçs",
+            "description": "LEGO CITY 4204 THE MINE 748PÇS - Original LEGO, Usado, Completo, Com Caixa e Manual - Ano de lançamento: 2012 - Idade Recomendada: 6+",
+            "price": 850.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 120,
+            "type": [
+                "PUZZLES",
+                "SIMULATION",
+                "ADVENTURE"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/58/588565681451013.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/57/579509682050181.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/56/567522328809745.webp"
+                }
+            ]
+        },
+        {
+            "id": "6",
+            "ownerId": "7",
+            "name": "Brinquedo de menino -Barraca infantil",
+            "description": "Barraca infantil, de Poliéster - Dimensões do produto 130P x 100L x 130A centímetros. Material da moldura aço - Montagem rápida e sem complicação. Com estrutura inteligente e dobrável, a tenda infantil é montada em segundos, sem ferramentas. Fácil de desmontar e guardar, cabe até em armários pequenos. Perfeita para quem quer praticidade no dia a dia. Acompanha 50 bolinhas",
+            "price": 130.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 12,
+            "type": [
+                "SIMULATION",
+                "ADVENTURE"
+            ],
+            "ageGroup": "ONE_TO_THREE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/63/635586218657083.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/67/671573694675104.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/64/649542698567289.webp"
+                }
+            ]
+        },
+        {
+            "id": "7",
+            "ownerId": "8",
+            "name": "Brinquedos de meninas mini magic e hatchimals",
+            "description": "Explore um mundo mágico com este conjunto de brinquedos! Inclui bonecos adoráveis, um playset interativo e acessórios para horas de diversão e imaginação. Perfeito para presentear!",
+            "price": 90.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 18,
+            "type": [
+                "DOLLS",
+                "GIRLS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/60/603588564993573.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/61/617586328461870.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/62/626514681652958.webp"
+                }
+            ]
+        },
+        {
+            "id": "8",
+            "ownerId": "9",
+            "name": "Brinquedos para meninas NOVOS",
+            "description": "Vários brinquedos disponíveis a pronta entrega, todos novos e lacrados.Entregamos com taxa e conseguimos parcelar dependendo do valor. A partir de 69,90",
+            "price": 69.9,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "GIRLS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/30/302585566834444.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/30/303536926966901.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/30/300527806651296.webp"
+                }
+            ]
+        },
+        {
+            "id": "9",
+            "ownerId": "0",
+            "name": "Brinquedo para bebê",
+            "description": "Torre de encaixe colorida com números para as crianças aprenderem brincando. Estimula a coordenação motora e o raciocínio lógico. Som funciona perfeitamente",
+            "price": 45.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 12,
+            "type": [
+                "BABIES",
+                "EDUCATIONAL"
+            ],
+            "ageGroup": "ZERO_TO_ONE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/98/984561326663274.webp"
+                }
+            ]
+        },
+        {
+            "id": "10",
+            "ownerId": "1",
+            "name": "Super Nintendo Entertainment System/ fita super Mário ",
+            "description": "Aceito propostas, Item de colecionador, console completo, pronto para a diversão, vai com a fita do super Mário, somente a fita 150,00 - Console 350,00 - Os dois juntos 450,00",
+            "price": 450.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 300,
+            "type": [
+                "VIDEOGAME"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/92/921514682105861.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/93/930565563473946.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/93/930565563473946.webp"
+                }
+            ]
+        },
+        {
+            "id": "11",
+            "ownerId": "4",
+            "name": "Jogo de tabuleiro antigo Lince (anos 80)",
+            "description": "Tabuleiro antigo de Lince dos anos 80. Versão rara.",
+            "price": 180.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 240,
+            "type": [
+                "BOARD",
+                "STRATEGY",
+                "EDUCATIONAL"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/35/352531520228146.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/41/412563282341316.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/45/451539643933472.webp"
+                }
+            ]
+        },
+        {
+            "id": "12",
+            "ownerId": "3",
+            "name": "GOLEIRA DE FUTEBOL INFANTIL",
+            "description": "Goleira de futebol infantil para uso em gramados e áreas externas.",
+            "price": 80.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 24,
+            "type": [
+                "SPORTS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/27/270549203758909.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/28/289585808309824.webp"
+                }
+            ]
+        },
+        {
+            "id": "13",
+            "ownerId": "4",
+            "name": "Boneca Shadow High Rosie",
+            "description": "Boneca Shadow High Rosie em estado de nova, somente foi retirado a roupa vai nua, exatamente conforme fotos do anúncio acompanha os acessórios, pente e suporte.",
+            "price": 100.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 3,
+            "type": [
+                "DOLLS",
+                "GIRLS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 15,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/52/527555449735476.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/11/112511445991686.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/11/112511445991686.webp"
+                },
+                {
+                    "id": "4",
+                    "order": 4,
+                    "picture": "https://img.olx.com.br/images/18/187501681352979.webp"
+                }
+            ]
+        },
+        {
+            "id": "14",
+            "ownerId": "5",
+            "name": "Bebê Reborn Realista Original Maria",
+            "description": "Boneca reborn realista, kit Maria Original, não existe réplica. Esse kit possui membros 3/4 e corpo inteiro em vinil com corpo de tecido por dentro. NÃO PODE TOMAR BANHO. Bebê da minha coleção em perfeito estado. ",
+            "price": 750.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 6,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "ARTISTIC"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/62/621533688152682.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/64/649528204711584.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/67/678578203698943.webp"
+                }
+            ]
+        },
+        {
+            "id": "15",
+            "ownerId": "6",
+            "name": "Baby Alive negra c penico e bebê conforto",
+            "description": "Baby alive negra com bebê conforto. Ela fala, se mexe, dança e faz xixi.",
+            "price": 150.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 24,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "BABIES"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/52/525506744759355.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/48/483501265608597.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/47/479549381492751.webp"
+                }
+            ]
+        },
+        {
+            "id": "16",
+            "ownerId": "7",
+            "name": "Boneca Peppa Pig de Pelucia da Estrela",
+            "description": "Linda pelúcia da Peppa Pig, perfeita para crianças de todas as idades! Em bom estado, macia e fofinha, ideal para brincar ou colecionar. Não perca essa oportunidade!",
+            "price": 40.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 18,
+            "type": [
+                "DOLLS",
+                "BABIES"
+            ],
+            "ageGroup": "ONE_TO_THREE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/78/783580512230384.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/80/801502396249195.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/78/788562633373204.webp"
+                }
+            ]
+        },
+        {
+            "id": "17",
+            "ownerId": "8",
+            "name": "Jogo Detetive Estrela",
+            "description": "Jogo em ótimas condições, leves marcas de uso! original e completo! Todas as peças, cartas, dado, envelope, manual, bloco de suspeitos (com MUITAS folhas), tabuleiro? Tudo incluído! Vem na caixa original",
+            "price": 55.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 30,
+            "type": [
+                "BOARD",
+                "STRATEGY",
+                "PUZZLES"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/32/322559653066911.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/48/488572171924329.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/49/497544530781896.webp"
+                }
+            ]
+        },
+        {
+            "id": "18",
+            "ownerId": "9",
+            "name": "Jogo da Vida - Estrela",
+            "description": "Jogo da Vida, um clássico para toda a família. Escolha sua carreira e construa uma vida cheia de aventuras e desafios. Diversão garantida para todas as idades!",
+            "price": 65.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 36,
+            "type": [
+                "BOARD",
+                "SIMULATION",
+                "STRATEGY"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/30/308517792309374.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/41/412565792712729.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/36/368513912001515.webp"
+                }
+            ]
+        },
+        {
+            "id": "19",
+            "ownerId": "0",
+            "name": "Jogo Eu Sou? - Estrela, Novo",
+            "description": "Descubra quem você é com o jogo Eu Sou?!. Inclui novas cartas e um modo de jogo inovador! Acompanha APP gratuito!",
+            "price": 45.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "BOARD",
+                "STRATEGY",
+                "WORDS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/39/391594187825811.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/41/412565792712729.webp"
+                }
+            ]
+        },
+        {
+            "id": "20",
+            "ownerId": "1",
+            "name": "Boneca barbie Bela e a fera - Disney ",
+            "description": "Boneca Bela marca disney. Vai como nas fotos.",
+            "price": 50.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 24,
+            "type": [
+                "DOLLS",
+                "GIRLS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/36/361596510766045.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/40/400531274196824.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/38/383593633491221.webp"
+                }
+            ]
+        },
+        {
+            "id": "21",
+            "ownerId": "2",
+            "name": "Boneca barbie simba toys",
+            "description": "Boneca barbie da marca simba toys. ",
+            "price": 30.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 36,
+            "type": [
+                "DOLLS",
+                "GIRLS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/65/651539808059527.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/67/676542326241523.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/71/716584807889749.webp"
+                }
+            ]
+        },
+        {
+            "id": "22",
+            "ownerId": "3",
+            "name": "Imaginext Tubarão Pirata com Canhão e Boneco",
+            "description": "Aventura garantida com este incrível tubarão pirata! Inclui canhão e dois bonecos para muita diversão e imaginação. Perfeito para crianças! Brinquedos imaginext originais FisherPrice em ótimo estado de conservação apenas com algumas marcas de uso como mostra bem nas fotos. Na Frente do tubarão pirata e no pé do boneco tubarão pirata. Qualquer dúvida estou à disposição.",
+            "price": 110.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 18,
+            "type": [
+                "ADVENTURE",
+                "DOLLS",
+                "BOYS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/52/520552566393969.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/17/177519687660637.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/56/569598201101524.webp"
+                }
+            ]
+        },
+        {
+            "id": "23",
+            "ownerId": "4",
+            "name": "Bonecos bebês corpo de pano Cotiplas",
+            "description": "Lindas bonecas de bebê, com detalhes realistas e perfeitas para brincar e colecionar! Ótima opção de presente.",
+            "price": 60.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 24,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "BABIES"
+            ],
+            "ageGroup": "ONE_TO_THREE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/46/462590918385108.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/48/489511795945165.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/52/527540319680020.webp"
+                }
+            ]
+        },
+        {
+            "id": "24",
+            "ownerId": "5",
+            "name": "Boneca Mônica",
+            "description": "Linda raridade boneca da Mônica, 35 cm, personagem da Turma da Mônica, para a diversão da criançada! 70 reais",
+            "price": 70.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 48,
+            "type": [
+                "DOLLS",
+                "GIRLS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/46/464532807966815.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/47/472546448318625.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/49/498547206109297.webp"
+                }
+            ]
+        },
+        {
+            "id": "25",
+            "ownerId": "6",
+            "name": "Boneco Mulher Maravilha Dc True Moves - Mattel 30cm",
+            "description": "BONECO NOVO E LACRADO 30CM TRUE MOVES ENVIO IMEDIATO.....ÚLTIMA PEÇA.....",
+            "price": 95.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "ADVENTURE"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/98/985446554255400.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/98/988453313744505.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/98/985440436477808.webp"
+                }
+            ]
+        },
+        {
+            "id": "26",
+            "ownerId": "7",
+            "name": "Bicicleta Infantil Cairu, barbada",
+            "description": "Bicicleta infantil Cairu, perfeita para as crianças se divertirem com segurança e estilo. Design moderno e resistente, em bom estado.",
+            "price": 150.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 36,
+            "type": [
+                "SPORTS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/91/916563219387982.webp"
+                }
+            ]
+        },
+        {
+            "id": "27",
+            "ownerId": "8",
+            "name": "Tablet infantil",
+            "description": "Tablet infantil com tela e design ergonômico, perfeito para crianças. Ideal para jogos, vídeos e atividades educativas. A capa emborrachada evida danos em caso de queda e pode ser trocada",
+            "price": 220.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 18,
+            "type": [
+                "VIDEOGAME",
+                "EDUCATIONAL"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/24/248549205286210.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/25/252581082077924.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/26/268570089368085.webp"
+                }
+            ]
+        },
+        {
+            "id": "28",
+            "ownerId": "9",
+            "name": "Tablet Positivo Twist Minions ",
+            "description": "Tablet Positivo Twist Tab Minions Tamanho da tela 7 Capacidade 64GB",
+            "price": 280.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 12,
+            "type": [
+                "VIDEOGAME",
+                "EDUCATIONAL"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/24/248549205286210.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/25/252581082077924.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/26/268570089368085.webp"
+                }
+            ]
+        },
+        {
+            "id": "29",
+            "ownerId": "0",
+            "name": "Revistinhas Disney e de Colorir ",
+            "description": "Lindas revistinhas para colorir e se divertir com os personagens da Disney! Desenhos incríveis e histórias emocionantes, ideal para crianças!",
+            "price": 20.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 3,
+            "type": [
+                "ARTISTIC",
+                "EDUCATIONAL",
+                "WORDS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/86/864589668011618.webp"
+                }
+            ]
+        },
+        {
+            "id": "30",
+            "ownerId": "1",
+            "name": "Bola de futebol do Inter",
+            "description": "Nunca usada, com etiqueta de preço da loja.",
+            "price": 80.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "SPORTS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/27/278549190853021.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/27/274597795647993.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/27/277569677956242.webp"
+                }
+            ]
+        },
+        {
+            "id": "31",
+            "ownerId": "2",
+            "name": "Jogo Watch Dogs 2 PS4",
+            "description": "Watch Dogs 2 PS4 em bom estado",
+            "price": 60.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 36,
+            "type": [
+                "VIDEOGAME",
+                "ADVENTURE"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/87/873553937487665.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/89/892515458524495.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/92/920518571725869.webp"
+                }
+            ]
+        },
+        {
+            "id": "32",
+            "ownerId": "4",
+            "name": "LEGO® Marvel - Homem-Aranha vs. Oscorp | 808 peças (76324)",
+            "description": "Prepare-se para uma batalha épica nas ruas da cidade com o incrível conjunto LEGO® Marvel - Homem-Aranha vs. Oscorp (76324)! Este set premium, repleto de ação, recria um quarteirão vibrante onde heróis e vilões se enfrentam em locais icônicos do universo do Homem-Aranha. Este item está em estado de novo, tendo sido montado apenas uma vez para exibição. É a oportunidade perfeita para fãs da Marvel e colecionadores de LEGO adicionarem uma peça dinâmica e cheia de personagens à sua coleção. Detalhes do Produto: Quantidade de Peças: 808 peças; Minifiguras: 8 minifiguras (Homem-Aranha, Mulher-Aranha, Miles Morales, Eddie Brock/Venom, Aranha-Fantasma, Norman Osborn/Duende Verde, Kraven, o Caçador, e mais); Estado: Usado, mas em excelente estado. Montado apenas uma vez; Dimensões: O conjunto montado cria uma cena de rua com vários edifícios de diferentes alturas; Idade Indicada: 10+ anos; Acompanha: Manual de instruções original e caixa original em perfeito estado. Destaques do Conjunto: Cenário Urbano Detalhado: Construa o apartamento de Miles Morales, o imponente edifício da Oscorp e o esconderijo de Venom; Elenco de Estrelas: 8 minifiguras icônicas para recriar confrontos clássicos; Acessórios para Ação: motocicleta do Miles, planador do Duende Verde e diversos acessórios; Brincadeira e Exibição: ideal para ação e para exibição em coleções LEGO Marvel.",
+            "price": 950.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 2,
+            "type": [
+                "EDUCATIONAL",
+                "ADVENTURE",
+                "STRATEGY",
+                "BOYS",
+                "PUZZLES"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/80/807527695376775.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/80/801527096669588.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/80/802578579757694.webp"
+                }
+            ]
+        },
+        {
+            "id": "33",
+            "ownerId": "7",
+            "name": "Lote de 8 Brinquedos Littlest Pet Shop",
+            "description": "Lote com 8 brinquedos Littlest Pet Shop em ótimo estado! Perfeitos para colecionadores ou para brincar. Inclui vários modelos diferentes, como uma gatinha, uma bonequinha, um cachorro e muitos outros! Aproveite!",
+            "price": 120.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 12,
+            "type": [
+                "DOLLS",
+                "GIRLS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 15,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/38/383522858886256.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/34/340503499117598.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/34/342552133557826.webp"
+                }
+            ]
+        },
+        {
+            "id": "34",
+            "ownerId": "2",
+            "name": "Mini Buggy Clash",
+            "description": "Mini buggy elétrico infantil, pouco usado, ideal para a diversão das crianças! Possui design moderno, pneus off-road e faróis de LED, garantindo aventura e emoção em um só brinquedo. Modelo: Buggy Clash 24V com porte grande e funções manual e remota. Conta com 4 motores, autonomia média entre 45 e 80 minutos, suporte de até 80kg, dois assentos com bancos de couro e cintos de segurança. Dispõe de controle remoto, carregador bivolt, buzina no volante, alavanca frente/trás e iluminação completa. Novo, esse modelo custa mais de R$5.000.",
+            "price": 2900.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 8,
+            "type": [
+                "CARS",
+                "ADVENTURE",
+                "SPORTS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 20,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/93/934537662387180.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/93/932553666065361.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/93/939510549636087.webp"
+                }
+            ]
+        },
+        {
+            "id": "35",
+            "ownerId": "1",
+            "name": "Livro Corpo Humano 3D",
+            "description": "Explore o corpo humano de forma divertida e educativa com este livro interativo! Cada página traz ilustrações em 3D que revelam o funcionamento dos órgãos e sistemas do corpo. Um material envolvente que desperta a curiosidade e incentiva o aprendizado sobre a máquina mais complexa do universo: o ser humano.",
+            "price": 95.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": true,
+            "usageTime": 0,
+            "type": [
+                "EDUCATIONAL",
+                "ARTISTIC",
+                "WORDS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/81/818536096491261.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/80/808541570559127.webp"
+                }
+            ]
+        },
+        {
+            "id": "36",
+            "ownerId": "8",
+            "name": "Jogo de Tabuleiro Recalcula - O Jogo para quem sabe economizar",
+            "description": "Jogo de tabuleiro Recalcula: o jogo para quem sabe economizar. Estilo Monopoly com temática gaúcha: o dinheiro são 'pila' e os destinos são locais da região de Porto Alegre. Completo e em ótimo estado. Divirta-se e aprenda sobre economia, explorando a cidade, calculando as finanças e competindo para ver quem economiza mais. Ótimo para jogar com amigos e família.",
+            "price": 110.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 14,
+            "type": [
+                "BOARD",
+                "STRATEGY",
+                "EDUCATIONAL"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/94/949542798448127.webp"
+                }
+            ]
+        },
+        {
+            "id": "37",
+            "ownerId": "0",
+            "name": "Jogo Tabuleiro Ludo / Damas",
+            "description": "Divirta-se com o clássico jogo de tabuleiro Ludo e Damas! Ideal para reunir amigos e familiares e garantir horas de diversão. Jogo completo, com todas as peças e instruções, em ótimo estado de conservação.",
+            "price": 60.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 18,
+            "type": [
+                "BOARD",
+                "STRATEGY"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 15,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/70/706521430753634.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/71/718544196133220.webp"
+                }
+            ]
+        },
+        {
+            "id": "38",
+            "ownerId": "6",
+            "name": "Jogo de Tabuleiro Veja o Brasil",
+            "description": "Jogo de tabuleiro Veja o Brasil, com 1800 perguntas sobre diversas categorias — Artes e Espetáculos, Comportamento, Esportes, Gente, História e Variedades. Um jogo completo que desafia o conhecimento sobre o Brasil e garante diversão entre amigos e família. Produto em perfeito estado de conservação, com todas as cartas, peças e tabuleiro intactos.",
+            "price": 130.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 10,
+            "type": [
+                "BOARD",
+                "EDUCATIONAL",
+                "WORDS",
+                "STRATEGY"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/90/908468832468378.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/90/908406475211937.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/88/887454237797180.webp"
+                }
+            ]
+        },
+        {
+            "id": "39",
+            "ownerId": "3",
+            "name": "Figure Grandista Hisoka HxH",
+            "description": "Action figure do personagem Hisoka, do anime Hunter x Hunter. Peça oficial da linha Grandista, importada do Japão, com 28 cm de altura. Rica em detalhes, com pintura de alta qualidade e cores vibrantes. Aberta apenas para conferência e mantida em perfeito estado, ideal para colecionadores de figuras de anime. Avalio trocas por figuras Grandista da série JoJo.",
+            "price": 420.0,
+            "isNew": true,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 1,
+            "type": [
+                "DOLLS",
+                "ARTISTIC",
+                "BOYS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/43/435503578121710.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/44/444552450276397.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/45/451522692554899.webp"
+                }
+            ]
+        },
+        {
+            "id": "40",
+            "ownerId": "9",
+            "name": "Action Figure T-800 Terminator 1/6 30 cm McFarlane Neca Exterminador do Futuro",
+            "description": "Action figure detalhada do T-800, personagem icônico da franquia Terminator. Peça em escala 1/6 (30 cm), produzida pela McFarlane/Neca, com design fiel ao filme e riqueza de detalhes impressionante. Figura rara, com som funcional e apenas um pequeno detalhe ausente: os pinos da base. Ideal para colecionadores e fãs do Exterminador do Futuro.",
+            "price": 850.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 16,
+            "type": [
+                "DOLLS",
+                "BOYS",
+                "ARTISTIC"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/91/911555521490019.webp"
+                }
+            ]
+        },
+        {
+            "id": "41",
+            "ownerId": "2",
+            "name": "Miniatura Toyota Supra Velozes e Furiosos com Action Figure escala 1/24 Jada Toys",
+            "description": "Miniatura detalhada do Toyota Supra da franquia Velozes e Furiosos, acompanhada de action figure. Produzida pela Jada Toys na escala 1/24, apresenta pintura metálica, interior fiel ao veículo original e rodas funcionais. Item colecionável de alta qualidade, ideal para fãs da série e amantes de carros esportivos. Produto novo e original, modelo importado.",
+            "price": 390.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "CARS",
+                "BOYS",
+                "ARTISTIC"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/46/467510752673637.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/45/454556153138912.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/45/459587631218375.webp"
+                }
+            ]
+        },
+        {
+            "id": "42",
+            "ownerId": "7",
+            "name": "Miniatura Velozes e Furiosos Casa do Toretto escala 1/87 Jada Toys",
+            "description": "Miniatura da icônica Casa do Toretto, da franquia Velozes e Furiosos, produzida pela Jada Toys na escala 1/87. Produto novo, altamente detalhado, ideal para colecionadores e fãs da série. Representa fielmente o cenário clássico dos filmes, perfeita para exposição junto a outros modelos da linha. Item de coleção MS Minis Diecast, com envio para todo o Brasil.",
+            "price": 390.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "CARS",
+                "ARTISTIC",
+                "BOYS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/60/605483181612080.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/43/437441663076946.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/43/437481900927299.webp"
+                }
+            ]
+        },
+        {
+            "id": "43",
+            "ownerId": "4",
+            "name": "Cartas Pokémon (só raras)",
+            "description": "Coleção exclusiva de cartas Pokémon composta apenas por cartas raras e relíquias. Inclui edições holográficas, lendárias e promocionais, ideais para colecionadores e fãs da franquia. Todas as cartas estão em ótimo estado de conservação, armazenadas em sleeves protetoras. Item perfeito para quem busca expandir ou valorizar sua coleção.",
+            "price": 550.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 24,
+            "type": [
+                "CARDS",
+                "BOYS",
+                "STRATEGY"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/80/806585195153520.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/69/695576078228572.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/87/870523078337886.webp"
+                }
+            ]
+        },
+        {
+            "id": "44",
+            "ownerId": "6",
+            "name": "Barbie Cantora",
+            "description": "Encante-se com esta linda Barbie Cantora! Vestida como uma princesa, com um vestido colorido e detalhes encantadores, é perfeita para brincar, estimular a imaginação e também para colecionar. Uma ótima opção de presente para crianças que adoram música e moda.",
+            "price": 130.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": true,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "ARTISTIC"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/15/158573210307366.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/19/198531215938890.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/17/178561572954085.webp"
+                }
+            ]
+        },
+        {
+            "id": "45",
+            "ownerId": "5",
+            "name": "NERF Rebelle",
+            "description": "Aproveite a emoção com a NERF Rebelle! Lançador com design moderno e cores vibrantes, ideal para brincadeiras ao ar livre. Estimula a coordenação motora, a criatividade e o trabalho em equipe. Perfeita para meninas e meninos que adoram ação e aventura.",
+            "price": 160.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 10,
+            "type": [
+                "ADVENTURE",
+                "SPORTS",
+                "BOYS",
+                "GIRLS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/91/913568817815977.webp"
+                }
+            ]
+        },
+        {
+            "id": "46",
+            "ownerId": "8",
+            "name": "Coleção de Pistolas Nerf",
+            "description": "Diversas pistolas Nerf para muita diversão! São vários modelos disponíveis, ideais para brincadeiras em grupo e competições amigáveis. Estimula a coordenação, a estratégia e o trabalho em equipe. Em ótimo estado de conservação, prontas para novas aventuras!",
+            "price": 280.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 14,
+            "type": [
+                "ADVENTURE",
+                "SPORTS",
+                "BOYS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/47/471572695237782.webp"
+                }
+            ]
+        },
+        {
+            "id": "47",
+            "ownerId": "3",
+            "name": "Coleção Toy Story",
+            "description": "Lindos bonecos dos personagens favoritos de Toy Story! Inclui Buzz Lightyear, Woody, Jessie, Sr. e Sra. Cabeça de Batata e outros personagens icônicos da animação. Perfeita para fãs da franquia e colecionadores. Brinquedos em ótimo estado, ideais tanto para brincar quanto para exibir.",
+            "price": 3000.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 18,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/21/213530682481190.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/20/200514441485780.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/21/219561569078619.webp"
+                },
+                {
+                    "id": "4",
+                    "order": 4,
+                    "picture": "https://img.olx.com.br/images/21/214596447825922.webp"
+                }
+            ]
+        },
+        {
+            "id": "48",
+            "ownerId": "9",
+            "name": "Playset Imaginext Ilha do Pirata Fantasma com Tubarão e Crocodilos",
+            "description": "Explore o emocionante mundo dos piratas com este incrível playset Imaginext Ilha do Pirata Fantasma! Inclui figuras, navio, tubarão, crocodilos e diversos acessórios que garantem horas de diversão e aventura. Brinquedos originais Fisher-Price Mattel, em ótimo estado de conservação, praticamente completos e bem novos. O tubarão e os bonecos apresentam apenas pequenas marquinhas de uso, conforme mostrado nas fotos. Ideal para estimular a imaginação e a criatividade das crianças.",
+            "price": 370.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 12,
+            "type": [
+                "ADVENTURE",
+                "BOYS",
+                "DOLLS",
+                "SIMULATION"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/97/971576684620383.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/78/780531448426135.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/75/751569320667550.webp"
+                }
+            ]
+        },
+        {
+            "id": "49",
+            "ownerId": "1",
+            "name": "Hoverboard com LED e Bluetooth",
+            "description": "Hoverboard moderno com luzes de LED e conexão Bluetooth, permitindo ouvir música enquanto se diverte. Ideal para passeios ao ar livre, oferecendo equilíbrio, tecnologia e diversão. Produto em ótimo estado, com bateria e sistema de som funcionando perfeitamente.",
+            "price": 750.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 10,
+            "type": [
+                "SPORTS",
+                "ADVENTURE",
+                "BOYS",
+                "GIRLS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 15,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/31/312569933489710.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/33/332502330503754.webp"
+                }
+            ]
+        },
+        {
+            "id": "50",
+            "ownerId": "5",
+            "name": "Boneca Barbie Fashionista Design by Hillary Duff",
+            "description": "Linda boneca Barbie Fashionista com roupa moderna e estilosa criada pela atriz e cantora Hillary Duff. Possui cabelos loiros, look fashion e acabamento de alta qualidade. Ideal tanto para colecionadores quanto para brincadeiras criativas. Entrega disponível em Porto Alegre (em frente ao Ibis Hotel Moinhos de Vento) ou em Gravataí (próximo à parada 61). Para quem retirar pessoalmente em Porto Alegre, há desconto de R$100. Demais localidades via entrega OLX.",
+            "price": 350.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "ARTISTIC"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 20,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/82/828575664007087.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/86/864579660849109.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/89/896513669511746.webp"
+                }
+            ]
+        },
+        {
+            "id": "51",
+            "ownerId": "2",
+            "name": "Aliens - Toy Story Collection (com certificado)",
+            "description": "Coleção de bonecos Aliens do filme Toy Story, versão com logo Toy Story Collection branco e certificado de autenticidade. Ideal para colecionadores e fãs da franquia. Figuras icônicas e divertidas, em ótimo estado de conservação, pertencentes a único dono. Foram expostas apenas em expositor de vidro, sem sinais de desgaste. Um item raro e de excelente qualidade para exibição.",
+            "price": 520.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 14,
+            "type": [
+                "DOLLS",
+                "ARTISTIC",
+                "BOYS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/44/449534799660048.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/44/447539193383179.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/43/433510673396630.webp"
+                }
+            ]
+        },
+        {
+            "id": "52",
+            "ownerId": "4",
+            "name": "Barbie Carrinho de Compras Midge Happy Family Mattel",
+            "description": "Carrinho de compras com itens da coleção Barbie Midge Happy Family, lançado pela Mattel em 2002. Item antigo e raro, ideal para colecionadores. Inclui os acessórios mostrados nas imagens. Produto usado, mas em bom estado de conservação, preservando as cores e detalhes originais da peça.",
+            "price": 220.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 24,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "ARTISTIC"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/15/155453340203690.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/14/149422581398155.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/15/152441108637336.webp"
+                }
+            ]
+        },
+        {
+            "id": "53",
+            "ownerId": "7",
+            "name": "Caminhão de Madeira Artesanal - Colecionador",
+            "description": "Lindo caminhão de madeira artesanal, feito com acabamento detalhado e design clássico. Ideal para colecionadores, amantes de brinquedos vintage ou para uso decorativo. Peça robusta e charmosa, feita à mão, que resgata o estilo dos brinquedos tradicionais. Também pode ser utilizada em brincadeiras com crianças sob supervisão.",
+            "price": 260.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 36,
+            "type": [
+                "ARTISTIC",
+                "CARS",
+                "EDUCATIONAL"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/47/471501773130124.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/48/486585777385156.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/51/516572776972214.webp"
+                }
+            ]
+        },
+        {
+            "id": "54",
+            "ownerId": "1",
+            "name": "Boneca Rainbow High Amaya Raine",
+            "description": "Boneca Rainbow High Amaya Raine, nova e lacrada na caixa. Produto original, com detalhes vibrantes e acabamento de alta qualidade característico da linha Rainbow High. As fotos do anúncio são reais da boneca. Ideal para colecionadores e fãs da série. Vendedora com outras bonecas e brinquedos disponíveis nos anúncios.",
+            "price": 420.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "ARTISTIC"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/49/495569284623929.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/63/631537164995483.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/63/633542765978328.webp"
+                }
+            ]
+        },
+        {
+            "id": "55",
+            "ownerId": "3",
+            "name": "Bala no Alvo - Toy Story",
+            "description": "Boneco Bala no Alvo (Bullseye) da Disney Store, em perfeitas condições. Item de coleção, sem marcas de uso, ideal para fãs e colecionadores da franquia Toy Story. Não acompanha a caixa original, mas está muito bem conservado e com ótimo acabamento.",
+            "price": 380.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 8,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/58/581506097380579.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/60/604561936171787.webp"
+                }
+            ]
+        },
+        {
+            "id": "56",
+            "ownerId": "6",
+            "name": "Coleção de Bonecos - Bart Simpson e Monstros S.A.",
+            "description": "Coleção de bonecos colecionáveis dos personagens Bart Simpson e Monstros S.A. Peças com detalhes incríveis e cores vibrantes, perfeitas para fãs das animações e para quem deseja decorar o ambiente com estilo e nostalgia. Produtos bem conservados, ideais tanto para exibição quanto para presentear.",
+            "price": 250.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 16,
+            "type": [
+                "DOLLS",
+                "ARTISTIC"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/64/640540301943092.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/63/633550301079362.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/64/644559667586893.webp"
+                }
+            ]
+        },
+        {
+            "id": "57",
+            "ownerId": "9",
+            "name": "Boneco Mutano da Coleção Jovens Titãs McDonald's 2019 (sem disco lançador)",
+            "description": "Boneco do personagem Mutano da coleção Jovens Titãs, lançado pelo McDonald's em 2019. Está em estado novíssimo, sem o disco lançador, conforme as fotos. Ideal para fãs da animação e colecionadores de itens promocionais. Envio disponível pelos Correios ou Shopee para todo o Brasil.",
+            "price": 40.0,
+            "isNew": true,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "BOYS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/88/887215307708510.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/88/886293784087284.webp"
+                }
+            ]
+        },
+        {
+            "id": "58",
+            "ownerId": "3",
+            "name": "Jogo de tabuleiro Clue",
+            "description": "Jogo de tabuleiro Clue da Hasbro, completo, usado poucas vezes,como está nas fotos , pequenas marcas de uso nas bordas da caixa",
+            "price": 65.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 8,
+            "type": [
+                "BOARD",
+                "STRATEGY",
+                "PUZZLES"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/97/977423465020125.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/98/980445221004461.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/98/988428349274553.webp"
+                }
+            ]
+        },
+        {
+            "id": "59",
+            "ownerId": "4",
+            "name": "Jogo de Tabuleiro Truque de Mestre da Estrela",
+            "description": "Aprenda conceitos de mágica e impressione a todos! Este kit inclui 15 truques incríveis para você se tornar um verdadeiro mestre da magia.",
+            "price": 50.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 12,
+            "type": [
+                "BOARD",
+                "ARTISTIC",
+                "EDUCATIONAL"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/87/871504574041171.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/87/879532810126244.webp"
+                }
+            ]
+        },
+        {
+            "id": "60",
+            "ownerId": "5",
+            "name": "Jogo de Tabuleiro Equilibra Filhotes da Patrulha Canina",
+            "description": "Divirta-se com o jogo Equilibra Filhotes da Patrulha Canina! Um jogo emocionante de equilíbrio com peças de madeira que estimula a coordenação motora e a concentração. Brinquedo em excelente estado de conservação com TODAS as peças.",
+            "price": 40.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 24,
+            "type": [
+                "BOARD",
+                "EDUCATIONAL",
+                "BABIES"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/65/650537683945553.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/65/656545563846894.webp"
+                }
+            ]
+        },
+        {
+            "id": "61",
+            "ownerId": "6",
+            "name": "Lego Jogo de Tabuleiro Harry Potter Hogwarts",
+            "description": "Jogo de tabuleiro Lego Harry Potter Hogwarts 3862, para fãs de Harry Potter e de jogos de tabuleiro. Diversão garantida para toda a família!",
+            "price": 250.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 96,
+            "type": [
+                "BOARD",
+                "PUZZLES",
+                "STRATEGY",
+                "ADVENTURE"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/30/304564860486867.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/30/309512862504755.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/30/302549745582200.webp"
+                }
+            ]
+        },
+        {
+            "id": "62",
+            "ownerId": "7",
+            "name": "Jogo da Velha Pac-Man - Pac x Fantasma",
+            "description": "Transforme o clássico Jogo da Velha em uma versão criativa inspirada no universo dos games retrô. O tabuleiro acompanha peças amarelas no formato Pac-Man e peças vermelhas no formato de fantasmas, trazendo um visual divertido e nostálgico.",
+            "price": 75.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 3,
+            "type": [
+                "BOARD",
+                "STRATEGY",
+                "VIDEOGAME"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/53/539585441998347.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/53/538599689691751.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/53/538574562230149.webp"
+                }
+            ]
+        },
+        {
+            "id": "63",
+            "ownerId": "3",
+            "name": "Coringa mini bust Joker Batman The Animated Series",
+            "description": "Mini bust do Joker Coringa da série animada do Batman. Em ótimo estado, perfeito para colecionadores.",
+            "price": 250.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 18,
+            "type": [
+                "DOLLS",
+                "BOYS",
+                "ARTISTIC"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/65/659507032638942.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/65/654537394673373.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/66/663501154553447.webp"
+                }
+            ]
+        },
+        {
+            "id": "64",
+            "ownerId": "8",
+            "name": "Boneco The Sandman - DC Direct",
+            "description": "Boneco de ação do Sandman, da DC Comics. Em perfeito estado de conservação. Colecionável para fãs da série.",
+            "price": 350.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 12,
+            "type": [
+                "DOLLS",
+                "ADVENTURE"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/79/797501156514737.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/78/781525390766812.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/79/797501156514737.webp"
+                }
+            ]
+        },
+        {
+            "id": "65",
+            "ownerId": "1",
+            "name": "Boneco DC Infinite Crisis - Mongul",
+            "description": "Boneco do Mongul da linha DC Infinite Crisis. Perfeito para colecionadores! Em ótimo estado. Figura incrível com 30 cm de altura.",
+            "price": 420.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 24,
+            "type": [
+                "DOLLS",
+                "BOYS",
+                "ADVENTURE"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/92/928569038711930.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/93/930551155592098.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/92/922585513279903.webp"
+                }
+            ]
+        },
+        {
+            "id": "66",
+            "ownerId": "5",
+            "name": "Kit Rescue Bots - Central de Comando",
+            "description": "Explore a ação com a Central de Comando Rescue Bots! Inclui bonecos e veículos transformáveis para horas de diversão. Perfeito para fãs da série e crianças que adoram brincar de heróis!",
+            "price": 180.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 30,
+            "type": [
+                "CARS",
+                "BOYS",
+                "ADVENTURE"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 15,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/29/295557550632946.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/34/341585075002982.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/31/318527317947219.webp"
+                }
+            ]
+        },
+        {
+            "id": "67",
+            "ownerId": "7",
+            "name": "Casa Polly Pocket",
+            "description": "Casa Polly Pocket com acessórios.",
+            "price": 90.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 48,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "SIMULATION"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/20/203460814623166.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/20/205408214370842.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/21/215429573814588.webp"
+                }
+            ]
+        },
+        {
+            "id": "68",
+            "ownerId": "2",
+            "name": "Boneco Action Figure Smallville - Clark Kent",
+            "description": "Figura de ação do Clark Kent da série Smallville, com acessórios. Colecionável para fãs! Figura nova e lacrada com todos os acessórios, porém o blister está bem danificado como mostrado nas fotos. Nunca retirado do blister. Figura rara.",
+            "price": 450.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "ADVENTURE"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/55/558517185890244.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/56/564548181129721.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/59/591559544571714.webp"
+                }
+            ]
+        },
+        {
+            "id": "69",
+            "ownerId": "9",
+            "name": "Boneco Homem Elástico Elongated Man - DC Comics",
+            "description": "Boneco do Homem Elástico Elongated Man da linha JLA DC Comics. Item de colecionador, com design fiel ao personagem.",
+            "price": 280.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 36,
+            "type": [
+                "DOLLS",
+                "BOYS",
+                "ADVENTURE"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/95/953587905752081.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/97/974572785042642.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/98/984581786373060.webp"
+                }
+            ]
+        },
+        {
+            "id": "70",
+            "ownerId": "0",
+            "name": "Batman - The Dark Knight Returns - Armored Batman - Figura de Ação",
+            "description": "Figura de ação do Batman com armadura do The Dark Knight Returns. Colecione e conecte com o Doomsday! Perfeito para fãs de quadrinhos! Figura importada.",
+            "price": 550.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 8,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/98/987533863632022.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/97/978517141935778.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/98/989524621348516.webp"
+                }
+            ]
+        },
+        {
+            "id": "71",
+            "ownerId": "4",
+            "name": "Motoca infantil do homem aranha e patrola",
+            "description": "Divirta-se com estes brinquedos incríveis! Um trator com design especial e um triciclo colorido para muita aventura e diversão. 130,00 reais os dois.",
+            "price": 130.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 25,
+            "type": [
+                "CARS",
+                "BOYS",
+                "ADVENTURE"
+            ],
+            "ageGroup": "ONE_TO_THREE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/39/396507097806118.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/41/416556097969624.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/43/433556696611050.webp"
+                }
+            ]
+        },
+        {
+            "id": "72",
+            "ownerId": "6",
+            "name": "Boneco Rocky Balboa - The Italian Stallion",
+            "description": "Boneco do Rocky Balboa na versão The Italian Stallion, em excelente estado de conservação. Versão Antes da luta com Apollo.",
+            "price": 320.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 15,
+            "type": [
+                "DOLLS",
+                "SPORTS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/20/203503365574119.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/19/190556722627714.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/20/209528720880968.webp"
+                }
+            ]
+        },
+        {
+            "id": "73",
+            "ownerId": "1",
+            "name": "Bonecos Batman - Dark Knight Strikes Again - 6 Peças",
+            "description": "Conjunto de 6 bonecos do filme Batman - Dark Knight Strikes Again. Inclui Batman, Superman, Robin, e outros personagens. Perfeito para colecionadores e fãs do Batman! Figuras em pvc, item importado.",
+            "price": 600.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 10,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/63/635553728540904.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/63/632502729778083.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/63/631594725516996.webp"
+                }
+            ]
+        },
+        {
+            "id": "74",
+            "ownerId": "8",
+            "name": "Boneco Green Arrow - Justice League Crisis",
+            "description": "Boneco do Green Arrow da linha Justice League Crisis, em excelente estado de conservação, pronto para aventuras épicas! Figura nova e lacrada.",
+            "price": 380.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/64/640503242046594.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/64/646524121345294.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/64/642562005392880.webp"
+                }
+            ]
+        },
+        {
+            "id": "75",
+            "ownerId": "5",
+            "name": "Boneca Bratz Clueless Cher",
+            "description": "Boneca Bratz Cher do filme As Patricinhas de Beverly Hills. Edição limitada, perfeita para colecionadores e fãs do filme. Nova, lacrada, sem defeitos na caixa.",
+            "price": 450.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "GIRLS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/85/854554336533706.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/94/947558573581947.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/94/949514574723067.webp"
+                }
+            ]
+        },
+        {
+            "id": "76",
+            "ownerId": "0",
+            "name": "boneca barbie summer dreamhouse mattel",
+            "description": "boneca summer dreamhouse original mattel - sucata. condição: único acessório incluso é esse vestido, apesar disso ela não tem nenhuma mancha. a perna quebrou, eu guardei pra colar e no fim não colei.",
+            "price": 25.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 60,
+            "type": [
+                "DOLLS",
+                "GIRLS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 20,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/94/946515575830880.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/99/999502698960413.webp"
+                }
+            ]
+        },
+        {
+            "id": "77",
+            "ownerId": "3",
+            "name": "Quebra-Cabeça Batalha dos Dinossauros 200 Peças",
+            "description": "Explore o mundo dos dinossauros com este incrível quebra-cabeça de 200 peças! Com imagens vibrantes e desafiadoras, este jogo estimula a concentração e a coordenação motora das crianças. Diversão garantida para os pequenos paleontólogos!",
+            "price": 45.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 5,
+            "type": [
+                "PUZZLES",
+                "EDUCATIONAL",
+                "STRATEGY"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/97/978518052838554.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/97/973508179895119.webp"
+                }
+            ]
+        },
+        {
+            "id": "78",
+            "ownerId": "7",
+            "name": "Teletubbies",
+            "description": "Pelúcia Média, 2 unidades",
+            "price": 60.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 36,
+            "type": [
+                "DOLLS",
+                "BABIES"
+            ],
+            "ageGroup": "ZERO_TO_ONE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/55/552451416025402.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/55/555492658525085.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/55/552455291577245.webp"
+                }
+            ]
+        },
+        {
+            "id": "79",
+            "ownerId": "9",
+            "name": "Coleção de Tartarugas Ninja - 12 Peças",
+            "description": "Coleção completa de Tartarugas Ninja, incluindo os 4 irmãos, Shredder, Bebop, Rocksteady, April e acessórios! Perfeita para colecionadores e fãs! Coleção Playmates original 1988.",
+            "price": 1200.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 300,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/64/649503606419210.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/64/641571248501482.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/63/630541001092873.webp"
+                }
+            ]
+        },
+        {
+            "id": "80",
+            "ownerId": "2",
+            "name": "Dc direct Lanterna Verde Rebirth Colecionador - Hal Jordan & Sinestro",
+            "description": "Conjunto de figuras de ação do Green Lantern Rebirth, com Lanterna Verde e Sinestro. Perfeito para colecionadores e fãs do universo DC Comics! Acompanha revista completa em inglês. Produto novo e lacrado. Material importado.",
+            "price": 750.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/66/662555144067665.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/67/671548501943997.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/67/671538502462603.webp"
+                }
+            ]
+        },
+        {
+            "id": "81",
+            "ownerId": "6",
+            "name": "Star Wars Unleashed Darth Vader e Anakin Skywalker",
+            "description": "Figuras com 18 cm de altura, acompanha base, sabres de luz cards. Bonecos Star Wars Unleashed Darth Vader e Anakin Skywalker. ótimo estado, perfeitos para colecionadores! VALOR DAS FIGURAS SEPARADAS 400 REAIS.",
+            "price": 800.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 40,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/64/640596147425998.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/64/649543261197601.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/64/647547746439909.webp"
+                }
+            ]
+        },
+        {
+            "id": "82",
+            "ownerId": "8",
+            "name": "Estátua Colecionável do Charada - DC Comics COLEÇÃO YAMATO",
+            "description": "Linda estátua do Charada, um dos vilões mais icônicos do Batman. Rica em detalhes e com cores vibrantes, perfeita para colecionadores. A estátua vem com base temática e acessórios característicos do personagem.",
+            "price": 950.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 12,
+            "type": [
+                "ARTISTIC",
+                "DOLLS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/80/808531047928030.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/83/832575168942442.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/84/849586649649791.webp"
+                }
+            ]
+        },
+        {
+            "id": "83",
+            "ownerId": "8",
+            "name": "Estátua Batman Coleção YAMATO",
+            "description": "Linda estátua do Batman em pose dinâmica, com detalhes impressionantes e base temática. Perfeita para colecionadores e fãs do herói!",
+            "price": 1100.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 10,
+            "type": [
+                "ARTISTIC",
+                "DOLLS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/29/295513167877288.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/31/319523161396627.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/33/334597283404497.webp"
+                }
+            ]
+        },
+        {
+            "id": "84",
+            "ownerId": "1",
+            "name": "Boneco Wonder Woman DC Direct - Action Figure",
+            "description": "Boneco da Wonder Woman da DC Direct, edição Action Figure. Em perfeito estado de conservação.",
+            "price": 300.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 24,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "ADVENTURE"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/69/694535125070406.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/69/693574121012326.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/69/692504721400044.webp"
+                }
+            ]
+        },
+        {
+            "id": "85",
+            "ownerId": "4",
+            "name": "Lote - Coleção de Carrinhos Hot Wheels",
+            "description": "Coleção de carrinhos Hot Wheels variados, com diversos modelos e cores para colecionadores e crianças. Diversão garantida! São mais de 100 unidades, vendo somente o lote.",
+            "price": 500.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 72,
+            "type": [
+                "CARS",
+                "BOYS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/40/402506643989043.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/39/391569405817563.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/38/380591169756595.webp"
+                }
+            ]
+        },
+        {
+            "id": "86",
+            "ownerId": "7",
+            "name": "Acessório Polly",
+            "description": "Playground colorido com escorregador, casinha, boneca e diversos acessórios para muita diversão. Ideal para crianças que adoram brincar e soltar a imaginação!",
+            "price": 50.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 20,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "SIMULATION"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/77/779570797031626.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/79/797541072429082.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/80/808580432314469.webp"
+                }
+            ]
+        },
+        {
+            "id": "87",
+            "ownerId": "7",
+            "name": "Trailer de lanche Polly Pocket e mini Polly",
+            "description": "Trailer de lanche Polly e mini Polly.",
+            "price": 65.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 22,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "SIMULATION"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/84/842479837350331.webp"
+                }
+            ]
+        },
+        {
+            "id": "88",
+            "ownerId": "4",
+            "name": "Hot Wheels Formula 1 Pack",
+            "description": "Pack novo Formula 1 Hot Wheels.",
+            "price": 85.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "CARS",
+                "SPORTS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/27/271577566234317.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/28/283519446055080.webp"
+                }
+            ]
+        },
+        {
+            "id": "89",
+            "ownerId": "1",
+            "name": "Bonecos Action Figures DC Comics - Superman, Darkseid e Wonder Woman",
+            "description": "Coleção de action figures dos personagens da DC Comics: Superman, Darkseid e Wonder Woman. Perfeitos para colecionadores e fãs do universo DC.",
+            "price": 850.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 14,
+            "type": [
+                "DOLLS",
+                "ADVENTURE"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/70/707571795058676.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/71/717592311335637.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/73/737536077413871.webp"
+                }
+            ]
+        },
+        {
+            "id": "90",
+            "ownerId": "7",
+            "name": "02 Kit acessórios Polly balanço e cafeteria",
+            "description": "Playset Polly Pocket com balanço e boneca para muita diversão e imaginação. Perfeito para crianças que adoram criar histórias e brincar!",
+            "price": 70.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 18,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "SIMULATION"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/26/266559557430430.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/28/286522431510290.webp"
+                }
+            ]
+        },
+        {
+            "id": "91",
+            "ownerId": "5",
+            "name": "BTS brindes do McDonald's Tiny TAN 2025 - Todos os 14 Lacrados",
+            "description": "Coleção completa dos bonecos Tiny TAN do McDonald's! Bonecos exclusivos para fãs de BTS.",
+            "price": 350.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "DOLLS",
+                "GIRLS",
+                "BOYS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/15/152528328984480.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/17/172598328926288.webp"
+                }
+            ]
+        },
+        {
+            "id": "92",
+            "ownerId": "4",
+            "name": "Fuscas Coca-Cola Matchbox exclusivo 1/64",
+            "description": "Box exclusiva target com 02 fuscas matchbox da coca-cola 1/64 - produto raríssimo de 1998.",
+            "price": 480.0,
+            "isNew": false,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 320,
+            "type": [
+                "CARS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/96/967522329029453.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/97/974535680788510.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/97/974588683605480.webp"
+                }
+            ]
+        },
+        {
+            "id": "93",
+            "ownerId": "0",
+            "name": "Batman lote com figuras variadas",
+            "description": "Lote Batman contém: Batman: the Batman desenho da tv Batman:Máscara de tengu Batman: Azrael Batman: cavaleiro das trevas.",
+            "price": 400.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 48,
+            "type": [
+                "DOLLS",
+                "ADVENTURE",
+                "BOYS"
+            ],
+            "ageGroup": "TWELVE_OR_MORE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/96/967577144143093.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/96/963592625014617.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/96/965540506036147.webp"
+                }
+            ]
+        },
+        {
+            "id": "94",
+            "ownerId": "5",
+            "name": "Monster High Operetta Freaky Fusion",
+            "description": "falta tiara, máscara, bolsa e cinto. não acompanha suporte.",
+            "price": 40.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 50,
+            "type": [
+                "DOLLS",
+                "GIRLS"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 15,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/16/162540328593233.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/13/138591204111605.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/13/135585925403772.webp"
+                }
+            ]
+        },
+        {
+            "id": "95",
+            "ownerId": "3",
+            "name": "Jogo tabuleiro Eu Sou?",
+            "description": "Jogo EU SOU? Para jogar em 2 ou até 4 jogadores.",
+            "price": 35.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 10,
+            "type": [
+                "BOARD",
+                "STRATEGY",
+                "EDUCATIONAL"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/41/416523135451273.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/41/411565617680784.webp"
+                }
+            ]
+        },
+        {
+            "id": "96",
+            "ownerId": "9",
+            "name": "Jogo de tabuleiro dos Ursinhos Carinhosos",
+            "description": "Em bom estado. É usado então possui sinais de uso. Acredito estar completo, faltando apenas o manual.",
+            "price": 55.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 150,
+            "type": [
+                "BOARD",
+                "BABIES",
+                "GIRLS"
+            ],
+            "ageGroup": "THREE_TO_SIX",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/71/714587527819928.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/79/792514042203780.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/75/750554040640404.webp"
+                }
+            ]
+        },
+        {
+            "id": "97",
+            "ownerId": "8",
+            "name": "Jogo de Tabuleiro Wiki - O Fantástico Desafio da Comunicação",
+            "description": "Jogo de tabuleiro Wiki, para 4 a 8 jogadores, a partir de 9 anos. O objetivo do jogo é se comunicar com seus companheiros de equipe para adivinhar as palavras que estão no cartão. O jogo é divertido e desafiador, e ajuda a desenvolver a comunicação, a criatividade e o raciocínio lógico.",
+            "price": 70.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 12,
+            "type": [
+                "BOARD",
+                "WORDS",
+                "EDUCATIONAL",
+                "STRATEGY"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 10,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/75/755534146007988.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/75/750588623651829.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/75/753513147899729.webp"
+                }
+            ]
+        },
+        {
+            "id": "98",
+            "ownerId": "2",
+            "name": "Jogo de Tabuleiro - Um Crime Desafiador",
+            "description": "Vendo jogo de tabuleiro detetive: um crime desafiador, Um clássico cheio de mistério e diversão para toda a família! Excelente para reunir amigos e testar suas habilidades de dedução, descobrindo quem cometeu o crime, com qual arma e em qual local.",
+            "price": 85.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": true,
+            "usageTime": 24,
+            "type": [
+                "BOARD",
+                "STRATEGY",
+                "PUZZLES"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 5,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/21/216553455839612.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/22/226558691521295.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/24/244529093158330.webp"
+                }
+            ]
+        },
+        {
+            "id": "99",
+            "ownerId": "6",
+            "name": "Jogo de tabuleiro Combate da Estrela",
+            "description": "Participantes: 2 pessoas Objetivo do jogo: jogo de lógica e estratégia. Avance a tropa, sem se descuidar em proteger o prisioneiro inimigo. Inclui 1 tabuleiro, 40 peças verdes, 40 peças pretas e manual de instruções. Indicação 8+ anos",
+            "price": 60.0,
+            "isNew": false,
+            "canTrade": true,
+            "canLend": false,
+            "usageTime": 36,
+            "type": [
+                "BOARD",
+                "STRATEGY"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/52/523519452674920.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/51/518574930392129.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/52/529565577376470.webp"
+                }
+            ]
+        },
+        {
+            "id": "100",
+            "ownerId": "4",
+            "name": "Jogo de tabuleiro Piratas do Caribe. Grow. Embalagem lacrada",
+            "description": "Entre em uma aventura pirata com este incrível jogo de tabuleiro. Explore o mundo de Piratas do Caribe, enfrente desafios e divirta-se com amigos e família. Da Grow. Embalagem lacrada",
+            "price": 150.0,
+            "isNew": true,
+            "canTrade": false,
+            "canLend": false,
+            "usageTime": 0,
+            "type": [
+                "BOARD",
+                "STRATEGY",
+                "ADVENTURE"
+            ],
+            "ageGroup": "SIX_TO_TWELVE",
+            "discount": 0,
+            "pictures": [
+                {
+                    "id": "1",
+                    "order": 1,
+                    "picture": "https://img.olx.com.br/images/31/319509401680980.webp"
+                },
+                {
+                    "id": "2",
+                    "order": 2,
+                    "picture": "https://img.olx.com.br/images/32/329585769176938.webp"
+                },
+                {
+                    "id": "3",
+                    "order": 3,
+                    "picture": "https://img.olx.com.br/images/32/324550643036664.webp"
+                }
+            ]
+        }
+    ]
+}

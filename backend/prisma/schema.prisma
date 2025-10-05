@@ -49,8 +49,8 @@ model organizationInfo {
   organizationId String   @unique
   organization   User     @relation(fields: [organizationId], references: [id])
   description    String
-  phone_number1  Int
-  phone_number2  Int?
+  phone_number1  String
+  phone_number2  String?
   ageRange       AgeRange
   approved       Boolean  @default(false)
   website_url    String

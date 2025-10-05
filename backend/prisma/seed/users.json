@@ -1,0 +1,164 @@
+{
+  "users": [
+    {
+      "id": "0",
+      "name": "Lucas Almeida",
+      "email": "lucas.almeida@exemplo.com",
+      "password": "senha123",
+      "picture": "https://engenharia360.com/wp-content/uploads/2019/05/esta-pessoa-nao-existe-engenharia360-4.png",
+      "address": {
+        "district": "Camobi",
+        "street": "Rua Venâncio Aires",
+        "number": 1420,
+        "detail": "Casa",
+        "cep": "97105-000"
+      },
+      "parentalControl": false,
+      "active": true
+    },
+    {
+      "id": "1",
+      "name": "Mariana Santos",
+      "email": "mariana.santos@exemplo.com",
+      "password": "senha123",
+      "picture": "https://static.imasters.com.br/wp-content/uploads/2019/02/20110731/person04-300x300.jpg",
+      "address": {
+        "district": "Centro",
+        "street": "Avenida Presidente Vargas",
+        "number": 850,
+        "detail": "Apto 302",
+        "cep": "97010-180"
+      },
+      "parentalControl": false,
+      "active": true
+    },
+    {
+      "id": "2",
+      "name": "Rafael Costa",
+      "email": "rafael.costa@exemplo.com",
+      "password": "senha123",
+      "picture": "https://preview.redd.it/essas-pessoas-não-existem-v0-tc2i44kg3se91.jpg?width=1024&format=pjpg&auto=webp&s=731e0348e806e88d04a14fb7a1a35aeda5f5eac2",
+      "address": {
+        "district": "Nossa Senhora de Fátima",
+        "street": "Rua Conde de Porto Alegre",
+        "number": 421,
+        "detail": null,
+        "cep": "97105-410"
+      },
+      "parentalControl": false,
+      "active": true
+    },
+    {
+      "id": "3",
+      "name": "Carolina Pereira",
+      "email": "carolina.pereira@exemplo.com",
+      "password": "senha123",
+      "picture": "https://www.colegiocognos.com.br/wp-content/uploads/2020/08/essa-pessoa-nao-existe1.jpeg",
+      "address": {
+        "district": "Menino Jesus",
+        "street": "Rua Silva Jardim",
+        "number": 78,
+        "detail": "Casa 2",
+        "cep": "97010-150"
+      },
+      "parentalControl": false,
+      "active": true
+    },
+    {
+      "id": "4",
+      "name": "Gustavo Ferreira",
+      "email": "gustavo.ferreira@exemplo.com",
+      "password": "senha123",
+      "picture": "https://tm.ibxk.com.br/2019/02/17/17124052466014.jpg?ims=fit-in/800x500/filters:quality(70)",
+      "address": {
+        "district": "Bonfim",
+        "street": "Avenida Rio Branco",
+        "number": 210,
+        "detail": null,
+        "cep": "97040-180"
+      },
+      "parentalControl": false,
+      "active": true
+    },
+    {
+      "id": "5",
+      "name": "Beatriz Lima",
+      "email": "beatriz.lima@exemplo.com",
+      "password": "senha123",
+      "picture": "https://wl-incrivel.cf.tsp.li/resize/728x/jpg/d6e/300/7b3cad5f5499ca2d4e6d83ce95.jpg",
+      "address": {
+        "district": "Itararé",
+        "street": "Rua Marechal Floriano",
+        "number": 333,
+        "detail": "Bloco B",
+        "cep": "97060-220"
+      },
+      "parentalControl": false,
+      "active": true
+    },
+    {
+      "id": "6",
+      "name": "Mateus Oliveira",
+      "email": "mateus.oliveira@exemplo.com",
+      "password": "senha123",
+      "picture": "https://wl-incrivel.cf.tsp.li/resize/728x/jpg/430/8b6/d5b863586ea38afc43920e0881.jpg",
+      "address": {
+        "district": "Urlândia",
+        "street": "Rua João Pessoa",
+        "number": 56,
+        "detail": null,
+        "cep": "97090-320"
+      },
+      "parentalControl": false,
+      "active": true
+    },
+    {
+      "id": "7",
+      "name": "Ana Rodrigues",
+      "email": "ana.rodrigues@exemplo.com",
+      "password": "senha123",
+      "picture": "https://api.dicebear.com/9.x/personas/svg?seed=random8",
+      "address": {
+        "district": "Divina Providência",
+        "street": "Avenida Nossa Senhora das Dores",
+        "number": 1120,
+        "detail": "Sala 4",
+        "cep": "97070-450"
+      },
+      "parentalControl": false,
+      "active": true
+    },
+    {
+      "id": "8",
+      "name": "Felipe Martins",
+      "email": "felipe.martins@exemplo.com",
+      "password": "senha123",
+      "picture": "https://api.dicebear.com/9.x/personas/svg?seed=random9",
+      "address": {
+        "district": "Nossa Senhora das Dores",
+        "street": "Rua Dois de Novembro",
+        "number": 415,
+        "detail": null,
+        "cep": "97050-260"
+      },
+      "parentalControl": false,
+      "active": true
+    },
+    {
+      "id": "9",
+      "name": "Marcos Gomes",
+      "email": "marcos.gomes@exemplo.com",
+      "password": "senha123",
+      "picture": "https://api.dicebear.com/9.x/personas/svg?seed=random10",
+      "address": {
+        "district": "Centro",
+        "street": "Rua Venâncio Aires",
+        "number": 220,
+        "detail": "Loja 01",
+        "cep": "97010-190"
+      },
+      "parentalControl": false,
+      "active": true
+    }
+  ]
+}
