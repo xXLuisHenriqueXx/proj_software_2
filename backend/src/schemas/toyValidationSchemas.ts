@@ -21,7 +21,7 @@ export const toyCreateSchema = z.object({
     .string()
     .min(1, "A descrição é obrigatória.")
     .max(300, "A descrição não pode ter mais de 300 caracteres."),
-  price: z.number().positive("O preço deve ser um número positivo."),
+  price: z.number().nonnegative("O preço deve ser um número positivo."),
   isNew: z.boolean(),
   canTrade: z.boolean(),
   canLend: z.boolean(),
@@ -35,7 +35,12 @@ export const toyCreateSchema = z.object({
   ageGroup: ageRangeEnum,
   pictures: z
     .array(
-      z.string().refine((val) => {
+    z
+      .string()
+      .refine((val) => /^data:image\/[a-zA-Z]+;base64,/.test(val), {
+        message: "A imagem deve estar em formato Base64 válido (data:image/...;base64,)",
+      })
+      .refine((val) => {
         try {
           const base64 = val.split(",")[1] ?? val;
           const sizeInBytes = (base64.length * 3) / 4; 

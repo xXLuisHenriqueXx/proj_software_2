@@ -33,24 +33,40 @@ export const ToyService = {
         },
       },
       include: {
-        ToyPictures: true,
-        owner: {
-          select: {
-            id: true,
-            name: true,
-            picture: true,
-          },
-        },
+        ToyPictures: { orderBy: { order: "asc" } },
+        owner: { select: { id: true, name: true, picture: true } },
       },
     });
-    return toy;
+
+    return {
+      id: toy.id,
+      createdAt: toy.createdAt,
+      name: toy.name,
+      description: toy.description,
+      price: toy.price,
+      isNew: toy.isNew,
+      canTrade: toy.canTrade,
+      canLend: toy.canLend,
+      usageTime: toy.usageTime,
+      type: toy.type,
+      ageGroup: toy.ageGroup,
+      discount: toy.discount ?? undefined,
+      pictures:
+        toy.ToyPictures?.map((p) => ({
+          id: p.id,
+          order: p.order,
+          picture: p.picture,
+        })) ?? [],
+      owner: {
+        id: toy.owner.id,
+        name: toy.owner.name,
+        picture:
+          toy.owner.picture ?? "/public/assets/avatar_not_found.webp",
+      },
+    };
   },
 
-  async updateToy(
-    toyId: string,
-    data: ToyUpdateData,
-    ownerId: string
-  ): Promise<any> {
+  async updateToy(toyId: string, data: ToyUpdateData, ownerId: string): Promise<any> {
     const toy = await prisma.toy.findUnique({ where: { id: toyId } });
     if (!toy) throw new Error("Brinquedo não encontrado");
     if (toy.ownerId !== ownerId)
@@ -64,27 +80,89 @@ export const ToyService = {
         ...toyData,
         ToyPictures: pictures
           ? {
-            deleteMany: {},
-            create: pictures.map((pic, index) => ({
-              picture: pic,
-              order: index + 1,
-            })),
-          }
+              deleteMany: {},
+              create: pictures.map((pic, index) => ({
+                picture: pic,
+                order: index + 1,
+              })),
+            }
           : undefined,
       },
-      include: { ToyPictures: true, owner: true },
+      include: {
+        ToyPictures: { orderBy: { order: "asc" } },
+        owner: { select: { id: true, name: true, picture: true } },
+      },
     });
-    return updatedToy;
+
+    return {
+      id: updatedToy.id,
+      createdAt: updatedToy.createdAt,
+      name: updatedToy.name,
+      description: updatedToy.description,
+      price: updatedToy.price,
+      isNew: updatedToy.isNew,
+      canTrade: updatedToy.canTrade,
+      canLend: updatedToy.canLend,
+      usageTime: updatedToy.usageTime,
+      type: updatedToy.type,
+      ageGroup: updatedToy.ageGroup,
+      discount: updatedToy.discount ?? undefined,
+      pictures:
+        updatedToy.ToyPictures?.map((p) => ({
+          id: p.id,
+          order: p.order,
+          picture: p.picture,
+        })) ?? [],
+      owner: {
+        id: updatedToy.owner.id,
+        name: updatedToy.owner.name,
+        picture:
+          updatedToy.owner.picture ?? "/public/assets/avatar_not_found.webp",
+      },
+    };
   },
 
-  async deleteToy(toyId: string, ownerId: string): Promise<boolean> {
-    const toy = await prisma.toy.findUnique({ where: { id: toyId } });
+  async deleteToy(toyId: string, ownerId: string): Promise<any> {
+    const toy = await prisma.toy.findUnique({
+      where: { id: toyId },
+      include: {
+        ToyPictures: { orderBy: { order: "asc" } },
+        owner: { select: { id: true, name: true, picture: true } },
+      },
+    });
+
     if (!toy) throw new Error("Brinquedo não encontrado");
     if (toy.ownerId !== ownerId)
       throw new Error("Você não tem permissão para deletar este brinquedo");
 
     await prisma.toy.delete({ where: { id: toyId } });
-    return true;
+
+    return {
+      id: toy.id,
+      createdAt: toy.createdAt,
+      name: toy.name,
+      description: toy.description,
+      price: toy.price,
+      isNew: toy.isNew,
+      canTrade: toy.canTrade,
+      canLend: toy.canLend,
+      usageTime: toy.usageTime,
+      type: toy.type,
+      ageGroup: toy.ageGroup,
+      discount: toy.discount ?? undefined,
+      pictures:
+        toy.ToyPictures?.map((p) => ({
+          id: p.id,
+          order: p.order,
+          picture: p.picture,
+        })) ?? [],
+      owner: {
+        id: toy.owner.id,
+        name: toy.owner.name,
+        picture:
+          toy.owner.picture ?? "/public/assets/avatar_not_found.webp",
+      },
+    };
   },
 
   async getToyById(id: string) {
