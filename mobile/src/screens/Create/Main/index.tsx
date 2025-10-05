@@ -1,4 +1,3 @@
-import { useCallback, useState } from "react";
 import {
   View,
   Text,
@@ -7,7 +6,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
 import MaskInput, { Masks } from "react-native-mask-input";
 import { X } from "lucide-react-native";
 
@@ -17,38 +15,14 @@ import PictureSelector from "./_components/PictureSelector";
 
 import {
   EAgeRange,
-  IFieldsToyCreateMain,
 } from "@src/common/Interfaces/Toy.interface";
-import { PropsAppStack } from "@src/routes/stacks/AppStack";
-import { PropsCreateStack } from "@src/routes/stacks/CreateStack";
 import { SECONDARY_COLOR } from "@src/constants/Colors";
+import { formatPrice } from "@src/utils/FormatPrice";
+import { useMain } from "@src/hooks/Create/useMain";
 
 const Main = () => {
-  const rootNavigation = useNavigation<PropsAppStack>();
-  const createNavigation = useNavigation<PropsCreateStack>();
-  const [fields, setFields] = useState<IFieldsToyCreateMain>({
-    name: "",
-    description: "",
-    price: "",
-    isNew: false,
-    canTrade: false,
-    canLend: false,
-    usageTime: "",
-    ageGroup: EAgeRange.ZERO_TO_ONE,
-    pictures: [],
-    discount: "",
-  });
+  const { fields, setFields, rootNavigation, handleNavigateToCategories } = useMain();
 
-  const handleNavigateToCategories = () => {
-    createNavigation.navigate("Categories", { fields });
-  };
-
-  const formatPrice = useCallback(
-    (value: string) => {
-      return value.replace(".", "").replace(",", ".").split(" ")[1];
-    },
-    [fields.price]
-  );
 
   return (
     <ScrollView

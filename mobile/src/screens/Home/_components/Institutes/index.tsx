@@ -46,7 +46,9 @@ const Institutes = ({ data }: IInstituteItemProps) => {
             >
               <Image
                 style={styles.image}
-                source={{ uri: item.picture }}
+                source={{
+                  uri: item.picture,
+                }}
                 resizeMode="contain"
               />
 

@@ -27,7 +27,11 @@ const Home = () => {
       style={styles.container}
       contentContainerStyle={{ paddingBottom: 92, flexGrow: 1 }}
     >
-      <Header name={user?.name} onLogout={handleLogout} />
+      <Header
+        name={user?.name}
+        picture={user?.picture}
+        onLogout={handleLogout}
+      />
 
       <View style={styles.containerContent}>
         <Carousel width={carouselWidth} height={240} data={highlights} />

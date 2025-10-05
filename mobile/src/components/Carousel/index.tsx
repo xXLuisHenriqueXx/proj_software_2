@@ -56,9 +56,7 @@ const Carousel = ({ width, height, data }: ICarouselProps) => {
                 <Image
                   style={[styles.image, { width, height }]}
                   source={{
-                    uri: item.picture.includes("http")
-                      ? item.picture
-                      : `data:image/jpeg;base64,${item.picture}`,
+                    uri: item.picture,
                   }}
                   resizeMode="cover"
                 />

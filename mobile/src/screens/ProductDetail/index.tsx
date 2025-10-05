@@ -1,13 +1,13 @@
-import { View, ScrollView, Text, ActivityIndicator } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import Pictures from "./_components/Pictures";
+import Loader from "@src/components/Loader";
 
 import { AppStackParamList } from "@src/routes/stacks/AppStack";
 import { formatCurrency } from "@src/utils/FormatCurrency";
 import { statusBarHeight } from "@src/constants/Values";
-import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 import { getAgeGroup } from "@src/utils/GetAgeGroup";
 import { useProductDetail } from "@src/hooks/useProductDetail";
 
@@ -18,7 +18,7 @@ const ProductDetail = ({ route }: Props) => {
   const { product, loading, characteristicWidth, width } = useProductDetail(id);
 
   if (!product || loading) {
-    return <ActivityIndicator size={64} color={HIGHLIGHT_COLOR} />;
+    return <Loader />;
   }
 
   return (
@@ -43,7 +43,9 @@ const ProductDetail = ({ route }: Props) => {
           </Text>
         </View>
 
-        <Text style={styles.price}>{formatCurrency(product.price)}</Text>
+        <Text style={styles.price}>
+          {product.price === 0 ? "Gratuito" : formatCurrency(product.price)}
+        </Text>
 
         <View style={styles.containerInfo}>
           <Text style={styles.title}>Características</Text>

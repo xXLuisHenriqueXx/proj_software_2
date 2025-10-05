@@ -1,79 +1,37 @@
-import { useState } from "react";
 import {
+  ActivityIndicator,
   ScrollView,
   Text,
   TouchableOpacity,
-  useWindowDimensions,
   View,
 } from "react-native";
 import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ChevronLeft, X } from "lucide-react-native";
 
-import { EToyType, IToyCreate } from "@src/common/Interfaces/Toy.interface";
-import { PropsAppStack } from "@src/routes/stacks/AppStack";
+import Loader from "@src/components/Loader";
+
 import {
   CreateStackParamList,
-  PropsCreateStack,
 } from "@src/routes/stacks/CreateStack";
 import { categoriesData } from "@src/static/CategoriesData";
-import { toyService } from "@src/services/ToyService";
 import {
   BACKGROUND_PRIMARY_COLOR,
   BACKGROUND_SECONDARY_COLOR,
+  CONTRAST_COLOR,
   HIGHLIGHT_COLOR,
   SECONDARY_COLOR,
 } from "@src/constants/Colors";
+import { useCategories } from "@src/hooks/Create/useCategories";
 
 type Props = NativeStackScreenProps<CreateStackParamList, "Categories">;
 
 const Categories = ({ route }: Props) => {
   const { fields } = route.params;
-  const { width } = useWindowDimensions();
-  const rootNavigation = useNavigation<PropsAppStack>();
-  const createNavigation = useNavigation<PropsCreateStack>();
+  const { categories, loading, widthCategory, createNavigation, rootNavigation, handleSelectCategory, handleCreate } = useCategories(fields);
+  
+  if (loading) return <Loader />
 
-  const [categories, setCategories] = useState<EToyType[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const handleSelectCategory = (category: EToyType) => {
-    if (categories.includes(category)) {
-      setCategories(categories.filter((item) => item !== category));
-    } else {
-      setCategories([...categories, category]);
-    }
-  };
-
-  const handleCreate = async () => {
-    setLoading(true);
-
-    try {
-      const params: IToyCreate = {
-        name: fields.name,
-        description: fields.description,
-        price: fields.canLend || fields.canTrade ? 0 : Number(fields.price),
-        isNew: fields.isNew,
-        canTrade: fields.canTrade,
-        canLend: fields.canLend,
-        usageTime: 1,
-        type: categories,
-        ageGroup: fields.ageGroup,
-        pictures: fields.pictures,
-        discount: 0,
-      };
-
-      await toyService.create(params);
-
-      rootNavigation.replace("AppTabs");
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const widthCategory = (width - 48 - 16) / 2;
   return (
     <ScrollView
       style={styles.container}
@@ -137,7 +95,11 @@ const Categories = ({ route }: Props) => {
         activeOpacity={0.85}
         onPress={handleCreate}
       >
-        <Text style={styles.saveText}>Salvar</Text>
+        {loading ? (
+          <ActivityIndicator size="small" color={CONTRAST_COLOR} />
+        ) : (
+          <Text style={styles.saveText}>Salvar</Text>
+        )}
       </TouchableOpacity>
     </ScrollView>
   );

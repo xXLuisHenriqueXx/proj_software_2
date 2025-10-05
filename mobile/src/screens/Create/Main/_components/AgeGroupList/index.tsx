@@ -1,4 +1,3 @@
-import React, { Fragment } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { Check } from "lucide-react-native";

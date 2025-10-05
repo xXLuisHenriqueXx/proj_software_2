@@ -1,20 +1,35 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { styles } from "./styles";
-import { LogOut } from "lucide-react-native";
+import { LogOut, User2 } from "lucide-react-native";
 
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 interface IHeaderProps {
   name?: string;
+  picture?: string;
   onLogout: () => void;
 }
 
-const Header = ({ name, onLogout }: IHeaderProps) => {
+const Header = ({ name, picture, onLogout }: IHeaderProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Olá, <Text style={styles.titleHighlight}>{name}</Text>
-      </Text>
+      <View style={styles.containerUser}>
+        {picture ? (
+          <Image
+            style={styles.image}
+            source={{ uri: picture }}
+            resizeMode="cover"
+          />
+        ) : (
+          <View style={styles.image}>
+            <User2 size={20} color={HIGHLIGHT_COLOR} strokeWidth={1} />
+          </View>
+        )}
+
+        <Text style={styles.title}>
+          Olá, <Text style={styles.titleHighlight}>{name}</Text>
+        </Text>
+      </View>
 
       <TouchableOpacity activeOpacity={0.85} onPress={onLogout}>
         <LogOut size={24} color={HIGHLIGHT_COLOR} />

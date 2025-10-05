@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -24,7 +24,7 @@ const PictureSelector = ({ setFieldPictures }: IPictureSelectorProps) => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images"],
       allowsMultipleSelection: true,
-      quality: 1,
+      quality: 0.7,
       aspect: [4, 3],
       selectionLimit: 5,
       base64: true,
@@ -33,8 +33,13 @@ const PictureSelector = ({ setFieldPictures }: IPictureSelectorProps) => {
     if (result.assets) {
       const images = result.assets.slice(0, 5);
 
+      const formattedImages = images.map((image) => {
+        const type = image.type || "jpeg";
+        return `data:image/${type};base64,${image.base64}`;
+      });
+
       setImages(images.map((image) => image.uri));
-      setFieldPictures(images.map((image) => image.uri));
+      setFieldPictures(formattedImages);
     }
   };
 

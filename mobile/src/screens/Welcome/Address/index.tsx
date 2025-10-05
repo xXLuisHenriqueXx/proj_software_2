@@ -1,9 +1,10 @@
-import { ActivityIndicator, View } from "react-native";
+import {  View } from "react-native";
 import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import Header from "./_components/Header";
 import Fields from "./_components/Fields";
+import Loader from "@src/components/Loader";
 
 import { AuthStackParamList } from "@src/routes/stacks/AuthStack";
 import { useAddress } from "@src/hooks/Welcome/useAddress";
@@ -35,7 +36,7 @@ const Address = ({ route }: Props) => {
   } = useAddress({ fieldsData, type });
 
   if (loadingCep) {
-    return <ActivityIndicator />;
+    return <Loader />;
   }
 
   return (

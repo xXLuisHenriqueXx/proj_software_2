@@ -63,7 +63,9 @@ const List = ({ title, subtitile, data, onClose }: IListProps) => {
               )}
 
               <View style={styles.containerInfo}>
-                <Text style={styles.price}>{formatCurrency(item.price)}</Text>
+                <Text style={styles.price}>
+                  {item.price === 0 ? "Gratuito" : formatCurrency(item.price)}
+                </Text>
                 <Text style={styles.name} numberOfLines={2}>
                   {item.name}
                 </Text>

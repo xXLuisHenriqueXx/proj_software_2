@@ -1,0 +1,57 @@
+import { useState } from "react";
+import { useWindowDimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import { EToyType, IFieldsToyCreateMain, IToyCreate } from "@src/common/Interfaces/Toy.interface";
+import { PropsAppStack } from "@src/routes/stacks/AppStack";
+import { PropsCreateStack } from "@src/routes/stacks/CreateStack";
+import { toyService } from "@src/services/ToyService";
+
+export function useCategories(fields: IFieldsToyCreateMain) {
+    const { width } = useWindowDimensions();
+  const rootNavigation = useNavigation<PropsAppStack>();
+  const createNavigation = useNavigation<PropsCreateStack>();
+
+  const [categories, setCategories] = useState<EToyType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleSelectCategory = (category: EToyType) => {
+    if (categories.includes(category)) {
+      setCategories(categories.filter((item) => item !== category));
+    } else {
+      setCategories([...categories, category]);
+    }
+  };
+
+  const handleCreate = async () => {
+    setLoading(true);
+
+    try {
+      const params: IToyCreate = {
+        name: fields.name,
+        description: fields.description,
+        price: fields.canLend || fields.canTrade ? 0 : Number(fields.price),
+        isNew: fields.isNew,
+        canTrade: fields.canTrade,
+        canLend: fields.canLend,
+        usageTime: 1,
+        type: categories,
+        ageGroup: fields.ageGroup,
+        pictures: fields.pictures,
+        discount: 0,
+      };
+
+      await toyService.create(params);
+
+      rootNavigation.replace("AppTabs");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const widthCategory = (width - 48 - 16) / 2;
+
+  return { categories, loading, widthCategory, createNavigation, rootNavigation, handleSelectCategory, handleCreate };
+}
