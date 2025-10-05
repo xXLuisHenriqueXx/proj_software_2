@@ -132,11 +132,11 @@ async function main() {
   // ======== HIGHLIGHTS ========
   console.log("Criando highlights...");
   const highlightsData = [
-    { name: "Brinquedos Gratuitos", type: HighlightType.FREE, description: "Brinquedos disponíveis para doação ou gratuitos.", picture: base64Placeholder },
-    { name: "Mais Perto de Você", type: HighlightType.NEARBY, description: "Brinquedos próximos à sua localização.", picture: base64Placeholder },
-    { name: "Mais Populares", type: HighlightType.POPULAR, description: "Brinquedos mais visualizados por outros usuários.", picture: base64Placeholder },
-    { name: "Últimos Adicionados", type: HighlightType.RECENT, description: "Brinquedos recém adicionados na plataforma.", picture: base64Placeholder },
-    { name: "Brinquedos Novos", type: HighlightType.NEW, description: "Brinquedos que estão como novos.", picture: base64Placeholder },
+    { name: "Brinquedos Gratuitos", type: HighlightType.FREE, description: "Brinquedos disponíveis para doação ou gratuitos.", picture: '/public/assets/doacao.png' },
+    { name: "Mais Perto de Você", type: HighlightType.NEARBY, description: "Brinquedos próximos à sua localização.", picture: '/public/assets/perto.png' },
+    { name: "Mais Populares", type: HighlightType.POPULAR, description: "Brinquedos mais visualizados por outros usuários.", picture: '/public/assets/Populares.png' },
+    { name: "Últimos Adicionados", type: HighlightType.RECENT, description: "Brinquedos recém adicionados na plataforma.", picture: '/public/assets/recentes.png' },
+    { name: "Brinquedos Novos", type: HighlightType.NEW, description: "Brinquedos que estão como novos.", picture: '/public/assets/Novos.png' },
   ];
 
   for (const h of highlightsData) {
