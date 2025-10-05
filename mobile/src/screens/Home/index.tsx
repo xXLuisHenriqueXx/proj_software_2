@@ -15,6 +15,7 @@ const Home = () => {
     handleLogout,
     carouselWidth,
     highlights,
+    institutes,
     forYouToys,
     boyToys,
     girlToys,
@@ -31,7 +32,7 @@ const Home = () => {
       <View style={styles.containerContent}>
         <Carousel width={carouselWidth} height={240} data={highlights} />
 
-        <Institutes />
+        <Institutes data={institutes} />
 
         <Benefit />
 

@@ -8,13 +8,12 @@ import CreateStack from "./CreateStack";
 import ProductDetail from "@src/screens/ProductDetail";
 import InstituteDetail from "@src/screens/InstituteDetail";
 
-import { IInstitute } from "@src/common/Entities/Institute";
 
 export type AppStackParamList = {
   AppTabs: undefined;
   CreateStack: undefined;
   ProductDetail: { id: string };
-  InstituteDetail: { institute: IInstitute };
+  InstituteDetail: { id: string };
 };
 
 const Stack = createNativeStackNavigator<AppStackParamList>();

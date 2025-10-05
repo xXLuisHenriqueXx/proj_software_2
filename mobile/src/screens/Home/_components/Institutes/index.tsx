@@ -3,16 +3,19 @@ import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { ChevronRight } from "lucide-react-native";
 
-import { institutesData } from "@src/static/InstitutesData";
 import { IInstitute } from "@src/common/Entities/Institute";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { PRIMARY_COLOR } from "@src/constants/Colors";
 
-const Institutes = () => {
+interface IInstituteItemProps {
+  data: IInstitute[];
+}
+
+const Institutes = ({ data }: IInstituteItemProps) => {
   const navigation = useNavigation<PropsAppStack>();
 
-  const handleNavigateToInstituteDetail = (institute: IInstitute) => {
-    navigation.navigate("InstituteDetail", { institute });
+  const handleNavigateToInstituteDetail = (id: string) => {
+    navigation.navigate("InstituteDetail", { id });
   };
 
   return (
@@ -34,16 +37,16 @@ const Institutes = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         >
-          {institutesData.map((item, index) => (
+          {data.map((item, index) => (
             <TouchableOpacity
               key={index}
               style={styles.containerItem}
               activeOpacity={0.85}
-              onPress={() => handleNavigateToInstituteDetail(item)}
+              onPress={() => handleNavigateToInstituteDetail(item.id)}
             >
               <Image
                 style={styles.image}
-                source={{ uri: item.src }}
+                source={{ uri: item.picture }}
                 resizeMode="contain"
               />
 

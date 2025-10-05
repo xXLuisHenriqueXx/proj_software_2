@@ -1,31 +1,32 @@
-import {
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  useWindowDimensions,
-  View,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { X } from "lucide-react-native";
+import { Copy } from "lucide-react-native";
 
-import { AppStackParamList, PropsAppStack } from "@src/routes/stacks/AppStack";
+import Header from "./Header";
+import Loader from "@src/components/Loader";
+
+import { AppStackParamList } from "@src/routes/stacks/AppStack";
 import { statusBarHeight } from "@src/constants/Values";
+import { getAgeGroup } from "@src/utils/GetAgeGroup";
+import { useInstituteDetail } from "@src/hooks/useInstituteDetail";
+import { BACKGROUND_PRIMARY_COLOR } from "@src/constants/Colors";
 
 type Props = NativeStackScreenProps<AppStackParamList, "InstituteDetail">;
+const mapImage = require("@assets/map.jpg")
 
 const InstituteDetail = ({ route }: Props) => {
-  const { institute } = route.params || {};
-  const { width } = useWindowDimensions();
+  const { id } = route.params || {};
+  const { institute, loading, infoWidth, handleOpenSite, handleCopyPixKey } =
+    useInstituteDetail(id);
 
-  const navigation = useNavigation<PropsAppStack>();
-
-  const infoWidth = (width - 48 - 16) / 2;
+  if (!institute || loading) {
+    return <Loader />;
+  }
 
   return (
     <ScrollView
-      className="flex-1 bg-backgroundPrimary"
+      style={styles.container}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
         paddingTop: statusBarHeight + 32,
@@ -33,74 +34,62 @@ const InstituteDetail = ({ route }: Props) => {
         rowGap: 48,
       }}
     >
-      <View className="flex-row items-center justify-between w-full px-6 py-4">
-        <Text className="text-2xl font-redHatDisplaySemiBold text-primary">
-          Instituições assistenciais
-        </Text>
+      <Header />
 
-        <TouchableOpacity
-          activeOpacity={0.85}
-          onPress={() => navigation.goBack()}
-        >
-          <X size={20} color={"#13131399"} />
-        </TouchableOpacity>
-      </View>
-
-      <View className="flex-col gap-y-6 w-full px-6">
-        <View className="flex-col gap-y-4">
+      <View style={styles.containerContent}>
+        <View style={styles.containerInfo}>
           <Image
-            className="w-28 h-28 rounded-2xl"
-            source={{ uri: institute.src }}
+            style={styles.image}
+            source={{ uri: institute.picture }}
             resizeMode="cover"
           />
 
-          <View className="flex-col gap-y-1">
-            <Text
-              className="text-2xl font-redHatDisplaySemiBold text-primary"
-              numberOfLines={2}
-            >
+          <View style={styles.containerText}>
+            <Text style={styles.name} numberOfLines={2}>
               {institute.name}
             </Text>
-            <Text className="text-base font-redHatDisplayRegular text-primary/60">
-              {institute.ageRange}
+            <Text style={styles.ageRange}>
+              {getAgeGroup(institute.ageRange)}
             </Text>
           </View>
 
-          <Text className="text-lg font-redHatDisplayRegular text-primary">
-            {institute.description}
-          </Text>
+          <Text style={styles.description}>{institute.description}</Text>
         </View>
 
-        <View className="flex-row flex-wrap justify-between gap-4 w-full">
-          <View className="flex-col" style={{ width: infoWidth }}>
-            <Text className="text-base font-redHatDisplaySemiBold text-primary">
-              Telefone
-            </Text>
-            <Text className="text-base font-redHatDisplayRegular text-primary/60">
-              {institute.phone}
-            </Text>
+        <View style={styles.containerCharacteristics}>
+          <View style={{ flexDirection: "column", width: infoWidth }}>
+            <Text style={styles.title}>Telefone</Text>
+            <Text style={styles.subtitle}>{institute.phone}</Text>
           </View>
 
-          <View className="flex-col" style={{ width: infoWidth }}>
-            <Text className="text-base font-redHatDisplaySemiBold text-primary">
-              Online
-            </Text>
-            <Text className="text-base font-redHatDisplayRegular text-primary/60">
-              {institute.online}
-            </Text>
+          <TouchableOpacity
+            style={{ flexDirection: "column", width: infoWidth }}
+            activeOpacity={0.85}
+            onPress={handleOpenSite}
+          >
+            <Text style={styles.title}>Site</Text>
+            <Text style={styles.subtitle}>{institute.online}</Text>
+          </TouchableOpacity>
+
+          <View style={styles.containerBigText}>
+            <Text style={styles.title}>Endereço</Text>
+            <Text style={styles.subtitle}>{institute.address}</Text>
           </View>
 
-          <View className="flex-col w-full">
-            <Text className="text-base font-redHatDisplaySemiBold text-primary">
-              Endereço
-            </Text>
-            <Text className="text-base font-redHatDisplayRegular text-primary/60">
-              {institute.address}
-            </Text>
-          </View>
+          <TouchableOpacity
+            style={styles.buttonCopy}
+            activeOpacity={0.85}
+            onPress={handleCopyPixKey}
+          >
+            <Text style={styles.textCopy}>Copiar chave PIX</Text>
+            <Copy style={styles.iconCopy} size={20} color={BACKGROUND_PRIMARY_COLOR} />
+          </TouchableOpacity>
         </View>
 
-        <View className="w-full h-44 bg-backgroundSecondary rounded-xl" />
+        <Image style={styles.map} 
+          source={mapImage}
+          resizeMode="cover"
+        />          
       </View>
     </ScrollView>
   );

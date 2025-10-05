@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useWindowDimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 
 import useAuth from "./useAuth";
 import { IHighlight } from "@src/common/Entities/Highlight";
@@ -7,9 +9,9 @@ import { IProduct } from "@src/common/Entities/Product";
 import { highlightService } from "@src/services/HighlightService";
 import { toyService } from "@src/services/ToyService";
 import { EToyType, IFilter } from "@src/common/Interfaces/Toy.interface";
-import Toast from "react-native-toast-message";
 import { PropsRoot } from "@src/routes";
-import { useNavigation } from "@react-navigation/native";
+import { IInstitute } from "@src/common/Entities/Institute";
+import { instituteService } from "@src/services/InstituteService";
 
 export function useHome() {
   const { width } = useWindowDimensions();
@@ -18,6 +20,7 @@ export function useHome() {
   const navigation = useNavigation<PropsRoot>();
 
   const [highlights, setHighlights] = useState<IHighlight[]>([]);
+  const [institutes, setInstitutes] = useState<IInstitute[]>([]);
   const [forYouToys, setForYouToys] = useState<IProduct[]>([]);
   const [boyToys, setBoyToys] = useState<IProduct[]>([]);
   const [girlToys, setGirlToys] = useState<IProduct[]>([]);
@@ -39,12 +42,19 @@ export function useHome() {
     setHighlights(response.data);
   };
 
+  const handleFetchInstitutes = async () => {
+    const response = await instituteService.get();
+
+    setInstitutes(response.data);
+  };
+
   const handleLoadData = async () => {
     setIsLoading(true);
 
     try {
       await Promise.all([
         handleFetchHighlights(),
+        handleFetchInstitutes(),
         fetchToys(setForYouToys),
         fetchToys(setBoyToys, { type: EToyType.BOYS }),
         fetchToys(setGirlToys, { type: EToyType.GIRLS }),
@@ -75,6 +85,7 @@ export function useHome() {
     user,
     handleLogout,
     highlights,
+    institutes,
     forYouToys,
     boyToys,
     girlToys,

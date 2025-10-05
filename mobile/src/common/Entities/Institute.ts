@@ -1,10 +1,15 @@
+import { EAgeRange } from "../Interfaces/Toy.interface";
+
 export interface IInstitute {
   id: string;
   name: string;
   description: string;
-  src: string;
-  phone: string;
+  picture: string;
+  phone: string[];
   online: string;
   address: string;
-  ageRange: string;
+  ageRange: EAgeRange;
+  pix_key: string;
+  latitude: number;
+  longitude: number;
 }
