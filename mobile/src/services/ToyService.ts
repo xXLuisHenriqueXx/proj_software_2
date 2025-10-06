@@ -34,7 +34,16 @@ export const toyService = {
   },
 
   getByID: async (params: IToyGet) => {
-    const response = await api.get(`/api/toys/${params.id}`);
+    const key = process.env.EXPO_PUBLIC_SECURE_TOKEN;
+    if (!key) return;
+
+    const token = await SecureStore.getItemAsync(key);
+
+    const response = await api.get(`/api/toys/${params.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     return response;
   },
