@@ -22,10 +22,34 @@ export const featuredData: IFeaturedDataProps[] = [
   },
   {
     id: 5,
-    name: "Uno",
+    name: "Baby",
   },
   {
     id: 6,
     name: "Pokémon",
+  },
+  {
+    id: 7,
+    name: "Star Wars",
+  },
+  {
+    id: 8,
+    name: "Detetive",
+  },
+  {
+    id: 9,
+    name: "War",
+  },
+  {
+    id: 10,
+    name: "Futebol",
+  },
+  {
+    id: 11,
+    name: "Naruto",
+  },
+  {
+    id: 12,
+    name: "Anime",
   },
 ];

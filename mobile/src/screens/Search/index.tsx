@@ -15,6 +15,7 @@ const Search = () => {
     handleFocus,
     handleEndEditing,
     handleSearchWithCategory,
+    handleSearchWithFeatured,
     handleCloseList,
     shouldShowFeatured,
     shouldShowList,
@@ -26,35 +27,36 @@ const Search = () => {
     loading,
   } = useSearch();
 
-  if (loading) return <Loader />;
+  const renderContent = () => {
+    if (shouldShowList) return <List data={data} onClose={handleCloseList} />;
 
-  return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={{
-        paddingBottom: 264,
-        rowGap: 48,
-      }}
-    >
-      {!shouldShowList && (
+    return (
+      <>
         <SearchInput
           onPress={handleFocus}
           onEndEditing={handleEndEditing}
           search={search}
           setSearch={setSearch}
         />
-      )}
+        {shouldShowFeatured && (
+          <>
+            <Featured onSearch={handleSearchWithFeatured} />
+            <Categories onSearch={handleSearchWithCategory} />
+          </>
+        )}
+        {isFocused && <Recent data={recents} setSearch={setSearch} />}
+      </>
+    );
+  };
 
-      {shouldShowFeatured && (
-        <>
-          <Featured />
-          <Categories onSearch={handleSearchWithCategory} />
-        </>
-      )}
+  if (loading) return <Loader />;
 
-      {isFocused && <Recent data={recents} setSearch={setSearch} />}
-
-      {shouldShowList && <List data={data} onClose={handleCloseList} />}
+  return (
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.containerScroll}
+    >
+      {renderContent()}
     </ScrollView>
   );
 };

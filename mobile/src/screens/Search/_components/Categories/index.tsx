@@ -9,6 +9,7 @@ import { styles } from "./styles";
 import { categoriesData } from "@src/static/CategoriesData";
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
+import { memo } from "react";
 
 interface ICategoriesProps {
   onSearch: (value: EToyType) => void;
@@ -41,4 +42,4 @@ const Categories = ({ onSearch }: ICategoriesProps) => {
   );
 };
 
-export default Categories;
+export default memo(Categories);

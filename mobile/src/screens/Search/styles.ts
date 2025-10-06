@@ -13,4 +13,8 @@ export const styles = StyleSheet.create({
     paddingTop: statusBarHeight + 32,
     backgroundColor: BACKGROUND_PRIMARY_COLOR,
   },
+  containerScroll: {
+    paddingBottom: 264,
+    rowGap: 48,
+  },
 });

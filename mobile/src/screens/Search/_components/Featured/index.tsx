@@ -1,22 +1,31 @@
-import { View, Text } from "react-native";
+import { memo } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
 import { featuredData } from "@src/static/FeaturedData";
 
-const Featured = () => {
+interface IFeaturedProps {
+  onSearch: (value: string) => void;
+}
+
+const Featured = ({ onSearch }: IFeaturedProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Em destaque</Text>
 
       <View style={styles.containerContent}>
         {featuredData.map((item) => (
-          <Text key={item.id} style={styles.text}>
-            {item.name}
-          </Text>
+          <TouchableOpacity
+            key={item.id}
+            activeOpacity={0.85}
+            onPress={() => onSearch(item.name)}
+          >
+            <Text style={styles.text}>{item.name}</Text>
+          </TouchableOpacity>
         ))}
       </View>
     </View>
   );
 };
 
-export default Featured;
+export default memo(Featured);

@@ -52,6 +52,13 @@ export function useSearch() {
     [fetchToys]
   );
 
+  const handleSearchWithFeatured = useCallback(
+    async (value: string) => {
+      await fetchToys({ search: value });
+    },
+    [fetchToys]
+  );
+
   const handleFocus = useCallback(() => setIsFocused(true), []);
   const handleEndEditing = useCallback(() => {
     setIsFocused(false);
@@ -88,6 +95,7 @@ export function useSearch() {
     handleFocus,
     handleEndEditing,
     handleSearchWithCategory,
+    handleSearchWithFeatured,
     handleCloseList,
     shouldShowList,
     shouldShowFeatured,
