@@ -11,11 +11,24 @@ import { api } from "./Api";
 
 export const toyService = {
   get: async (params: IToyList) => {
-    const response = await api.post("/api/toys/list", {
-      page: params.page,
-      pageSize: params.pageSize,
-      filter: params.filter,
-    });
+    const key = process.env.EXPO_PUBLIC_SECURE_TOKEN;
+    if (!key) return;
+
+    const token = await SecureStore.getItemAsync(key);
+
+    const response = await api.post(
+      "/api/toys/list",
+      {
+        page: params.page,
+        pageSize: params.pageSize,
+        filter: params.filter,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     return response;
   },
