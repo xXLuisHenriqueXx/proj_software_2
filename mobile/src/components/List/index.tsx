@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import {
   View,
   Text,
@@ -30,6 +30,51 @@ interface IListProps {
   data: IProduct[];
 }
 
+interface IListItemProps {
+  item: IProduct;
+  index: number;
+  widthProduct: number;
+  handleNavigateToDetail: (item: IProduct) => void;
+}
+
+const EmptyList = () => (
+  <View style={styles.containerNotFound}>
+    <CircleOff size={24} color={HIGHLIGHT_COLOR} />
+    <Text style={styles.notFound}>Nenhum produto encontrado</Text>
+  </View>
+);
+
+const ListItem = ({
+  item,
+  index,
+  widthProduct,
+  handleNavigateToDetail,
+}: IListItemProps) => (
+  <TouchableOpacity
+    key={index}
+    style={[styles.container, { width: widthProduct }]}
+    activeOpacity={0.85}
+    onPress={() => handleNavigateToDetail(item)}
+  >
+    {item?.pictures?.[0]?.picture ? (
+      <Image style={styles.image} source={{ uri: item.pictures[0].picture }} />
+    ) : (
+      <View style={styles.imagePlaceholder}>
+        <CameraOff size={24} color={HIGHLIGHT_COLOR} />
+      </View>
+    )}
+
+    <View style={styles.containerInfo}>
+      <Text style={styles.price}>
+        {item.price === 0 ? "Gratuito" : formatCurrency(item.price)}
+      </Text>
+      <Text style={styles.name} numberOfLines={2}>
+        {item.name}
+      </Text>
+    </View>
+  </TouchableOpacity>
+);
+
 const List = ({ title, subtitile, data, onClose }: IListProps) => {
   const { width } = useWindowDimensions();
   const navigation = useNavigation<PropsAppStack>();
@@ -39,63 +84,40 @@ const List = ({ title, subtitile, data, onClose }: IListProps) => {
   };
 
   const widthProduct = (width - 48 - 24) / 2;
-
   const hasHeader = title && subtitile;
 
+  if (!data || data.length === 0) {
+    return (
+      <Skeleton
+        width={width - 48}
+        height={300}
+        colors={[BACKGROUND_SECONDARY_COLOR, SECONDARY_COLOR]}
+      />
+    );
+  }
+
   return (
-    <Skeleton
-      width={width - 48}
-      height={300}
-      colors={[BACKGROUND_SECONDARY_COLOR, SECONDARY_COLOR]}
-    >
-      {data.length > 0 ? (
-        <View style={styles.container}>
-          {hasHeader && <Header title={title} subtitile={subtitile} />}
-          {onClose && <BackButton onClose={onClose} />}
+    <View style={styles.container}>
+      {hasHeader && <Header title={title} subtitile={subtitile} />}
+      {onClose && <BackButton onClose={onClose} />}
 
-          {data && data.length > 0 ? (
-            <View style={styles.containerContent}>
-              {data.map((item, index) => (
-                <TouchableOpacity
-                  key={index}
-                  style={[styles.container, { width: widthProduct }]}
-                  activeOpacity={0.85}
-                  onPress={() => handleNavigateToDetail(item)}
-                >
-                  {item?.pictures?.[0]?.picture ? (
-                    <Image
-                      style={styles.image}
-                      source={{ uri: item.pictures[0].picture }}
-                    />
-                  ) : (
-                    <View style={styles.imagePlaceholder}>
-                      <CameraOff size={24} color={HIGHLIGHT_COLOR} />
-                    </View>
-                  )}
-
-                  <View style={styles.containerInfo}>
-                    <Text style={styles.price}>
-                      {item.price === 0
-                        ? "Gratuito"
-                        : formatCurrency(item.price)}
-                    </Text>
-                    <Text style={styles.name} numberOfLines={2}>
-                      {item.name}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              ))}
-            </View>
-          ) : (
-            <View style={styles.containerNotFound}>
-              <CircleOff size={24} color={HIGHLIGHT_COLOR} />
-              <Text style={styles.notFound}>Nenhum produto encontrado</Text>
-            </View>
-          )}
+      {data && data.length > 0 ? (
+        <View style={styles.containerContent}>
+          {data.map((item, index) => (
+            <ListItem
+              key={index}
+              item={item}
+              index={index}
+              widthProduct={widthProduct}
+              handleNavigateToDetail={handleNavigateToDetail}
+            />
+          ))}
         </View>
-      ) : null}
-    </Skeleton>
+      ) : (
+        <EmptyList />
+      )}
+    </View>
   );
 };
 
-export default List;
+export default memo(List);

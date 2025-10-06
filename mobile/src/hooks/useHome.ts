@@ -27,12 +27,13 @@ export function useHome() {
   const [babyToys, setBabyToys] = useState<IProduct[]>([]);
   const [carToys, setCarToys] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const fetchToys = async (
     setToys: (toys: IProduct[]) => void,
     filter?: IFilter
   ) => {
-    const toys = await toyService.get({ page: 1, pageSize: 6, filter });
+    const toys = await toyService.get({ page: 1, pageSize: 4, filter });
 
     setToys(toys.data.toys);
   };
@@ -77,6 +78,11 @@ export function useHome() {
     handleLoadData();
   }, []);
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    handleLoadData().finally(() => setRefreshing(false));
+  };
+
   const handleLogout = async () => {
     await logout();
 
@@ -86,6 +92,8 @@ export function useHome() {
   return {
     user,
     handleLogout,
+    onRefresh,
+    refreshing,
     highlights,
     institutes,
     forYouToys,

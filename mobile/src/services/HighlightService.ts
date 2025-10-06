@@ -3,7 +3,7 @@ import { api } from "./Api";
 
 export const highlightService = {
   get: async () => {
-    const response = api.get("/api/highlights");
+    const response = await api.get("/api/highlights");
 
     return response;
   },

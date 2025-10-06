@@ -4,6 +4,7 @@ import { LogOut, User2 } from "lucide-react-native";
 
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 import { baseURL } from "@src/services/Api";
+import { memo } from "react";
 
 interface IHeaderProps {
   name?: string;
@@ -43,4 +44,4 @@ const Header = ({ name, picture, onLogout }: IHeaderProps) => {
   );
 };
 
-export default Header;
+export default memo(Header);

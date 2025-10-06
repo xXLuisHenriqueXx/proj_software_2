@@ -21,6 +21,9 @@ export const styles = StyleSheet.create({
     rowGap: 4,
     width: 96,
   },
+  containerScroll: {
+    columnGap: 16,
+  },
   title: {
     fontSize: 16,
     fontFamily: SEMIBOLD_FONT,

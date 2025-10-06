@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import {
   Image,
   NativeScrollEvent,
@@ -17,6 +17,7 @@ import {
   HIGHLIGHT_COLOR,
   SECONDARY_COLOR,
 } from "@src/constants/Colors";
+import { baseURL } from "@src/services/Api";
 
 interface ICarouselProps {
   width: number;
@@ -56,7 +57,11 @@ const Carousel = ({ width, height, data }: ICarouselProps) => {
                 <Image
                   style={[styles.image, { width, height }]}
                   source={{
-                    uri: item.picture,
+                    uri:
+                      item.picture.startsWith("data:image") ||
+                      item.picture.startsWith("http")
+                        ? item.picture
+                        : `${baseURL}${item.picture}`,
                   }}
                   resizeMode="cover"
                 />
@@ -85,4 +90,4 @@ const Carousel = ({ width, height, data }: ICarouselProps) => {
   );
 };
 
-export default Carousel;
+export default memo(Carousel);

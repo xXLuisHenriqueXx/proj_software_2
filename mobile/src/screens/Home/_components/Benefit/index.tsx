@@ -1,5 +1,6 @@
 import { TouchableOpacity, Image } from "react-native";
 import { styles } from "./styles";
+import { memo } from "react";
 
 const Benefit = () => {
   return (
@@ -15,4 +16,4 @@ const Benefit = () => {
   );
 };
 
-export default Benefit;
+export default memo(Benefit);
