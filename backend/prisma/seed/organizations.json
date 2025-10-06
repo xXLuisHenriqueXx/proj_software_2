@@ -73,7 +73,7 @@
       "addressNumber": 25,
       "addressDetail": "Bloco A",
       "addressCep": "70070-010",
-      "picture": "https://upload.wikimedia.org/wikipedia/commons/7/78/Unicef.png"
+      "picture": "/public/assets/Unicef.png"
     },
     {
       "organizationId": "USER_ID_5",
