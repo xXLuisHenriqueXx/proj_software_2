@@ -7,6 +7,7 @@ import {
   SECONDARY_COLOR,
 } from "@src/constants/Colors";
 import { BOLD_FONT, REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
+import { statusBarHeight } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
   container: {
@@ -23,12 +24,29 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     rowGap: 8,
   },
+  containerScroll: {
+    paddingTop: statusBarHeight,
+    paddingBottom: 32,
+    rowGap: 48,
+  },
   containerCharacteristics: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    gap: 16,
+    rowGap: 24,
     width: "100%",
+  },
+  containerOwner: {
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 8,
+  },
+  image: {
+    width: 32,
+    height: 32,
+    borderWidth: 0.5,
+    borderColor: HIGHLIGHT_COLOR,
+    borderRadius: 32,
   },
   title: {
     fontSize: 18,

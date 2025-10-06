@@ -7,11 +7,9 @@ import Loader from "@src/components/Loader";
 
 import { AppStackParamList } from "@src/routes/stacks/AppStack";
 import { formatCurrency } from "@src/utils/FormatCurrency";
-import { statusBarHeight } from "@src/constants/Values";
 import { getAgeGroup } from "@src/utils/GetAgeGroup";
 import { useProductDetail } from "@src/hooks/useProductDetail";
 import { baseURL } from "@src/services/Api";
-import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 type Props = NativeStackScreenProps<AppStackParamList, "ProductDetail">;
 
@@ -27,11 +25,7 @@ const ProductDetail = ({ route }: Props) => {
     <ScrollView
       style={styles.container}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
-        paddingTop: statusBarHeight,
-        paddingBottom: 32,
-        rowGap: 48,
-      }}
+      contentContainerStyle={styles.containerScroll}
     >
       <Pictures data={product.pictures} width={width} />
 
@@ -53,16 +47,12 @@ const ProductDetail = ({ route }: Props) => {
           <Text style={styles.title}>Características</Text>
 
           <View style={styles.containerCharacteristics}>
-            <View
-              style={{ flexDirection: "column", width: characteristicWidth }}
-            >
+            <View style={{ width: characteristicWidth }}>
               <Text style={styles.subtitle}>Tempo de uso</Text>
               <Text style={styles.text}>{product.usageTime} meses</Text>
             </View>
 
-            <View
-              style={{ flexDirection: "column", width: characteristicWidth }}
-            >
+            <View style={{ width: characteristicWidth }}>
               <Text style={styles.subtitle}>Condição</Text>
               <Text style={styles.text}>
                 {product.isNew ? "Novo" : "Usado"}
@@ -70,21 +60,15 @@ const ProductDetail = ({ route }: Props) => {
             </View>
 
             <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                columnGap: 8,
-                width: characteristicWidth,
-              }}
+              style={[
+                styles.containerOwner,
+                {
+                  width: characteristicWidth,
+                },
+              ]}
             >
               <Image
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderWidth: 0.5,
-                  borderColor: HIGHLIGHT_COLOR,
-                  borderRadius: 32,
-                }}
+                style={styles.image}
                 source={{
                   uri:
                     product.owner.picture.startsWith("data:image") ||
@@ -95,15 +79,13 @@ const ProductDetail = ({ route }: Props) => {
                 resizeMode="contain"
               />
 
-              <View style={{ flexDirection: "column" }}>
+              <View>
                 <Text style={styles.subtitle}>Proprietário</Text>
                 <Text style={styles.text}>{product.owner.name}</Text>
               </View>
             </View>
 
-            <View
-              style={{ flexDirection: "column", width: characteristicWidth }}
-            >
+            <View style={{ width: characteristicWidth }}>
               <Text style={styles.subtitle}>Faixa etária</Text>
               <Text style={styles.text}>{getAgeGroup(product.ageGroup)}</Text>
             </View>

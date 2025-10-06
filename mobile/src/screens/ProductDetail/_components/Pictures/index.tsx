@@ -8,6 +8,7 @@ import Carousel from "@src/components/Carousel";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 import { IToyPicture } from "@src/common/Interfaces/Toy.interface";
+import { memo } from "react";
 
 interface IPicturesProps {
   data: IToyPicture[];
@@ -48,4 +49,4 @@ const Pictures = ({ data, width }: IPicturesProps) => {
   );
 };
 
-export default Pictures;
+export default memo(Pictures);

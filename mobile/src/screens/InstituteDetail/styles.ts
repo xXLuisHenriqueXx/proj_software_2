@@ -7,6 +7,7 @@ import {
   SECONDARY_COLOR,
 } from "@src/constants/Colors";
 import { MEDIUM_FONT, REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
+import { statusBarHeight } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
   container: {
@@ -22,6 +23,11 @@ export const styles = StyleSheet.create({
   containerInfo: {
     flexDirection: "column",
     rowGap: 16,
+  },
+  containerScroll: {
+    paddingTop: statusBarHeight + 32,
+    paddingBottom: 32,
+    rowGap: 48,
   },
   containerText: {
     flexDirection: "column",

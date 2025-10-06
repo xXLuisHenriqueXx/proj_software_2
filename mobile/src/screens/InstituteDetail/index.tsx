@@ -7,7 +7,6 @@ import Header from "./Header";
 import Loader from "@src/components/Loader";
 
 import { AppStackParamList } from "@src/routes/stacks/AppStack";
-import { statusBarHeight } from "@src/constants/Values";
 import { getAgeGroup } from "@src/utils/GetAgeGroup";
 import { useInstituteDetail } from "@src/hooks/useInstituteDetail";
 import {
@@ -31,12 +30,8 @@ const InstituteDetail = ({ route }: Props) => {
   return (
     <ScrollView
       style={styles.container}
+      contentContainerStyle={styles.containerScroll}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
-        paddingTop: statusBarHeight + 32,
-        paddingBottom: 32,
-        rowGap: 48,
-      }}
     >
       <Header />
 
@@ -61,16 +56,16 @@ const InstituteDetail = ({ route }: Props) => {
         </View>
 
         <View style={styles.containerCharacteristics}>
-          <View style={{ flexDirection: "column" }}>
+          <View>
             <Text style={styles.title}>Telefone</Text>
-            {institute.phone.map((item, index) => (
-              <Text key={index} style={styles.subtitle}>
+            {institute.phone.map((item) => (
+              <Text key={item} style={styles.subtitle}>
                 {formatPhoneNumber(item)}
               </Text>
             ))}
           </View>
 
-          <View style={{ flexDirection: "column" }}>
+          <View>
             <Text style={styles.title}>Endereço</Text>
             <Text style={styles.subtitle}>{institute.address}</Text>
           </View>

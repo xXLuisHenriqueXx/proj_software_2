@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
@@ -23,4 +24,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
