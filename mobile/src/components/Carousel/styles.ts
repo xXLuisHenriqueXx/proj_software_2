@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
+import { PRIMARY_COLOR_25 } from "@src/constants/Colors";
 
 export const styles = StyleSheet.create({
   containerDots: {
@@ -14,9 +14,9 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 0.25,
-    borderColor: HIGHLIGHT_COLOR,
-    borderRadius: 12,
+    borderWidth: 0.5,
+    borderColor: PRIMARY_COLOR_25,
+    borderRadius: 8,
   },
   dot: {
     height: 6,
