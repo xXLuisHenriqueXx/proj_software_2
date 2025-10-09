@@ -38,7 +38,7 @@ const Home = () => {
 
           <Header
             title="Recomendados para você"
-            subtitle="Dê uma olhada nos produto que podem ser do seu interesse"
+            subtitle="Produtos que podem ser do seu interesse ..."
             variant="link"
           />
         </View>

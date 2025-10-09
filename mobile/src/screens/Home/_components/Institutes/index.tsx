@@ -1,7 +1,6 @@
 import { memo, useCallback } from "react";
 import {
   View,
-  ScrollView,
   useWindowDimensions,
   ListRenderItem,
   FlatList,
@@ -11,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Skeleton } from "moti/skeleton";
 
 import Header from "@src/components/Header";
-import InstituteCard from "@src/components/InstituteCard";
+import Item from "./Item";
 
 import { IInstitute } from "@src/common/Entities/Institute";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
@@ -38,8 +37,8 @@ const Institutes = ({ data }: IInstituteProps) => {
 
   const renderItem: ListRenderItem<IInstitute> = useCallback(
     ({ item }) => (
-      <InstituteCard
-        item={item}
+      <Item
+        data={item}
         handleNavigateToInstituteDetail={handleNavigateToInstituteDetail}
       />
     ),
