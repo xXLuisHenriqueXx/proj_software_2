@@ -1,26 +1,77 @@
-import { memo } from "react";
+import React, { memo } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { ChevronLeft, ChevronRight } from "lucide-react-native";
+
 import { styles } from "./styles";
-import { ChevronRight } from "lucide-react-native";
+import { PRIMARY_COLOR, SECONDARY_COLOR } from "@src/constants/Colors";
+import { PropsRoot } from "@src/routes";
 
-import { PRIMARY_COLOR } from "@src/constants/Colors";
+export type HeaderVariant = "back" | "close" | "link" | "noClose";
 
-interface IHeaderProps {
+interface HeaderProps {
   title: string;
-  subtitle: string;
-  onClose?: () => void;
+  subtitle?: string;
+  variant?: HeaderVariant;
+  onPress?: () => void;
 }
 
-const Header = ({ title, subtitle }: IHeaderProps) => {
+const Header = ({
+  title,
+  subtitle,
+  variant = "back",
+  onPress,
+}: HeaderProps) => {
+  const navigation = useNavigation<PropsRoot>();
+
+  const handleBack = () => {
+    if (onPress) return onPress();
+    navigation.goBack();
+  };
+
+  const renderLeftIcon = () => {
+    if (variant === "back") {
+      return (
+        <TouchableOpacity activeOpacity={0.85} onPress={handleBack}>
+          <ChevronLeft size={24} color={SECONDARY_COLOR} />
+        </TouchableOpacity>
+      );
+    }
+    return null;
+  };
+
+  const renderRightIcon = () => {
+    if (variant === "close" || variant === "link") {
+      return (
+        <TouchableOpacity activeOpacity={0.85} onPress={onPress}>
+          <ChevronRight size={24} color={PRIMARY_COLOR} />
+        </TouchableOpacity>
+      );
+    }
+    return null;
+  };
+
+  const Wrapper = variant === "link" ? TouchableOpacity : View;
+
   return (
-    <TouchableOpacity style={styles.containerHeader} activeOpacity={0.85}>
-      <View style={{ flexDirection: "column" }}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subtitle}>{subtitle}</Text>
+    <Wrapper
+      style={
+        variant === "back" ? styles.containerHeaderBack : styles.containerHeader
+      }
+      activeOpacity={0.85}
+      onPress={variant === "link" ? onPress : undefined}
+    >
+      {renderLeftIcon()}
+
+      <View style={{ flex: 1 }}>
+        <Text style={variant === "back" ? styles.titleBack : styles.title}>
+          {title}
+        </Text>
+        {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
       </View>
 
-      <ChevronRight size={24} color={PRIMARY_COLOR} />
-    </TouchableOpacity>
+      {renderRightIcon()}
+    </Wrapper>
   );
 };
 

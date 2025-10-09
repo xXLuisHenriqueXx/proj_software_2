@@ -1,14 +1,14 @@
-import {  View } from "react-native";
+import { View } from "react-native";
 import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import Header from "./_components/Header";
+import Header from "@src/components/Header";
 import Fields from "./_components/Fields";
 import Loader from "@src/components/Loader";
+import RegisterButton from "./_components/RegisterButton";
 
 import { AuthStackParamList } from "@src/routes/stacks/AuthStack";
 import { useAddress } from "@src/hooks/Welcome/useAddress";
-import RegisterButton from "./_components/RegisterButton";
 
 export interface IEditableFields {
   street: boolean;
@@ -41,7 +41,7 @@ const Address = ({ route }: Props) => {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header title="Endereço" variant="back" />
 
       <Fields
         cep={cep}

@@ -61,6 +61,7 @@ const Institutes = ({ data }: IInstituteProps) => {
       <Header
         title="Instituições assistenciais"
         subtitle="Explore e contribua com um mundo melhor"
+        variant="link"
       />
 
       <View style={styles.containerScroll}>

@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { styles } from "./styles";
 
-import Header from "./_components/Header";
+import Header from "@src/components/Header";
 import Fields from "./_components/Fields";
 import LoginButton from "./_components/LoginButton";
 import SheetEmail from "./_components/SheetEmail";
@@ -29,7 +29,7 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header title="Acessar conta" variant="back" />
 
       <Fields
         fields={fields}

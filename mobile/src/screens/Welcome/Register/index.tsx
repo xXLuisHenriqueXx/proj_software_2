@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { styles } from "./styles";
 
-import Header from "./_components/Header";
+import Header from "@src/components/Header";
 import TypeButton from "./_components/TypeButton";
 import Fields from "./_components/Fields";
 import NextButton from "./_components/NextButton";
@@ -14,7 +14,7 @@ const Register = () => {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header title="Criar conta" variant="back" />
 
       <View style={styles.containerTypes}>
         <TypeButton
