@@ -11,6 +11,8 @@ export const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     rowGap: 12,
+    borderRadius: 8,
+    overflow: "hidden",
   },
   containerInfo: {
     flexDirection: "column",
@@ -22,7 +24,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     aspectRatio: 1,
-    borderRadius: 8,
     backgroundColor: BACKGROUND_SECONDARY_COLOR,
   },
   textName: {

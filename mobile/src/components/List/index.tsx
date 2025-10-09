@@ -11,11 +11,10 @@ import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { CircleOff } from "lucide-react-native";
 
-import ProductCard from "../ProductCard";
-
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { IProduct } from "@src/common/Entities/Product";
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
+import Item from "./Item";
 
 interface IListProps {
   header?: any;
@@ -55,8 +54,8 @@ const List = ({
   };
 
   const renderItem: ListRenderItem<IProduct> = ({ item }) => (
-    <ProductCard
-      item={item}
+    <Item
+      data={item}
       widthProduct={widthProduct}
       handleNavigateToDetail={handleNavigateToDetail}
     />

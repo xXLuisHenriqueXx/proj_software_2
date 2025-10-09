@@ -7,24 +7,20 @@ import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 import { formatCurrency } from "@src/utils/FormatCurrency";
 import { IProduct } from "@src/common/Entities/Product";
 
-interface IProductCardProps {
-  item: IProduct;
+interface IItemProps {
+  data: IProduct;
   widthProduct: number;
   handleNavigateToDetail: (id: string) => void;
 }
 
-const ProductCard = ({
-  item,
-  widthProduct,
-  handleNavigateToDetail,
-}: IProductCardProps) => (
+const Item = ({ data, widthProduct, handleNavigateToDetail }: IItemProps) => (
   <TouchableOpacity
     style={[styles.container, { width: widthProduct }]}
     activeOpacity={0.85}
-    onPress={() => handleNavigateToDetail(item.id)}
+    onPress={() => handleNavigateToDetail(data.id)}
   >
-    {item?.pictures?.[0]?.picture ? (
-      <Image style={styles.image} source={{ uri: item.pictures[0].picture }} />
+    {data?.pictures?.[0]?.picture ? (
+      <Image style={styles.image} source={{ uri: data.pictures[0].picture }} />
     ) : (
       <View style={styles.image}>
         <CameraOff size={24} color={HIGHLIGHT_COLOR} />
@@ -33,14 +29,14 @@ const ProductCard = ({
 
     <View style={styles.containerInfo}>
       <Text style={styles.textName} numberOfLines={2}>
-        {item.name}
+        {data.name}
       </Text>
 
       <Text style={styles.textPrice}>
-        {item.price === 0 ? "Gratuito" : formatCurrency(item.price)}
+        {data.price === 0 ? "Gratuito" : formatCurrency(data.price)}
       </Text>
     </View>
   </TouchableOpacity>
 );
 
-export default memo(ProductCard);
+export default memo(Item);

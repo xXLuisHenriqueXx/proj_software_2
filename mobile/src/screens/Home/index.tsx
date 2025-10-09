@@ -7,9 +7,9 @@ import Institutes from "./_components/Institutes";
 import Benefit from "./_components/Benefit";
 import List from "@src/components/List";
 import CategoryList from "./_components/CategoryList";
+import Header from "@src/components/Header";
 
 import { useHome } from "@src/hooks/useHome";
-import Header from "@src/components/Header";
 
 const Home = () => {
   const {
