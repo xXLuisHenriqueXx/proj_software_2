@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
-import { HIGHLIGHT_COLOR, PRIMARY_COLOR } from "@src/constants/Colors";
-import { MEDIUM_FONT, REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
+import { PRIMARY_COLOR } from "@src/constants/Colors";
+import { REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
   container: {
@@ -15,13 +15,10 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
   },
-  containerItem: {
-    flexDirection: "column",
-    alignItems: "center",
-    rowGap: 4,
-    width: 96,
-  },
   containerScroll: {
+    width: "100%",
+  },
+  containerScrollContent: {
     columnGap: 16,
   },
   title: {
@@ -33,18 +30,5 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: REGULAR_FONT,
     color: PRIMARY_COLOR,
-  },
-  image: {
-    width: 96,
-    height: 96,
-    borderWidth: 0.25,
-    borderColor: HIGHLIGHT_COLOR,
-    borderRadius: 12,
-  },
-  name: {
-    fontSize: 12,
-    fontFamily: MEDIUM_FONT,
-    color: PRIMARY_COLOR,
-    textAlign: "center",
   },
 });

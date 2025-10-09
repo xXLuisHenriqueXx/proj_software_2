@@ -1,62 +1,28 @@
 import { memo, useCallback } from "react";
 import {
   View,
-  Text,
-  TouchableOpacity,
   ScrollView,
-  Image,
   useWindowDimensions,
+  ListRenderItem,
+  FlatList,
 } from "react-native";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { Skeleton } from "moti/skeleton";
-import { ChevronRight } from "lucide-react-native";
+
+import Header from "@src/components/Header";
+import InstituteCard from "@src/components/InstituteCard";
 
 import { IInstitute } from "@src/common/Entities/Institute";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import {
   BACKGROUND_SECONDARY_COLOR,
-  PRIMARY_COLOR,
   SECONDARY_COLOR,
 } from "@src/constants/Colors";
-import { baseURL } from "@src/services/Api";
 
 interface IInstituteProps {
   data: IInstitute[];
 }
-
-interface IInstituteItemProps {
-  item: IInstitute;
-  index: number;
-  handleNavigateToInstituteDetail: (id: string) => void;
-}
-
-const InstituteItem = ({
-  item,
-  index,
-  handleNavigateToInstituteDetail,
-}: IInstituteItemProps) => (
-  <TouchableOpacity
-    key={index}
-    style={styles.containerItem}
-    activeOpacity={0.85}
-    onPress={() => handleNavigateToInstituteDetail(item.id)}
-  >
-    <Image
-      style={styles.image}
-      source={{
-        uri:
-          item.picture.startsWith("data:image") ||
-          item.picture.startsWith("http")
-            ? item.picture
-            : `${baseURL}${item.picture}`,
-      }}
-      resizeMode="contain"
-    />
-
-    <Text style={styles.name}>{item.name}</Text>
-  </TouchableOpacity>
-);
 
 const Institutes = ({ data }: IInstituteProps) => {
   const { width } = useWindowDimensions();
@@ -68,6 +34,16 @@ const Institutes = ({ data }: IInstituteProps) => {
       navigation.navigate("InstituteDetail", { id });
     },
     [navigation]
+  );
+
+  const renderItem: ListRenderItem<IInstitute> = useCallback(
+    ({ item }) => (
+      <InstituteCard
+        item={item}
+        handleNavigateToInstituteDetail={handleNavigateToInstituteDetail}
+      />
+    ),
+    [handleNavigateToInstituteDetail]
   );
 
   if (!data || data.length === 0) {
@@ -82,32 +58,23 @@ const Institutes = ({ data }: IInstituteProps) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.containerHeader} activeOpacity={0.85}>
-        <View style={{ flexDirection: "column" }}>
-          <Text style={styles.title}>Instituições assistenciais</Text>
-          <Text style={styles.subtitle}>
-            Explore e contribua com um mundo melhor
-          </Text>
-        </View>
+      <Header
+        title="Instituições assistenciais"
+        subtitle="Explore e contribua com um mundo melhor"
+      />
 
-        <ChevronRight size={24} color={PRIMARY_COLOR} />
-      </TouchableOpacity>
-
-      <View style={{ width: "100%" }}>
-        <ScrollView
-          contentContainerStyle={{ columnGap: 16 }}
+      <View style={styles.containerScroll}>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
-        >
-          {data.map((item, index) => (
-            <InstituteItem
-              key={index}
-              item={item}
-              index={index}
-              handleNavigateToInstituteDetail={handleNavigateToInstituteDetail}
-            />
-          ))}
-        </ScrollView>
+          contentContainerStyle={styles.containerScrollContent}
+          initialNumToRender={5}
+          maxToRenderPerBatch={6}
+          windowSize={5}
+        />
       </View>
     </View>
   );

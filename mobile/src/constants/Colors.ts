@@ -1,5 +1,8 @@
 export const HIGHLIGHT_COLOR = "#316A41";
 export const PRIMARY_COLOR = "#131313";
+export const PRIMARY_COLOR_75 = "#131313CC";
+export const PRIMARY_COLOR_50 = "#13131380";
+export const PRIMARY_COLOR_25 = "#13131340";
 export const SECONDARY_COLOR = "#373737";
 export const CONTRAST_COLOR = "#FEFEFE";
 export const BACKGROUND_PRIMARY_COLOR = "#FAF9F6";

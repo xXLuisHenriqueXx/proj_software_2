@@ -1,25 +1,28 @@
 import { StyleSheet } from "react-native";
 
 import {
+  BACKGROUND_PRIMARY_COLOR,
   BACKGROUND_SECONDARY_COLOR,
   PRIMARY_COLOR,
 } from "@src/constants/Colors";
-import { BOLD_FONT, REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
+import { SEMIBOLD_FONT } from "@src/constants/Fonts";
+import { statusBarHeight } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
-    rowGap: 16,
+    flex: 1,
+    backgroundColor: BACKGROUND_PRIMARY_COLOR,
   },
   containerContent: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    gap: 24,
+    alignItems: "stretch",
+    rowGap: 32,
+    width: "100%",
+    padding: 24,
+    paddingTop: statusBarHeight + 32,
+    paddingBottom: 120,
   },
-  containerInfo: {
-    flexDirection: "column",
-    rowGap: 4,
+  containerColumn: {
+    justifyContent: "space-between",
   },
   containerNotFound: {
     flexDirection: "column",
@@ -31,30 +34,6 @@ export const styles = StyleSheet.create({
     padding: 32,
     backgroundColor: BACKGROUND_SECONDARY_COLOR,
     borderRadius: 12,
-  },
-  image: {
-    width: "100%",
-    aspectRatio: 1,
-    borderRadius: 12,
-  },
-  imagePlaceholder: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    aspectRatio: 1,
-    borderRadius: 12,
-    backgroundColor: BACKGROUND_SECONDARY_COLOR,
-  },
-  price: {
-    fontSize: 14,
-    fontFamily: BOLD_FONT,
-    color: PRIMARY_COLOR,
-  },
-  name: {
-    fontSize: 14,
-    fontFamily: REGULAR_FONT,
-    color: PRIMARY_COLOR,
   },
   notFound: {
     fontSize: 16,

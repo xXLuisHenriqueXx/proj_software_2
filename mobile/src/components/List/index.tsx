@@ -3,120 +3,86 @@ import {
   View,
   Text,
   useWindowDimensions,
-  TouchableOpacity,
-  Image,
+  ListRenderItem,
+  FlatList,
+  RefreshControl,
 } from "react-native";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { Skeleton } from "moti/skeleton";
-import { CameraOff, CircleOff } from "lucide-react-native";
+import { CircleOff } from "lucide-react-native";
 
-import Header from "./Header";
-import BackButton from "./BackButton";
+import ProductCard from "../ProductCard";
 
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { IProduct } from "@src/common/Entities/Product";
-import { formatCurrency } from "@src/utils/FormatCurrency";
-import {
-  BACKGROUND_SECONDARY_COLOR,
-  HIGHLIGHT_COLOR,
-  SECONDARY_COLOR,
-} from "@src/constants/Colors";
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 interface IListProps {
-  title?: string;
-  subtitile?: string;
-  onClose?: () => void;
+  header?: any;
   data: IProduct[];
+  refreshing?: boolean;
+  onRefresh?: () => void;
+  keyExtractor?: (item: IProduct) => string;
+  onItemPress?: (id: string) => void;
+  emptyMessage?: string;
 }
 
-interface IListItemProps {
-  item: IProduct;
-  index: number;
-  widthProduct: number;
-  handleNavigateToDetail: (item: IProduct) => void;
-}
-
-const EmptyList = () => (
+const EmptyList = ({ message }: { message?: string }) => (
   <View style={styles.containerNotFound}>
     <CircleOff size={24} color={HIGHLIGHT_COLOR} />
-    <Text style={styles.notFound}>Nenhum produto encontrado</Text>
+    <Text style={styles.notFound}>
+      {message || "Nenhum produto encontrado"}
+    </Text>
   </View>
 );
 
-const ListItem = ({
-  item,
-  index,
-  widthProduct,
-  handleNavigateToDetail,
-}: IListItemProps) => (
-  <TouchableOpacity
-    key={index}
-    style={[styles.container, { width: widthProduct }]}
-    activeOpacity={0.85}
-    onPress={() => handleNavigateToDetail(item)}
-  >
-    {item?.pictures?.[0]?.picture ? (
-      <Image style={styles.image} source={{ uri: item.pictures[0].picture }} />
-    ) : (
-      <View style={styles.imagePlaceholder}>
-        <CameraOff size={24} color={HIGHLIGHT_COLOR} />
-      </View>
-    )}
-
-    <View style={styles.containerInfo}>
-      <Text style={styles.price}>
-        {item.price === 0 ? "Gratuito" : formatCurrency(item.price)}
-      </Text>
-      <Text style={styles.name} numberOfLines={2}>
-        {item.name}
-      </Text>
-    </View>
-  </TouchableOpacity>
-);
-
-const List = ({ title, subtitile, data, onClose }: IListProps) => {
+const List = ({
+  header,
+  data,
+  refreshing = false,
+  onRefresh,
+  keyExtractor = (item) => item.id,
+  onItemPress,
+  emptyMessage,
+}: IListProps) => {
   const { width } = useWindowDimensions();
+
   const navigation = useNavigation<PropsAppStack>();
 
-  const handleNavigateToDetail = (item: IProduct) => {
-    navigation.navigate("ProductDetail", { id: item.id });
+  const handleNavigateToDetail = (id: string) => {
+    if (onItemPress) onItemPress(id);
+    else navigation.navigate("ProductDetail", { id });
   };
 
-  const widthProduct = (width - 48 - 24) / 2;
-  const hasHeader = title && subtitile;
+  const renderItem: ListRenderItem<IProduct> = ({ item }) => (
+    <ProductCard
+      item={item}
+      widthProduct={widthProduct}
+      handleNavigateToDetail={handleNavigateToDetail}
+    />
+  );
 
-  if (!data || data.length === 0) {
-    return (
-      <Skeleton
-        width={width - 48}
-        height={300}
-        colors={[BACKGROUND_SECONDARY_COLOR, SECONDARY_COLOR]}
-      />
-    );
-  }
+  const widthProduct = (width - 48 - 16) / 2;
+  const hasRefreshControl = !!onRefresh;
 
   return (
-    <View style={styles.container}>
-      {hasHeader && <Header title={title} subtitile={subtitile} />}
-      {onClose && <BackButton onClose={onClose} />}
-
-      {data && data.length > 0 ? (
-        <View style={styles.containerContent}>
-          {data.map((item, index) => (
-            <ListItem
-              key={index}
-              item={item}
-              index={index}
-              widthProduct={widthProduct}
-              handleNavigateToDetail={handleNavigateToDetail}
-            />
-          ))}
-        </View>
-      ) : (
-        <EmptyList />
-      )}
-    </View>
+    <FlatList
+      style={styles.container}
+      ListHeaderComponent={header}
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      numColumns={2}
+      ListEmptyComponent={<EmptyList message={emptyMessage} />}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.containerContent}
+      columnWrapperStyle={styles.containerColumn}
+      refreshControl={
+        hasRefreshControl ? (
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        ) : undefined
+      }
+    />
   );
 };
 
