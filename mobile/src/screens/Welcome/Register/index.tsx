@@ -1,7 +1,8 @@
 import { View } from "react-native";
 import { styles } from "./styles";
+import { ChevronLeft } from "lucide-react-native";
 
-import Header from "@src/components/Header";
+import { Header } from "@src/components/Header";
 import TypeButton from "./_components/TypeButton";
 import Fields from "./_components/Fields";
 import NextButton from "./_components/NextButton";
@@ -9,12 +10,21 @@ import NextButton from "./_components/NextButton";
 import { useRegister } from "@src/hooks/Welcome/useRegister";
 
 const Register = () => {
-  const { type, setType, fields, setFields, handleNavigateToAddress } =
-    useRegister();
+  const {
+    type,
+    setType,
+    fields,
+    setFields,
+    handleNavigateToAddress,
+    handleNavigateGoBack,
+  } = useRegister();
 
   return (
     <View style={styles.container}>
-      <Header title="Criar conta" variant="back" />
+      <Header.Root>
+        <Header.LeftIcon icon={ChevronLeft} onPress={handleNavigateGoBack} />
+        <Header.Content title="Criar conta" />
+      </Header.Root>
 
       <View style={styles.containerTypes}>
         <TypeButton

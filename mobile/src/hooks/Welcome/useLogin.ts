@@ -81,6 +81,7 @@ export function useLogin() {
     bottomSheetEmailRef,
     handleLogin,
     handleSendEmail,
+    handleNavigateGoBack: () => navigation.goBack(),
     handleOpenSheetEmail: () => openSheet(bottomSheetEmailRef),
     handleCloseSheetEmail: () => closeSheet(bottomSheetEmailRef),
     handleCloseSheetCode: () => closeSheet(bottomSheetCodeRef),

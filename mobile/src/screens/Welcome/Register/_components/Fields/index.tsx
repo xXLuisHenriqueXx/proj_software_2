@@ -12,7 +12,6 @@ import { Eye, EyeOff } from "lucide-react-native";
 import MaskedInput from "@src/components/MaskedInput";
 
 import { SECONDARY_COLOR } from "@src/constants/Colors";
-import { useRegister } from "@src/hooks/Welcome/useRegister";
 import { CNPJ_MASK } from "@src/constants/Masks";
 import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
 

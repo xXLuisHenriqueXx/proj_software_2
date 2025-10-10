@@ -1,8 +1,9 @@
 import { View } from "react-native";
 import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ChevronLeft } from "lucide-react-native";
 
-import Header from "@src/components/Header";
+import { Header } from "@src/components/Header";
 import Fields from "./_components/Fields";
 import Loader from "@src/components/Loader";
 import RegisterButton from "./_components/RegisterButton";
@@ -30,8 +31,8 @@ const Address = ({ route }: Props) => {
     setCep,
     fields,
     setFields,
-    editableFields,
     handleRegister,
+    handleNavigateGoBack,
     loading,
   } = useAddress({ fieldsData, type });
 
@@ -41,14 +42,16 @@ const Address = ({ route }: Props) => {
 
   return (
     <View style={styles.container}>
-      <Header title="Endereço" variant="back" />
+      <Header.Root>
+        <Header.LeftIcon icon={ChevronLeft} onPress={handleNavigateGoBack} />
+        <Header.Content title="Endereço" />
+      </Header.Root>
 
       <Fields
         cep={cep}
         setCep={setCep}
         fields={fields}
         setFields={setFields}
-        editableFields={editableFields}
         onRegister={handleRegister}
       />
 

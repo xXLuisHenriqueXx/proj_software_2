@@ -35,17 +35,6 @@ export function useAddress({ fieldsData, type }: IParams) {
   const [fields, setFields] = useState<IFieldsAddress>(EMPTY_ADDRESS);
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingCep, setLoadingCep] = useState<boolean>(false);
-  const editableFields = useMemo<IEditableFields>(
-    () => ({
-      street: !fields.street,
-      number: true,
-      neighborhood: !fields.neighborhood,
-      extra: true,
-      city: !fields.city,
-      state: !fields.state,
-    }),
-    [fields]
-  );
 
   const validateFields = (): IFieldsAddress => {
     const { values, error } = validateForm(fields as any, addressSchema);
@@ -134,9 +123,9 @@ export function useAddress({ fieldsData, type }: IParams) {
     setCep,
     fields,
     setFields,
-    editableFields,
     loading,
     loadingCep,
     handleRegister,
+    handleNavigateGoBack: () => navigation.goBack(),
   };
 }

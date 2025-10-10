@@ -7,9 +7,9 @@ import Institutes from "./_components/Institutes";
 import Benefit from "./_components/Benefit";
 import List from "@src/components/List";
 import CategoryList from "./_components/CategoryList";
-import Header from "@src/components/Header";
 
 import { useHome } from "@src/hooks/useHome";
+import { Header } from "@src/components/Header";
 
 const Home = () => {
   const {
@@ -36,11 +36,12 @@ const Home = () => {
 
           <CategoryList />
 
-          <Header
-            title="Recomendados para você"
-            subtitle="Produtos que podem ser do seu interesse ..."
-            variant="link"
-          />
+          <Header.Root>
+            <Header.Content
+              title="Recomendados para você"
+              subtitle="Produtos que podem ser do seu interesse ..."
+            />
+          </Header.Root>
         </View>
       }
       data={toys}

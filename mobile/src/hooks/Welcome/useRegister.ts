@@ -48,6 +48,7 @@ export function useRegister() {
     navigation,
     validateFields,
     handleNavigateToAddress,
+    handleNavigateGoBack: () => navigation.goBack(),
     isTypePersonal: type === "personal",
   };
 }

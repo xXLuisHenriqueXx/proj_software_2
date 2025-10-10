@@ -1,13 +1,14 @@
 import { View } from "react-native";
 import { styles } from "./styles";
 
-import Header from "@src/components/Header";
+import { Header } from "@src/components/Header";
 import Fields from "./_components/Fields";
 import LoginButton from "./_components/LoginButton";
 import SheetEmail from "./_components/SheetEmail";
 import SheetCode from "./_components/SheetCode";
 
 import { useLogin } from "@src/hooks/Welcome/useLogin";
+import { ChevronLeft } from "lucide-react-native";
 
 const Login = () => {
   const {
@@ -21,6 +22,7 @@ const Login = () => {
     bottomSheetEmailRef,
     bottomSheetCodeRef,
     handleLogin,
+    handleNavigateGoBack,
     handleOpenSheetEmail,
     handleCloseSheetEmail,
     handleCloseSheetCode,
@@ -29,7 +31,10 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <Header title="Acessar conta" variant="back" />
+      <Header.Root>
+        <Header.LeftIcon icon={ChevronLeft} onPress={handleNavigateGoBack} />
+        <Header.Content title="Acessar conta" />
+      </Header.Root>
 
       <Fields
         fields={fields}

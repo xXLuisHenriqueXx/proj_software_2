@@ -19,7 +19,6 @@ interface IFieldsProps {
   setCep: (cep: string) => void;
   fields: IFieldsAddress;
   setFields: (fields: IFieldsAddress) => void;
-  editableFields: IEditableFields;
   onRegister: () => void;
 }
 
@@ -28,7 +27,6 @@ const Fields = ({
   setCep,
   fields,
   setFields,
-  editableFields,
   onRegister,
 }: IFieldsProps) => {
   const { width } = useWindowDimensions();
@@ -75,8 +73,6 @@ const Fields = ({
               placeholder="Seu endereço"
               returnKeyType="next"
               onSubmitEditing={() => numberRef.current?.focus()}
-              blurOnSubmit={false}
-              editable={editableFields.street}
               value={fields.street}
               onChangeText={(text: string) => {
                 setFields({ ...fields, street: text });
@@ -94,8 +90,6 @@ const Fields = ({
               placeholder="000"
               returnKeyType="next"
               onSubmitEditing={() => neighborhoodRef.current?.focus()}
-              blurOnSubmit={false}
-              editable={editableFields.number}
               value={fields.number}
               onChangeText={(text: string) => {
                 setFields({ ...fields, number: text });
@@ -115,8 +109,6 @@ const Fields = ({
               placeholder="Seu bairro"
               returnKeyType="next"
               onSubmitEditing={() => extraRef.current?.focus()}
-              blurOnSubmit={false}
-              editable={editableFields.neighborhood}
               value={fields.neighborhood}
               onChangeText={(text: string) => {
                 setFields({ ...fields, neighborhood: text });
@@ -134,8 +126,6 @@ const Fields = ({
               placeholder="Opcional"
               returnKeyType="next"
               onSubmitEditing={() => cityRef.current?.focus()}
-              blurOnSubmit={false}
-              editable={editableFields.extra}
               value={fields.extra}
               onChangeText={(text: string) => {
                 setFields({ ...fields, extra: text });
@@ -155,8 +145,6 @@ const Fields = ({
               placeholder="Sua cidade"
               returnKeyType="next"
               onSubmitEditing={() => stateRef.current?.focus()}
-              blurOnSubmit={false}
-              editable={editableFields.city}
               value={fields.city}
               onChangeText={(text: string) => {
                 setFields({ ...fields, city: text });
@@ -174,8 +162,6 @@ const Fields = ({
               placeholder="XX"
               returnKeyType="next"
               onSubmitEditing={onRegister}
-              blurOnSubmit={true}
-              editable={editableFields.state}
               value={fields.state}
               onChangeText={(text: string) => {
                 setFields({ ...fields, state: text });

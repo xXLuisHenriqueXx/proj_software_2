@@ -9,7 +9,7 @@ import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { Skeleton } from "moti/skeleton";
 
-import Header from "@src/components/Header";
+import { Header } from "@src/components/Header";
 import Item from "./Item";
 
 import { IInstitute } from "@src/common/Entities/Institute";
@@ -57,11 +57,12 @@ const Institutes = ({ data }: IInstituteProps) => {
 
   return (
     <View style={styles.container}>
-      <Header
-        title="Instituições assistenciais"
-        subtitle="Explore e contribua com um mundo melhor"
-        variant="link"
-      />
+      <Header.Root>
+        <Header.Content
+          title="Instituições assistenciais"
+          subtitle="Explore e contribua com um mundo melhor"
+        />
+      </Header.Root>
 
       <View style={styles.containerScroll}>
         <FlatList
