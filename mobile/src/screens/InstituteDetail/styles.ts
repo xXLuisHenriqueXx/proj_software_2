@@ -13,11 +13,11 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BACKGROUND_PRIMARY_COLOR,
+    paddingHorizontal: 24,
   },
   containerContent: {
     flexDirection: "column",
     rowGap: 24,
-    paddingHorizontal: 24,
     width: "100%",
   },
   containerInfo: {

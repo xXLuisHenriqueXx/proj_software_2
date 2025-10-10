@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { ChevronLeft, ChevronRight } from "lucide-react-native";
-
 import { styles } from "./styles";
+import { useNavigation } from "@react-navigation/native";
+import { ChevronLeft, ChevronRight, X } from "lucide-react-native";
+
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "@src/constants/Colors";
 import { PropsRoot } from "@src/routes";
 
@@ -44,7 +44,11 @@ const Header = ({
     if (variant === "close" || variant === "link") {
       return (
         <TouchableOpacity activeOpacity={0.85} onPress={onPress}>
-          <ChevronRight size={24} color={PRIMARY_COLOR} />
+          {variant === "close" ? (
+            <X size={24} color={PRIMARY_COLOR} />
+          ) : (
+            <ChevronRight size={24} color={PRIMARY_COLOR} />
+          )}
         </TouchableOpacity>
       );
     }
@@ -56,7 +60,9 @@ const Header = ({
   return (
     <Wrapper
       style={
-        variant === "back" ? styles.containerHeaderBack : styles.containerHeader
+        variant === "back" || variant === "close"
+          ? styles.containerHeaderBack
+          : styles.containerHeader
       }
       activeOpacity={0.85}
       onPress={variant === "link" ? onPress : undefined}
@@ -64,7 +70,13 @@ const Header = ({
       {renderLeftIcon()}
 
       <View style={{ flex: 1 }}>
-        <Text style={variant === "back" ? styles.titleBack : styles.title}>
+        <Text
+          style={
+            variant === "back" || variant === "close"
+              ? styles.titleBack
+              : styles.title
+          }
+        >
           {title}
         </Text>
         {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
