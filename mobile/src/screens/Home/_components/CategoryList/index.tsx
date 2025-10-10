@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import { styles } from "./styles";
 
@@ -23,21 +23,19 @@ const CategoryList = () => {
         />
       </Header.Root>
 
-      <View style={styles.containerScroll}>
-        <FlatList
-          data={categoriesData}
-          renderItem={renderItem}
-          keyExtractor={(item) => String(item.id)}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.containerScrollContent}
-          initialNumToRender={5}
-          maxToRenderPerBatch={6}
-          windowSize={5}
-        />
-      </View>
+      <FlatList
+        data={categoriesData}
+        renderItem={renderItem}
+        keyExtractor={(item) => String(item.id)}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.containerScrollContent}
+        initialNumToRender={5}
+        maxToRenderPerBatch={6}
+        windowSize={5}
+      />
     </View>
   );
 };
 
-export default CategoryList;
+export default memo(CategoryList);

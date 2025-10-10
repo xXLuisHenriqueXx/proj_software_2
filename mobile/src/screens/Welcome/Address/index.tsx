@@ -42,7 +42,7 @@ const Address = ({ route }: Props) => {
 
   return (
     <View style={styles.container}>
-      <Header.Root>
+      <Header.Root padding={16}>
         <Header.LeftIcon icon={ChevronLeft} onPress={handleNavigateGoBack} />
         <Header.Content title="Endereço" />
       </Header.Root>

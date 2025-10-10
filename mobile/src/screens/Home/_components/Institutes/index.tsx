@@ -7,17 +7,13 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { Skeleton } from "moti/skeleton";
 
 import { Header } from "@src/components/Header";
 import Item from "./Item";
+import LoaderSkeleton from "@src/components/LoaderSkeleton";
 
 import { IInstitute } from "@src/common/Entities/Institute";
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
-import {
-  BACKGROUND_SECONDARY_COLOR,
-  SECONDARY_COLOR,
-} from "@src/constants/Colors";
 
 interface IInstituteProps {
   data: IInstitute[];
@@ -46,13 +42,7 @@ const Institutes = ({ data }: IInstituteProps) => {
   );
 
   if (!data || data.length === 0) {
-    return (
-      <Skeleton
-        width={width - 48}
-        height={116}
-        colors={[BACKGROUND_SECONDARY_COLOR, SECONDARY_COLOR]}
-      />
-    );
+    return <LoaderSkeleton width={width - 48} height={116} />;
   }
 
   return (
@@ -64,19 +54,17 @@ const Institutes = ({ data }: IInstituteProps) => {
         />
       </Header.Root>
 
-      <View style={styles.containerScroll}>
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.containerScrollContent}
-          initialNumToRender={5}
-          maxToRenderPerBatch={6}
-          windowSize={5}
-        />
-      </View>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.containerScrollContent}
+        initialNumToRender={5}
+        maxToRenderPerBatch={6}
+        windowSize={5}
+      />
     </View>
   );
 };

@@ -67,7 +67,7 @@ const SheetCode = forwardRef<BottomSheet, SheetCodeProps>(
           </View>
 
           <View style={styles.containerInput}>
-            <Text style={styles.labelText}>Código</Text>
+            <Text style={styles.textLabel}>Código</Text>
             <TextInput
               style={styles.input}
               placeholder="Seu código"

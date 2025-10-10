@@ -31,7 +31,7 @@ const Fields = ({ fields, setFields, onLogin, onForgot }: IFieldsProps) => {
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.containerInput}>
-        <Text style={styles.labelText}>E-mail</Text>
+        <Text style={styles.textLabel}>E-mail</Text>
 
         <TextInput
           style={styles.input}
@@ -47,7 +47,7 @@ const Fields = ({ fields, setFields, onLogin, onForgot }: IFieldsProps) => {
 
       <View style={{ flexDirection: "column" }}>
         <View style={styles.containerInput}>
-          <Text style={styles.labelText}>Senha</Text>
+          <Text style={styles.textLabel}>Senha</Text>
 
           <TextInput
             style={styles.input}
@@ -76,7 +76,7 @@ const Fields = ({ fields, setFields, onLogin, onForgot }: IFieldsProps) => {
           )}
         </View>
         <TouchableOpacity activeOpacity={0.85} onPress={onForgot}>
-          <Text style={styles.forgotText}>Esqueci a senha</Text>
+          <Text style={styles.textForgot}>Esqueci a senha</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

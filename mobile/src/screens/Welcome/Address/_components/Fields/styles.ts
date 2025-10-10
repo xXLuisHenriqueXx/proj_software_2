@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     borderColor: HIGHLIGHT_COLOR,
     borderStyle: "dashed",
   },
-  labelText: {
+  textLabel: {
     position: "absolute",
     top: -12,
     left: 16,

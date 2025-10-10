@@ -63,17 +63,17 @@ export const styles = StyleSheet.create({
     fontFamily: REGULAR_FONT,
     color: PRIMARY_COLOR,
   },
-  name: {
+  textName: {
     fontSize: 22,
     fontFamily: SEMIBOLD_FONT,
     color: PRIMARY_COLOR,
   },
-  condition: {
+  textCondition: {
     fontSize: 14,
     fontFamily: REGULAR_FONT,
     color: SECONDARY_COLOR,
   },
-  price: {
+  textPrice: {
     fontSize: 28,
     fontFamily: BOLD_FONT,
     color: HIGHLIGHT_COLOR,

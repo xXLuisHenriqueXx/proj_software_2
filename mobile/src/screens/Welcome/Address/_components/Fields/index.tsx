@@ -10,7 +10,6 @@ import { styles } from "./styles";
 
 import MaskedInput from "@src/components/MaskedInput";
 
-import { IEditableFields } from "../..";
 import { CEP_MASK } from "@src/constants/Masks";
 import { IFieldsAddress } from "@src/common/Interfaces/Auth.interface";
 
@@ -66,7 +65,7 @@ const Fields = ({
       <View style={styles.containerInputGroup}>
         <View style={{ flexDirection: "column", width: streetWidth }}>
           <View style={styles.containerInput}>
-            <Text style={styles.labelText}>Endereço*</Text>
+            <Text style={styles.textLabel}>Endereço*</Text>
 
             <TextInput
               style={styles.input}
@@ -83,7 +82,7 @@ const Fields = ({
 
         <View style={{ flexDirection: "column", width: numberWidth }}>
           <View style={styles.containerInput}>
-            <Text style={styles.labelText}>Número*</Text>
+            <Text style={styles.textLabel}>Número*</Text>
 
             <TextInput
               style={styles.input}
@@ -102,7 +101,7 @@ const Fields = ({
       <View style={styles.containerInputGroup}>
         <View style={{ flexDirection: "column", width: neighborhoodWidth }}>
           <View style={styles.containerInput}>
-            <Text style={styles.labelText}>Bairro*</Text>
+            <Text style={styles.textLabel}>Bairro*</Text>
 
             <TextInput
               style={styles.input}
@@ -119,7 +118,7 @@ const Fields = ({
 
         <View style={{ flexDirection: "column", width: extraWidth }}>
           <View style={styles.containerInput}>
-            <Text style={styles.labelText}>Complemento</Text>
+            <Text style={styles.textLabel}>Complemento</Text>
 
             <TextInput
               style={styles.input}
@@ -138,7 +137,7 @@ const Fields = ({
       <View style={styles.containerInputGroup}>
         <View style={{ flexDirection: "column", width: cityWidth }}>
           <View style={styles.containerInput}>
-            <Text style={styles.labelText}>Cidade*</Text>
+            <Text style={styles.textLabel}>Cidade*</Text>
 
             <TextInput
               style={styles.input}
@@ -155,7 +154,7 @@ const Fields = ({
 
         <View style={{ flexDirection: "column", width: stateWidth }}>
           <View style={styles.containerInput}>
-            <Text style={styles.labelText}>UF*</Text>
+            <Text style={styles.textLabel}>UF*</Text>
 
             <TextInput
               style={styles.input}

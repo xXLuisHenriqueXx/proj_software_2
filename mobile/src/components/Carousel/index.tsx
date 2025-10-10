@@ -1,17 +1,13 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
-import { Skeleton } from "moti/skeleton";
 import PagerView from "react-native-pager-view";
+
+import LoaderSkeleton from "../LoaderSkeleton";
 
 import { IHighlight } from "@src/common/Entities/Highlight";
 import { IToyPicture } from "@src/common/Interfaces/Toy.interface";
-import {
-  BACKGROUND_SECONDARY_COLOR,
-  HIGHLIGHT_COLOR,
-  PRIMARY_COLOR_25,
-  SECONDARY_COLOR,
-} from "@src/constants/Colors";
+import { HIGHLIGHT_COLOR, PRIMARY_COLOR_25 } from "@src/constants/Colors";
 import { baseURL } from "@src/services/Api";
 
 interface ICarouselProps {
@@ -38,18 +34,12 @@ const Carousel = ({ width, height, data }: ICarouselProps) => {
     return () => clearInterval(interval);
   }, [activeIndex, data.length]);
 
-  if (!data?.length) {
-    return (
-      <Skeleton
-        width={width}
-        height={height}
-        colors={[BACKGROUND_SECONDARY_COLOR, SECONDARY_COLOR]}
-      />
-    );
+  if (!data || data.length === 0) {
+    return <LoaderSkeleton width={width} height={height} />;
   }
 
   return (
-    <View style={{ width: "100%" }}>
+    <View style={styles.container}>
       <PagerView
         ref={pagerRef}
         style={{ width, height }}

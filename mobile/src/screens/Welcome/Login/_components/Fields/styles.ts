@@ -24,7 +24,13 @@ export const styles = StyleSheet.create({
     borderColor: HIGHLIGHT_COLOR,
     borderRadius: 12,
   },
-  labelText: {
+  input: {
+    flex: 1,
+    fontSize: 14,
+    fontFamily: REGULAR_FONT,
+    color: PRIMARY_COLOR,
+  },
+  textLabel: {
     position: "absolute",
     top: -12,
     left: 16,
@@ -34,13 +40,7 @@ export const styles = StyleSheet.create({
     fontFamily: MEDIUM_FONT,
     color: HIGHLIGHT_COLOR,
   },
-  input: {
-    flex: 1,
-    fontSize: 14,
-    fontFamily: REGULAR_FONT,
-    color: PRIMARY_COLOR,
-  },
-  forgotText: {
+  textForgot: {
     width: "100%",
     marginTop: 8,
     fontSize: 14,

@@ -1,10 +1,10 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Copy, Globe } from "lucide-react-native";
+import { Copy, Globe, X } from "lucide-react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import Header from "@src/components/Header";
+import { Header } from "@src/components/Header";
 import Loader from "@src/components/Loader";
 
 import { AppStackParamList } from "@src/routes/stacks/AppStack";
@@ -37,11 +37,10 @@ const InstituteDetail = ({ route }: Props) => {
       contentContainerStyle={styles.containerScroll}
       showsVerticalScrollIndicator={false}
     >
-      <Header
-        title="Instituição assistencial"
-        variant="close"
-        onPress={() => navigation.goBack()}
-      />
+      <Header.Root padding={16}>
+        <Header.Content title="Instituição assistencial" />
+        <Header.RightIcon icon={X} onPress={() => navigation.goBack()} />
+      </Header.Root>
 
       <View style={styles.containerContent}>
         <View style={styles.containerInfo}>
@@ -52,15 +51,15 @@ const InstituteDetail = ({ route }: Props) => {
           />
 
           <View style={styles.containerText}>
-            <Text style={styles.name} numberOfLines={2}>
+            <Text style={styles.textName} numberOfLines={2}>
               {institute.name}
             </Text>
-            <Text style={styles.ageRange}>
+            <Text style={styles.textAgeRange}>
               {getAgeGroup(institute.ageRange)}
             </Text>
           </View>
 
-          <Text style={styles.description}>{institute.description}</Text>
+          <Text style={styles.textDescription}>{institute.description}</Text>
         </View>
 
         <View style={styles.containerCharacteristics}>
@@ -102,7 +101,11 @@ const InstituteDetail = ({ route }: Props) => {
           </TouchableOpacity>
         </View>
 
-        <Image style={styles.map} source={mapImage} resizeMode="cover" />
+        <Image
+          style={styles.containerMap}
+          source={mapImage}
+          resizeMode="cover"
+        />
       </View>
     </ScrollView>
   );

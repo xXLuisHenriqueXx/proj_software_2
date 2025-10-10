@@ -47,7 +47,7 @@ const SheetEmail = forwardRef<BottomSheet, ISheetEmailProps>(
           </View>
 
           <View style={styles.containerInput}>
-            <Text style={styles.labelText}>E-mail</Text>
+            <Text style={styles.textLabel}>E-mail</Text>
             <TextInput
               style={styles.input}
               placeholder="seuemail@exemplo.com"

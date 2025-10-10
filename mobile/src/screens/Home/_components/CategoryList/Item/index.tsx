@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { View, Text } from "react-native";
 import { styles } from "./styles";
 
@@ -19,4 +20,4 @@ const Item = ({ data }: IItemProps) => {
   );
 };
 
-export default Item;
+export default memo(Item);

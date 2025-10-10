@@ -22,13 +22,7 @@ const Item = ({ data, handleNavigateToInstituteDetail }: IItemProps) => {
       activeOpacity={0.85}
       onPress={() => handleNavigateToInstituteDetail(data.id)}
     >
-      <Image
-        style={styles.image}
-        source={{
-          uri,
-        }}
-        resizeMode="cover"
-      />
+      <Image style={styles.image} source={{ uri }} resizeMode="cover" />
 
       <Text style={styles.text}>{data.name}</Text>
     </TouchableOpacity>

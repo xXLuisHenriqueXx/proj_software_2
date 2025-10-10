@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_SECONDARY_COLOR,
     borderRadius: 12,
   },
-  notFound: {
+  textNotFound: {
     fontSize: 16,
     fontFamily: SEMIBOLD_FONT,
     color: PRIMARY_COLOR,

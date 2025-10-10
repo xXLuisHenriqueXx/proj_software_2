@@ -15,7 +15,7 @@ const MaskedInput = forwardRef<any, IMaskedInputProps>((props, ref) => {
 
   return (
     <View style={styles.containerInput}>
-      <Text style={styles.labelText}>{label}</Text>
+      <Text style={styles.textLabel}>{label}</Text>
       <MaskInput style={styles.input} ref={ref} {...rest} />
     </View>
   );

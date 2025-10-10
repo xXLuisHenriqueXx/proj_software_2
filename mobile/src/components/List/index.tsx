@@ -11,10 +11,11 @@ import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { CircleOff } from "lucide-react-native";
 
+import Item from "./Item";
+
 import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { IProduct } from "@src/common/Entities/Product";
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
-import Item from "./Item";
 
 interface IListProps {
   header?: any;
@@ -29,7 +30,7 @@ interface IListProps {
 const EmptyList = ({ message }: { message?: string }) => (
   <View style={styles.containerNotFound}>
     <CircleOff size={24} color={HIGHLIGHT_COLOR} />
-    <Text style={styles.notFound}>
+    <Text style={styles.textNotFound}>
       {message || "Nenhum produto encontrado"}
     </Text>
   </View>

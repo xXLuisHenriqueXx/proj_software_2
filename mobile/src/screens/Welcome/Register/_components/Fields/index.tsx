@@ -27,7 +27,7 @@ export const Input = forwardRef<any, IInputProps>((props, ref) => {
   return (
     <View style={{ flexDirection: "column" }}>
       <View style={styles.containerInput}>
-        <Text style={styles.labelText}>{label}</Text>
+        <Text style={styles.textLabel}>{label}</Text>
         <TextInput style={styles.input} ref={ref} {...rest} />
       </View>
     </View>
@@ -41,7 +41,7 @@ export const PasswordInput = forwardRef<any, IInputProps>((props, ref) => {
   return (
     <View style={{ flexDirection: "column" }}>
       <View style={styles.containerInput}>
-        <Text style={styles.labelText}>{label}</Text>
+        <Text style={styles.textLabel}>{label}</Text>
         <TextInput
           style={styles.input}
           ref={ref}
@@ -62,7 +62,7 @@ export const PasswordInput = forwardRef<any, IInputProps>((props, ref) => {
           />
         )}
       </View>
-      {instruction && <Text style={styles.instructionText}>{instruction}</Text>}
+      {instruction && <Text style={styles.textInstruction}>{instruction}</Text>}
     </View>
   );
 });

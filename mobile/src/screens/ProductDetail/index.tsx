@@ -31,15 +31,15 @@ const ProductDetail = ({ route }: Props) => {
 
       <View style={styles.containerContent}>
         <View>
-          <Text style={styles.name} numberOfLines={2}>
+          <Text style={styles.textName} numberOfLines={2}>
             {product.name}
           </Text>
-          <Text style={styles.condition}>
+          <Text style={styles.textCondition}>
             {product.isNew ? "Novo" : "Usado"}
           </Text>
         </View>
 
-        <Text style={styles.price}>
+        <Text style={styles.textPrice}>
           {product.price === 0 ? "Gratuito" : formatCurrency(product.price)}
         </Text>
 
@@ -60,12 +60,7 @@ const ProductDetail = ({ route }: Props) => {
             </View>
 
             <View
-              style={[
-                styles.containerOwner,
-                {
-                  width: characteristicWidth,
-                },
-              ]}
+              style={[styles.containerOwner, { width: characteristicWidth }]}
             >
               <Image
                 style={styles.image}

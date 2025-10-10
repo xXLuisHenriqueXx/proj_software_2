@@ -1,6 +1,6 @@
+import { memo } from "react";
 import { TouchableOpacity, Image } from "react-native";
 import { styles } from "./styles";
-import { memo } from "react";
 
 const Benefit = () => {
   return (

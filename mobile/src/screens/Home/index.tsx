@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import { styles } from "./styles";
 
+import { Header } from "@src/components/Header";
 import UserInfo from "./_components/UserInfo";
 import Carousel from "@src/components/Carousel";
 import Institutes from "./_components/Institutes";
@@ -9,7 +10,6 @@ import List from "@src/components/List";
 import CategoryList from "./_components/CategoryList";
 
 import { useHome } from "@src/hooks/useHome";
-import { Header } from "@src/components/Header";
 
 const Home = () => {
   const {

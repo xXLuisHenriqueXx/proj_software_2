@@ -40,16 +40,20 @@ export const styles = StyleSheet.create({
     columnGap: 16,
     rowGap: 32,
   },
+  containerMap: {
+    width: "100%",
+    height: 240,
+    borderRadius: 12,
+    overflow: "hidden",
+  },
   image: {
     width: 112,
     height: 112,
     borderRadius: 12,
   },
-  map: {
-    width: "100%",
-    height: 240,
-    borderRadius: 12,
-    overflow: "hidden",
+  icon: {
+    position: "absolute",
+    right: 16,
   },
   buttonCopy: {
     alignItems: "center",
@@ -68,10 +72,6 @@ export const styles = StyleSheet.create({
     borderColor: HIGHLIGHT_COLOR,
     borderRadius: 12,
   },
-  icon: {
-    position: "absolute",
-    right: 16,
-  },
   textCopy: {
     fontSize: 14,
     fontFamily: MEDIUM_FONT,
@@ -82,17 +82,17 @@ export const styles = StyleSheet.create({
     fontFamily: MEDIUM_FONT,
     color: HIGHLIGHT_COLOR,
   },
-  name: {
+  textName: {
     fontSize: 22,
     fontFamily: SEMIBOLD_FONT,
     color: PRIMARY_COLOR,
   },
-  ageRange: {
+  textAgeRange: {
     fontSize: 14,
     fontFamily: REGULAR_FONT,
     color: SECONDARY_COLOR,
   },
-  description: {
+  textDescription: {
     fontSize: 16,
     fontFamily: REGULAR_FONT,
     color: PRIMARY_COLOR,

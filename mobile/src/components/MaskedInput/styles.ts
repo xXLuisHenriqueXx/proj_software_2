@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     borderColor: HIGHLIGHT_COLOR,
     borderRadius: 12,
   },
-  labelText: {
+  textLabel: {
     position: "absolute",
     top: -12,
     left: 16,

@@ -5,8 +5,6 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     rowGap: 16,
-  },
-  containerScroll: {
     width: "100%",
   },
   containerScrollContent: {
