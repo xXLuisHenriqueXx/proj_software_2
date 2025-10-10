@@ -1,0 +1,43 @@
+import { useCallback } from "react";
+import { FlatList, ListRenderItem, View } from "react-native";
+import { styles } from "./styles";
+
+import { Header } from "@src/components/Header";
+import Item from "./Item";
+
+import { ICategory } from "@src/common/Entities/Category";
+import { categoriesData } from "@src/static/CategoriesData";
+
+const CategoryList = () => {
+  const renderItem: ListRenderItem<ICategory> = useCallback(
+    ({ item }) => <Item data={item} />,
+    []
+  );
+
+  return (
+    <View style={styles.container}>
+      <Header.Root>
+        <Header.Content
+          title="Categorias"
+          subtitle="Viaje por categorias para encontrar o que precisa ..."
+        />
+      </Header.Root>
+
+      <View style={styles.containerScroll}>
+        <FlatList
+          data={categoriesData}
+          renderItem={renderItem}
+          keyExtractor={(item) => String(item.id)}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.containerScrollContent}
+          initialNumToRender={5}
+          maxToRenderPerBatch={6}
+          windowSize={5}
+        />
+      </View>
+    </View>
+  );
+};
+
+export default CategoryList;

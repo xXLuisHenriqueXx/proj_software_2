@@ -1,3 +1,4 @@
+import { ICategory } from "@src/common/Entities/Category";
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
 import {
   Baby,
@@ -8,21 +9,13 @@ import {
   Dice2,
   Gamepad,
   GraduationCap,
-  LucideIcon,
   Medal,
   Palette,
   Puzzle,
   WholeWord,
 } from "lucide-react-native";
 
-interface ICategoriesDataProps {
-  id: number;
-  name: string;
-  icon: LucideIcon;
-  value: EToyType;
-}
-
-export const categoriesData: ICategoriesDataProps[] = [
+export const categoriesData: ICategory[] = [
   {
     id: 1,
     name: "Artístico",
