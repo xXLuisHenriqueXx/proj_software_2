@@ -1,3 +1,3 @@
 import Constants from "expo-constants";
 
-export const statusBarHeight = Constants.statusBarHeight;
+export const STATUS_BAR_HEIGHT = Constants.statusBarHeight;

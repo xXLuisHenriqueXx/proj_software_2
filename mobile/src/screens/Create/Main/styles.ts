@@ -8,12 +8,12 @@ import {
   SECONDARY_COLOR,
 } from "@src/constants/Colors";
 import { MEDIUM_FONT, REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
-import { statusBarHeight } from "@src/constants/Values";
+import { STATUS_BAR_HEIGHT } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
   container: {
     position: "relative",
-    paddingTop: statusBarHeight + 32,
+    paddingTop: STATUS_BAR_HEIGHT + 32,
     backgroundColor: BACKGROUND_SECONDARY_COLOR,
   },
   containerHeader: {

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import { BACKGROUND_PRIMARY_COLOR, PRIMARY_COLOR } from "@src/constants/Colors";
-import { statusBarHeight } from "@src/constants/Values";
+import { STATUS_BAR_HEIGHT } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     rowGap: 32,
-    paddingTop: statusBarHeight + 32,
+    paddingTop: STATUS_BAR_HEIGHT + 32,
     paddingHorizontal: 24,
     backgroundColor: BACKGROUND_PRIMARY_COLOR,
   },

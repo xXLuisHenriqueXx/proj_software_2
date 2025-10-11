@@ -6,7 +6,7 @@ import {
   PRIMARY_COLOR,
 } from "@src/constants/Colors";
 import { SEMIBOLD_FONT } from "@src/constants/Fonts";
-import { statusBarHeight } from "@src/constants/Values";
+import { STATUS_BAR_HEIGHT } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
   container: {
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     rowGap: 32,
     width: "100%",
     padding: 24,
-    paddingTop: statusBarHeight + 32,
+    paddingTop: STATUS_BAR_HEIGHT + 32,
     paddingBottom: 120,
   },
   containerColumn: {
