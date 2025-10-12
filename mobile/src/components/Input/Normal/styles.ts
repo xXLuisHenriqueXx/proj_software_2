@@ -8,17 +8,22 @@ import {
 import { MEDIUM_FONT, REGULAR_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
-  containerInput: {
+  container: {
     position: "relative",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: "100%",
     height: 64,
     paddingHorizontal: 16,
     borderWidth: 1,
     borderColor: HIGHLIGHT_COLOR,
     borderRadius: 12,
+  },
+  input: {
+    flex: 1,
+    fontSize: 14,
+    fontFamily: REGULAR_FONT,
+    color: PRIMARY_COLOR,
   },
   textLabel: {
     position: "absolute",
@@ -29,11 +34,5 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: MEDIUM_FONT,
     color: HIGHLIGHT_COLOR,
-  },
-  input: {
-    flex: 1,
-    fontSize: 14,
-    fontFamily: REGULAR_FONT,
-    color: PRIMARY_COLOR,
   },
 });

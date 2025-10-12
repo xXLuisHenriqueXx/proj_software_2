@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 import {
   BACKGROUND_PRIMARY_COLOR,
-  CONTRAST_COLOR,
   HIGHLIGHT_COLOR,
   PRIMARY_COLOR,
 } from "@src/constants/Colors";
@@ -15,19 +14,12 @@ export const styles = StyleSheet.create({
     paddingTop: STATUS_BAR_HEIGHT + 32,
     backgroundColor: BACKGROUND_PRIMARY_COLOR,
   },
-  containerHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-    paddingVertical: 16,
-  },
-  containerTitle: {
-    flexDirection: "row",
-    alignItems: "center",
-    columnGap: 16,
-  },
   containerContent: {
+    paddingBottom: 124,
+    rowGap: 48,
+    paddingHorizontal: 24,
+  },
+  containerCategory: {
     flexDirection: "column",
     alignItems: "flex-start",
     rowGap: 16,
@@ -39,11 +31,6 @@ export const styles = StyleSheet.create({
     gap: 16,
     width: "100%",
   },
-  contentTitle: {
-    fontSize: 16,
-    fontFamily: SEMIBOLD_FONT,
-    color: PRIMARY_COLOR,
-  },
   containerItem: {
     flexDirection: "row",
     alignItems: "center",
@@ -54,24 +41,10 @@ export const styles = StyleSheet.create({
     borderColor: HIGHLIGHT_COLOR,
     borderRadius: 12,
   },
-  buttonSave: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 64,
-    backgroundColor: HIGHLIGHT_COLOR,
-    borderRadius: 12,
-  },
   title: {
-    fontSize: 22,
-    fontFamily: SEMIBOLD_FONT,
-    color: PRIMARY_COLOR,
-  },
-  saveText: {
     fontSize: 16,
     fontFamily: SEMIBOLD_FONT,
-    color: CONTRAST_COLOR,
+    color: PRIMARY_COLOR,
   },
   name: {
     fontSize: 14,

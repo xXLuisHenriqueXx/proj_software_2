@@ -11,60 +11,56 @@ import { ChevronLeft, X } from "lucide-react-native";
 
 import Loader from "@src/components/Loader";
 
-import {
-  CreateStackParamList,
-} from "@src/routes/stacks/CreateStack";
+import { CreateStackParamList } from "@src/routes/stacks/CreateStack";
 import { categoriesData } from "@src/static/CategoriesData";
 import {
   BACKGROUND_PRIMARY_COLOR,
   BACKGROUND_SECONDARY_COLOR,
   CONTRAST_COLOR,
   HIGHLIGHT_COLOR,
-  SECONDARY_COLOR,
 } from "@src/constants/Colors";
 import { useCategories } from "@src/hooks/Create/useCategories";
+import { Header } from "@src/components/Header";
+import ButtonSave from "./_components/ButtonSave";
 
 type Props = NativeStackScreenProps<CreateStackParamList, "Categories">;
 
 const Categories = ({ route }: Props) => {
   const { fields } = route.params;
-  const { categories, loading, widthCategory, createNavigation, rootNavigation, handleSelectCategory, handleCreate } = useCategories(fields);
-  
-  if (loading) return <Loader />
+  const {
+    categories,
+    loading,
+    widthCategory,
+    createNavigation,
+    rootNavigation,
+    handleSelectCategory,
+    handleCreate,
+  } = useCategories(fields);
+
+  if (loading) return <Loader />;
 
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{
-        paddingBottom: 124,
-        rowGap: 48,
-        paddingHorizontal: 24,
-      }}
+      contentContainerStyle={styles.containerContent}
+      showsVerticalScrollIndicator={false}
     >
-      <View style={styles.containerHeader}>
-        <View style={styles.containerTitle}>
-          <TouchableOpacity
-            activeOpacity={0.85}
-            onPress={() => createNavigation.goBack()}
-          >
-            <ChevronLeft size={20} color={SECONDARY_COLOR} />
-          </TouchableOpacity>
+      <Header.Root padding={16}>
+        <Header.LeftIcon
+          icon={ChevronLeft}
+          onPress={() => createNavigation.goBack()}
+        />
 
-          <Text style={styles.title}>Criar anúncio</Text>
-        </View>
+        <Header.Content title="Criar anúncio" />
 
-        <TouchableOpacity
-          activeOpacity={0.85}
+        <Header.RightIcon
+          icon={X}
           onPress={() => rootNavigation.replace("AppTabs")}
-        >
-          <X size={20} color={SECONDARY_COLOR} />
-        </TouchableOpacity>
-      </View>
+        />
+      </Header.Root>
 
-      <View style={styles.containerContent}>
-        <Text style={styles.contentTitle}>
-          Escolha as categorias do seu anúncio
-        </Text>
+      <View style={styles.containerCategory}>
+        <Text style={styles.title}>Escolha as categorias do seu anúncio</Text>
 
         <View style={styles.containerList}>
           {categoriesData.map((item) => (
@@ -90,17 +86,7 @@ const Categories = ({ route }: Props) => {
         </View>
       </View>
 
-      <TouchableOpacity
-        style={styles.buttonSave}
-        activeOpacity={0.85}
-        onPress={handleCreate}
-      >
-        {loading ? (
-          <ActivityIndicator size="small" color={CONTRAST_COLOR} />
-        ) : (
-          <Text style={styles.saveText}>Salvar</Text>
-        )}
-      </TouchableOpacity>
+      <ButtonSave loading={loading} onPress={handleCreate} />
     </ScrollView>
   );
 };

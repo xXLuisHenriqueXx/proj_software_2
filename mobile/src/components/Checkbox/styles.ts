@@ -4,22 +4,18 @@ import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 export const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    paddingTop: 12,
-  },
-  containerContent: {
-    rowGap: 32,
-    paddingBottom: 120,
-  },
-  containerInputGroup: {
-    flexDirection: "row",
     alignItems: "center",
-    columnGap: 8,
-  },
-  line: {
-    width: "100%",
+    justifyContent: "center",
+    width: 24,
+    height: 24,
     borderWidth: 1,
     borderColor: HIGHLIGHT_COLOR,
-    borderStyle: "dashed",
+  },
+  checkbox: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 16,
+    height: 16,
+    backgroundColor: HIGHLIGHT_COLOR,
   },
 });

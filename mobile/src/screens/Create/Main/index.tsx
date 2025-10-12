@@ -1,48 +1,42 @@
 import {
   View,
   Text,
-  TextInput,
   ScrollView,
   TouchableOpacity,
+  useWindowDimensions,
 } from "react-native";
 import { styles } from "./styles";
-import MaskInput, { Masks } from "react-native-mask-input";
 import { X } from "lucide-react-native";
 
+import { Header } from "@src/components/Header";
+import { Input } from "@src/components/Input";
 import ConditionList from "./_components/ConditionList";
 import AgeGroupList from "./_components/AgeGroupList";
 import PictureSelector from "./_components/PictureSelector";
+import Checkbox from "@src/components/Checkbox";
+import ButtonNext from "./_components/ButtonNext";
 
-import {
-  EAgeRange,
-} from "@src/common/Interfaces/Toy.interface";
-import { SECONDARY_COLOR } from "@src/constants/Colors";
+import { EAgeRange } from "@src/common/Interfaces/Toy.interface";
 import { formatPrice } from "@src/utils/FormatPrice";
 import { useMain } from "@src/hooks/Create/useMain";
+import { Masks } from "react-native-mask-input";
 
 const Main = () => {
-  const { fields, setFields, rootNavigation, handleNavigateToCategories } = useMain();
+  const { fields, setFields, rootNavigation, handleNavigateToCategories } =
+    useMain();
+  const { width } = useWindowDimensions();
 
+  const lineWidth = width / 2 - 48;
 
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{
-        rowGap: 48,
-        paddingBottom: 124,
-        paddingHorizontal: 24,
-      }}
+      contentContainerStyle={styles.containerContent}
     >
-      <View style={styles.containerHeader}>
-        <Text style={styles.title}>Criar anúncio</Text>
-
-        <TouchableOpacity
-          activeOpacity={0.85}
-          onPress={() => rootNavigation.goBack()}
-        >
-          <X size={20} color={SECONDARY_COLOR} />
-        </TouchableOpacity>
-      </View>
+      <Header.Root padding={16}>
+        <Header.Content title="Criar anúncio" />
+        <Header.RightIcon icon={X} onPress={() => rootNavigation.goBack()} />
+      </Header.Root>
 
       <PictureSelector
         setFieldPictures={(images) =>
@@ -51,51 +45,55 @@ const Main = () => {
       />
 
       <View style={styles.containerInputGroup}>
-        <View style={styles.containerInput}>
-          <Text style={styles.labelText}>Título do anúncio</Text>
-
-          <TextInput
-            style={styles.input}
-            placeholder="ex: Brinquedo Pelúcia Leãozinho"
-            returnKeyType="done"
-            value={fields.name}
-            onChangeText={(text: string) =>
-              setFields({ ...fields, name: text })
-            }
-          />
-        </View>
+        <Input.Normal
+          label="Título"
+          width={width - 48}
+          placeholder="ex: Brinquedo Pelúcia Leãozinho"
+          returnKeyType="done"
+          value={fields.name}
+          onChangeText={(text: string) => setFields({ ...fields, name: text })}
+        />
 
         <Text style={styles.infoText}>{fields.name.length} de 100</Text>
       </View>
 
-      <View style={styles.containerSelectGroup}>
-        <View style={styles.containerFree}>
-          <View style={styles.containerInput}>
-            <Text style={styles.labelText}>Valor do anúncio</Text>
+      <View style={styles.containerInputGroup}>
+        <Input.Normal
+          label="Descrição"
+          width={width - 48}
+          height={192}
+          multiline
+          placeholder="ex.: Pelúcia Leãozinho com plush macio, cor marrom clássica, antialérgico e tamanho 25cm"
+          returnKeyType="done"
+          value={fields.description}
+          onChangeText={(text: string) =>
+            setFields({ ...fields, description: text })
+          }
+        />
 
-            {fields.canLend || fields.canTrade ? (
-              <Text style={styles.input}>Gratuito</Text>
-            ) : (
-              <MaskInput
-                mask={Masks.BRL_CURRENCY}
-                style={styles.input}
-                placeholder="ex: R$ 50,00"
-                returnKeyType="done"
-                value={fields.price}
-                onChangeText={(masked, unmasked) => {
-                  setFields({ ...fields, price: formatPrice(masked) });
-                }}
-              />
-            )}
-          </View>
-        </View>
+        <Text style={styles.infoText}>{fields.description.length} de 350</Text>
+      </View>
+
+      <View style={styles.containerSelectGroup}>
+        <Input.Masked
+          label="Valor"
+          width={width - 48}
+          mask={Masks.BRL_CURRENCY}
+          placeholder="R$ XX,XX"
+          returnKeyType="done"
+          value={fields.canLend || fields.canTrade ? "R$ 0,00" : fields.price}
+          onChangeText={(masked, _) => {
+            setFields({ ...fields, price: formatPrice(masked) });
+          }}
+          editable={!fields.canLend && !fields.canTrade}
+        />
 
         <View style={styles.containerOr}>
-          <View style={styles.line} />
+          <View style={[styles.line, { width: lineWidth }]} />
 
           <Text style={styles.orText}>ou</Text>
 
-          <View style={styles.line} />
+          <View style={[styles.line, { width: lineWidth }]} />
         </View>
 
         <View style={styles.containerCheckboxes}>
@@ -113,13 +111,7 @@ const Main = () => {
               </Text>
             </View>
 
-            {fields.canLend ? (
-              <View style={styles.checkboxActive}>
-                <View style={styles.checkboxContent} />
-              </View>
-            ) : (
-              <View style={styles.checkboxInactive} />
-            )}
+            <Checkbox checked={fields.canLend} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -134,34 +126,9 @@ const Main = () => {
               </Text>
             </View>
 
-            {fields.canTrade ? (
-              <View style={styles.checkboxActive}>
-                <View style={styles.checkboxContent} />
-              </View>
-            ) : (
-              <View style={styles.checkboxInactive} />
-            )}
+            <Checkbox checked={fields.canTrade} />
           </TouchableOpacity>
         </View>
-      </View>
-
-      <View style={styles.containerInputGroup}>
-        <View style={styles.containerTextArea}>
-          <Text style={styles.labelText}>Descrição do anúncio</Text>
-
-          <TextInput
-            style={styles.input}
-            placeholder="ex.: Pelúcia Leãozinho com plush macio, cor marrom clássica, antialérgico e tamanho 25cm"
-            returnKeyType="done"
-            multiline
-            value={fields.description}
-            onChangeText={(text: string) =>
-              setFields({ ...fields, description: text })
-            }
-          />
-        </View>
-
-        <Text style={styles.infoText}>{fields.description.length} de 350</Text>
       </View>
 
       <ConditionList
@@ -177,13 +144,7 @@ const Main = () => {
         }
       />
 
-      <TouchableOpacity
-        style={styles.buttonNext}
-        activeOpacity={0.85}
-        onPress={handleNavigateToCategories}
-      >
-        <Text style={styles.nextText}>Continuar</Text>
-      </TouchableOpacity>
+      <ButtonNext onPress={handleNavigateToCategories} />
     </ScrollView>
   );
 };

@@ -1,9 +1,9 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
-import { Check } from "lucide-react-native";
+
+import Checkbox from "@src/components/Checkbox";
 
 import { EAgeRange } from "@src/common/Interfaces/Toy.interface";
-import { CONTRAST_COLOR } from "@src/constants/Colors";
 
 interface IAgeGroupListProps {
   ageGroup: EAgeRange;
@@ -13,7 +13,7 @@ interface IAgeGroupListProps {
 const AgeGroupList = ({ ageGroup, setFieldAgeGroup }: IAgeGroupListProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Selecione a faixa etária do seu anúncio</Text>
+      <Text style={styles.title}>Selecione a faixa etária</Text>
 
       <View style={styles.containerContent}>
         {[
@@ -29,15 +29,7 @@ const AgeGroupList = ({ ageGroup, setFieldAgeGroup }: IAgeGroupListProps) => {
             activeOpacity={0.85}
             onPress={() => setFieldAgeGroup(item.value)}
           >
-            {ageGroup === item.value ? (
-              <View style={styles.containerCheckbox}>
-                <View style={styles.checkbox}>
-                  <Check size={12} color={CONTRAST_COLOR} />
-                </View>
-              </View>
-            ) : (
-              <View style={styles.containerCheckbox} />
-            )}
+            <Checkbox checked={ageGroup === item.value} />
 
             <Text style={styles.text}>{item.name}</Text>
           </TouchableOpacity>

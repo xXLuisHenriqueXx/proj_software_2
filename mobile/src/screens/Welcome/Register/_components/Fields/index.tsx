@@ -1,71 +1,11 @@
-import { forwardRef, useMemo, useRef, useState } from "react";
-import {
-  ScrollView,
-  Text,
-  TextInput,
-  TextInputProps,
-  View,
-} from "react-native";
+import { useMemo, useRef } from "react";
+import { ScrollView, TextInput, useWindowDimensions } from "react-native";
 import { styles } from "./styles";
-import { Eye, EyeOff } from "lucide-react-native";
 
-import MaskedInput from "@src/components/MaskedInput";
+import { Input } from "@src/components/Input";
 
-import { SECONDARY_COLOR } from "@src/constants/Colors";
 import { CNPJ_MASK } from "@src/constants/Masks";
 import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
-
-type IInputProps = TextInputProps & {
-  label: string;
-  instruction?: string;
-  password?: boolean;
-};
-
-export const Input = forwardRef<any, IInputProps>((props, ref) => {
-  const { label, instruction, ...rest } = props;
-
-  return (
-    <View style={{ flexDirection: "column" }}>
-      <View style={styles.containerInput}>
-        <Text style={styles.textLabel}>{label}</Text>
-        <TextInput style={styles.input} ref={ref} {...rest} />
-      </View>
-    </View>
-  );
-});
-
-export const PasswordInput = forwardRef<any, IInputProps>((props, ref) => {
-  const { label, instruction, ...rest } = props;
-  const [showPassword, setShowPassword] = useState(true);
-
-  return (
-    <View style={{ flexDirection: "column" }}>
-      <View style={styles.containerInput}>
-        <Text style={styles.textLabel}>{label}</Text>
-        <TextInput
-          style={styles.input}
-          ref={ref}
-          secureTextEntry={showPassword}
-          {...rest}
-        />
-        {showPassword ? (
-          <Eye
-            onPress={() => setShowPassword(false)}
-            size={24}
-            color={SECONDARY_COLOR}
-          />
-        ) : (
-          <EyeOff
-            onPress={() => setShowPassword(true)}
-            size={24}
-            color={SECONDARY_COLOR}
-          />
-        )}
-      </View>
-      {instruction && <Text style={styles.textInstruction}>{instruction}</Text>}
-    </View>
-  );
-});
 
 interface IParams {
   type: "personal" | "enterprise";
@@ -87,18 +27,18 @@ const getFieldsRegister = ({
       placeholder:
         type === "personal" ? "Seu nome ..." : "Nome da instituição ...",
       nextRef: type === "enterprise" ? cnpjRef : emailRef,
-      component: Input,
+      component: Input.Normal,
     },
     ...(type === "enterprise"
       ? [
           {
             key: "cnpj",
             label: "CNPJ",
-            placeholder: "Seu CNPJ ...",
+            placeholder: "XX.XXX.XXX/XXXX-XX",
             ref: cnpjRef,
             nextRef: emailRef,
             mask: CNPJ_MASK,
-            component: MaskedInput,
+            component: Input.Masked,
           },
         ]
       : []),
@@ -108,7 +48,7 @@ const getFieldsRegister = ({
       placeholder: "seuemail@exemplo.com",
       ref: emailRef,
       nextRef: passwordRef,
-      component: Input,
+      component: Input.Normal,
     },
     {
       key: "password",
@@ -118,7 +58,7 @@ const getFieldsRegister = ({
       nextRef: passwordConfirmationRef,
       password: true,
       instruction: "Deve conter no mínimo 8 caracteres",
-      component: PasswordInput,
+      component: Input.Password,
     },
     {
       key: "passwordConfirmation",
@@ -127,7 +67,7 @@ const getFieldsRegister = ({
       ref: passwordConfirmationRef,
       onSubmitEditing: handleNavigateToAddress,
       password: true,
-      component: PasswordInput,
+      component: Input.Password,
     },
   ];
 };
@@ -145,6 +85,8 @@ const Fields = ({
   setFields,
   handleNavigateToAddress,
 }: IFieldsProps) => {
+  const { width } = useWindowDimensions();
+
   const emailRef = useRef<TextInput>();
   const cnpjRef = useRef<TextInput>();
   const passwordRef = useRef<TextInput>();
@@ -159,7 +101,7 @@ const Fields = ({
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{ rowGap: 32, paddingBottom: 120 }}
+      contentContainerStyle={styles.containerContent}
       showsVerticalScrollIndicator={false}
     >
       {fieldConfigs.map((field, index) => (
@@ -167,6 +109,7 @@ const Fields = ({
           key={field.key}
           ref={field.ref}
           label={field.label}
+          width={width - 48}
           placeholder={field.placeholder}
           returnKeyType={index === fieldConfigs.length - 1 ? "done" : "next"}
           onSubmitEditing={
@@ -174,7 +117,6 @@ const Fields = ({
               ? field.onSubmitEditing
               : () => field.nextRef?.current?.focus()
           }
-          password={field.password}
           instruction={field.instruction}
           value={fields[field.key as keyof typeof fields]}
           onChangeText={(text: string) =>

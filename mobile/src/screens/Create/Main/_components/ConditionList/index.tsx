@@ -1,8 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
-import { Check } from "lucide-react-native";
 
-import { CONTRAST_COLOR } from "@src/constants/Colors";
+import Checkbox from "@src/components/Checkbox";
 
 interface IConditionListProps {
   isNew: boolean;
@@ -17,9 +16,7 @@ const ConditionList = ({
 }: IConditionListProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Selecione a condição de uso do seu anúncio
-      </Text>
+      <Text style={styles.title}>Selecione a condição de uso</Text>
 
       <View style={styles.containerContent}>
         {[
@@ -32,15 +29,7 @@ const ConditionList = ({
             activeOpacity={0.85}
             onPress={item.onPress}
           >
-            {isNew === item.value ? (
-              <View style={styles.containerCheckbox}>
-                <View style={styles.checkbox}>
-                  <Check size={12} color={CONTRAST_COLOR} />
-                </View>
-              </View>
-            ) : (
-              <View style={styles.containerCheckbox} />
-            )}
+            <Checkbox checked={isNew === item.value} />
 
             <Text style={styles.text}>{item.name}</Text>
           </TouchableOpacity>

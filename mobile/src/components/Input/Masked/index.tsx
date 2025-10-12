@@ -3,22 +3,20 @@ import { Text, View } from "react-native";
 import { styles } from "./styles";
 import MaskInput, { MaskInputProps } from "react-native-mask-input";
 
-type MaskType = (string | RegExp)[];
-
-type IMaskedInputProps = MaskInputProps & {
+type IMaskedProps = MaskInputProps & {
   label: string;
-  mask?: MaskType;
+  width: number;
 };
 
-const MaskedInput = forwardRef<any, IMaskedInputProps>((props, ref) => {
-  const { label, ...rest } = props;
+const Masked = forwardRef<any, IMaskedProps>((props, ref) => {
+  const { label, width, ...rest } = props;
 
   return (
-    <View style={styles.containerInput}>
+    <View style={[styles.container, { width }]}>
       <Text style={styles.textLabel}>{label}</Text>
       <MaskInput style={styles.input} ref={ref} {...rest} />
     </View>
   );
 });
 
-export default MaskedInput;
+export default Masked;

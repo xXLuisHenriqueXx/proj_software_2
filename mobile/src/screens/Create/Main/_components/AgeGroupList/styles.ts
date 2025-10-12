@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { HIGHLIGHT_COLOR, PRIMARY_COLOR } from "@src/constants/Colors";
+import { PRIMARY_COLOR } from "@src/constants/Colors";
 import { SEMIBOLD_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
@@ -19,21 +19,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     columnGap: 8,
     width: "100%",
-  },
-  containerCheckbox: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: 24,
-    height: 24,
-    borderWidth: 1,
-    borderColor: HIGHLIGHT_COLOR,
-  },
-  checkbox: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: 16,
-    height: 16,
-    backgroundColor: HIGHLIGHT_COLOR,
   },
   title: {
     fontSize: 16,
