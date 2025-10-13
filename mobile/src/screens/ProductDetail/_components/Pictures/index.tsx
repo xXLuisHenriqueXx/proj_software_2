@@ -1,14 +1,13 @@
 import { View, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
 import { ChevronLeft, Heart, Share2 } from "lucide-react-native";
 
 import Carousel from "@src/components/Carousel";
 
-import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 import { IToyPicture } from "@src/common/Interfaces/Toy.interface";
 import { memo } from "react";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 interface IPicturesProps {
   data: IToyPicture[];
@@ -16,13 +15,13 @@ interface IPicturesProps {
 }
 
 const Pictures = ({ data, width }: IPicturesProps) => {
-  const navigation = useNavigation<PropsAppStack>();
+  const { appNavigation } = useAppNavigation();
 
   return (
     <View style={{ position: "relative" }}>
       <TouchableOpacity
         style={styles.buttonTopLeft}
-        onPress={() => navigation.goBack()}
+        onPress={() => appNavigation.goBack()}
         activeOpacity={0.85}
       >
         <ChevronLeft size={20} color={HIGHLIGHT_COLOR} />
@@ -30,7 +29,7 @@ const Pictures = ({ data, width }: IPicturesProps) => {
 
       <TouchableOpacity
         style={styles.buttonTopRight}
-        onPress={() => navigation.goBack()}
+        onPress={() => appNavigation.goBack()}
         activeOpacity={0.85}
       >
         <Share2 size={20} color={HIGHLIGHT_COLOR} />
@@ -38,7 +37,7 @@ const Pictures = ({ data, width }: IPicturesProps) => {
 
       <TouchableOpacity
         style={styles.buttonBottomRight}
-        onPress={() => navigation.goBack()}
+        onPress={() => appNavigation.goBack()}
         activeOpacity={0.85}
       >
         <Heart size={20} color={HIGHLIGHT_COLOR} />

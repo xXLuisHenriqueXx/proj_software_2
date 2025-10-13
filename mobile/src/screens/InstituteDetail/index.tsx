@@ -2,7 +2,6 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Copy, Globe, X } from "lucide-react-native";
-import { useNavigation } from "@react-navigation/native";
 
 import { Header } from "@src/components/Header";
 import Loader from "@src/components/Loader";
@@ -15,7 +14,7 @@ import {
   HIGHLIGHT_COLOR,
 } from "@src/constants/Colors";
 import { formatPhoneNumber } from "@src/utils/FormatPhoneNumber";
-import { PropsRoot } from "@src/routes";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 type Props = NativeStackScreenProps<AppStackParamList, "InstituteDetail">;
 const mapImage = require("@assets/map.jpg");
@@ -25,7 +24,7 @@ const InstituteDetail = ({ route }: Props) => {
   const { institute, loading, handleOpenSite, handleCopyPixKey } =
     useInstituteDetail(id);
 
-  const navigation = useNavigation<PropsRoot>();
+  const { rootNavigation } = useAppNavigation();
 
   if (!institute || loading) {
     return <Loader />;
@@ -39,7 +38,7 @@ const InstituteDetail = ({ route }: Props) => {
     >
       <Header.Root padding={16}>
         <Header.Content title="Instituição assistencial" />
-        <Header.RightIcon icon={X} onPress={() => navigation.goBack()} />
+        <Header.RightIcon icon={X} onPress={() => rootNavigation.goBack()} />
       </Header.Root>
 
       <View style={styles.containerContent}>

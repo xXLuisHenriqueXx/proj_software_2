@@ -6,14 +6,13 @@ import {
   FlatList,
 } from "react-native";
 import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
 
 import { Header } from "@src/components/Header";
 import Item from "./Item";
 import LoaderSkeleton from "@src/components/LoaderSkeleton";
 
 import { IInstitute } from "@src/common/Entities/Institute";
-import { PropsAppStack } from "@src/routes/stacks/AppStack";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 interface IInstituteProps {
   data: IInstitute[];
@@ -22,13 +21,13 @@ interface IInstituteProps {
 const Institutes = ({ data }: IInstituteProps) => {
   const { width } = useWindowDimensions();
 
-  const navigation = useNavigation<PropsAppStack>();
+  const { appNavigation } = useAppNavigation();
 
   const handleNavigateToInstituteDetail = useCallback(
     (id: string) => {
-      navigation.navigate("InstituteDetail", { id });
+      appNavigation.navigate("InstituteDetail", { id });
     },
-    [navigation]
+    [appNavigation]
   );
 
   const renderItem: ListRenderItem<IInstitute> = useCallback(

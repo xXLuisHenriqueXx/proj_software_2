@@ -1,18 +1,17 @@
 import { RefObject, useRef, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import BottomSheet from "@gorhom/bottom-sheet";
 import Toast from "react-native-toast-message";
 
 import useAuth from "../useAuth";
-import { PropsRoot } from "@src/routes";
 import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
 import { validateForm } from "@src/utils/FormValidator";
 import { loginSchema } from "@src/utils/ValidationSchemas";
 import { EMAIL_REGEX } from "@src/constants/Regex";
+import { useAppNavigation } from "../useAppNavigation";
 
 export function useLogin() {
   const { login } = useAuth();
-  const navigation = useNavigation<PropsRoot>();
+  const { rootNavigation } = useAppNavigation();
   const bottomSheetEmailRef = useRef<BottomSheet>(null);
   const bottomSheetCodeRef = useRef<BottomSheet>(null);
 
@@ -39,7 +38,7 @@ export function useLogin() {
 
       await login(validFields);
 
-      navigation.replace("AppStack");
+      rootNavigation.replace("AppStack");
     } catch (error: any) {
       Toast.show({
         type: "error",
@@ -81,7 +80,7 @@ export function useLogin() {
     bottomSheetEmailRef,
     handleLogin,
     handleSendEmail,
-    handleNavigateGoBack: () => navigation.goBack(),
+    handleNavigateGoBack: () => rootNavigation.goBack(),
     handleOpenSheetEmail: () => openSheet(bottomSheetEmailRef),
     handleCloseSheetEmail: () => closeSheet(bottomSheetEmailRef),
     handleCloseSheetCode: () => closeSheet(bottomSheetCodeRef),

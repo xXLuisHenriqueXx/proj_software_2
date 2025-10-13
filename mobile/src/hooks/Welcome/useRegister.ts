@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
 import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
-import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
 import { validateForm } from "@src/utils/FormValidator";
 import { registerSchema } from "@src/utils/ValidationSchemas";
+import { useAppNavigation } from "../useAppNavigation";
 
 export function useRegister() {
-  const navigation = useNavigation<PropsAuthStack>();
+  const { authNavigation } = useAppNavigation();
 
   const [type, setType] = useState<"personal" | "enterprise">("personal");
   const [fields, setFields] = useState<IFieldsRegister>({
@@ -30,7 +29,7 @@ export function useRegister() {
     try {
       const validFields = validateFields();
 
-      navigation.navigate("Address", { fieldsData: validFields, type });
+      authNavigation.navigate("Address", { fieldsData: validFields, type });
     } catch (error: any) {
       Toast.show({
         type: "error",
@@ -45,10 +44,10 @@ export function useRegister() {
     setType,
     fields,
     setFields,
-    navigation,
+    authNavigation,
     validateFields,
     handleNavigateToAddress,
-    handleNavigateGoBack: () => navigation.goBack(),
+    handleNavigateGoBack: () => authNavigation.goBack(),
     isTypePersonal: type === "personal",
   };
 }

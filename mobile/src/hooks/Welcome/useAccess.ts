@@ -1,11 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
-import { PropsAuthStack } from "@src/routes/stacks/AuthStack";
+import { useAppNavigation } from "../useAppNavigation";
 
 export function useAccess() {
-  const navigation = useNavigation<PropsAuthStack>();
+  const { authNavigation } = useAppNavigation();
 
   return {
-    handleNavigateToLogin: () => navigation.navigate("Login"),
-    handleNavigateToRegister: () => navigation.navigate("Register"),
+    handleNavigateToLogin: () => authNavigation.navigate("Login"),
+    handleNavigateToRegister: () => authNavigation.navigate("Register"),
   };
 }

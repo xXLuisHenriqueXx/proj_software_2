@@ -8,14 +8,13 @@ import {
   RefreshControl,
 } from "react-native";
 import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
 import { CircleOff } from "lucide-react-native";
 
 import Item from "./Item";
 
-import { PropsAppStack } from "@src/routes/stacks/AppStack";
 import { IProduct } from "@src/common/Entities/Product";
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 interface IListProps {
   header?: any;
@@ -47,11 +46,11 @@ const List = ({
 }: IListProps) => {
   const { width } = useWindowDimensions();
 
-  const navigation = useNavigation<PropsAppStack>();
+  const { appNavigation } = useAppNavigation();
 
   const handleNavigateToDetail = (id: string) => {
     if (onItemPress) onItemPress(id);
-    else navigation.navigate("ProductDetail", { id });
+    else appNavigation.navigate("ProductDetail", { id });
   };
 
   const renderItem: ListRenderItem<IProduct> = ({ item }) => (

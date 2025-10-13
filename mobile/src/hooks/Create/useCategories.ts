@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useWindowDimensions } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
 import {
@@ -8,14 +7,12 @@ import {
   IFieldsToyCreateMain,
   IToyCreate,
 } from "@src/common/Interfaces/Toy.interface";
-import { PropsAppStack } from "@src/routes/stacks/AppStack";
-import { PropsCreateStack } from "@src/routes/stacks/CreateStack";
 import { toyService } from "@src/services/ToyService";
+import { useAppNavigation } from "../useAppNavigation";
 
 export function useCategories(fields: IFieldsToyCreateMain) {
   const { width } = useWindowDimensions();
-  const rootNavigation = useNavigation<PropsAppStack>();
-  const createNavigation = useNavigation<PropsCreateStack>();
+  const { appNavigation, createNavigation } = useAppNavigation();
 
   const [categories, setCategories] = useState<EToyType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -48,7 +45,7 @@ export function useCategories(fields: IFieldsToyCreateMain) {
 
       await toyService.create(params);
 
-      rootNavigation.replace("AppTabs");
+      appNavigation.replace("AppTabs");
     } catch (error: any) {
       Toast.show({
         type: "error",
@@ -67,7 +64,7 @@ export function useCategories(fields: IFieldsToyCreateMain) {
     loading,
     widthCategory,
     createNavigation,
-    rootNavigation,
+    appNavigation,
     handleSelectCategory,
     handleCreate,
   };

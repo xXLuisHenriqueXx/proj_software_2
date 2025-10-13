@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 
 import {
@@ -8,10 +7,9 @@ import {
   IRegister,
 } from "@src/common/Interfaces/Auth.interface";
 import useAuth from "../useAuth";
-import { PropsRoot } from "@src/routes";
-import { IEditableFields } from "@src/screens/Welcome/Address";
 import { validateForm } from "@src/utils/FormValidator";
 import { addressSchema } from "@src/utils/ValidationSchemas";
+import { useAppNavigation } from "../useAppNavigation";
 
 const EMPTY_ADDRESS: IFieldsAddress = {
   street: "",
@@ -29,7 +27,7 @@ interface IParams {
 
 export function useAddress({ fieldsData, type }: IParams) {
   const { register } = useAuth();
-  const navigation = useNavigation<PropsRoot>();
+  const { rootNavigation } = useAppNavigation();
 
   const [cep, setCep] = useState<string>("");
   const [fields, setFields] = useState<IFieldsAddress>(EMPTY_ADDRESS);
@@ -63,7 +61,7 @@ export function useAddress({ fieldsData, type }: IParams) {
 
       await register(params);
 
-      navigation.replace("AppStack");
+      rootNavigation.replace("AppStack");
     } catch (error: any) {
       Toast.show({
         type: "error",
@@ -126,6 +124,6 @@ export function useAddress({ fieldsData, type }: IParams) {
     loading,
     loadingCep,
     handleRegister,
-    handleNavigateGoBack: () => navigation.goBack(),
+    handleNavigateGoBack: () => rootNavigation.goBack(),
   };
 }

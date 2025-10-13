@@ -1,16 +1,13 @@
 import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import {
   EAgeRange,
   IFieldsToyCreateMain,
 } from "@src/common/Interfaces/Toy.interface";
-import { PropsAppStack } from "@src/routes/stacks/AppStack";
-import { PropsCreateStack } from "@src/routes/stacks/CreateStack";
+import { useAppNavigation } from "../useAppNavigation";
 
 export function useMain() {
-  const rootNavigation = useNavigation<PropsAppStack>();
-  const createNavigation = useNavigation<PropsCreateStack>();
+  const { appNavigation, createNavigation } = useAppNavigation();
 
   const [fields, setFields] = useState<IFieldsToyCreateMain>({
     name: "",
@@ -33,7 +30,7 @@ export function useMain() {
     fields,
     setFields,
     handleNavigateToCategories,
-    rootNavigation,
+    appNavigation,
     createNavigation,
   };
 }
