@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import { useToysQuery } from "./Toys/useToysQuery";
+
 import { IProduct } from "@src/common/Entities/Product";
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
+import { useToys } from "./useToys";
+import { useRecentsStore } from "@src/stores/RecentsStore";
 
 export function useSearch() {
-  const { searchToys, recents, loading, loadRecents } = useToysQuery();
+  const { fetchToys, loading } = useToys();
+  const { recents, fetchRecents } = useRecentsStore();
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
@@ -13,24 +16,20 @@ export function useSearch() {
   const handleFocus = useCallback(() => setIsFocused(true), []);
   const handleEndEditing = useCallback(() => {
     setIsFocused(false);
-    searchToys(search).then((toys) => setSearchToys(toys));
+    fetchToys(1, 10, { search }).then((toys) => setSearchToys(toys));
   }, [search]);
 
   const handleSearchWithCategory = useCallback((type: EToyType) => {
-    searchToys(type).then((toys) => setSearchToys(toys));
+    fetchToys(1, 10, { type }).then((toys) => setSearchToys(toys));
   }, []);
 
   const handleSearchWithFeatured = useCallback((search: string) => {
-    searchToys(search).then((toys) => setSearchToys(toys));
-  }, []);
-
-  const handleCloseList = useCallback(() => {
-    setSearch("");
+    fetchToys(1, 10, { search }).then((toys) => setSearchToys(toys));
   }, []);
 
   useEffect(() => {
-    loadRecents();
-  }, [loadRecents]);
+    fetchRecents();
+  }, [fetchRecents]);
 
   const shouldShowFeatured = !isFocused && toys.length === 0;
   const shouldShowList = !isFocused && toys.length > 0;
@@ -46,7 +45,6 @@ export function useSearch() {
     handleEndEditing,
     handleSearchWithCategory,
     handleSearchWithFeatured,
-    handleCloseList,
     shouldShowList,
     shouldShowFeatured,
   };

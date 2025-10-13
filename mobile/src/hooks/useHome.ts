@@ -2,46 +2,29 @@ import { useEffect, useState } from "react";
 import { useWindowDimensions } from "react-native";
 import Toast from "react-native-toast-message";
 
-import useAuth from "./useAuth";
-import { IHighlight } from "@src/common/Entities/Highlight";
-import { highlightService } from "@src/services/HighlightService";
-import { IInstitute } from "@src/common/Entities/Institute";
-import { instituteService } from "@src/services/InstituteService";
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
 import { IProduct } from "@src/common/Entities/Product";
-import { useToysQuery } from "./Toys/useToysQuery";
+import { useToys } from "./useToys";
+import { useHighlightsStore } from "@src/stores/HighlightStore";
+import { useInstitutesStore } from "@src/stores/InstituteStore";
 
 export function useHome() {
   const { width } = useWindowDimensions();
-  const { user } = useAuth();
-  const { fetchToys } = useToysQuery();
+  const { fetchToys } = useToys();
+  const { highlights, fetchHighlights } = useHighlightsStore();
+  const { institutes, fetchInstitutes } = useInstitutesStore();
 
-  const [highlights, setHighlights] = useState<IHighlight[]>([]);
-  const [institutes, setInstitutes] = useState<IInstitute[]>([]);
   const [toys, setToys] = useState<IProduct[]>([]);
-  const [category, setCategory] = useState<EToyType>();
   const [loading, setLoading] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
-
-  const handleFetchHighlights = async () => {
-    const response = await highlightService.get();
-
-    setHighlights(response.data);
-  };
-
-  const handleFetchInstitutes = async () => {
-    const response = await instituteService.get();
-
-    setInstitutes(response.data);
-  };
 
   const handleLoadData = async () => {
     setLoading(true);
 
     try {
       await Promise.all([
-        handleFetchHighlights(),
-        handleFetchInstitutes(),
+        fetchHighlights(),
+        fetchInstitutes(),
         fetchToys().then((toys) => setToys(toys)),
       ]);
     } catch (error: any) {
@@ -59,7 +42,7 @@ export function useHome() {
     setLoading(true);
 
     try {
-      await fetchToys(1, 10, { search, type }).then((toys) => setToys(toys));
+      await fetchToys(1, 20, { search, type }).then((toys) => setToys(toys));
     } catch (error: any) {
       Toast.show({
         type: "error",
@@ -79,7 +62,6 @@ export function useHome() {
     setRefreshing(true);
 
     try {
-      setCategory(undefined);
       handleLoadData();
     } catch (error: any) {
       Toast.show({
@@ -93,11 +75,8 @@ export function useHome() {
   };
 
   return {
-    user,
     onRefresh,
     refreshing,
-    category,
-    setCategory,
     highlights,
     institutes,
     toys,
