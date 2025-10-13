@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { styles } from "./styles";
 
 import { Header } from "@src/components/Header";
-import UserInfo from "./_components/UserInfo";
+import { Input } from "@src/components/Input";
 import Carousel from "@src/components/Carousel";
 import Institutes from "./_components/Institutes";
 import Benefit from "./_components/Benefit";
@@ -12,29 +12,22 @@ import CategoryList from "./_components/CategoryList";
 import { useHome } from "@src/hooks/useHome";
 
 const Home = () => {
-  const {
-    user,
-    carouselWidth,
-    refreshing,
-    onRefresh,
-    highlights,
-    institutes,
-    toys,
-  } = useHome();
+  const { carouselWidth, refreshing, onRefresh, highlights, institutes, toys } =
+    useHome();
 
   return (
     <List
       header={
         <View style={styles.containerHeader}>
-          <UserInfo picture={user?.picture} />
+          <Input.Search placeholder="Pesquisar ..." />
+
+          <CategoryList />
 
           <Carousel width={carouselWidth} height={240} data={highlights} />
 
           <Institutes data={institutes} />
 
           <Benefit />
-
-          <CategoryList />
 
           <Header.Root>
             <Header.Content
