@@ -10,16 +10,21 @@ import List from "@src/components/List";
 import CategoryList from "./_components/CategoryList";
 
 import { useHome } from "@src/hooks/useHome";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 const Home = () => {
   const { carouselWidth, refreshing, onRefresh, highlights, institutes, toys } =
     useHome();
+  const { appNavigation } = useAppNavigation();
 
   return (
     <List
       header={
         <View style={styles.containerHeader}>
-          <Input.Search placeholder="Pesquisar ..." />
+          <Input.Search
+            placeholder="Pesquisar ..."
+            onPress={() => appNavigation.navigate("Recents")}
+          />
 
           <CategoryList />
 

@@ -7,10 +7,22 @@ import Item from "./Item";
 
 import { ICategory } from "@src/common/Entities/Category";
 import { categoriesData } from "@src/static/CategoriesData";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 const CategoryList = () => {
+  const { appNavigation } = useAppNavigation();
+
   const renderItem: ListRenderItem<ICategory> = useCallback(
-    ({ item }) => <Item data={item} />,
+    ({ item }) => (
+      <Item
+        data={item}
+        onPress={() =>
+          appNavigation.navigate("ProductList", {
+            filter: { type: item.value },
+          })
+        }
+      />
+    ),
     []
   );
 
