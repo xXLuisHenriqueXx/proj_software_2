@@ -42,6 +42,7 @@ model User {
 
   // mensagens enviadas
   messages Message[]
+  Favorite Favorite[]
 }
 
 model organizationInfo {
@@ -84,6 +85,20 @@ model Toy {
   ToyPictures ToyPicture[] @relation("Pictures")
   ageGroup    AgeRange
   discount    Int
+  Favorite    Favorite[]
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  toyId String
+  toy   Toy    @relation(fields: [toyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, toyId]) // Garante que um usuário só pode favoritar um brinquedo uma vez
 }
 
 enum ToyType {
