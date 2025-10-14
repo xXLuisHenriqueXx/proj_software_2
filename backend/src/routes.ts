@@ -7,6 +7,7 @@ import { ToyController } from "./controllers/toyController";
 import { HighlightController } from "./controllers/highlightController";
 import { highlightResponseSchema, highlightListSchema } from "./schemas/highlightsValidationSchema";
 import { InstituteController } from "./controllers/instituteController";
+import { getUserHistory, hideHistoryEntry } from './controllers/historyController';
 
 
 import { authMiddleware } from "./middleware/authMiddleware";
@@ -161,5 +162,9 @@ export async function routes(app: FastifyInstance) {
       response: { 200: instituteResponseSchema },
     },
   }, InstituteController.getById);
+
+    app.get("/history", { onRequest: [verifyJwt] }, getUserHistory);
+    app.patch("/history/:historyId", { onRequest: [verifyJwt] }, hideHistoryEntry);
+
 }
 
