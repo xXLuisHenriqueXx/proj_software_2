@@ -1,4 +1,4 @@
-import { ChevronLeft, SearchIcon } from "lucide-react-native";
+import { forwardRef } from "react";
 import {
   TextInput,
   TextInputProps,
@@ -6,6 +6,7 @@ import {
   View,
 } from "react-native";
 import { styles } from "./styles";
+import { ChevronLeft, SearchIcon } from "lucide-react-native";
 
 import {
   BACKGROUND_PRIMARY_COLOR,
@@ -16,7 +17,7 @@ type ISearchProps = TextInputProps & {
   onBack?: () => void;
 };
 
-const Search = (props: ISearchProps) => {
+const Search = forwardRef<any, ISearchProps>((props, ref) => {
   const { onBack, ...rest } = props;
 
   return (
@@ -34,10 +35,10 @@ const Search = (props: ISearchProps) => {
       <View style={styles.containerInput}>
         <SearchIcon size={20} color={HIGHLIGHT_COLOR} />
 
-        <TextInput style={styles.input} {...rest} />
+        <TextInput ref={ref} style={styles.input} {...rest} />
       </View>
     </View>
   );
-};
+});
 
 export default Search;
