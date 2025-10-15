@@ -3,28 +3,35 @@ import { z } from "zod";
 
 import { authController } from "./controllers/authController";
 import { ToyController } from "./controllers/toyController";
+import { getPublicUserById } from "./services/userService";
 
 import { HighlightController } from "./controllers/highlightController";
 import { highlightResponseSchema, highlightListSchema } from "./schemas/highlightsValidationSchema";
 
 import { authMiddleware } from "./middleware/authMiddleware";
-import { 
-  registerSchema, 
-  loginSchema, 
-  updateUserSchema, 
+
+
+import {
+  registerSchema,
+  loginSchema,
+  updateUserSchema,
   updateAvatarSchema,
-  userResponseSchema
+  userResponseSchema,
+  userMeResponseSchema
 } from "./schemas/authValidationSchemas";
-import { 
-  toyCreateSchema, 
-  toyUpdateSchema, 
-  getToySchema, 
-  toyResponseSchema, 
-  toyListSchema 
+
+
+
+import {
+  toyCreateSchema,
+  toyUpdateSchema,
+  getToySchema,
+  toyResponseSchema,
+  toyListSchema
 } from "./schemas/toyValidationSchemas";
 
 export async function routes(app: FastifyInstance) {
-    app.get('/health', {
+  app.get('/health', {
     schema: {
       tags: ['Health'],
       summary: 'Verifica se a API está rodando',
@@ -34,7 +41,7 @@ export async function routes(app: FastifyInstance) {
     }
   }, async () => {
     return { status: "ok" };
-  }),
+  });
 
   app.post('/auth/register', {
     schema: {
@@ -53,6 +60,21 @@ export async function routes(app: FastifyInstance) {
       response: { 200: z.object({ user: userResponseSchema, token: z.string() }) }
     }
   }, authController.login);
+
+  app.get('/users/me', {
+  onRequest: [authMiddleware],
+  schema: {
+    tags: ['Users'],
+    summary: 'Retorna informações do utilizador autenticado',
+    response: { 200: userMeResponseSchema }
+  }
+}, async (req, reply) => {
+  const userId = (req as any).user?.userId ?? (req as any).userId;
+  if (!userId) return reply.status(401).send({ message: "Unauthorized" });
+  const user = await getPublicUserById(userId);
+  if (!user) return reply.status(404).send({ message: "User not found" });
+  return reply.send(user);
+});
 
   app.patch('/users/me', {
     onRequest: [authMiddleware],
@@ -79,7 +101,6 @@ export async function routes(app: FastifyInstance) {
       summary: 'Deleta o utilizador autenticado',
     }
   }, authController.delete);
-
 
   app.post('/toys', {
     onRequest: [authMiddleware],
@@ -127,7 +148,8 @@ export async function routes(app: FastifyInstance) {
       params: getToySchema,
     }
   }, ToyController.delete);
-   app.get('/highlights', {
+
+  app.get('/highlights', {
     schema: {
       tags: ['Highlights'],
       summary: 'Lista todos os highlights disponíveis',
@@ -144,4 +166,3 @@ export async function routes(app: FastifyInstance) {
     }
   }, HighlightController.getHighlight);
 }
-

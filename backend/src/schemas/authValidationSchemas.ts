@@ -1,11 +1,25 @@
 import { z } from "zod";
 
-export const userResponseSchema = z.object({
-  id: z.string().uuid(),
-  name: z.string(),
+import { z } from "zod";
+
+export const userMeResponseSchema = z.object({
+  id: z.string(),
+  createdAt: z.string().datetime(),
   email: z.string().email(),
-  picture: z.string().nullable(),
+  name: z.string(),
+  parentalControl: z.boolean(),
+  cnpj: z.string().nullable().optional(),
+  pix_key: z.string().nullable().optional(),
+  picture: z.string().nullable().optional(),
+  addressDistrict: z.string(),
+  addressStreet: z.string(),
+  addressNumber: z.number(),
+  addressDetail: z.string().nullable().optional(),
+  addressCep: z.string(),
+  toys: z.array(z.object({ id: z.string() }))
 });
+
+
 // Regex para formato
 const cpfRegex = /^(\d{3}\.?\d{3}\.?\d{3}-?\d{2})$/;
 const cnpjRegex = /^(\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2})$/;

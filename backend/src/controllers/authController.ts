@@ -12,6 +12,7 @@ import {
 } from "../schemas/authValidationSchemas";
 import { passwordHelper } from "../helpers/passwordHelper";
 import { Role } from "../generated/prisma";
+import { getPublicUserById } from "../services/userService";
 
 type RegisterBody = z.infer<typeof registerSchema>;
 type LoginBody = z.infer<typeof loginSchema>;
@@ -34,7 +35,6 @@ export const authController = {
   ) {
     try {
       const data = req.body;
-
       const userExists = await prisma.user.findFirst({
         where: { OR: [{ email: data.email }, { cpf: data.cpf }] },
       });
@@ -46,38 +46,7 @@ export const authController = {
       const user = await authService.createUser(data);
       const token = await tokenHelper.generateToken(user.id, Role.USER);
       return reply.status(201).send({ user: safeUser(user), token });
-    } catch (error) {
-      console.error("Erro no controller de registro:", error);
-      return reply.status(500).send({ message: "Erro interno do servidor" });
-    }
-  },
-
-  async update(
-    req: FastifyRequest<{ Body: UpdateUserBody }>,
-    reply: FastifyReply
-  ) {
-    try {
-      const userId = (req.user as any).userId;
-      const updateData = req.body;
-      const updatedUser = await authService.updateUser(userId, updateData);
-      return reply
-        .status(200)
-        .send({ message: "Usuário atualizado com sucesso", user: updatedUser });
-    } catch (error) {
-      console.error("Erro no controller de update:", error);
-      return reply.status(500).send({ message: "Erro interno do servidor" });
-    }
-  },
-
-  async delete(req: FastifyRequest, reply: FastifyReply) {
-    try {
-      const userId = (req.user as any).userId;
-      await prisma.user.delete({ where: { id: userId } });
-      return reply
-        .status(200)
-        .send({ message: "Usuário deletado com sucesso" });
-    } catch (error) {
-      console.error("Erro no controller de delete:", error);
+    } catch {
       return reply.status(500).send({ message: "Erro interno do servidor" });
     }
   },
@@ -97,8 +66,47 @@ export const authController = {
       } else {
         return reply.status(401).send({ message: "Credenciais inválidas" });
       }
-    } catch (error) {
-      console.error("Erro no controller de login:", error);
+    } catch {
+      return reply.status(500).send({ message: "Erro interno do servidor" });
+    }
+  },
+
+  async me(req: FastifyRequest, reply: FastifyReply) {
+    try {
+      const userId = (req as any).user?.userId ?? (req as any).userId;
+      if (!userId) return reply.status(401).send({ message: "Unauthorized" });
+      const user = await getPublicUserById(userId);
+      if (!user) return reply.status(404).send({ message: "User not found" });
+      return reply.send(user);
+    } catch {
+      return reply.status(500).send({ message: "Erro interno do servidor" });
+    }
+  },
+
+  async update(
+    req: FastifyRequest<{ Body: UpdateUserBody }>,
+    reply: FastifyReply
+  ) {
+    try {
+      const userId = (req.user as any).userId;
+      const updateData = req.body;
+      const updatedUser = await authService.updateUser(userId, updateData);
+      return reply
+        .status(200)
+        .send({ message: "Usuário atualizado com sucesso", user: updatedUser });
+    } catch {
+      return reply.status(500).send({ message: "Erro interno do servidor" });
+    }
+  },
+
+  async delete(req: FastifyRequest, reply: FastifyReply) {
+    try {
+      const userId = (req.user as any).userId;
+      await prisma.user.delete({ where: { id: userId } });
+      return reply
+        .status(200)
+        .send({ message: "Usuário deletado com sucesso" });
+    } catch {
       return reply.status(500).send({ message: "Erro interno do servidor" });
     }
   },
@@ -121,8 +129,7 @@ export const authController = {
       )}`;
       await authService.updatePicture(userId, optimizedBase64String);
       return reply.status(200).send({ message: "Foto atualizada com sucesso" });
-    } catch (error) {
-      console.error("Erro no controller de updatePicture:", error);
+    } catch {
       return reply.status(500).send({ message: "Erro interno do servidor" });
     }
   },
