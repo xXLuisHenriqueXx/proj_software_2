@@ -27,6 +27,14 @@ import {
   toyListSchema
 } from "./schemas/toyValidationSchemas";
 
+import {
+  addFavoriteSchema,
+  removeFavoriteSchema,
+  favoriteResponseSchema,
+  favoriteListResponseSchema,
+} from "./schemas/favoriteValidationSchema"
+import { favoriteController } from "./controllers/favoriteController"
+
 export async function routes(app: FastifyInstance) {
   app.get('/health', {
     schema: {
@@ -163,8 +171,59 @@ export async function routes(app: FastifyInstance) {
     },
   }, InstituteController.getById);
 
-    app.get("/history", { onRequest: [verifyJwt] }, getUserHistory);
-    app.patch("/history/:historyId", { onRequest: [verifyJwt] }, hideHistoryEntry);
 
+  app.get("/history", { onRequest: [verifyJwt] }, getUserHistory);
+  
+  app.patch("/history/:historyId", { onRequest: [verifyJwt] }, hideHistoryEntry);
+  
+  app.post(
+    "/favorites",
+    {
+      onRequest: [authMiddleware],
+      schema: {
+        tags: ["Favorites"],
+        summary: "Adiciona um brinquedo aos favoritos",
+        security: [{ bearerAuth: [] }],
+        body: addFavoriteSchema,
+        response: {
+          201: favoriteResponseSchema,
+        },
+      },
+    },
+    favoriteController.addFavorite
+  );
+
+  app.get(
+    "/favorites",
+    {
+      onRequest: [authMiddleware],
+      schema: {
+        tags: ["Favorites"],
+        summary: "Lista os brinquedos favoritos do usuário",
+        security: [{ bearerAuth: [] }],
+        response: {
+          200: favoriteListResponseSchema,
+        },
+      },
+    },
+    favoriteController.getFavorites
+  );
+
+  app.delete(
+    "/favorites/:toyId",
+    {
+      onRequest: [authMiddleware],
+      schema: {
+        tags: ["Favorites"],
+        summary: "Remove um brinquedo dos favoritos",
+        security: [{ bearerAuth: [] }],
+        params: removeFavoriteSchema,
+        response: {
+          200: z.object({ message: z.string() }),
+        },
+      },
+    },
+    favoriteController.removeFavorite
+  );
 }
 
