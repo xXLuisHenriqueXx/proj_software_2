@@ -172,10 +172,10 @@ export async function routes(app: FastifyInstance) {
   }, InstituteController.getById);
 
 
-  app.get("/history", { onRequest: [verifyJwt] }, getUserHistory);
-  
-  app.patch("/history/:historyId", { onRequest: [verifyJwt] }, hideHistoryEntry);
-  
+  app.get("/history", { onRequest: [authMiddleware] }, getUserHistory);
+
+  app.patch("/history/:historyId", { onRequest: [authMiddleware] }, hideHistoryEntry);
+
   app.post(
     "/favorites",
     {

@@ -1,11 +1,12 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../prisma";
 import { z } from "zod";
+import { ToyHelper } from "../helpers/toyHelper";
 
 export async function getUserHistory(request: FastifyRequest, reply: FastifyReply) {
   const userId = request.user.sub;
 
-  const historyEntries = await prisma.historyEntry.findMany({
+  var historyEntries = await prisma.historyEntry.findMany({
     where: {
       userId: userId,
       visible: true,
@@ -13,7 +14,7 @@ export async function getUserHistory(request: FastifyRequest, reply: FastifyRepl
     include: {
       toy: {
         include: {
-          ToyPictures: true,
+          ToyPictures: true, owner: true
         },
       },
     },
@@ -22,6 +23,9 @@ export async function getUserHistory(request: FastifyRequest, reply: FastifyRepl
     },
   });
 
+  historyEntries.map((entry) => {
+    entry.toy = ToyHelper.fixToyObject(entry.toy)
+  })
   return reply.status(200).send(historyEntries);
 }
 

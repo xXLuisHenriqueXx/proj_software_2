@@ -17,45 +17,7 @@ export const HighlightService = {
 
     var toys = await this.getHighlightToys(highlight, userId);
 
-    toys = toys.map(({ ToyPictures, owner, discount, ...toy }) => ({
-      id: toy.id,
-      createdAt: toy.createdAt,
-      name: toy.name,
-      description: toy.description,
-      price: toy.price,
-      isNew: toy.isNew,
-      canTrade: toy.canTrade,
-      canLend: toy.canLend,
-      usageTime: toy.usageTime,
-      type: toy.type,
-      ageGroup: toy.ageGroup,
-      discount: discount,
-      pictures:
-        ToyPictures && ToyPictures.length > 0
-          ? ToyPictures.map((p) => ({
-            id: p.id,
-            order: p.order,
-            picture: p.picture,
-          }))
-          : [
-            {
-              id: "placeholder",
-              order: 1,
-              picture: "/public/assets/image_not_found.jpg",
-            },
-          ],
-      owner: owner
-        ? {
-          id: owner.id,
-          name: owner.name,
-          picture: owner.picture ?? "/public/assets/avatar_not_found.webp",
-        }
-        : {
-          id: "placeholder",
-          name: "Usuário não encontrado",
-          picture: "/public/assets/avatar_not_found.webp",
-        },
-    }));
+    toys = ToyHelper.fixToyListObject(toys)
 
     return {
       ...highlight,
@@ -72,7 +34,7 @@ export const HighlightService = {
           where: { price: 0 },
           orderBy: { createdAt: "desc" },
           take: 10,
-          include: { ToyPictures: true },
+          include: { ToyPictures: true, owner: true },
         });
         break;
 
@@ -81,7 +43,7 @@ export const HighlightService = {
           where: { isNew: true },
           orderBy: { createdAt: "desc" },
           take: 10,
-          include: { ToyPictures: true },
+          include: { ToyPictures: true, owner: true },
         });
         break;
 
@@ -89,7 +51,7 @@ export const HighlightService = {
         toys = await prisma.toy.findMany({
           orderBy: { createdAt: "desc" },
           take: 10,
-          include: { ToyPictures: true },
+          include: { ToyPictures: true, owner: true },
         });
         break;
 
@@ -97,7 +59,7 @@ export const HighlightService = {
         toys = await prisma.toy.findMany({
           orderBy: { history: { _count: "desc" } },
           take: 10,
-          include: { ToyPictures: true },
+          include: { ToyPictures: true, owner: true },
         });
         break;
 
