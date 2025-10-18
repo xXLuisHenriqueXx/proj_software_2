@@ -17,13 +17,16 @@ import {
   updateAvatarSchema,
   userResponseSchema,
   getMeResponseSchema,
+  updatePictureResponseSchema,
+  deleteUserResponseSchema,
 } from "./schemas/authValidationSchemas";
 import {
   toyCreateSchema,
   toyUpdateSchema,
   getToySchema,
   toyResponseSchema,
-  toyListSchema
+  toyListSchema,
+  toyListResponseSchema,
 } from "./schemas/toyValidationSchemas";
 import { highlightResponseSchema, highlightListSchema } from "./schemas/highlightsValidationSchema";
 import { institutesResponseSchema, instituteResponseSchema } from "./schemas/instituteValidationSchema";
@@ -33,6 +36,10 @@ import {
   favoriteResponseSchema,
   favoriteListResponseSchema,
 } from "./schemas/favoriteValidationSchema"
+import {
+  historyParamsSchema,
+  getUserHistoryResponseSchema
+} from "./schemas/historyValidationSchemas";
 
 
 export async function routes(app: FastifyInstance) {
@@ -69,12 +76,12 @@ export async function routes(app: FastifyInstance) {
   app.get('/users/me', {
     onRequest: [authMiddleware],
     schema: {
-        tags: ['Users'],
-        summary: 'Busca os dados completos do usuário autenticado e seus brinquedos',
-        security: [{ bearerAuth: [] }],
-        response: {
-            200: getMeResponseSchema
-        }
+      tags: ['Users'],
+      summary: 'Busca os dados completos do usuário autenticado e seus brinquedos',
+      security: [{ bearerAuth: [] }],
+      response: {
+        200: getMeResponseSchema
+      }
     }
   }, authController.getMe);
 
@@ -101,6 +108,9 @@ export async function routes(app: FastifyInstance) {
       summary: 'Atualiza a foto de perfil do utilizador autenticado',
       security: [{ bearerAuth: [] }],
       body: updateAvatarSchema,
+      response: {
+        200: updatePictureResponseSchema
+      }
     }
   }, authController.updatePicture);
 
@@ -109,6 +119,10 @@ export async function routes(app: FastifyInstance) {
     schema: {
       tags: ['Users'],
       summary: 'Deleta o utilizador autenticado',
+      security: [{ bearerAuth: [] }],
+      response: {
+        200: deleteUserResponseSchema
+      }
     }
   }, authController.delete);
 
@@ -137,6 +151,9 @@ export async function routes(app: FastifyInstance) {
       tags: ['Toys'],
       summary: 'Lista brinquedos com filtros e paginação',
       body: toyListSchema,
+      response: {
+        200: toyListResponseSchema
+      }
     }
   }, ToyController.getToyList);
 
@@ -197,10 +214,30 @@ export async function routes(app: FastifyInstance) {
     },
   }, InstituteController.getById);
 
+  app.get("/history", {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ["History"],
+      summary: "Busca o histórico de visualização do usuário",
+      security: [{ bearerAuth: [] }],
+      response: {
+        200: getUserHistoryResponseSchema
+      }
+    }
+  }, getUserHistory);
 
-  app.get("/history", { onRequest: [authMiddleware] }, getUserHistory);
-
-  app.patch("/history/:historyId", { onRequest: [authMiddleware] }, hideHistoryEntry);
+  app.patch("/history/:historyId", {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ["History"],
+      summary: "Oculta um item do histórico de visualização",
+      security: [{ bearerAuth: [] }],
+      params: historyParamsSchema,
+      response: {
+        204: z.void()
+      }
+    }
+  }, hideHistoryEntry);
 
   app.post(
     "/favorites",

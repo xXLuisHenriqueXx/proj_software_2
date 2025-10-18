@@ -87,31 +87,57 @@ export const getToySchema = z.object({
   toyId: z.string().uuid("O ID do brinquedo deve ser um UUID válido."),
 });
 
-export const toyPictureSchema = z.object({
+const toyPictureSchema = z.object({
   id: z.string(),
-  order: z.number(),
+  order: z.number().int(),
   picture: z.string(),
 });
 
-export const toyOwnerSchema = z.object({
-  id: z.string(),
+const toyOwnerSchema = z.object({
+  id: z.string().uuid(),
   name: z.string(),
   picture: z.string().nullable(),
 });
 
-export const toyResponseSchema = z.object({
-  id: z.string(),
-  createdAt: z.date(),
+const toyInListSchema = z.object({
+  id: z.string().uuid(),
+  createdAt: z.date(), 
   name: z.string(),
   description: z.string(),
-  price: z.number(),
+  ownerId: z.string().uuid(),
+  price: z.number(), 
   isNew: z.boolean(),
   canTrade: z.boolean(),
   canLend: z.boolean(),
-  usageTime: z.number(),
-  type: z.array(toyTypeEnum),
-  ageGroup: ageRangeEnum,
-  discount: z.number().nonnegative().optional(),
+  usageTime: z.number(), 
+  type: z.array(z.nativeEnum(ToyType)), 
+  ageGroup: z.nativeEnum(AgeRange), 
+  discount: z.number(), 
   pictures: z.array(toyPictureSchema),
-  owner: toyOwnerSchema,
+  _score: z.number().optional(), 
+});
+
+export const toyListResponseSchema = z.object({
+  page: z.number(),
+  pageSize: z.number(),
+  total: z.number(),
+  totalPages: z.number(),
+  toys: z.array(toyInListSchema),
+});
+
+export const toyResponseSchema = z.object({
+  id: z.string().uuid(),
+  createdAt: z.date(), 
+  name: z.string(),
+  description: z.string(),
+  price: z.number(), 
+  isNew: z.boolean(),
+  canTrade: z.boolean(),
+  canLend: z.boolean(),
+  usageTime: z.number(), 
+  type: z.array(z.nativeEnum(ToyType)),
+  ageGroup: z.nativeEnum(AgeRange),
+  discount: z.number(), 
+  pictures: z.array(toyPictureSchema), 
+  owner: toyOwnerSchema, 
 });
