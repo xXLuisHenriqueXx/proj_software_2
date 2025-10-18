@@ -5,7 +5,6 @@ import { Header } from "@src/components/Header";
 import { Input } from "@src/components/Input";
 import Carousel from "@src/components/Carousel";
 import Institutes from "./_components/Institutes";
-import Benefit from "./_components/Benefit";
 import List from "@src/components/List";
 import CategoryList from "./_components/CategoryList";
 
@@ -22,17 +21,15 @@ const Home = () => {
       header={
         <View style={styles.containerHeader}>
           <Input.Search
-            placeholder="Pesquisar ..."
+            placeholder="Pesquisar anúncios ..."
             onPress={() => appNavigation.navigate("Recents")}
           />
 
           <CategoryList />
 
-          <Carousel width={carouselWidth} height={240} data={highlights} />
-
           <Institutes data={institutes} />
 
-          <Benefit />
+          <Carousel width={carouselWidth} height={240} data={highlights} />
 
           <Header.Root>
             <Header.Content
