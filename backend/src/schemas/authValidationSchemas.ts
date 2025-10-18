@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { toyResponseSchema } from "./toyValidationSchemas";
 
 export const userResponseSchema = z.object({
   id: z.string().uuid(),
@@ -6,7 +7,23 @@ export const userResponseSchema = z.object({
   email: z.string().email(),
   picture: z.string().nullable(),
 });
-// Regex para formato
+
+export const getMeResponseSchema = z.object({
+  id: z.string(),
+  email: z.string().email(),
+  name: z.string(),
+  parentalControl: z.boolean(),
+  cnpj: z.string().optional(),
+  pix_key: z.string().optional(),
+  picture: z.string().optional(),
+  addressDistrict: z.string(),
+  addressStreet: z.string(),
+  addressNumber: z.number().int(),
+  addressDetail: z.string().optional(),
+  addressCep: z.string(),
+  toys: z.array(toyResponseSchema.omit({ owner: true })).optional(),
+});
+
 const cnpjRegex = /^(\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2})$/;
 
 export const registerSchema = z.object({
@@ -63,13 +80,12 @@ export const loginSchema = z.object({
 });
 
 export const updateUserSchema = z.object({
-    name: z.string().trim().optional(),
-    email: z.string().email().optional(),
-    password: z.string().trim().optional(),
-    cnpj: z.string().regex(cnpjRegex, "Formato de CNPJ inválido").optional(),
+    name: z.string().trim().min(3).optional(),
+    pix_key: z.string().trim().optional(),
+    parentalControl: z.boolean().optional(),
     addressDistrict: z.string().optional(),
     addressStreet: z.string().optional(),
-    addressNumber: z.number().int().optional(),
+    addressNumber: z.number().int().positive().optional(),
     addressDetail: z.string().optional(),
     addressCep: z.string().regex(/^\d{5}-?\d{3}$/, "CEP inválido").optional()
 });
@@ -83,4 +99,3 @@ export const updateAvatarSchema = z.object({
 export const authHeaderSchema = z.object({
   authorization: z.string().regex(/^Bearer\s.+$/, "Token inválido ou ausente")
 });
-

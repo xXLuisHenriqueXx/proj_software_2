@@ -3,21 +3,20 @@ import { z } from "zod";
 
 import { authController } from "./controllers/authController";
 import { ToyController } from "./controllers/toyController";
-
 import { HighlightController } from "./controllers/highlightController";
-import { highlightResponseSchema, highlightListSchema } from "./schemas/highlightsValidationSchema";
 import { InstituteController } from "./controllers/instituteController";
 import { getUserHistory, hideHistoryEntry } from './controllers/historyController';
-
+import { favoriteController } from "./controllers/favoriteController"
 
 import { authMiddleware } from "./middleware/authMiddleware";
-import { institutesResponseSchema, instituteResponseSchema } from "./schemas/instituteValidationSchema";
+
 import {
   registerSchema,
   loginSchema,
   updateUserSchema,
   updateAvatarSchema,
-  userResponseSchema
+  userResponseSchema,
+  getMeResponseSchema,
 } from "./schemas/authValidationSchemas";
 import {
   toyCreateSchema,
@@ -26,14 +25,15 @@ import {
   toyResponseSchema,
   toyListSchema
 } from "./schemas/toyValidationSchemas";
-
+import { highlightResponseSchema, highlightListSchema } from "./schemas/highlightsValidationSchema";
+import { institutesResponseSchema, instituteResponseSchema } from "./schemas/instituteValidationSchema";
 import {
   addFavoriteSchema,
   removeFavoriteSchema,
   favoriteResponseSchema,
   favoriteListResponseSchema,
 } from "./schemas/favoriteValidationSchema"
-import { favoriteController } from "./controllers/favoriteController"
+
 
 export async function routes(app: FastifyInstance) {
   app.get('/health', {
@@ -46,16 +46,16 @@ export async function routes(app: FastifyInstance) {
     }
   }, async () => {
     return { status: "ok" };
-  }),
+  });
 
-    app.post('/auth/register', {
-      schema: {
-        tags: ['Auth'],
-        summary: 'Regista um novo utilizador',
-        body: registerSchema,
-        response: { 201: z.object({ user: userResponseSchema, token: z.string() }) }
-      }
-    }, authController.register);
+  app.post('/auth/register', {
+    schema: {
+      tags: ['Auth'],
+      summary: 'Regista um novo utilizador',
+      body: registerSchema,
+      response: { 201: z.object({ user: userResponseSchema, token: z.string() }) }
+    }
+  }, authController.register);
 
   app.post('/auth/login', {
     schema: {
@@ -66,12 +66,31 @@ export async function routes(app: FastifyInstance) {
     }
   }, authController.login);
 
+  app.get('/users/me', {
+    onRequest: [authMiddleware],
+    schema: {
+        tags: ['Users'],
+        summary: 'Busca os dados completos do usuário autenticado e seus brinquedos',
+        security: [{ bearerAuth: [] }],
+        response: {
+            200: getMeResponseSchema
+        }
+    }
+  }, authController.getMe);
+
   app.patch('/users/me', {
     onRequest: [authMiddleware],
     schema: {
       tags: ['Users'],
       summary: 'Atualiza informações do utilizador autenticado',
+      security: [{ bearerAuth: [] }],
       body: updateUserSchema,
+      response: {
+        200: z.object({
+          message: z.string(),
+          user: userResponseSchema
+        })
+      }
     }
   }, authController.update);
 
@@ -80,6 +99,7 @@ export async function routes(app: FastifyInstance) {
     schema: {
       tags: ['Users'],
       summary: 'Atualiza a foto de perfil do utilizador autenticado',
+      security: [{ bearerAuth: [] }],
       body: updateAvatarSchema,
     }
   }, authController.updatePicture);
@@ -92,12 +112,12 @@ export async function routes(app: FastifyInstance) {
     }
   }, authController.delete);
 
-
   app.post('/toys', {
     onRequest: [authMiddleware],
     schema: {
       tags: ['Toys'],
       summary: 'Cria um novo brinquedo',
+      security: [{ bearerAuth: [] }],
       body: toyCreateSchema,
       response: { 201: toyResponseSchema }
     }
@@ -125,6 +145,7 @@ export async function routes(app: FastifyInstance) {
     schema: {
       tags: ['Toys'],
       summary: 'Atualiza um brinquedo existente',
+      security: [{ bearerAuth: [] }],
       params: getToySchema,
       body: toyUpdateSchema,
       response: { 200: toyResponseSchema }
@@ -136,9 +157,12 @@ export async function routes(app: FastifyInstance) {
     schema: {
       tags: ['Toys'],
       summary: 'Deleta um brinquedo existente',
+      security: [{ bearerAuth: [] }],
       params: getToySchema,
+      response: { 200: z.object({ message: z.string() }) }
     }
   }, ToyController.delete);
+
   app.get('/highlights', {
     schema: {
       tags: ['Highlights'],
@@ -155,6 +179,7 @@ export async function routes(app: FastifyInstance) {
       response: { 200: highlightResponseSchema }
     }
   }, HighlightController.getHighlight);
+
   app.get('/institutes', {
     schema: {
       tags: ['Institutes'],
@@ -162,6 +187,7 @@ export async function routes(app: FastifyInstance) {
       response: { 200: institutesResponseSchema },
     },
   }, InstituteController.getAll);
+
   app.get('/institutes/:id', {
     schema: {
       tags: ['Institutes'],
@@ -226,4 +252,3 @@ export async function routes(app: FastifyInstance) {
     favoriteController.removeFavorite
   );
 }
-

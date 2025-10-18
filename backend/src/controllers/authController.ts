@@ -28,6 +28,48 @@ export function safeUser(user: any) {
 }
 
 export const authController = {
+  async getMe(req: FastifyRequest, reply: FastifyReply) {
+    try {
+      const userId = (req.user as any).userId;
+
+      const user = await prisma.user.findUniqueOrThrow({
+        where: { id: userId },
+        include: {
+          toys: {
+            include: {
+              ToyPictures: true,
+            },
+          },
+        },
+      });
+
+      const userProfile: { [key: string]: any } = {};
+      const excludedKeys = ['password', 'role', 'createdAt', 'active'];
+      
+      for (const [key, value] of Object.entries(user)) {
+        if (value !== null && !excludedKeys.includes(key)) {
+          userProfile[key] = value;
+        }
+      }
+
+      if (userProfile.toys) {
+        userProfile.toys = user.toys.map(toy => {
+          const { ownerId, owner, ToyPictures, ...restOfToy } = toy;
+          return {
+            ...restOfToy,
+            createdAt: toy.createdAt.toISOString(),
+            pictures: ToyPictures,
+          };
+        });
+      }
+
+      return reply.status(200).send(userProfile);
+    } catch (error) {
+      console.error("Erro ao buscar dados do usuário:", error);
+      return reply.status(500).send({ message: "Erro interno do servidor" });
+    }
+  },
+
   async register(
     req: FastifyRequest<{ Body: RegisterBody }>,
     reply: FastifyReply
@@ -59,13 +101,22 @@ export const authController = {
     try {
       const userId = (req.user as any).userId;
       const updateData = req.body;
+      
       const updatedUser = await authService.updateUser(userId, updateData);
+
+      if (updatedUser.cnpj) {
+        await prisma.organizationInfo.updateMany({
+          where: { organizationId: userId },
+          data: { approved: false },
+        });
+      }
+
       return reply
         .status(200)
-        .send({ message: "Usuário atualizado com sucesso", user: updatedUser });
+        .send({ message: "Usuário atualizado com sucesso", user: safeUser(updatedUser) });
     } catch (error) {
       console.error("Erro no controller de update:", error);
-      return reply.status(500).send({ message: "Erro interno do servidor" });
+      return reply.status(500).send({ message: "Erro interno do servidor", details: (error as Error).message });
     }
   },
 
