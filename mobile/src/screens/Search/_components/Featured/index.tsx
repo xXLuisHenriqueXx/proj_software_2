@@ -3,12 +3,11 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
 import { featuredData } from "@src/static/FeaturedData";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
-interface IFeaturedProps {
-  onSearch: (value: string) => void;
-}
+const Featured = () => {
+  const { appNavigation } = useAppNavigation();
 
-const Featured = ({ onSearch }: IFeaturedProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Em destaque</Text>
@@ -18,7 +17,11 @@ const Featured = ({ onSearch }: IFeaturedProps) => {
           <TouchableOpacity
             key={item.id}
             activeOpacity={0.85}
-            onPress={() => onSearch(item.name)}
+            onPress={() =>
+              appNavigation.navigate("ProductList", {
+                filter: { search: item.name },
+              })
+            }
           >
             <Text style={styles.text}>{item.name}</Text>
           </TouchableOpacity>

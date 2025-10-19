@@ -15,9 +15,10 @@ import Toast from "react-native-toast-message";
 import "react-native-reanimated";
 import "react-native-gesture-handler";
 
+import ErrorBoundary from "@src/components/Error";
+
 import Routes from "@src/routes";
 import { useAuthStore } from "@src/stores/AuthStore";
-import ErrorBoundary from "@src/components/Error";
 
 export default function App() {
   const [fontsLoaded] = useFonts({

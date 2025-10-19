@@ -5,7 +5,7 @@ import MaskInput, { MaskInputProps } from "react-native-mask-input";
 
 type IMaskedProps = MaskInputProps & {
   label: string;
-  width: number;
+  width?: number;
 };
 
 const Masked = forwardRef<any, IMaskedProps>((props, ref) => {

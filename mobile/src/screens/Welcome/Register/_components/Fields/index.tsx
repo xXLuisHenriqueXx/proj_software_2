@@ -1,5 +1,5 @@
 import { useMemo, useRef } from "react";
-import { ScrollView, TextInput, useWindowDimensions } from "react-native";
+import { ScrollView, TextInput } from "react-native";
 import { styles } from "./styles";
 
 import { Input } from "@src/components/Input";
@@ -85,8 +85,6 @@ const Fields = ({
   setFields,
   handleNavigateToAddress,
 }: IFieldsProps) => {
-  const { width } = useWindowDimensions();
-
   const emailRef = useRef<TextInput>();
   const cnpjRef = useRef<TextInput>();
   const passwordRef = useRef<TextInput>();
@@ -109,7 +107,6 @@ const Fields = ({
           key={field.key}
           ref={field.ref}
           label={field.label}
-          width={width - 48}
           placeholder={field.placeholder}
           returnKeyType={index === fieldConfigs.length - 1 ? "done" : "next"}
           onSubmitEditing={

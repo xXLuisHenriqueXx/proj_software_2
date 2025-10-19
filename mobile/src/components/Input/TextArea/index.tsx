@@ -2,12 +2,12 @@ import { forwardRef } from "react";
 import { Text, TextInput, TextInputProps, View } from "react-native";
 import { styles } from "./styles";
 
-type INormalProps = TextInputProps & {
+type ITextAreaProps = TextInputProps & {
   label: string;
   width?: number;
 };
 
-const Normal = forwardRef<any, INormalProps>((props, ref) => {
+const TextArea = forwardRef<any, ITextAreaProps>((props, ref) => {
   const { label, width, ...rest } = props;
 
   return (
@@ -18,4 +18,4 @@ const Normal = forwardRef<any, INormalProps>((props, ref) => {
   );
 });
 
-export default Normal;
+export default TextArea;

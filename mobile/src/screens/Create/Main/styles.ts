@@ -7,7 +7,7 @@ import {
   SECONDARY_COLOR,
 } from "@src/constants/Colors";
 import { REGULAR_FONT } from "@src/constants/Fonts";
-import { STATUS_BAR_HEIGHT } from "@src/constants/Values";
+import { STATUS_BAR_HEIGHT, WIDTH } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
   container: {
@@ -52,6 +52,7 @@ export const styles = StyleSheet.create({
     rowGap: 4,
   },
   line: {
+    width: WIDTH / 2 - 48,
     height: 1,
     backgroundColor: PRIMARY_COLOR_25,
   },
@@ -72,7 +73,7 @@ export const styles = StyleSheet.create({
     marginLeft: 16,
   },
   orText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: REGULAR_FONT,
     color: PRIMARY_COLOR,
   },

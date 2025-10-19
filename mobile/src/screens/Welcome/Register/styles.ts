@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
-import { BACKGROUND_PRIMARY_COLOR, PRIMARY_COLOR } from "@src/constants/Colors";
+import {
+  BACKGROUND_PRIMARY_COLOR,
+  HIGHLIGHT_COLOR,
+} from "@src/constants/Colors";
 import { STATUS_BAR_HEIGHT } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
@@ -22,7 +25,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     padding: 8,
     borderWidth: 1,
-    borderColor: PRIMARY_COLOR,
+    borderColor: HIGHLIGHT_COLOR,
     borderRadius: 12,
   },
 });

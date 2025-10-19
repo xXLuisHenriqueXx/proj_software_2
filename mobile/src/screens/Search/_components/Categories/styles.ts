@@ -5,6 +5,7 @@ import {
   PRIMARY_COLOR,
 } from "@src/constants/Colors";
 import { REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
+import { WIDTH } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
   container: {
@@ -23,6 +24,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    width: (WIDTH - 48 - 16) / 2,
     paddingHorizontal: 16,
     paddingVertical: 24,
     backgroundColor: BACKGROUND_SECONDARY_COLOR,

@@ -4,7 +4,6 @@ import { styles } from "./styles";
 import {
   BACKGROUND_PRIMARY_COLOR,
   HIGHLIGHT_COLOR,
-  PRIMARY_COLOR,
 } from "@src/constants/Colors";
 
 const TypeButton = ({
@@ -27,7 +26,7 @@ const TypeButton = ({
     <Text
       style={[
         styles.text,
-        { color: isActive ? BACKGROUND_PRIMARY_COLOR : PRIMARY_COLOR },
+        { color: isActive ? BACKGROUND_PRIMARY_COLOR : HIGHLIGHT_COLOR },
       ]}
     >
       {label}

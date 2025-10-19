@@ -8,7 +8,7 @@ import { PRIMARY_COLOR_75 } from "@src/constants/Colors";
 type IPasswordProps = TextInputProps & {
   label: string;
   instruction?: string;
-  width: number;
+  width?: number;
 };
 
 const Password = forwardRef<any, IPasswordProps>((props, ref) => {

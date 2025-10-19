@@ -9,16 +9,13 @@ import { MEDIUM_FONT, REGULAR_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
-  },
-  containerInput: {
     position: "relative",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
     width: "100%",
-    height: 64,
-    paddingHorizontal: 16,
+    height: 192,
+    padding: 16,
     borderWidth: 1,
     borderColor: HIGHLIGHT_COLOR,
     borderRadius: 12,
@@ -38,13 +35,5 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: MEDIUM_FONT,
     color: HIGHLIGHT_COLOR,
-  },
-  textInstruction: {
-    width: "100%",
-    marginTop: 8,
-    fontSize: 12,
-    fontFamily: REGULAR_FONT,
-    color: PRIMARY_COLOR,
-    textAlign: "right",
   },
 });

@@ -1,11 +1,6 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  useWindowDimensions,
-} from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
+import { Masks } from "react-native-mask-input";
 import { X } from "lucide-react-native";
 
 import { Header } from "@src/components/Header";
@@ -19,14 +14,11 @@ import ButtonNext from "./_components/ButtonNext";
 import { EAgeRange } from "@src/common/Interfaces/Toy.interface";
 import { formatPrice } from "@src/utils/FormatPrice";
 import { useMain } from "@src/hooks/Create/useMain";
-import { Masks } from "react-native-mask-input";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 const Main = () => {
-  const { fields, setFields, rootNavigation, handleNavigateToCategories } =
-    useMain();
-  const { width } = useWindowDimensions();
-
-  const lineWidth = width / 2 - 48;
+  const { fields, setFields, handleNavigateToCategories } = useMain();
+  const { rootNavigation } = useAppNavigation();
 
   return (
     <ScrollView
@@ -47,7 +39,6 @@ const Main = () => {
       <View style={styles.containerInputGroup}>
         <Input.Normal
           label="Título"
-          width={width - 48}
           placeholder="ex: Brinquedo Pelúcia Leãozinho"
           returnKeyType="done"
           value={fields.name}
@@ -58,10 +49,8 @@ const Main = () => {
       </View>
 
       <View style={styles.containerInputGroup}>
-        <Input.Normal
+        <Input.TextArea
           label="Descrição"
-          width={width - 48}
-          height={192}
           multiline
           placeholder="ex.: Pelúcia Leãozinho com plush macio, cor marrom clássica, antialérgico e tamanho 25cm"
           returnKeyType="done"
@@ -77,7 +66,6 @@ const Main = () => {
       <View style={styles.containerSelectGroup}>
         <Input.Masked
           label="Valor"
-          width={width - 48}
           mask={Masks.BRL_CURRENCY}
           placeholder="R$ XX,XX"
           returnKeyType="done"
@@ -89,11 +77,11 @@ const Main = () => {
         />
 
         <View style={styles.containerOr}>
-          <View style={[styles.line, { width: lineWidth }]} />
+          <View style={styles.line} />
 
-          <Text style={styles.orText}>ou</Text>
+          <Text style={styles.orText}>OU</Text>
 
-          <View style={[styles.line, { width: lineWidth }]} />
+          <View style={styles.line} />
         </View>
 
         <View style={styles.containerCheckboxes}>

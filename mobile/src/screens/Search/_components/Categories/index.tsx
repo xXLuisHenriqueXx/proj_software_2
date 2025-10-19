@@ -1,24 +1,13 @@
-import {
-  View,
-  Text,
-  useWindowDimensions,
-  TouchableOpacity,
-} from "react-native";
+import { memo } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
 import { categoriesData } from "@src/static/CategoriesData";
-import { EToyType } from "@src/common/Interfaces/Toy.interface";
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
-import { memo } from "react";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
-interface ICategoriesProps {
-  onSearch: (value: EToyType) => void;
-}
-
-const Categories = ({ onSearch }: ICategoriesProps) => {
-  const { width } = useWindowDimensions();
-
-  const widthCategory = (width - 48 - 16) / 2;
+const Categories = () => {
+  const { appNavigation } = useAppNavigation();
 
   return (
     <View style={styles.container}>
@@ -28,9 +17,13 @@ const Categories = ({ onSearch }: ICategoriesProps) => {
         {categoriesData.map((item) => (
           <TouchableOpacity
             key={item.id}
-            style={[styles.containerItem, { width: widthCategory }]}
+            style={styles.containerItem}
             activeOpacity={0.85}
-            onPress={() => onSearch(item.value)}
+            onPress={() =>
+              appNavigation.navigate("ProductList", {
+                filter: { type: item.value },
+              })
+            }
           >
             <Text style={styles.text}>{item.name}</Text>
 

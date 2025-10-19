@@ -1,10 +1,5 @@
 import { useRef } from "react";
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  useWindowDimensions,
-} from "react-native";
+import { ScrollView, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
 import { Input } from "@src/components/Input";
@@ -19,8 +14,6 @@ interface IFieldsProps {
 }
 
 const Fields = ({ fields, setFields, onLogin, onForgot }: IFieldsProps) => {
-  const { width } = useWindowDimensions();
-
   const passwordRef = useRef<any>();
 
   return (
@@ -31,7 +24,6 @@ const Fields = ({ fields, setFields, onLogin, onForgot }: IFieldsProps) => {
     >
       <Input.Normal
         label="E-mail"
-        width={width - 48}
         placeholder="seuemail@exemplo.com"
         returnKeyType="next"
         onSubmitEditing={() => passwordRef.current?.focus()}
@@ -43,7 +35,6 @@ const Fields = ({ fields, setFields, onLogin, onForgot }: IFieldsProps) => {
 
       <Input.Password
         label="Senha"
-        width={width - 48}
         ref={passwordRef}
         placeholder="Sua senha"
         returnKeyType="done"

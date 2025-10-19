@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
     height: 64,
     paddingHorizontal: 16,
     borderWidth: 1,
@@ -21,7 +22,7 @@ export const styles = StyleSheet.create({
   },
   textLabel: {
     position: "absolute",
-    top: -12,
+    top: -8,
     left: 16,
     paddingHorizontal: 8,
     backgroundColor: BACKGROUND_PRIMARY_COLOR,
