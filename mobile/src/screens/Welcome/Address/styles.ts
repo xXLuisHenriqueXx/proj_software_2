@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     rowGap: 32,
     paddingTop: STATUS_BAR_HEIGHT + 32,
     paddingHorizontal: 24,
+    paddingBottom: 24,
     backgroundColor: BACKGROUND_PRIMARY_COLOR,
   },
 });

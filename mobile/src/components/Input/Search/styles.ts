@@ -27,12 +27,4 @@ export const styles = StyleSheet.create({
     fontFamily: REGULAR_FONT,
     color: PRIMARY_COLOR,
   },
-  button: {
-    width: 56,
-    height: 56,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: HIGHLIGHT_COLOR,
-    borderRadius: 16,
-  },
 });

@@ -4,9 +4,9 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ChevronLeft } from "lucide-react-native";
 
 import { Header } from "@src/components/Header";
+import { Button } from "@src/components/Button";
 import Fields from "./_components/Fields";
 import Loader from "@src/components/Loader";
-import RegisterButton from "./_components/RegisterButton";
 
 import { AuthStackParamList } from "@src/routes/stacks/AuthStack";
 import { useAddress } from "@src/hooks/Welcome/useAddress";
@@ -55,7 +55,11 @@ const Address = ({ route }: Props) => {
         onRegister={handleRegister}
       />
 
-      <RegisterButton loading={loading} onRegister={handleRegister} />
+      <Button.Primary
+        text="Cadastrar-se"
+        onPress={handleRegister}
+        loading={loading}
+      />
     </View>
   );
 };

@@ -1,8 +1,9 @@
-import { Text, TouchableOpacity } from "react-native";
+import { Pressable, Text } from "react-native";
 import { styles } from "./styles";
 
 import {
   BACKGROUND_PRIMARY_COLOR,
+  BACKGROUND_SECONDARY_COLOR,
   HIGHLIGHT_COLOR,
 } from "@src/constants/Colors";
 
@@ -15,12 +16,16 @@ const TypeButton = ({
   isActive: boolean;
   onPress: () => void;
 }) => (
-  <TouchableOpacity
+  <Pressable
     style={[
       styles.button,
       { backgroundColor: isActive ? HIGHLIGHT_COLOR : "transparent" },
     ]}
-    activeOpacity={0.85}
+    android_ripple={{
+      color: BACKGROUND_SECONDARY_COLOR,
+      borderless: false,
+      foreground: true,
+    }}
     onPress={onPress}
   >
     <Text
@@ -31,7 +36,7 @@ const TypeButton = ({
     >
       {label}
     </Text>
-  </TouchableOpacity>
+  </Pressable>
 );
 
 export default TypeButton;

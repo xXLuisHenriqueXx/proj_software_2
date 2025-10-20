@@ -2,10 +2,10 @@ import { StyleSheet } from "react-native";
 
 import {
   CONTRAST_COLOR,
-  HIGHLIGHT_COLOR,
   PRIMARY_COLOR,
+  PRIMARY_COLOR_75,
 } from "@src/constants/Colors";
-import { MEDIUM_FONT, REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
+import { REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
   container: {
@@ -32,59 +32,17 @@ export const styles = StyleSheet.create({
   containerHeader: {
     flexDirection: "column",
     alignItems: "center",
-    rowGap: 4,
-    textAlign: "center",
-  },
-  containerInput: {
-    position: "relative",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 64,
-    paddingHorizontal: 16,
-    borderWidth: 1,
-    borderColor: HIGHLIGHT_COLOR,
-    borderRadius: 12,
-  },
-  input: {
-    flex: 1,
-    fontSize: 14,
-    fontFamily: REGULAR_FONT,
-    color: PRIMARY_COLOR,
-  },
-  buttonForgot: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 64,
-    borderRadius: 12,
-    backgroundColor: HIGHLIGHT_COLOR,
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     fontFamily: SEMIBOLD_FONT,
     color: PRIMARY_COLOR,
+    textAlign: "center",
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: REGULAR_FONT,
-    color: PRIMARY_COLOR,
-  },
-  textLabel: {
-    position: "absolute",
-    top: -12,
-    left: 16,
-    paddingHorizontal: 8,
-    backgroundColor: CONTRAST_COLOR,
-    fontSize: 12,
-    fontFamily: MEDIUM_FONT,
-    color: HIGHLIGHT_COLOR,
-  },
-  textForgot: {
-    fontSize: 16,
-    fontFamily: MEDIUM_FONT,
-    color: CONTRAST_COLOR,
+    color: PRIMARY_COLOR_75,
+    textAlign: "center",
   },
 });

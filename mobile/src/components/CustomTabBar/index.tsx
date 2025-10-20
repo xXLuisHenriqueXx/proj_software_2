@@ -1,12 +1,14 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { AnimatePresence, MotiText, MotiView } from "moti";
 import { Plus } from "lucide-react-native";
 
+import { Button } from "../Button";
+
 import { buttonsData } from "@src/static/TabBarButtonsData";
-import { CONTRAST_COLOR, HIGHLIGHT_COLOR } from "@src/constants/Colors";
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 const CustomTabBar = ({
   state,
@@ -69,13 +71,10 @@ const CustomTabBar = ({
       })}
 
       <View style={styles.containerCreate}>
-        <TouchableOpacity
-          style={styles.buttonCreate}
-          activeOpacity={0.85}
+        <Button.Square
+          icon={Plus}
           onPress={() => navigation.navigate("CreateStack")}
-        >
-          <Plus size={24} color={CONTRAST_COLOR} />
-        </TouchableOpacity>
+        />
       </View>
     </View>
   );

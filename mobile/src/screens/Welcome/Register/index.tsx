@@ -3,9 +3,9 @@ import { styles } from "./styles";
 import { ChevronLeft } from "lucide-react-native";
 
 import { Header } from "@src/components/Header";
+import { Button } from "@src/components/Button";
 import TypeButton from "./_components/TypeButton";
 import Fields from "./_components/Fields";
-import NextButton from "./_components/NextButton";
 
 import { useRegister } from "@src/hooks/Welcome/useRegister";
 
@@ -47,7 +47,7 @@ const Register = () => {
         handleNavigateToAddress={handleNavigateToAddress}
       />
 
-      <NextButton onNext={handleNavigateToAddress} />
+      <Button.Primary text="Proximo" onPress={handleNavigateToAddress} />
     </View>
   );
 };

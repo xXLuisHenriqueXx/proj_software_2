@@ -1,8 +1,11 @@
 import { forwardRef } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import { styles } from "./styles";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { AsteriskSquare } from "lucide-react-native";
+
+import { Input } from "@src/components/Input";
+import { Button } from "@src/components/Button";
 
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
@@ -25,7 +28,7 @@ const SheetEmail = forwardRef<BottomSheet, ISheetEmailProps>(
       <BottomSheet
         ref={ref}
         index={-1}
-        snapPoints={["48%"]}
+        snapPoints={["50%"]}
         onChange={handleSheetChanges}
         backgroundComponent={({ style }) => (
           <View style={[style, styles.container]} />
@@ -46,27 +49,18 @@ const SheetEmail = forwardRef<BottomSheet, ISheetEmailProps>(
             </Text>
           </View>
 
-          <View style={styles.containerInput}>
-            <Text style={styles.textLabel}>E-mail</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="seuemail@exemplo.com"
-              returnKeyType="done"
-              onSubmitEditing={onSend}
-              value={email}
-              onChangeText={(text: string) => {
-                setEmail(text);
-              }}
-            />
-          </View>
+          <Input.Normal
+            label="E-mail"
+            placeholder="seuemail@exemplo.com"
+            returnKeyType="done"
+            onSubmitEditing={onSend}
+            value={email}
+            onChangeText={(text: string) => {
+              setEmail(text);
+            }}
+          />
 
-          <TouchableOpacity
-            style={styles.buttonForgot}
-            activeOpacity={0.85}
-            onPress={onSend}
-          >
-            <Text style={styles.textForgot}>Enviar</Text>
-          </TouchableOpacity>
+          <Button.Primary text="Enviar" onPress={onSend} />
         </BottomSheetView>
       </BottomSheet>
     );

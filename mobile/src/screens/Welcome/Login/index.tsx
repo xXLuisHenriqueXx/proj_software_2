@@ -2,8 +2,8 @@ import { View } from "react-native";
 import { styles } from "./styles";
 
 import { Header } from "@src/components/Header";
+import { Button } from "@src/components/Button";
 import Fields from "./_components/Fields";
-import LoginButton from "./_components/LoginButton";
 import SheetEmail from "./_components/SheetEmail";
 import SheetCode from "./_components/SheetCode";
 
@@ -43,7 +43,7 @@ const Login = () => {
         onForgot={handleOpenSheetEmail}
       />
 
-      <LoginButton loading={loading} onLogin={handleLogin} />
+      <Button.Primary text="Entrar" onPress={handleLogin} loading={loading} />
 
       <SheetEmail
         ref={bottomSheetEmailRef}
@@ -54,6 +54,7 @@ const Login = () => {
       />
       <SheetCode
         ref={bottomSheetCodeRef}
+        email={email}
         code={code}
         setCode={setCode}
         onClose={handleCloseSheetCode}

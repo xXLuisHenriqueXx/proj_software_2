@@ -1,5 +1,7 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { styles } from "./styles";
+
+import { Button } from "@src/components/Button";
 
 interface INavigationButtonsProps {
   onNavigateToLogin: () => void;
@@ -12,21 +14,9 @@ const NavigationButtons = ({
 }: INavigationButtonsProps) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.buttonLogin}
-        activeOpacity={0.85}
-        onPress={onNavigateToLogin}
-      >
-        <Text style={styles.textLogin}>Acessar minha conta</Text>
-      </TouchableOpacity>
+      <Button.Primary text="Acessar minha conta" onPress={onNavigateToLogin} />
 
-      <TouchableOpacity
-        style={styles.buttonRegister}
-        activeOpacity={0.85}
-        onPress={onNavigateToRegister}
-      >
-        <Text style={styles.textRegister}>Criar conta</Text>
-      </TouchableOpacity>
+      <Button.Secondary text="Criar conta" onPress={onNavigateToRegister} />
     </View>
   );
 };

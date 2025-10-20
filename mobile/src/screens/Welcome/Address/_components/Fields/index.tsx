@@ -1,16 +1,11 @@
 import React, { useRef } from "react";
-import {
-  ScrollView,
-  Text,
-  TextInput,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { ScrollView, useWindowDimensions, View } from "react-native";
 import { styles } from "./styles";
+
+import { Input } from "@src/components/Input";
 
 import { CEP_MASK } from "@src/constants/Masks";
 import { IFieldsAddress } from "@src/common/Interfaces/Auth.interface";
-import { Input } from "@src/components/Input";
 
 interface IFieldsProps {
   cep: string;

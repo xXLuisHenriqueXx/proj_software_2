@@ -4,11 +4,17 @@ import { styles } from "./styles";
 interface IContentProps {
   title: string;
   subtitle?: string;
+  textCenter?: boolean;
 }
 
-const Content = ({ title, subtitle }: IContentProps) => {
+const Content = ({ title, subtitle, textCenter }: IContentProps) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { alignItems: textCenter ? "center" : "flex-start" },
+      ]}
+    >
       <Text style={subtitle ? styles.titleSmall : styles.titleBig}>
         {title}
       </Text>
