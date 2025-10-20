@@ -199,6 +199,7 @@ export const ToyService = {
         usageTime: toy.usageTime,
         type: toy.type,
         ageGroup: toy.ageGroup,
+        discount: toy.discount,
         pictures: toy.ToyPictures.map((p) => ({
           id: p.id,
           order: p.order,

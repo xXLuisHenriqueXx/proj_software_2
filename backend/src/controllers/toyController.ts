@@ -133,7 +133,6 @@ export const ToyController = {
       }
       return reply.status(200).send(toy);
     } catch (error) {
-      console.error("Erro ao buscar brinquedo:", error);
       return reply.status(500).send({ error: "Erro interno do servidor" });
     }
   },

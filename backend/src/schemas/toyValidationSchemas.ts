@@ -101,20 +101,20 @@ const toyOwnerSchema = z.object({
 
 const toyInListSchema = z.object({
   id: z.string().uuid(),
-  createdAt: z.date(), 
+  createdAt: z.date(),
   name: z.string(),
   description: z.string(),
   ownerId: z.string().uuid(),
-  price: z.number(), 
+  price: z.number(),
   isNew: z.boolean(),
   canTrade: z.boolean(),
   canLend: z.boolean(),
-  usageTime: z.number(), 
-  type: z.array(z.nativeEnum(ToyType)), 
-  ageGroup: z.nativeEnum(AgeRange), 
-  discount: z.number(), 
+  usageTime: z.number(),
+  type: z.array(z.string()),
+  ageGroup: z.string(),
+  discount: z.number(),
   pictures: z.array(toyPictureSchema),
-  _score: z.number().optional(), 
+  _score: z.number().optional(),
 });
 
 export const toyListResponseSchema = z.object({
@@ -127,17 +127,17 @@ export const toyListResponseSchema = z.object({
 
 export const toyResponseSchema = z.object({
   id: z.string().uuid(),
-  createdAt: z.date(), 
+  createdAt: z.date(),
   name: z.string(),
   description: z.string(),
-  price: z.number(), 
+  price: z.number(),
   isNew: z.boolean(),
   canTrade: z.boolean(),
   canLend: z.boolean(),
-  usageTime: z.number(), 
-  type: z.array(z.nativeEnum(ToyType)),
-  ageGroup: z.nativeEnum(AgeRange),
-  discount: z.number(), 
+  usageTime: z.number(),
+  type: z.array(z.string()),
+  ageGroup: z.string(),
+  discount: z.number(),
   pictures: z.array(toyPictureSchema), 
   owner: toyOwnerSchema, 
 });

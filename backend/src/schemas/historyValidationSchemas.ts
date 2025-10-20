@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { toyResponseSchema } from "./toyValidationSchemas";
+import { toyResponseSchema } from "./toyValidationSchemas"; 
 
 export const historyParamsSchema = z.object({
   historyId: z.string().uuid(),

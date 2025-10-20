@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { prisma } from "../prisma";
 import { authService } from "../services/authService";
 import { tokenHelper } from "../helpers/tokenHelper";
-import * as sharp from "sharp";
+import sharp from "sharp";
 import { z } from "zod";
 import {
   registerSchema,
@@ -173,7 +173,6 @@ export const authController = {
       await authService.updatePicture(userId, optimizedBase64String);
       return reply.status(200).send({ message: "Foto atualizada com sucesso" });
     } catch (error) {
-      console.error("Erro no controller de updatePicture:", error);
       return reply.status(500).send({ message: "Erro interno do servidor" });
     }
   },
