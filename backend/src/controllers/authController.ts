@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { prisma } from "../prisma";
 import { authService } from "../services/authService";
 import { tokenHelper } from "../helpers/tokenHelper";
-import * as sharp from "sharp";
+import sharp from "sharp";
 import { z } from "zod";
 import {
   registerSchema,

@@ -99,3 +99,11 @@ export const updateAvatarSchema = z.object({
 export const authHeaderSchema = z.object({
   authorization: z.string().regex(/^Bearer\s.+$/, "Token inválido ou ausente")
 });
+
+export const updatePictureResponseSchema = z.object({
+  message: z.string(),
+});
+
+export const deleteUserResponseSchema = z.object({
+  message: z.string(),
+});
