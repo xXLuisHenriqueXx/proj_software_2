@@ -14,9 +14,9 @@ export interface IProduct {
   canTrade: boolean;
   canLend: boolean;
   usageTime: number;
-  preservation: number;
   type: EToyType[];
   ageGroup: EAgeRange;
   pictures: IToyPicture[];
   owner: IToyOwner;
+  createdAt: Date;
 }

@@ -1,42 +1,17 @@
-export interface IAddress {
-  district: string;
-  street: string;
-  number: string;
-  detail?: string;
-  cep: string;
-}
-
-export interface IUserUpdate {
-  name?: string;
-  email?: string;
-  password?: string;
-  cnpj?: string;
-  address?: IAddress;
-}
+import { IProduct } from "./Product";
 
 export interface IUser {
   id: string;
   name: string;
   email: string;
-  password: string;
-  cnpj?: string;
   parentalControl: boolean;
-  active: boolean;
-  address: IAddress;
-  createdAt: Date;
-  updatedAt: Date;
-  toys: string[];
-  history: string[];
-  ratings: number[];
-  organizationInfo?: string;
-  chatsAsUser1: string[];
-  chatsAsUser2: string[];
-  messages: string[];
-}
-
-export interface IUserResponse {
-  id: string;
-  name: string;
-  email: string;
+  cnpj?: string;
+  pix_key?: string;
   picture?: string;
+  addressDistrict: string;
+  addressStreet: string;
+  addressNumber: number;
+  addressDetail?: string;
+  addressCep: string;
+  toys: IProduct[];
 }

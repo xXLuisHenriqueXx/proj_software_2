@@ -86,39 +86,14 @@ export interface IToyCreate {
   discount?: number;
 }
 
-export interface IToyUpdate {
+export type IToyCreateMain = Omit<IToyCreate, "type">;
+
+export type IToyCreateCategory = Pick<IToyCreate, "type">;
+
+export type IToyUpdate = Partial<IToyCreate> & {
   id: string;
-  name?: string;
-  description?: string;
-  price?: number;
-  isNew?: boolean;
-  canTrade?: boolean;
-  canLend?: boolean;
-  usageTime?: number;
-  condition?: EToyCondition;
-  type?: EToyType[];
-  ageGroup?: EAgeRange;
-  pictures?: string[];
-  discount?: number;
-}
+};
 
 export interface IToyDelete {
   id: string;
-}
-
-export interface IFieldsToyCreateMain {
-  name: string;
-  description: string;
-  price: string;
-  isNew: boolean;
-  canTrade: boolean;
-  canLend: boolean;
-  usageTime: string;
-  ageGroup: EAgeRange;
-  pictures: (string | null | undefined)[];
-  discount?: string;
-}
-
-export interface IFieldsToyCreateCategory {
-  type: EToyType[];
 }

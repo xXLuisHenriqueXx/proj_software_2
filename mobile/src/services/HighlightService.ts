@@ -1,4 +1,4 @@
-import { IHighlightGet } from "@src/common/Interfaces/Highlight.interface";
+import { IHighlightGetByID } from "@src/common/Interfaces/Highlight.interface";
 import { api } from "./Api";
 
 export const highlightService = {
@@ -8,5 +8,9 @@ export const highlightService = {
     return response;
   },
 
-  getById: async (params: IHighlightGet) => {},
+  getById: async (params: IHighlightGetByID) => {
+    const response = await api.get(`/api/highlights/${params.id}`);
+
+    return response;
+  },
 };

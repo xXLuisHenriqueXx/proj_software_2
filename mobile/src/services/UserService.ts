@@ -4,7 +4,7 @@ import { api } from "./Api";
 import {
   IUpdateAvatar,
   IUpdateUser,
-} from "@src/common/Interfaces/User.interfaces";
+} from "@src/common/Interfaces/User.interface";
 
 export const userService = {
   update: async (params: IUpdateUser) => {

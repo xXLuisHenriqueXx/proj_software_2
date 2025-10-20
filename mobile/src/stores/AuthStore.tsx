@@ -6,7 +6,7 @@ import Toast from "react-native-toast-message";
 
 import { ILogin, IRegister } from "@src/common/Interfaces/Auth.interface";
 import { authService } from "@src/services/AuthService";
-import { IUserResponse } from "@src/common/Entities/User";
+import { IUserResponse } from "@src/common/Interfaces/User.interface";
 
 const TOKEN_KEY = process.env.EXPO_PUBLIC_SECURE_TOKEN;
 const USER_KEY = "@user";

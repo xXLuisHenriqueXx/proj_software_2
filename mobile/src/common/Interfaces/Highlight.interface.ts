@@ -1,3 +1,3 @@
-export interface IHighlightGet {
+export interface IHighlightGetByID {
   id: string;
 }

@@ -1,5 +1,5 @@
 import { api } from "./Api";
-import { IInstituteGet } from "@src/common/Interfaces/Institute.interface";
+import { IInstituteGetbyID } from "@src/common/Interfaces/Institute.interface";
 
 export const instituteService = {
   get: async () => {
@@ -8,7 +8,7 @@ export const instituteService = {
     return response;
   },
 
-  getByID: async (params: IInstituteGet) => {
+  getByID: async (params: IInstituteGetbyID) => {
     const response = await api.get(`/api/institutes/${params.id}`);
 
     return response;

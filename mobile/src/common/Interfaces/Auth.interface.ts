@@ -4,11 +4,11 @@ export interface IRegister {
   password: string;
   passwordConfirmation: string;
   cnpj?: string;
-  addressDistrict?: string;
-  addressStreet?: string;
-  addressNumber?: number;
+  addressDistrict: string;
+  addressStreet: string;
+  addressNumber: number;
   addressDetail?: string;
-  addressCep?: string;
+  addressCep: string;
 }
 
 export interface ILogin {
@@ -16,24 +16,18 @@ export interface ILogin {
   password: string;
 }
 
-export interface IFieldsRegister {
-  name: string;
-  cnpj?: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-}
+export type IFieldsRegister = Pick<
+  IRegister,
+  "name" | "email" | "password" | "passwordConfirmation" | "cnpj"
+>;
 
-export interface IFieldsAddress {
-  street: string;
-  number: string;
-  neighborhood: string;
-  extra?: string;
-  city: string;
-  state: string;
-}
+export type IFieldsAddress = Pick<
+  IRegister,
+  | "addressDistrict"
+  | "addressStreet"
+  | "addressNumber"
+  | "addressDetail"
+  | "addressCep"
+>;
 
-export interface IFieldsLogin {
-  email: string;
-  password: string;
-}
+export type IFieldsLogin = ILogin;

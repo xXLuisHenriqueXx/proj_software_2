@@ -1,3 +1,3 @@
-export interface IInstituteGet {
+export interface IInstituteGetbyID {
   id: string;
 }
