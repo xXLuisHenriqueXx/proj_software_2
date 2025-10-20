@@ -173,6 +173,7 @@ export const authController = {
       await authService.updatePicture(userId, optimizedBase64String);
       return reply.status(200).send({ message: "Foto atualizada com sucesso" });
     } catch (error) {
+      console.error("Erro no controller de updatePicture:", error);
       return reply.status(500).send({ message: "Erro interno do servidor" });
     }
   },
