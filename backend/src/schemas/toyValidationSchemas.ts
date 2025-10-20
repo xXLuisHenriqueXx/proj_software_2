@@ -114,7 +114,6 @@ const toyInListSchema = z.object({
   ageGroup: z.string(),
   discount: z.number(),
   pictures: z.array(toyPictureSchema),
-  _score: z.number().optional(),
 });
 
 export const toyListResponseSchema = z.object({
