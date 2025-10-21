@@ -8,4 +8,5 @@ export const CONTRAST_COLOR = "#FEFEFE";
 export const BACKGROUND_PRIMARY_COLOR = "#FAF9F6";
 export const BACKGROUND_SECONDARY_COLOR = "#EBEEEC";
 export const CANCEL_COLOR = "#BA1A1A";
+export const CANCEL_COLOR_10 = "#BA1A1A1A";
 export const ALERT_COLOR = "#FF5800";
