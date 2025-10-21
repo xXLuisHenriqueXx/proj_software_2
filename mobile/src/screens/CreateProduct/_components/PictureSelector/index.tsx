@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 import * as ImagePicker from "expo-image-picker";
+import * as ImageManipulator from "expo-image-manipulator";
 import { ImagePlus, X } from "lucide-react-native";
 
 import { HIGHLIGHT_COLOR, SECONDARY_COLOR } from "@src/constants/Colors";
@@ -25,22 +26,25 @@ const PictureSelector = ({ setFieldPictures }: IPictureSelectorProps) => {
       mediaTypes: ["images"],
       allowsMultipleSelection: true,
       quality: 0.7,
-      aspect: [4, 3],
       selectionLimit: 5,
-      base64: true,
     });
 
     if (result.assets) {
-      const images = result.assets.slice(0, 5);
-
-      const formattedImages = images.map((image) => {
-        const type = image.type || "jpeg";
-        return `data:image/${type};base64,${image.base64}`;
-      });
-
-      setImages(images.map((image) => image.uri));
-      setFieldPictures(formattedImages);
+      const compressedImages = await Promise.all(
+        result.assets.map((asset) => compressImage(asset.uri))
+      );
+      setImages([...images, ...compressedImages]);
+      setFieldPictures([...images, ...compressedImages]);
     }
+  };
+
+  const compressImage = async (uri: string) => {
+    const manipulated = await ImageManipulator.manipulateAsync(
+      uri,
+      [{ resize: { width: 800 } }],
+      { compress: 0.6, format: ImageManipulator.SaveFormat.JPEG, base64: true }
+    );
+    return `data:image/jpeg;base64,${manipulated.base64}`;
   };
 
   const handleRemoveImage = (uri: string) => {
