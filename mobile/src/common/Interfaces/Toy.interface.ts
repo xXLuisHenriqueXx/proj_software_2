@@ -56,7 +56,7 @@ export interface IToyList {
   filter?: IFilter;
 }
 
-export interface IToyGet {
+export interface IToyGetByID {
   id: string;
 }
 
@@ -86,9 +86,19 @@ export interface IToyCreate {
   discount?: number;
 }
 
-export type IToyCreateMain = Omit<IToyCreate, "type">;
-
-export type IToyCreateCategory = Pick<IToyCreate, "type">;
+export interface IToyCreateFields {
+  name: string;
+  description: string;
+  price: string;
+  isNew: boolean;
+  canTrade: boolean;
+  canLend: boolean;
+  usageTime: string;
+  type: EToyType[];
+  ageGroup: EAgeRange;
+  pictures: (string | null | undefined)[];
+  discount?: string;
+}
 
 export type IToyUpdate = Partial<IToyCreate> & {
   id: string;

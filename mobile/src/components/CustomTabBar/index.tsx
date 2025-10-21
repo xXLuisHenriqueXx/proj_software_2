@@ -73,7 +73,7 @@ const CustomTabBar = ({
       <View style={styles.containerCreate}>
         <Button.Square
           icon={Plus}
-          onPress={() => navigation.navigate("CreateStack")}
+          onPress={() => navigation.navigate("CreateProduct")}
         />
       </View>
     </View>

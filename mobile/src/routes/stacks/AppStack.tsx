@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/native-stack";
 
 import AppTabs from "../tabs/AppTabs";
-import CreateStack from "./CreateStack";
+import CreateProduct from "@src/screens/CreateProduct";
 import Recents from "@src/screens/Recents";
 import ProductDetail from "@src/screens/ProductDetail";
 import InstituteDetail from "@src/screens/InstituteDetail";
@@ -14,7 +14,7 @@ import { IFilter } from "@src/common/Interfaces/Toy.interface";
 
 export type AppStackParamList = {
   AppTabs: undefined;
-  CreateStack: undefined;
+  CreateProduct: undefined;
   Recents: undefined;
   ProductDetail: { id: string };
   InstituteDetail: { id: string };
@@ -31,7 +31,7 @@ export default function AppStack() {
       screenOptions={{ headerShown: false, animation: "fade_from_bottom" }}
     >
       <Stack.Screen name="AppTabs" component={AppTabs} />
-      <Stack.Screen name="CreateStack" component={CreateStack} />
+      <Stack.Screen name="CreateProduct" component={CreateProduct} />
       <Stack.Screen name="Recents" component={Recents} />
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="InstituteDetail" component={InstituteDetail} />

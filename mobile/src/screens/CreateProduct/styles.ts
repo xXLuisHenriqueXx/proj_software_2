@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 import {
   BACKGROUND_PRIMARY_COLOR,
+  HIGHLIGHT_COLOR,
   PRIMARY_COLOR,
   PRIMARY_COLOR_25,
   SECONDARY_COLOR,

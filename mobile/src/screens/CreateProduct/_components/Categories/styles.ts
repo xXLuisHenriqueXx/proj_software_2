@@ -1,25 +1,11 @@
 import { StyleSheet } from "react-native";
 
-import {
-  BACKGROUND_PRIMARY_COLOR,
-  HIGHLIGHT_COLOR,
-  PRIMARY_COLOR,
-} from "@src/constants/Colors";
+import { HIGHLIGHT_COLOR, PRIMARY_COLOR } from "@src/constants/Colors";
+import { WIDTH } from "@src/constants/Values";
 import { REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
-import { STATUS_BAR_HEIGHT } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
   container: {
-    position: "relative",
-    paddingTop: STATUS_BAR_HEIGHT + 32,
-    backgroundColor: BACKGROUND_PRIMARY_COLOR,
-  },
-  containerContent: {
-    paddingBottom: 124,
-    rowGap: 48,
-    paddingHorizontal: 24,
-  },
-  containerCategory: {
     flexDirection: "column",
     alignItems: "flex-start",
     rowGap: 16,
@@ -28,13 +14,14 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    gap: 16,
+    gap: 8,
     width: "100%",
   },
   containerItem: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    width: (WIDTH - 48 - 8) / 2,
     paddingHorizontal: 16,
     paddingVertical: 24,
     borderWidth: 0.5,

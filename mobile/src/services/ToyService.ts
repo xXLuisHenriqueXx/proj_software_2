@@ -3,7 +3,7 @@ import * as SecureStore from "expo-secure-store";
 import {
   IToyCreate,
   IToyDelete,
-  IToyGet,
+  IToyGetByID,
   IToyList,
   IToyUpdate,
 } from "@src/common/Interfaces/Toy.interface";
@@ -33,7 +33,7 @@ export const toyService = {
     return response;
   },
 
-  getByID: async (params: IToyGet) => {
+  getByID: async (params: IToyGetByID) => {
     const key = process.env.EXPO_PUBLIC_SECURE_TOKEN;
     if (!key) return;
 

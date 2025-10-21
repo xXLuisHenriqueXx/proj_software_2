@@ -1,24 +1,89 @@
+import { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { Masks } from "react-native-mask-input";
+import Toast from "react-native-toast-message";
 import { X } from "lucide-react-native";
 
 import { Header } from "@src/components/Header";
 import { Input } from "@src/components/Input";
+import { Button } from "@src/components/Button";
 import ConditionList from "./_components/ConditionList";
 import AgeGroupList from "./_components/AgeGroupList";
 import PictureSelector from "./_components/PictureSelector";
 import Checkbox from "@src/components/Checkbox";
-import ButtonNext from "./_components/ButtonNext";
+import Categories from "./_components/Categories";
 
-import { EAgeRange } from "@src/common/Interfaces/Toy.interface";
+import {
+  EAgeRange,
+  EToyType,
+  IToyCreate,
+  IToyCreateFields,
+} from "@src/common/Interfaces/Toy.interface";
 import { formatPrice } from "@src/utils/FormatPrice";
-import { useMain } from "@src/hooks/Create/useMain";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
+import { toyService } from "@src/services/ToyService";
 
-const Main = () => {
-  const { fields, setFields, handleNavigateToCategories } = useMain();
-  const { rootNavigation } = useAppNavigation();
+const CreateProduct = () => {
+  const { appNavigation } = useAppNavigation();
+
+  const [fields, setFields] = useState<IToyCreateFields>({
+    name: "",
+    description: "",
+    price: "",
+    isNew: true,
+    canTrade: false,
+    canLend: false,
+    usageTime: "",
+    type: [],
+    ageGroup: EAgeRange.ZERO_TO_ONE,
+    pictures: [],
+    discount: "",
+  });
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleCreate = async () => {
+    setLoading(true);
+
+    try {
+      const params: IToyCreate = {
+        name: fields.name,
+        description: fields.description,
+        price: fields.canLend || fields.canTrade ? 0 : Number(fields.price),
+        isNew: fields.isNew,
+        canTrade: fields.canTrade,
+        canLend: fields.canLend,
+        usageTime: 1,
+        type: fields.type,
+        ageGroup: fields.ageGroup,
+        pictures: fields.pictures,
+        discount: 0,
+      };
+
+      await toyService.create(params);
+
+      appNavigation.replace("AppTabs");
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Aviso",
+        text2: error.message || "Erro ao criar o produto",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSelectCategory = (category: EToyType) => {
+    if (fields.type.includes(category)) {
+      setFields({
+        ...fields,
+        type: fields.type.filter((item) => item !== category),
+      });
+    } else {
+      setFields({ ...fields, type: [...fields.type, category] });
+    }
+  };
 
   return (
     <ScrollView
@@ -27,7 +92,7 @@ const Main = () => {
     >
       <Header.Root padding={16}>
         <Header.Content title="Criar anúncio" />
-        <Header.RightIcon icon={X} onPress={() => rootNavigation.goBack()} />
+        <Header.RightIcon icon={X} onPress={() => appNavigation.goBack()} />
       </Header.Root>
 
       <PictureSelector
@@ -132,9 +197,15 @@ const Main = () => {
         }
       />
 
-      <ButtonNext onPress={handleNavigateToCategories} />
+      <Categories categories={fields.type} onSelect={handleSelectCategory} />
+
+      <Button.Primary
+        text="Criar anúncio"
+        loading={loading}
+        onPress={handleCreate}
+      />
     </ScrollView>
   );
 };
 
-export default Main;
+export default CreateProduct;
