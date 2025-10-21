@@ -15,8 +15,6 @@ import Toast from "react-native-toast-message";
 import "react-native-reanimated";
 import "react-native-gesture-handler";
 
-import ErrorBoundary from "@src/components/Error";
-
 import Routes from "@src/routes";
 import { useAuthStore } from "@src/stores/AuthStore";
 
@@ -29,7 +27,7 @@ export default function App() {
     RedHatDisplay_800ExtraBold: RedHatDisplay_800ExtraBold,
     RedHatDisplay_900Black: RedHatDisplay_900Black,
   });
-  const { restore, isLoading, logout } = useAuthStore();
+  const { restore, isLoading } = useAuthStore();
 
   useEffect(() => {
     const prepare = async () => {
@@ -58,17 +56,15 @@ export default function App() {
 const AppContent = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ErrorBoundary>
-        <GestureHandlerRootView>
-          <StatusBar
-            barStyle={"dark-content"}
-            backgroundColor="transparent"
-            translucent
-          />
+      <GestureHandlerRootView>
+        <StatusBar
+          barStyle={"dark-content"}
+          backgroundColor="transparent"
+          translucent
+        />
 
-          <Routes />
-        </GestureHandlerRootView>
-      </ErrorBoundary>
+        <Routes />
+      </GestureHandlerRootView>
 
       <Toast />
     </SafeAreaView>
