@@ -38,7 +38,7 @@ export const ToyController = {
   ) {
     try {
       const userId = (req as any).user.userId;
-      const { id: toyId } = req.params;
+      const { toyId } = req.params;
 
       const updatedToy = await ToyService.updateToy(toyId, req.body, userId);
 
