@@ -27,7 +27,7 @@ const ProductDetail = ({ route }: Props) => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.containerScroll}
     >
-      <Pictures data={product.pictures} width={width} />
+      <Pictures data={product.pictures} id={product.id} width={width} />
 
       <View style={styles.containerContent}>
         <View>

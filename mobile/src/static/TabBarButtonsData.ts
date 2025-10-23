@@ -31,9 +31,9 @@ export const buttonsData: IButtonsDataProps[] = [
     icon: PlusSquare,
   },
   {
-    key: "account",
+    key: "profile",
     text: "Conta",
-    label: "account",
+    label: "profile",
     width: 46,
     icon: UserCircle,
   },

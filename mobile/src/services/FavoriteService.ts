@@ -1,18 +1,16 @@
 import * as SecureStore from "expo-secure-store";
 
+import { IFavoriteAdd } from "@src/common/Interfaces/Favorite.interface";
 import { api } from "./Api";
-import {
-  IUpdateAvatar,
-  IUpdateUser,
-} from "@src/common/Interfaces/User.interface";
 
-export const userService = {
+export const favoriteService = {
   get: async () => {
     const key = process.env.EXPO_PUBLIC_SECURE_TOKEN;
     if (!key) return;
 
     const token = await SecureStore.getItemAsync(key);
-    const response = await api.get("/api/users/me", {
+
+    const response = await api.get("/api/favorites", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -21,12 +19,12 @@ export const userService = {
     return response;
   },
 
-  update: async (params: IUpdateUser) => {
+  add: async (params: IFavoriteAdd) => {
     const key = process.env.EXPO_PUBLIC_SECURE_TOKEN;
     if (!key) return;
 
     const token = await SecureStore.getItemAsync(key);
-    const response = await api.patch("/api/users/me", params, {
+    const response = await api.post("/api/favorites", params, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -35,26 +33,12 @@ export const userService = {
     return response;
   },
 
-  updateAvatar: async (params: IUpdateAvatar) => {
+  delete: async (params: IFavoriteAdd) => {
     const key = process.env.EXPO_PUBLIC_SECURE_TOKEN;
     if (!key) return;
 
     const token = await SecureStore.getItemAsync(key);
-    const response = await api.patch("/api/users/avatar", params, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    return response;
-  },
-
-  delete: async () => {
-    const key = process.env.EXPO_PUBLIC_SECURE_TOKEN;
-    if (!key) return;
-
-    const token = await SecureStore.getItemAsync(key);
-    const response = await api.delete("/api/users/me", {
+    const response = await api.delete(`/api/favorites/${params.toyId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

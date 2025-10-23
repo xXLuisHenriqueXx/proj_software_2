@@ -5,6 +5,7 @@ import {
 
 import AppTabs from "../tabs/AppTabs";
 import CreateProduct from "@src/screens/CreateProduct";
+import UpdateProduct from "@src/screens/UpdateProduct";
 import Recents from "@src/screens/Recents";
 import ProductDetail from "@src/screens/ProductDetail";
 import InstituteDetail from "@src/screens/InstituteDetail";
@@ -15,6 +16,7 @@ import { IFilter } from "@src/common/Interfaces/Toy.interface";
 export type AppStackParamList = {
   AppTabs: undefined;
   CreateProduct: undefined;
+  UpdateProduct: { id: string };
   Recents: undefined;
   ProductDetail: { id: string };
   InstituteDetail: { id: string };
@@ -32,6 +34,7 @@ export default function AppStack() {
     >
       <Stack.Screen name="AppTabs" component={AppTabs} />
       <Stack.Screen name="CreateProduct" component={CreateProduct} />
+      <Stack.Screen name="UpdateProduct" component={UpdateProduct} />
       <Stack.Screen name="Recents" component={Recents} />
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="InstituteDetail" component={InstituteDetail} />

@@ -8,14 +8,29 @@ import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 import { IToyPicture } from "@src/common/Interfaces/Toy.interface";
 import { memo } from "react";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
+import Toast from "react-native-toast-message";
+import { favoriteService } from "@src/services/FavoriteService";
 
 interface IPicturesProps {
   data: IToyPicture[];
+  id: string;
   width: number;
 }
 
-const Pictures = ({ data, width }: IPicturesProps) => {
+const Pictures = ({ data, id, width }: IPicturesProps) => {
   const { appNavigation } = useAppNavigation();
+
+  const handleAddFavorite = async () => {
+    try {
+      await favoriteService.add({ toyId: id });
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Aviso",
+        text2: error.message || "Erro ao adicionar aos favoritos",
+      });
+    }
+  };
 
   return (
     <View style={{ position: "relative" }}>
@@ -37,7 +52,7 @@ const Pictures = ({ data, width }: IPicturesProps) => {
 
       <TouchableOpacity
         style={styles.buttonBottomRight}
-        onPress={() => appNavigation.goBack()}
+        onPress={handleAddFavorite}
         activeOpacity={0.85}
       >
         <Heart size={20} color={HIGHLIGHT_COLOR} />
