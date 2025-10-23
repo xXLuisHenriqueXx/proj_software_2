@@ -65,7 +65,7 @@ const UpdateProduct = ({ route }: Props) => {
         usageTime: 1,
         type: fields.type,
         ageGroup: fields.ageGroup,
-        pictures: fields.pictures,
+        // pictures: fields.pictures,
         discount: 0,
       };
 

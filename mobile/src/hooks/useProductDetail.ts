@@ -18,7 +18,7 @@ export function useProductDetail(id: string) {
       setLoading(true);
       try {
         const response = await toyService.getByID({ id });
-        if (isMounted) setProduct(response.data);
+        if (isMounted) setProduct(response?.data);
       } catch (error: any) {
         Toast.show({
           type: "error",
