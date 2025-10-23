@@ -29,11 +29,11 @@ model User {
   addressCep      String
 
   // Relacionamentos
-  toys Toy[]
+  toys Toy[] @relation("UserToys")
 
-  history HistoryEntry[]
+  history HistoryEntry[] @relation("UserHistory")
 
-  ratings          Rate[]
+  ratings          Rate[] @relation("UserRates")
   organizationInfo organizationInfo?
 
   // relação com chats
@@ -41,14 +41,15 @@ model User {
   chatsAsUser2 Chat[] @relation("User2Chats")
 
   // mensagens enviadas
-  messages Message[]
-  Favorite Favorite[]
+  messages Message[] @relation("UserMessages")
+
+  Favorite Favorite[] @relation("UserFavorites")
 }
 
 model organizationInfo {
   id             String   @id @default(uuid())
   organizationId String   @unique
-  organization   User     @relation(fields: [organizationId], references: [id])
+  organization   User     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   description    String
   phone_number1  String
   phone_number2  String?
@@ -71,11 +72,10 @@ model Toy {
   description String
 
   ownerId String
-  owner   User   @relation(fields: [ownerId], references: [id])
+  owner   User   @relation("UserToys", fields: [ownerId], references: [id], onDelete: Cascade)
 
-  history HistoryEntry[]
-
-  price Float
+  history HistoryEntry[] @relation("ToyHistory")
+  price   Float
 
   isNew       Boolean
   canTrade    Boolean
@@ -85,7 +85,7 @@ model Toy {
   ToyPictures ToyPicture[] @relation("Pictures")
   ageGroup    AgeRange
   discount    Int
-  Favorite    Favorite[]
+  Favorite    Favorite[] @relation("ToyFavorites")
 }
 
 model Favorite {
@@ -93,10 +93,10 @@ model Favorite {
   createdAt DateTime @default(now())
 
   userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation("UserFavorites", fields: [userId], references: [id], onDelete: Cascade)
 
   toyId String
-  toy   Toy    @relation(fields: [toyId], references: [id], onDelete: Cascade)
+  toy   Toy    @relation("ToyFavorites", fields: [toyId], references: [id], onDelete: Cascade)
 
   @@unique([userId, toyId]) // Garante que um usuário só pode favoritar um brinquedo uma vez
 }
@@ -121,66 +121,62 @@ enum ToyType {
 }
 
 enum AgeRange {
-  ZERO_TO_ONE // 0 to 1 year
-  ONE_TO_THREE // 1 to 3 years
-  THREE_TO_SIX // 3 to 6 years
-  SIX_TO_TWELVE // 6 to 12 years
-  TWELVE_OR_MORE // 12 years or more
+  ZERO_TO_ONE
+  ONE_TO_THREE
+  THREE_TO_SIX
+  SIX_TO_TWELVE
+  TWELVE_OR_MORE
 }
 
 model ToyPicture {
   id      String @id @default(uuid())
   order   Int
   toyId   String
-  toy     Toy    @relation("Pictures", fields: [toyId], references: [id])
+  toy     Toy    @relation("Pictures", fields: [toyId], references: [id], onDelete: Cascade)
   picture String
 }
 
-// Visualização de um brinquedo pelo usuário
-// - Utilizado para recomendações futuras baseado em gostos
 model HistoryEntry {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   visible   Boolean  @default(true)
 
   userId String?
-  user   User?   @relation(fields: [userId], references: [id])
+  user   User?   @relation("UserHistory", fields: [userId], references: [id], onDelete: Cascade)
 
   toyId String
-  toy   Toy    @relation(fields: [toyId], references: [id])
+  toy   Toy    @relation("ToyHistory", fields: [toyId], references: [id], onDelete: Cascade)
 }
 
 model Rate {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-  value     Int // CHECK (value BETWEEN 1 AND 5)
+  value     Int
   comment   String?
 
   userId String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation("UserRates", fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Chat {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
 
-  // participantes (2 usuários por chat)
   user1Id String
-  user1   User   @relation("User1Chats", fields: [user1Id], references: [id])
+  user1   User   @relation("User1Chats", fields: [user1Id], references: [id], onDelete: Cascade)
 
   user2Id String
-  user2   User   @relation("User2Chats", fields: [user2Id], references: [id])
+  user2   User   @relation("User2Chats", fields: [user2Id], references: [id], onDelete: Cascade)
 
-  // mensagens
-  messages Message[]
+  messages Message[] @relation("ChatMessages")
 }
 
 enum HighlightType {
-  FREE // Brinquedos gratuitos (price = 0)
-  NEARBY // Mais perto do usuário logado
-  POPULAR // Mais visualizados
-  RECENT // Últimos adicionados
-  NEW // Brinquedos novos
+  FREE
+  NEARBY
+  POPULAR
+  RECENT
+  NEW
 }
 
 model Highlight {
@@ -198,11 +194,9 @@ model Message {
   createdAt DateTime @default(now())
   content   String
 
-  // remetente
   senderId String
-  sender   User   @relation(fields: [senderId], references: [id])
+  sender   User   @relation("UserMessages", fields: [senderId], references: [id], onDelete: Cascade)
 
-  // chat em que a mensagem foi enviada
   chatId String
-  chat   Chat   @relation(fields: [chatId], references: [id])
+  chat   Chat   @relation("ChatMessages", fields: [chatId], references: [id], onDelete: Cascade)
 }
