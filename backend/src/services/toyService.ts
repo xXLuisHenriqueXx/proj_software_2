@@ -221,17 +221,32 @@ export const ToyService = {
 
   async pushToUserHistory(userId: string, toyId: string) {
     try {
+      const toy = await prisma.toy.findUnique({
+        where: { id: toyId },
+        select: { ownerId: true },
+      });
+
+      if (!toy) {
+        throw new Error("Brinquedo não encontrado");
+      }
+
+      if (toy.ownerId === userId) {
+        return "Visualização do próprio brinquedo não registrada no histórico";
+      }
+
       await prisma.historyEntry.create({
         data: {
           userId: userId,
           toyId: toyId,
         },
       });
+
       return "Brinquedo registrado no histórico com sucesso";
     } catch (error) {
       throw new Error(error);
     }
   },
+
 
   async searchToys(
     userId: string | null,
