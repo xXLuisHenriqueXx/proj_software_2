@@ -1,6 +1,7 @@
 import {
   Home,
   LucideIcon,
+  MessageCircleMore,
   PlusSquare,
   Search,
   UserCircle,
@@ -24,11 +25,11 @@ export const buttonsData: IButtonsDataProps[] = [
     icon: Search,
   },
   {
-    key: "create",
-    text: "Criar",
-    label: "create",
+    key: "chats",
+    text: "Chats",
+    label: "chats",
     width: 40,
-    icon: PlusSquare,
+    icon: MessageCircleMore,
   },
   {
     key: "profile",
@@ -36,5 +37,12 @@ export const buttonsData: IButtonsDataProps[] = [
     label: "profile",
     width: 46,
     icon: UserCircle,
+  },
+  {
+    key: "create",
+    text: "Criar",
+    label: "create",
+    width: 40,
+    icon: PlusSquare,
   },
 ];

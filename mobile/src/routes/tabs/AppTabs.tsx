@@ -4,10 +4,12 @@ import CustomTabBar from "@src/components/CustomTabBar";
 import Profile from "@src/screens/Profile";
 import Home from "@src/screens/Home";
 import Search from "@src/screens/Search";
+import AllChats from "@src/screens/Chats/AllChats";
 
 export type AppTabsParamList = {
   Home: undefined;
   Search: undefined;
+  Chats: undefined;
   Profile: undefined;
 };
 
@@ -24,6 +26,7 @@ const AppTabs = () => {
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen name="Chats" component={AllChats} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

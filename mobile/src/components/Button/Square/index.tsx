@@ -1,4 +1,4 @@
-import { Pressable } from "react-native";
+import { Pressable, PressableProps } from "react-native";
 import { styles } from "./styles";
 import { LucideIcon } from "lucide-react-native";
 
@@ -7,12 +7,12 @@ import {
   BACKGROUND_SECONDARY_COLOR,
 } from "@src/constants/Colors";
 
-interface ISquareProps {
+type ISquareProps = PressableProps & {
   icon: LucideIcon;
   onPress: () => void;
-}
+};
 
-const Square = ({ icon: Icon, onPress }: ISquareProps) => {
+const Square = ({ icon: Icon, onPress, ...rest }: ISquareProps) => {
   return (
     <Pressable
       style={styles.button}
@@ -22,6 +22,7 @@ const Square = ({ icon: Icon, onPress }: ISquareProps) => {
         foreground: true,
       }}
       onPress={onPress}
+      {...rest}
     >
       <Icon size={24} color={BACKGROUND_PRIMARY_COLOR} />
     </Pressable>
