@@ -10,12 +10,19 @@ import { formatCurrency } from "@src/utils/FormatCurrency";
 import { getAgeGroup } from "@src/utils/GetAgeGroup";
 import { useProductDetail } from "@src/hooks/useProductDetail";
 import { baseURL } from "@src/services/Api";
+import useAuth from "@src/hooks/useAuth";
+import { Button } from "@src/components/Button";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 type Props = NativeStackScreenProps<AppStackParamList, "ProductDetail">;
 
 const ProductDetail = ({ route }: Props) => {
   const { id } = route.params || {};
+  const { user } = useAuth();
+  const { appNavigation } = useAppNavigation();
   const { product, loading, characteristicWidth, width } = useProductDetail(id);
+
+  const isOwner = product?.owner.id === user?.id;
 
   if (!product || loading) {
     return <Loader />;
@@ -59,26 +66,28 @@ const ProductDetail = ({ route }: Props) => {
               </Text>
             </View>
 
-            <View
-              style={[styles.containerOwner, { width: characteristicWidth }]}
-            >
-              <Image
-                style={styles.image}
-                source={{
-                  uri:
-                    product.owner.picture.startsWith("data:image") ||
-                    product.owner.picture.startsWith("http")
-                      ? product.owner.picture
-                      : `${baseURL}${product.owner.picture}`,
-                }}
-                resizeMode="contain"
-              />
+            {!isOwner && (
+              <View
+                style={[styles.containerOwner, { width: characteristicWidth }]}
+              >
+                <Image
+                  style={styles.image}
+                  source={{
+                    uri:
+                      product.owner.picture.startsWith("data:image") ||
+                      product.owner.picture.startsWith("http")
+                        ? product.owner.picture
+                        : `${baseURL}${product.owner.picture}`,
+                  }}
+                  resizeMode="contain"
+                />
 
-              <View>
-                <Text style={styles.subtitle}>Proprietário</Text>
-                <Text style={styles.text}>{product.owner.name}</Text>
+                <View>
+                  <Text style={styles.subtitle}>Proprietário</Text>
+                  <Text style={styles.text}>{product.owner.name}</Text>
+                </View>
               </View>
-            </View>
+            )}
 
             <View style={{ width: characteristicWidth }}>
               <Text style={styles.subtitle}>Faixa etária</Text>
@@ -92,6 +101,15 @@ const ProductDetail = ({ route }: Props) => {
 
           <Text style={styles.text}>{product.description}</Text>
         </View>
+
+        {isOwner && (
+          <Button.Primary
+            text="Editar produto"
+            onPress={() =>
+              appNavigation.navigate("UpdateProduct", { id: product.id })
+            }
+          />
+        )}
       </View>
     </ScrollView>
   );

@@ -65,11 +65,27 @@ const UpdateProduct = ({ route }: Props) => {
         usageTime: 1,
         type: fields.type,
         ageGroup: fields.ageGroup,
-        // pictures: fields.pictures,
+        pictures: fields.pictures,
         discount: 0,
       };
 
-      await toyService.update(params);
+      const response = await toyService.update(params);
+
+      if (response?.status !== 200) {
+        Toast.show({
+          type: "error",
+          text1: "Aviso",
+          text2: "Erro ao atualizar o produto",
+        });
+
+        return;
+      }
+
+      Toast.show({
+        type: "success",
+        text1: "Aviso",
+        text2: "Produto atualizado com sucesso",
+      });
 
       appNavigation.replace("AppTabs");
     } catch (error: any) {
