@@ -7,6 +7,8 @@ import { HighlightController } from "./controllers/highlightController";
 import { InstituteController } from "./controllers/instituteController";
 import { getUserHistory, hideHistoryEntry } from './controllers/historyController';
 import { favoriteController } from "./controllers/favoriteController"
+import { chatController } from './controllers/chatController';
+import { createChatSchema, allChats, getChatInfoById, sendMessage, allMessages, chat, messageSchema } from "./schemas/chatValidationSchema";
 
 import { authMiddleware } from "./middleware/authMiddleware";
 
@@ -288,4 +290,56 @@ export async function routes(app: FastifyInstance) {
     },
     favoriteController.removeFavorite
   );
+  app.post("/chat", {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ["Chats"],
+      summary: "Cria um novo chat entre o usuário logado e outro usuário",
+      body: createChatSchema,
+      response: {
+        201: chat,
+        400: z.object({ message: z.string() }),
+        409: z.object({ message: z.string() })
+      },
+      security: [{ bearerAuth: [] }],
+    },
+  }, chatController.createChat);
+
+  app.get("/chat", {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ["Chats"],
+      summary: "Lista todos os chats do usuário logado",
+      response: {
+        200: allChats,
+      },
+      security: [{ bearerAuth: [] }],
+    },
+  }, chatController.getAllChats);
+
+  app.post("/chat/messages", {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ["Chats"],
+      summary: "Busca todas as mensagens de um chat específico",
+      body: getChatInfoById,
+      response: {
+        200: allMessages,
+      },
+      security: [{ bearerAuth: [] }],
+    },
+  }, chatController.getChatMessages);
+
+  app.post("/chat/send", {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ["Chats"],
+      summary: "Envia uma mensagem em um chat existente",
+      body: sendMessage,
+      response: {
+        201: messageSchema,
+      },
+      security: [{ bearerAuth: [] }],
+    },
+  }, chatController.sendMessage);
 }
