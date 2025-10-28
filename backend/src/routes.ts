@@ -165,7 +165,7 @@ export async function routes(app: FastifyInstance) {
       security: [{ bearerAuth: [] }],
       params: getToySchema,
       body: toyUpdateSchema,
-      response: { 200: toyResponseSchema }
+      response: { 200: z.object({ message: z.string(), toy: toyResponseSchema }) }
     }
   }, ToyController.update);
 

@@ -40,6 +40,8 @@ export const authService = {
         data: updateData,
       });
 
+      
+
       return user;
     } catch (error) {
       console.error("Erro no serviço ao atualizar usuário:", error);

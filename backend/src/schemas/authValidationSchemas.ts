@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { toyResponseSchema } from "./toyValidationSchemas";
 
 export const userResponseSchema = z.object({
   id: z.string().uuid(),
@@ -8,20 +7,43 @@ export const userResponseSchema = z.object({
   picture: z.string().nullable(),
 });
 
+const getMeToyPictureSchema = z.object({
+  id: z.string().uuid(),
+  order: z.number().int(),
+  toyId: z.string().uuid(),
+  picture: z.string(),
+});
+
+const getMeToySchema = z.object({
+  id: z.string().uuid(),
+  createdAt: z.string().datetime(),
+  name: z.string(),
+  description: z.string(),
+  price: z.number(),
+  isNew: z.boolean(),
+  canTrade: z.boolean(),
+  canLend: z.boolean(),
+  usageTime: z.number(),
+  type: z.array(z.string()),
+  ageGroup: z.string(),
+  discount: z.number(),
+  pictures: z.array(getMeToyPictureSchema),
+});
+
 export const getMeResponseSchema = z.object({
-  id: z.string(),
+  id: z.string().uuid(),
   email: z.string().email(),
   name: z.string(),
   parentalControl: z.boolean(),
-  cnpj: z.string().optional(),
-  pix_key: z.string().optional(),
-  picture: z.string().optional(),
+  cnpj: z.string().optional().nullable(),
+  pix_key: z.string().optional().nullable(),
+  picture: z.string().optional().nullable(),
   addressDistrict: z.string(),
   addressStreet: z.string(),
   addressNumber: z.number().int(),
-  addressDetail: z.string().optional(),
+  addressDetail: z.string().optional().nullable(),
   addressCep: z.string(),
-  toys: z.array(toyResponseSchema.omit({ owner: true })).optional(),
+  toys: z.array(getMeToySchema),
 });
 
 const cnpjRegex = /^(\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2})$/;
