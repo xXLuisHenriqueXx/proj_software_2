@@ -218,12 +218,16 @@ export const chatController = {
         try {
             const { chatId } = getChatInfoById.parse(req.params)
             const token = (req.query as { token?: string })?.token;
+            if (!token) {
+                connection.send(JSON.stringify({ type: "error", message: "Token ausente." }));
+                connection.close();
+            }
             const decoded = await tokenHelper.verifyToken(token);
             const currentUserId = decoded.userId
 
             if (!currentUserId || !decoded || typeof decoded !== "object") {
+                connection.send(JSON.stringify({ type: "error", message: "Token ausente." }));
                 connection.close();
-                return;
             }
 
             const chat = await prisma.chat.findUnique({
