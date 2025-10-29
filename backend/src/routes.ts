@@ -9,7 +9,7 @@ import { InstituteController } from "./controllers/instituteController";
 import { getUserHistory, hideHistoryEntry } from './controllers/historyController';
 import { favoriteController } from "./controllers/favoriteController"
 import { chatController } from './controllers/chatController';
-import { createChatSchema, allChats, getChatInfoById, sendMessage, allMessages, chat, messageSchema, wsNewMessageSchema, wsSendMessageSchema, wsGetLatestMessageSchema, wsNoMessagesSchema } from "./schemas/chatValidationSchema";
+import { createChatSchema, allChats, getChatInfoById, sendMessage, allMessages, chat, messageSchema, wsNewMessageSchema, wsSendMessageSchema, wsGetLatestMessageSchema, wsNoMessagesSchema, wsTokenQuery } from "./schemas/chatValidationSchema";
 
 import { authMiddleware } from "./middleware/authMiddleware";
 
@@ -344,12 +344,12 @@ export async function routes(app: FastifyInstance) {
     },
   }, chatController.sendMessage);
   app.get('/chat/ws/:chatId', {
-    onRequest: [authMiddleware],
     schema: {
       tags: ['Chats'],
       summary: 'WebSocket para um chat específico',
       description: 'Abre uma conexão WebSocket para enviar e receber mensagens em tempo real.',
       params: getChatInfoById,
+      querystring: wsTokenQuery,
       security: [{ bearerAuth: [] }],
     },
     websocket: true,
@@ -361,7 +361,7 @@ export async function routes(app: FastifyInstance) {
       tags: ['Chats'],
       summary: 'Documentação do WebSocket do chat',
       description: `
-Conectar via WebSocket em ws://localhost:3000/chat/ws/{chatId}. Os inputs e outputs esperados estão no JSON da rota (/docs/json)
+Conectar via WebSocket em ws://localhost:3000/api/chat/ws/{chatId}?token={token de autenticação}. Os inputs e outputs esperados estão no JSON da rota (/docs/json)
 
 Mensagens enviadas pelo cliente:
   - sendMessage
@@ -373,6 +373,7 @@ Mensagens enviadas pelo servidor:
   - error
 `,
       params: getChatInfoById,
+      querystring: wsTokenQuery,
       security: [{ bearerAuth: [] }],
       'x-websocket': {
         clientMessages: [
