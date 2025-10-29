@@ -330,19 +330,6 @@ export async function routes(app: FastifyInstance) {
       security: [{ bearerAuth: [] }],
     },
   }, chatController.getChatMessages);
-
-  app.post("/chat/send", {
-    onRequest: [authMiddleware],
-    schema: {
-      tags: ["Chats"],
-      summary: "Envia uma mensagem em um chat existente",
-      body: sendMessage,
-      response: {
-        201: messageSchema,
-      },
-      security: [{ bearerAuth: [] }],
-    },
-  }, chatController.sendMessage);
   app.get('/chat/ws/:chatId', {
     schema: {
       tags: ['Chats'],
@@ -364,11 +351,11 @@ export async function routes(app: FastifyInstance) {
 Conectar via WebSocket em ws://localhost:3000/api/chat/ws/{chatId}?token={token de autenticação}. Os inputs e outputs esperados estão no JSON da rota (/docs/json)
 
 Mensagens enviadas pelo cliente:
-  - sendMessage
-  - getLatestMessage
+  - send_message
+  - get_latest_message
 
 Mensagens enviadas pelo servidor:
-  - newMessage
+  - new_message
   - no_messages
   - error
 `,
