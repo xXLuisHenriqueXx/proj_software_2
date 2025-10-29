@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { MotiView, AnimatePresence } from "moti";
 import { Plus } from "lucide-react-native";
 
 import { Button } from "../Button";
@@ -14,6 +15,18 @@ const CustomTabBar = ({
   descriptors,
   navigation,
 }: BottomTabBarProps) => {
+  const focusedRoute = state.routes[state.index];
+  const nestedState = focusedRoute.state as
+    | { index: number; routes: Array<{ name: string }> }
+    | undefined;
+
+  const nestedRouteName =
+    nestedState?.routes?.[nestedState.index]?.name ?? focusedRoute.name;
+
+  const shouldHide =
+    (focusedRoute.name === "Chats" && nestedRouteName === "Chat") ||
+    focusedRoute.name === "Profile";
+
   const visibleRoutes = state.routes
     .map((route, routeIndex) => {
       const found = buttonsData.find((b) => b.key === route.name.toLowerCase());
@@ -68,19 +81,29 @@ const CustomTabBar = ({
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.duoGroup}>{left.map(renderButton)}</View>
+    <AnimatePresence>
+      {!shouldHide && (
+        <MotiView
+          from={{ opacity: 0, translateY: 10 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          exit={{ opacity: 0, translateY: 10 }}
+          transition={{ type: "timing", duration: 250 }}
+          style={styles.container}
+        >
+          <View style={styles.duoGroup}>{left.map(renderButton)}</View>
 
-      <View style={styles.createWrapper}>
-        <Button.Square
-          style={styles.createButton}
-          icon={Plus}
-          onPress={() => navigation.navigate("CreateProduct")}
-        />
-      </View>
+          <View style={styles.createWrapper}>
+            <Button.Square
+              style={styles.createButton}
+              icon={Plus}
+              onPress={() => navigation.navigate("CreateProduct")}
+            />
+          </View>
 
-      <View style={styles.duoGroup}>{right.map(renderButton)}</View>
-    </View>
+          <View style={styles.duoGroup}>{right.map(renderButton)}</View>
+        </MotiView>
+      )}
+    </AnimatePresence>
   );
 };
 

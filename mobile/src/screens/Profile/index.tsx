@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Image, RefreshControl, ScrollView, Text, View } from "react-native";
 import BottomSheet from "@gorhom/bottom-sheet";
 import Toast from "react-native-toast-message";
-import { LogOut, User2 } from "lucide-react-native";
+import { ChevronLeft, LogOut, User2 } from "lucide-react-native";
 
 import { styles } from "./styles";
 import { Header } from "@src/components/Header";
@@ -46,7 +46,6 @@ const Profile = () => {
 
   const [activeSheet, setActiveSheet] = useState<ActiveSheet>(null);
 
-  // ------------------------ Data fetchers ------------------------
   const handleFetchUser = useCallback(async () => {
     const response = await userService.get();
     setUser(response?.data ?? undefined);
@@ -160,7 +159,11 @@ const Profile = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <Header.Root padding={16}>
+        <Header.Root>
+          <Header.LeftIcon
+            icon={ChevronLeft}
+            onPress={() => rootNavigation.goBack()}
+          />
           <Header.Content title="Minha Conta" />
           <Header.RightIcon icon={LogOut} onPress={onLogout} />
         </Header.Root>

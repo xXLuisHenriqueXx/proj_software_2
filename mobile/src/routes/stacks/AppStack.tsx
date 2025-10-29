@@ -3,7 +3,7 @@ import {
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
 
-import AppTabs from "../tabs/AppTabs";
+import AppTabs, { AppTabsParamList } from "../tabs/AppTabs";
 import CreateProduct from "@src/screens/CreateProduct";
 import UpdateProduct from "@src/screens/UpdateProduct";
 import Recents from "@src/screens/Recents";
@@ -14,7 +14,7 @@ import ProductList from "@src/screens/ProductList";
 import { IFilter } from "@src/common/Interfaces/Toy.interface";
 
 export type AppStackParamList = {
-  AppTabs: undefined;
+  AppTabs: { screen?: keyof AppTabsParamList } | undefined;
   CreateProduct: undefined;
   UpdateProduct: { id: string };
   Recents: undefined;
