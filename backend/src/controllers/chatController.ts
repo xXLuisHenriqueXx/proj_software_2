@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { prisma } from "../prisma";
 import { createChatSchema, chat, allChats, allMessages, getChatInfoById, sendMessage, messageSchema, wsMessageSchema } from "../schemas/chatValidationSchema";
+import { tokenHelper } from "../helpers/tokenHelper";
 
 export const chatController = {
     async createChat(req: FastifyRequest, res: FastifyReply) {
@@ -215,14 +216,15 @@ export const chatController = {
     },
     async handleSocket(connection: any, req: FastifyRequest) {
         try {
-            const currentUserId = (req.user as any)?.userId;
+            const { chatId } = getChatInfoById.parse(req.params)
+            const token = (req.query as { token?: string })?.token;
+            const decoded = await tokenHelper.verifyToken(token);
+            const currentUserId = decoded.userId
 
-            if (!currentUserId) {
+            if (!currentUserId || !decoded || typeof decoded !== "object") {
                 connection.close();
                 return;
             }
-
-            const { chatId } = getChatInfoById.parse(req.params)
 
             const chat = await prisma.chat.findUnique({
                 where: { id: chatId },
@@ -319,7 +321,7 @@ export const chatController = {
                 }
             });
             connection.on("close", () => {
-                console.log(`❌ WS desconectado: ${currentUserId}`);
+
             });
         } catch (err) {
             console.error("Erro no socket:", err);

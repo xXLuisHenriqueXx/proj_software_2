@@ -69,3 +69,7 @@ export const wsNoMessagesSchema = z.object({
   type: z.literal('no_messages'),
   message: z.string().default('Nenhuma mensagem nova encontrada'),
 });
+
+export const wsTokenQuery = z.object({
+  token: z.string().describe("Token JWT usado para autenticação via WebSocket"),
+});
