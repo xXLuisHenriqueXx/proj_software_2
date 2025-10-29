@@ -229,7 +229,6 @@ export const chatController = {
             if (!currentUserId || !decoded || typeof decoded !== "object") {
                 connection.send(JSON.stringify({ type: "error", message: "Token ausente." }));
                 connection.close();
-                connection.close();
                 return;
             }
 
