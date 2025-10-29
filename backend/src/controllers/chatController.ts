@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { prisma } from "../prisma";
-import { createChatSchema, chat, allChats, allMessages, getChatInfoById, sendMessage, messageSchema } from "../schemas/chatValidationSchema";
+import { createChatSchema, chat, allChats, allMessages, getChatInfoById, sendMessage, messageSchema, wsMessageSchema } from "../schemas/chatValidationSchema";
 
 export const chatController = {
     async createChat(req: FastifyRequest, res: FastifyReply) {
@@ -89,7 +89,6 @@ export const chatController = {
                 orderBy: { createdAt: "desc" },
             });
 
-            console.log(chats[0])
             const formatted = chats.map((c) => {
                 const latest = c.messages[0];
                 return {
@@ -208,11 +207,122 @@ export const chatController = {
 
             const validated = messageSchema.parse(formattedMessage);
 
-            console.log(validated)
             return res.status(201).send(validated);
         } catch (error) {
             console.error("Erro ao enviar mensagem:", error);
             return res.status(500).send({ message: "Erro interno ao enviar mensagem." });
+        }
+    },
+    async handleSocket(connection: any, req: FastifyRequest) {
+        try {
+            const currentUserId = (req.user as any)?.userId;
+
+            if (!currentUserId) {
+                connection.close();
+                return;
+            }
+
+            const { chatId } = getChatInfoById.parse(req.params)
+
+            const chat = await prisma.chat.findUnique({
+                where: { id: chatId },
+                include: { participants: { select: { id: true } } },
+            });
+
+            if (!chat) {
+                connection.send(JSON.stringify({ type: "error", message: "Chat não encontrado." }));
+                connection.close();
+            }
+
+
+            const isParticipant = chat.participants.some((p) => p.id === currentUserId);
+            if (!isParticipant) {
+                connection.send(JSON.stringify({ type: "error", message: "Você não participa deste chat." }));
+                connection.close();
+            }
+
+            connection.on("message", async (raw: string) => {
+                try {
+                    const data = wsMessageSchema.parse(JSON.parse(raw));
+
+                    if (data.type === "send_message") {
+                        const msg = await prisma.message.create({
+                            data: {
+                                content: data.message,
+                                sender: { connect: { id: currentUserId } },
+                                chat: { connect: { id: chatId } },
+                            },
+                        });
+
+                        connection.send(
+                            JSON.stringify({
+                                type: "new_message",
+                                message: {
+                                    id: msg.id,
+                                    chatId: msg.chatId,
+                                    message: msg.content,
+                                    sent_at: msg.createdAt,
+                                    sent_by_me: true,
+                                    seen: false,
+                                },
+                            })
+                        );
+                    }
+                    if (data.type === "get_latest_message") {
+                        const unreadMessages = await prisma.message.findMany({
+                            where: {
+                                chatId,
+                                seen: false,
+                                NOT: { senderId: currentUserId },
+                            },
+                            include: { sender: { select: { id: true } } },
+                            orderBy: { createdAt: "asc" },
+                        });
+
+                        if (unreadMessages.length === 0) {
+                            connection.send(
+                                JSON.stringify({
+                                    type: "no_messages",
+                                    message: "Nenhuma mensagem nova encontrada",
+                                })
+                            );
+                        }
+
+                        await prisma.message.updateMany({
+                            where: {
+                                chatId,
+                                seen: false,
+                                NOT: { senderId: currentUserId },
+                            },
+                            data: { seen: true },
+                        });
+
+                        for (const msg of unreadMessages) {
+                            connection.send(
+                                JSON.stringify({
+                                    type: "new_message",
+                                    message: {
+                                        id: msg.id,
+                                        chatId: msg.chatId,
+                                        message: msg.content,
+                                        sent_at: msg.createdAt,
+                                        sent_by_me: false,
+                                        seen: true,
+                                    },
+                                })
+                            );
+                        }
+                    }
+
+                } catch (err) {
+                    console.error("Erro ao processar WS:", err);
+                }
+            });
+            connection.on("close", () => {
+                console.log(`❌ WS desconectado: ${currentUserId}`);
+            });
+        } catch (err) {
+            console.error("Erro no socket:", err);
         }
     }
 };

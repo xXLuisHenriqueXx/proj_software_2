@@ -7,6 +7,8 @@ import fastifyJwt from "@fastify/jwt";
 import fastifyStatic from "@fastify/static"
 import * as path from 'path'
 
+import websocketPlugin from "@fastify/websocket";
+
 export const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyJwt, {
@@ -32,6 +34,8 @@ app.register(fastifySwagger, {
   },
   transform: jsonSchemaTransform,
 });
+
+app.register(websocketPlugin);
 
 app.register(fastifySwaggerUi, { routePrefix: "/docs" });
 app.register(routes, { prefix: "/api" });

@@ -44,3 +44,28 @@ export const allMessages = z.object({
 export const getChatInfoById = z.object({
     chatId: z.string().uuid()
 })
+
+export const wsSendMessageSchema = z.object({
+  type: z.literal("send_message"),
+  message: z
+    .string()
+    .regex(
+      /^(?=.*\S)[\p{L}\p{N}\p{P}\p{Zs}\p{S}]{1,500}$/u,
+      "Mensagem inválida: deve ter entre 1 e 500 caracteres e pode conter letras, números, pontuação, espaços e emojis"
+    ),
+});
+
+export const wsGetLatestMessageSchema = z.object({
+  type: z.literal("get_latest_message"),
+});
+
+export const wsMessageSchema = z.union([wsSendMessageSchema, wsGetLatestMessageSchema]);
+
+export const wsNewMessageSchema = z.object({
+  type: z.literal("new_message"),
+  message: messageSchema,
+});
+export const wsNoMessagesSchema = z.object({
+  type: z.literal('no_messages'),
+  message: z.string().default('Nenhuma mensagem nova encontrada'),
+});

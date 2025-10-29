@@ -1,5 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
+import websocket from '@fastify/websocket';
 
 import { authController } from "./controllers/authController";
 import { ToyController } from "./controllers/toyController";
@@ -8,7 +9,7 @@ import { InstituteController } from "./controllers/instituteController";
 import { getUserHistory, hideHistoryEntry } from './controllers/historyController';
 import { favoriteController } from "./controllers/favoriteController"
 import { chatController } from './controllers/chatController';
-import { createChatSchema, allChats, getChatInfoById, sendMessage, allMessages, chat, messageSchema } from "./schemas/chatValidationSchema";
+import { createChatSchema, allChats, getChatInfoById, sendMessage, allMessages, chat, messageSchema, wsNewMessageSchema, wsSendMessageSchema, wsGetLatestMessageSchema, wsNoMessagesSchema } from "./schemas/chatValidationSchema";
 
 import { authMiddleware } from "./middleware/authMiddleware";
 
@@ -342,4 +343,68 @@ export async function routes(app: FastifyInstance) {
       security: [{ bearerAuth: [] }],
     },
   }, chatController.sendMessage);
+  app.get('/chat/ws/:chatId', {
+    onRequest: [authMiddleware],
+    schema: {
+      tags: ['Chats'],
+      summary: 'WebSocket para um chat específico',
+      description: 'Abre uma conexão WebSocket para enviar e receber mensagens em tempo real.',
+      params: getChatInfoById,
+      security: [{ bearerAuth: [] }],
+    },
+    websocket: true,
+  }, chatController.handleSocket);
+
+  // Rota fake só para documentar
+  app.get('/chat/ws/:chatId/doc', {
+    schema: {
+      tags: ['Chats'],
+      summary: 'Documentação do WebSocket do chat',
+      description: `
+Conectar via WebSocket em ws://localhost:3000/chat/ws/{chatId}. Os inputs e outputs esperados estão no JSON da rota (/docs/json)
+
+Mensagens enviadas pelo cliente:
+  - sendMessage
+  - getLatestMessage
+
+Mensagens enviadas pelo servidor:
+  - newMessage
+  - no_messages
+  - error
+`,
+      params: getChatInfoById,
+      security: [{ bearerAuth: [] }],
+      'x-websocket': {
+        clientMessages: [
+          {
+            schema: wsSendMessageSchema,
+            description: 'Envia uma nova mensagem no chat',
+          },
+          {
+            schema: wsGetLatestMessageSchema,
+            description: 'Solicita todas as mensagens não lidas do chat',
+          },
+        ],
+        serverMessages: [
+          {
+            schema: wsNewMessageSchema,
+            description: 'Mensagem enviada ou recebida no chat',
+          },
+          {
+            schema: wsNoMessagesSchema,
+            description: 'Retornado quando não existem mensagens novas',
+          },
+          {
+            schema: z.object({
+              type: z.literal('error'),
+              message: z.string(),
+            }),
+            description: 'Erro retornado pelo servidor (ex: chat não encontrado, usuário não participante)',
+          },
+        ],
+      },
+    },
+  }, async () => {
+    return { info: 'Apenas documentação' };
+  });
 }
