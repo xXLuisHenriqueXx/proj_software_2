@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
-import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
+import {
+  BACKGROUND_SECONDARY_COLOR,
+  HIGHLIGHT_COLOR,
+} from "@src/constants/Colors";
 import { MEDIUM_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
@@ -9,6 +12,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     height: 64,
+    backgroundColor: BACKGROUND_SECONDARY_COLOR,
     borderRadius: 12,
     overflow: "hidden",
   },

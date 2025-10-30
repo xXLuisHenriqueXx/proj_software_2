@@ -1,10 +1,7 @@
 import { Text, Pressable, ActivityIndicator } from "react-native";
 import { styles } from "./styles";
 
-import {
-  BACKGROUND_SECONDARY_COLOR,
-  HIGHLIGHT_COLOR,
-} from "@src/constants/Colors";
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 interface ISecondaryProps {
   text: string;
@@ -17,7 +14,7 @@ const Secondary = ({ text, onPress, loading }: ISecondaryProps) => {
     <Pressable
       style={styles.button}
       android_ripple={{
-        color: BACKGROUND_SECONDARY_COLOR,
+        color: HIGHLIGHT_COLOR,
         borderless: false,
         foreground: true,
       }}
