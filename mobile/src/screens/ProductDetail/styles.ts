@@ -36,18 +36,6 @@ export const styles = StyleSheet.create({
     rowGap: 24,
     width: "100%",
   },
-  containerOwner: {
-    flexDirection: "row",
-    alignItems: "center",
-    columnGap: 8,
-  },
-  image: {
-    width: 32,
-    height: 32,
-    borderWidth: 0.5,
-    borderColor: HIGHLIGHT_COLOR,
-    borderRadius: 32,
-  },
   title: {
     fontSize: 18,
     fontFamily: SEMIBOLD_FONT,
