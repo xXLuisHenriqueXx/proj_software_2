@@ -1,4 +1,4 @@
-interface ILatestMessage {
+export interface IMessage {
   id: string;
   message: string;
   sent_at: Date;
@@ -10,5 +10,5 @@ export interface IChat {
   id: string;
   userName: string;
   userPicture: string;
-  latestMessage: ILatestMessage;
+  latestMessage: IMessage;
 }
