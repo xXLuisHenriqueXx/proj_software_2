@@ -1,19 +1,16 @@
 import { memo } from "react";
 import {
-  View,
-  Text,
   useWindowDimensions,
   ListRenderItem,
   FlatList,
   RefreshControl,
 } from "react-native";
 import { styles } from "./styles";
-import { CircleOff } from "lucide-react-native";
 
 import Item from "./Item";
+import EmptyList from "../EmptyList";
 
 import { IProduct } from "@src/common/Entities/Product";
-import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 interface IListProps {
@@ -23,17 +20,7 @@ interface IListProps {
   onRefresh?: () => void;
   keyExtractor?: (item: IProduct) => string;
   onItemPress?: (id: string) => void;
-  emptyMessage?: string;
 }
-
-const EmptyList = ({ message }: { message?: string }) => (
-  <View style={styles.containerNotFound}>
-    <CircleOff size={24} color={HIGHLIGHT_COLOR} />
-    <Text style={styles.textNotFound}>
-      {message || "Nenhum produto encontrado"}
-    </Text>
-  </View>
-);
 
 const List = ({
   header,
@@ -42,7 +29,6 @@ const List = ({
   onRefresh,
   keyExtractor = (item) => item.id,
   onItemPress,
-  emptyMessage,
 }: IListProps) => {
   const { width } = useWindowDimensions();
 
@@ -72,7 +58,7 @@ const List = ({
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       numColumns={2}
-      ListEmptyComponent={<EmptyList message={emptyMessage} />}
+      ListEmptyComponent={<EmptyList />}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.containerContent}
       columnWrapperStyle={styles.containerColumn}
