@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Skeleton } from "moti/skeleton";
 
 import {
@@ -20,4 +21,4 @@ const LoaderSkeleton = ({ width, height }: ILoaderSkeletonProps) => {
   );
 };
 
-export default LoaderSkeleton;
+export default memo(LoaderSkeleton);
