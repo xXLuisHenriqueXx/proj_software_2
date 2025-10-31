@@ -16,7 +16,11 @@ const NavigationButtons = ({
     <View style={styles.container}>
       <Button.Primary text="Acessar minha conta" onPress={onNavigateToLogin} />
 
-      <Button.Secondary text="Criar conta" onPress={onNavigateToRegister} />
+      <Button.Secondary
+        text="Criar conta"
+        onPress={onNavigateToRegister}
+        style={{ backgroundColor: "transparent" }}
+      />
     </View>
   );
 };

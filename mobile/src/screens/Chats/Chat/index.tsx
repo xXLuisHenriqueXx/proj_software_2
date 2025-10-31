@@ -5,7 +5,6 @@ import {
   Text,
   View,
   ListRenderItemInfo,
-  Platform,
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from "react-native";
@@ -28,7 +27,6 @@ import {
   PRIMARY_COLOR_50,
 } from "@src/constants/Colors";
 
-// 🔹 Mensagem individual otimizada
 const MessageBubble = memo(({ item }: { item: IMessage }) => {
   const isMine = item.sent_by_me;
 
@@ -97,7 +95,6 @@ const Chat = ({ route }: Props) => {
   const [autoScroll, setAutoScroll] = useState(true);
   const listRef = useRef<FlatList<IMessage> | null>(null);
 
-  // 🧠 Scroll inteligente — só auto-scroll se o usuário estiver no final
   const handleScroll = useCallback(
     (e: NativeSyntheticEvent<NativeScrollEvent>) => {
       const { layoutMeasurement, contentOffset, contentSize } = e.nativeEvent;
@@ -121,7 +118,6 @@ const Chat = ({ route }: Props) => {
     setText("");
   }, [text, sendMessage]);
 
-  // 🔥 FlatList otimizada
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<IMessage>) => <MessageBubble item={item} />,
     []
@@ -130,7 +126,7 @@ const Chat = ({ route }: Props) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.containerContent}>
-        <Header.Root>
+        <Header.Root padding={32}>
           <Header.LeftIcon
             icon={ChevronLeft}
             onPress={() => chatNavigation.goBack()}
@@ -151,13 +147,12 @@ const Chat = ({ route }: Props) => {
           scrollEventThrottle={50}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.containerContentFlatlist}
-          // ⚙️ Otimizações de performance:
           initialNumToRender={20}
           maxToRenderPerBatch={30}
           windowSize={5}
           removeClippedSubviews
           getItemLayout={(_, index) => ({
-            length: 80, // altura aproximada da mensagem
+            length: 80,
             offset: 80 * index,
             index,
           })}
@@ -179,7 +174,6 @@ const Chat = ({ route }: Props) => {
           />
 
           <Button.Square
-            style={styles.buttonSend}
             icon={ChevronRight}
             disabled={!text.trim() || !connected}
             onPress={handleSend}

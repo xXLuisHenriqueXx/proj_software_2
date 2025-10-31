@@ -1,4 +1,5 @@
-import { ActivityIndicator, Pressable, Text } from "react-native";
+import { memo, useMemo } from "react";
+import { ActivityIndicator, Pressable, Text, ViewStyle } from "react-native";
 import { styles } from "./styles";
 
 import {
@@ -10,18 +11,38 @@ interface IPrimaryProps {
   text: string;
   onPress: () => void;
   loading?: boolean;
+  disabled?: boolean;
+  style?: ViewStyle | ViewStyle[];
 }
 
-const Primary = ({ text, onPress, loading }: IPrimaryProps) => {
+const Primary = ({
+  text,
+  onPress,
+  loading = false,
+  disabled = false,
+  style,
+}: IPrimaryProps) => {
+  const pressableStyle = useMemo(
+    () => [styles.button, disabled && { opacity: 0.5 }, style],
+    [disabled, style]
+  );
+
+  const handlePress = useMemo(() => {
+    if (loading || disabled) return;
+
+    return onPress;
+  }, [loading, disabled, onPress]);
+
   return (
     <Pressable
-      style={styles.button}
+      style={pressableStyle}
       android_ripple={{
         color: BACKGROUND_SECONDARY_COLOR,
         borderless: false,
         foreground: true,
       }}
-      onPress={onPress}
+      disabled={loading || disabled}
+      onPress={handlePress}
     >
       {loading ? (
         <ActivityIndicator size="small" color={BACKGROUND_PRIMARY_COLOR} />
@@ -32,4 +53,4 @@ const Primary = ({ text, onPress, loading }: IPrimaryProps) => {
   );
 };
 
-export default Primary;
+export default memo(Primary);

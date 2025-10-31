@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Image, RefreshControl, ScrollView, Text, View } from "react-native";
 import BottomSheet from "@gorhom/bottom-sheet";
 import Toast from "react-native-toast-message";
-import { ChevronLeft, LogOut, User2 } from "lucide-react-native";
+import { ChevronLeft, User2 } from "lucide-react-native";
 
 import { styles } from "./styles";
 import { Header } from "@src/components/Header";
@@ -27,6 +27,7 @@ import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 import ProductsBody from "./_components/Sheet/ProductsBody";
 import FavoritesBody from "./_components/Sheet/FavoritesBody";
 import HistoryBody from "./_components/Sheet/HistoryBody";
+import { Button } from "@src/components/Button";
 
 type SheetType = "product" | "favorite" | "history";
 type ActiveSheet = { type: SheetType; id: string } | null;
@@ -46,23 +47,23 @@ const Profile = () => {
 
   const [activeSheet, setActiveSheet] = useState<ActiveSheet>(null);
 
-  const handleFetchUser = useCallback(async () => {
+  const handleFetchUser = async () => {
     const response = await userService.get();
     setUser(response?.data ?? undefined);
     return response;
-  }, []);
+  };
 
-  const handleFetchFavorites = useCallback(async () => {
+  const handleFetchFavorites = async () => {
     const response = await favoriteService.get();
     setFavorites(response?.data ?? []);
     return response;
-  }, []);
+  };
 
-  const handleFetchHistory = useCallback(async () => {
+  const handleFetchHistory = async () => {
     const response = await historyService.get();
     setHistory(response?.data ?? []);
     return response;
-  }, []);
+  };
 
   const fetchAll = useCallback(async () => {
     setLoading(true);
@@ -81,7 +82,7 @@ const Profile = () => {
     } finally {
       setLoading(false);
     }
-  }, [handleFetchUser, handleFetchFavorites, handleFetchHistory]);
+  }, []);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -165,7 +166,6 @@ const Profile = () => {
             onPress={() => rootNavigation.goBack()}
           />
           <Header.Content title="Minha Conta" />
-          <Header.RightIcon icon={LogOut} onPress={onLogout} />
         </Header.Root>
 
         <View style={styles.containerUser}>
@@ -200,6 +200,9 @@ const Profile = () => {
           setOpenSheet={(id: string) => openSheet("favorite", id)}
           setSelectedID={() => {}}
         />
+
+        <Button.Secondary text="Editar" onPress={onLogout} />
+        <Button.Destructive text="Sair" onPress={onLogout} />
       </ScrollView>
 
       <BottomSheet

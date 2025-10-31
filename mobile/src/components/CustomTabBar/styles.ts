@@ -1,10 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import {
-  CONTRAST_COLOR,
-  HIGHLIGHT_COLOR,
-  PRIMARY_COLOR_75,
-} from "@src/constants/Colors";
+import { CONTRAST_COLOR, PRIMARY_COLOR_75 } from "@src/constants/Colors";
 import { SEMIBOLD_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
@@ -40,9 +36,7 @@ export const styles = StyleSheet.create({
   },
 
   createButton: {
-    padding: 20,
-    borderRadius: 48,
-    backgroundColor: HIGHLIGHT_COLOR,
+    borderRadius: 32,
   },
 
   buttonNav: {

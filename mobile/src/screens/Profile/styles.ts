@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     rowGap: 32,
     width: "100%",
-    paddingBottom: 256,
+    paddingBottom: 120,
   },
   containerUser: {
     flexDirection: "column",
