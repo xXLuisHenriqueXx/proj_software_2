@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { View } from "react-native";
 import { styles } from "./styles";
 import { Check } from "lucide-react-native";
@@ -9,15 +10,17 @@ interface ICheckboxProps {
 }
 
 const Checkbox = ({ checked }: ICheckboxProps) => {
-  return (
-    <View style={styles.container}>
-      {checked && (
+  const icon = useMemo(
+    () =>
+      checked ? (
         <View style={styles.checkbox}>
           <Check size={12} color={BACKGROUND_PRIMARY_COLOR} />
         </View>
-      )}
-    </View>
+      ) : null,
+    [checked]
   );
+
+  return <View style={styles.container}>{icon}</View>;
 };
 
-export default Checkbox;
+export default memo(Checkbox);

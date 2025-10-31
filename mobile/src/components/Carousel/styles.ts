@@ -6,13 +6,6 @@ export const styles = StyleSheet.create({
   container: {
     width: "100%",
   },
-  containerDots: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    columnGap: 4,
-    marginTop: 8,
-  },
   image: {
     flexDirection: "column",
     alignItems: "center",
@@ -20,9 +13,5 @@ export const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: PRIMARY_COLOR_25,
     borderRadius: 8,
-  },
-  dot: {
-    height: 6,
-    borderRadius: 3,
   },
 });

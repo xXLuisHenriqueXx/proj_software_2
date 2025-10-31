@@ -1,85 +1,93 @@
-import { memo, useEffect, useRef, useState } from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Image, TouchableOpacity, View, ViewStyle } from "react-native";
 import { styles } from "./styles";
-import PagerView from "react-native-pager-view";
+import PagerView, {
+  PagerViewOnPageSelectedEvent,
+} from "react-native-pager-view";
 
 import LoaderSkeleton from "../LoaderSkeleton";
+import Dots from "./Dots";
 
 import { IHighlight } from "@src/common/Entities/Highlight";
 import { IToyPicture } from "@src/common/Interfaces/Toy.interface";
-import { HIGHLIGHT_COLOR, PRIMARY_COLOR_25 } from "@src/constants/Colors";
 import { baseURL } from "@src/services/Api";
 
 interface ICarouselProps {
   width: number;
   height: number;
   data: IToyPicture[] | IHighlight[];
+  autoScrollInterval?: number;
+  style?: ViewStyle;
 }
 
-const Carousel = ({ width, height, data }: ICarouselProps) => {
+const Carousel = ({
+  width,
+  height,
+  data,
+  autoScrollInterval = 8000,
+  style,
+}: ICarouselProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const pagerRef = useRef<PagerView>(null);
 
-  const handlePageSelected = (event: any) => {
-    const index = event.nativeEvent.position;
-    setActiveIndex(index);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % data.length);
-      pagerRef.current?.setPage((activeIndex + 1) % data.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, [activeIndex, data.length]);
-
-  if (!data || data.length === 0) {
+  if (!data?.length) {
     return <LoaderSkeleton width={width} height={height} />;
   }
 
+  const dataLength = data.length;
+
+  const imageUris = useMemo(
+    () =>
+      data.map((item) =>
+        item.picture.startsWith("data:image") || item.picture.startsWith("http")
+          ? item.picture
+          : `${baseURL}${item.picture}`
+      ),
+    [data]
+  );
+
+  const handlePageSelected = useCallback(
+    (event: PagerViewOnPageSelectedEvent) => {
+      setActiveIndex(event.nativeEvent.position);
+    },
+    []
+  );
+  useEffect(() => {
+    if (dataLength <= 1) return;
+
+    const id = setInterval(() => {
+      setActiveIndex((prev) => {
+        const next = (prev + 1) % dataLength;
+        pagerRef.current?.setPage(next);
+        return next;
+      });
+    }, autoScrollInterval);
+
+    return () => clearInterval(id);
+  }, [dataLength, autoScrollInterval]);
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <PagerView
         ref={pagerRef}
         style={{ width, height }}
         initialPage={0}
         onPageSelected={handlePageSelected}
+        overScrollMode={"never"}
       >
-        {data.map((item) => {
-          const uri =
-            item.picture.startsWith("data:image") ||
-            item.picture.startsWith("http")
-              ? item.picture
-              : `${baseURL}${item.picture}`;
-
-          return (
-            <TouchableOpacity key={item.id} activeOpacity={0.85}>
-              <Image
-                style={[styles.image, { width, height }]}
-                source={{ uri }}
-                resizeMode="cover"
-              />
-            </TouchableOpacity>
-          );
-        })}
+        {imageUris.map((uri, index) => (
+          <TouchableOpacity key={data[index].id} activeOpacity={0.85}>
+            <Image
+              style={[styles.image, { width, height }]}
+              source={{ uri }}
+              resizeMode="cover"
+            />
+          </TouchableOpacity>
+        ))}
       </PagerView>
 
-      <View style={styles.containerDots}>
-        {data.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.dot,
-              {
-                width: index === activeIndex ? 16 : 6,
-                backgroundColor:
-                  index === activeIndex ? HIGHLIGHT_COLOR : PRIMARY_COLOR_25,
-              },
-            ]}
-          />
-        ))}
-      </View>
+      <Dots length={dataLength} activeIndex={activeIndex} />
     </View>
   );
 };
