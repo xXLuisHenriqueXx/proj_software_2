@@ -1,5 +1,6 @@
-import { View, Text } from "react-native";
+import { View, Text, ViewStyle } from "react-native";
 import { styles } from "./styles";
+import { useMemo } from "react";
 
 interface IContentProps {
   title: string;
@@ -8,16 +9,22 @@ interface IContentProps {
 }
 
 const Content = ({ title, subtitle, textCenter }: IContentProps) => {
+  const containerStyle: ViewStyle[] = useMemo(
+    () => [
+      styles.container,
+      { alignItems: textCenter ? "center" : "flex-start" },
+    ],
+    [textCenter]
+  );
+
+  const titleStyle = useMemo(
+    () => (subtitle ? styles.titleSmall : styles.titleBig),
+    [subtitle]
+  );
+
   return (
-    <View
-      style={[
-        styles.container,
-        { alignItems: textCenter ? "center" : "flex-start" },
-      ]}
-    >
-      <Text style={subtitle ? styles.titleSmall : styles.titleBig}>
-        {title}
-      </Text>
+    <View style={containerStyle}>
+      <Text style={titleStyle}>{title}</Text>
 
       {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
     </View>

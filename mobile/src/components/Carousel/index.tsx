@@ -31,10 +31,6 @@ const Carousel = ({
 
   const pagerRef = useRef<PagerView>(null);
 
-  if (!data?.length) {
-    return <LoaderSkeleton width={width} height={height} />;
-  }
-
   const dataLength = data.length;
 
   const imageUris = useMemo(
@@ -53,6 +49,7 @@ const Carousel = ({
     },
     []
   );
+
   useEffect(() => {
     if (dataLength <= 1) return;
 
@@ -66,6 +63,10 @@ const Carousel = ({
 
     return () => clearInterval(id);
   }, [dataLength, autoScrollInterval]);
+
+  if (!data?.length) {
+    return <LoaderSkeleton width={width} height={height} />;
+  }
 
   return (
     <View style={[styles.container, style]}>

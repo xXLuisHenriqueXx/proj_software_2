@@ -1,13 +1,16 @@
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable, Image, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { CameraOff } from "lucide-react-native";
+import { CameraOff, Ellipsis } from "lucide-react-native";
 
-import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
+import {
+  BACKGROUND_PRIMARY_COLOR,
+  HIGHLIGHT_COLOR,
+} from "@src/constants/Colors";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
 import { IProduct } from "@src/common/Entities/Product";
 
@@ -42,19 +45,29 @@ const Item = ({ data, setOpenSheet, setSelectedID }: IItemProps) => {
     appNavigation.navigate("ProductDetail", { id: data.id });
   };
 
-  const onLongPress = () => {
-    setOpenSheet();
+  const onOpenSheet = () => {
     setSelectedID(data.id);
+    setOpenSheet();
   };
 
   return (
-    <Pressable
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-      onPress={onPress}
-      onLongPress={onLongPress}
-    >
+    <Pressable onPressIn={onPressIn} onPressOut={onPressOut} onPress={onPress}>
       <Animated.View style={[styles.container, animatedStyle]}>
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            top: 8,
+            right: 8,
+            padding: 8,
+            backgroundColor: BACKGROUND_PRIMARY_COLOR,
+            borderRadius: 8,
+            zIndex: 1,
+          }}
+          onPress={onOpenSheet}
+        >
+          <Ellipsis size={20} color={HIGHLIGHT_COLOR} />
+        </TouchableOpacity>
+
         {data.pictures.length === 0 ? (
           <View style={styles.image}>
             <CameraOff size={24} color={HIGHLIGHT_COLOR} />

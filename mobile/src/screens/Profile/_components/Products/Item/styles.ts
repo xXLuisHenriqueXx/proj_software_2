@@ -8,6 +8,7 @@ import { SEMIBOLD_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
   container: {
+    position: "relative",
     flexDirection: "column",
     rowGap: 8,
     width: 128,
