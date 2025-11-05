@@ -123,7 +123,7 @@ export const ToyController = {
         userId = decoded.userId as string;
       }
       const { toyId } = req.params;
-      const toy = await ToyService.getToyById(toyId);
+      const toy = await ToyService.getToyById(toyId, userId);
 
       if (!toy) {
         return reply.status(404).send({ message: "Brinquedo não encontrado" });

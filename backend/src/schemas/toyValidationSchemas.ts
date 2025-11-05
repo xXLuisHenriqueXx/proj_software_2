@@ -114,6 +114,7 @@ const toyInListSchema = z.object({
   ageGroup: z.string(),
   discount: z.number(),
   pictures: z.array(toyPictureSchema),
+  isFavorited: z.boolean(),
 });
 
 export const toyListResponseSchema = z.object({
@@ -139,4 +140,5 @@ export const toyResponseSchema = z.object({
   discount: z.number(),
   pictures: z.array(toyPictureSchema), 
   owner: toyOwnerSchema, 
+  isFavorited: z.boolean(),
 });

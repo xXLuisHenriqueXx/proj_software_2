@@ -28,6 +28,7 @@ const getMeToySchema = z.object({
   ageGroup: z.string(),
   discount: z.number(),
   pictures: z.array(getMeToyPictureSchema),
+  isFavorited: z.boolean(),
 });
 
 export const getMeResponseSchema = z.object({

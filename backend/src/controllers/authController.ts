@@ -32,6 +32,13 @@ export const authController = {
     try {
       const userId = (req.user as any).userId;
 
+      let favoritedToyIds = new Set<string>();
+      const userFavorites = await prisma.favorite.findMany({
+        where: { userId },
+        select: { toyId: true },
+      });
+      favoritedToyIds = new Set(userFavorites.map((f) => f.toyId));
+
       const user = await prisma.user.findUniqueOrThrow({
         where: { id: userId },
         include: {
@@ -59,6 +66,7 @@ export const authController = {
             ...restOfToy,
             createdAt: toy.createdAt.toISOString(),
             pictures: ToyPictures,
+            isFavorited: favoritedToyIds.has(toy.id),
           };
         });
       }
