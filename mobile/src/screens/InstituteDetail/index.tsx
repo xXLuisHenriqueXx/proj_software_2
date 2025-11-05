@@ -1,23 +1,19 @@
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import { styles } from "./styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Copy, Globe, X } from "lucide-react-native";
+import { X } from "lucide-react-native";
 
 import { Header } from "@src/components/Header";
+import { Button } from "@src/components/Button";
 import Loader from "@src/components/Loader";
 
 import { AppStackParamList } from "@src/routes/stacks/AppStack";
 import { getAgeGroup } from "@src/utils/GetAgeGroup";
 import { useInstituteDetail } from "@src/hooks/useInstituteDetail";
-import {
-  BACKGROUND_PRIMARY_COLOR,
-  HIGHLIGHT_COLOR,
-} from "@src/constants/Colors";
 import { formatPhoneNumber } from "@src/utils/FormatPhoneNumber";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 type Props = NativeStackScreenProps<AppStackParamList, "InstituteDetail">;
-const mapImage = require("@assets/map.jpg");
 
 const InstituteDetail = ({ route }: Props) => {
   const { id } = route.params || {};
@@ -53,7 +49,7 @@ const InstituteDetail = ({ route }: Props) => {
             <Text style={styles.textName} numberOfLines={2}>
               {institute.name}
             </Text>
-            <Text style={styles.textAgeRange}>
+            <Text style={styles.subtitle}>
               {getAgeGroup(institute.ageRange)}
             </Text>
           </View>
@@ -61,48 +57,33 @@ const InstituteDetail = ({ route }: Props) => {
           <Text style={styles.textDescription}>{institute.description}</Text>
         </View>
 
-        <View style={styles.containerCharacteristics}>
-          <View>
-            <Text style={styles.title}>Telefone</Text>
-            {institute.phone.map((item) => (
-              <Text key={item} style={styles.subtitle}>
-                {formatPhoneNumber(item)}
-              </Text>
-            ))}
-          </View>
-
-          <View>
-            <Text style={styles.title}>Endereço</Text>
-            <Text style={styles.subtitle}>{institute.address}</Text>
-          </View>
-
-          <TouchableOpacity
-            style={styles.buttonSite}
-            activeOpacity={0.85}
-            onPress={handleOpenSite}
-          >
-            <Text style={styles.textSite}>Acessar site</Text>
-
-            <Globe style={styles.icon} size={20} color={HIGHLIGHT_COLOR} />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.buttonCopy}
-            activeOpacity={0.85}
-            onPress={handleCopyPixKey}
-          >
-            <Text style={styles.textCopy}>Copiar chave PIX</Text>
-            <Copy
-              style={styles.icon}
-              size={20}
-              color={BACKGROUND_PRIMARY_COLOR}
-            />
-          </TouchableOpacity>
+        <View>
+          <Text style={styles.title}>
+            {institute.phone.length > 1 ? "Telefones" : "Telefone"}
+          </Text>
+          {institute.phone.map((item) => (
+            <Text key={item} style={styles.subtitle}>
+              {formatPhoneNumber(item)}
+            </Text>
+          ))}
         </View>
+
+        <View>
+          <Text style={styles.title}>Endereço</Text>
+          <Text style={styles.subtitle}>{institute.address}</Text>
+        </View>
+
+        <Button.Secondary
+          text="Acessar site"
+          onPress={handleOpenSite}
+          style={styles.buttonSite}
+        />
+
+        <Button.Primary text="Copiar chave PIX" onPress={handleCopyPixKey} />
 
         <Image
           style={styles.containerMap}
-          source={mapImage}
+          source={require("@assets/map.jpg")}
           resizeMode="cover"
         />
       </View>

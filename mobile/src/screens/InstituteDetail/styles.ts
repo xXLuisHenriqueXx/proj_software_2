@@ -4,93 +4,61 @@ import {
   BACKGROUND_PRIMARY_COLOR,
   HIGHLIGHT_COLOR,
   PRIMARY_COLOR,
+  PRIMARY_COLOR_25,
   SECONDARY_COLOR,
 } from "@src/constants/Colors";
-import { MEDIUM_FONT, REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
+import { REGULAR_FONT, SEMIBOLD_FONT } from "@src/constants/Fonts";
 import { STATUS_BAR_HEIGHT } from "@src/constants/Values";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BACKGROUND_PRIMARY_COLOR,
+  },
+  containerScroll: {
+    rowGap: 16,
+    paddingTop: STATUS_BAR_HEIGHT + 32,
+    paddingBottom: 32,
     paddingHorizontal: 24,
   },
   containerContent: {
     flexDirection: "column",
-    rowGap: 24,
+    rowGap: 32,
     width: "100%",
   },
   containerInfo: {
     flexDirection: "column",
     rowGap: 16,
   },
-  containerScroll: {
-    paddingTop: STATUS_BAR_HEIGHT + 32,
-    paddingBottom: 32,
-    rowGap: 48,
-  },
   containerText: {
     flexDirection: "column",
     rowGap: 4,
-  },
-  containerCharacteristics: {
-    position: "relative",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    columnGap: 16,
-    rowGap: 32,
   },
   containerMap: {
     width: "100%",
     height: 240,
     borderRadius: 12,
+    borderWidth: 0.5,
+    borderColor: PRIMARY_COLOR_25,
     overflow: "hidden",
   },
   image: {
-    width: 112,
-    height: 112,
+    width: 124,
+    height: 124,
     borderRadius: 12,
-  },
-  icon: {
-    position: "absolute",
-    right: 16,
-  },
-  buttonCopy: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 64,
-    backgroundColor: HIGHLIGHT_COLOR,
-    borderRadius: 12,
+    borderWidth: 0.5,
+    borderColor: PRIMARY_COLOR_25,
   },
   buttonSite: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 64,
+    backgroundColor: BACKGROUND_PRIMARY_COLOR,
     borderWidth: 1,
     borderColor: HIGHLIGHT_COLOR,
     borderRadius: 12,
-  },
-  textCopy: {
-    fontSize: 14,
-    fontFamily: MEDIUM_FONT,
-    color: BACKGROUND_PRIMARY_COLOR,
-  },
-  textSite: {
-    fontSize: 14,
-    fontFamily: MEDIUM_FONT,
-    color: HIGHLIGHT_COLOR,
   },
   textName: {
     fontSize: 22,
     fontFamily: SEMIBOLD_FONT,
     color: PRIMARY_COLOR,
-  },
-  textAgeRange: {
-    fontSize: 14,
-    fontFamily: REGULAR_FONT,
-    color: SECONDARY_COLOR,
   },
   textDescription: {
     fontSize: 16,
