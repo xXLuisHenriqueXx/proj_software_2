@@ -1,40 +1,36 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Image, RefreshControl, ScrollView, Text, View } from "react-native";
+import { styles } from "./styles";
 import BottomSheet from "@gorhom/bottom-sheet";
 import Toast from "react-native-toast-message";
 import { ChevronLeft, User2 } from "lucide-react-native";
 
-import { styles } from "./styles";
 import { Header } from "@src/components/Header";
+import { Button } from "@src/components/Button";
 import Loader from "@src/components/Loader";
 import Products from "./_components/Products";
 import Favorites from "./_components/Favorites";
 import History from "./_components/History";
+import ProductsBody from "./_components/Sheet/ProductsBody";
+import FavoritesBody from "./_components/Sheet/FavoritesBody";
+import HistoryBody from "./_components/Sheet/HistoryBody";
 
 import { useAuthStore } from "@src/stores/AuthStore";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
 import { IUser } from "@src/common/Entities/User";
 import { IProduct } from "@src/common/Entities/Product";
 import { IHistory } from "@src/common/Entities/History";
-
 import { userService } from "@src/services/UserService";
 import { favoriteService } from "@src/services/FavoriteService";
 import { historyService } from "@src/services/HistoryService";
-import { toyService } from "@src/services/ToyService";
-
 import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
-
-import ProductsBody from "./_components/Sheet/ProductsBody";
-import FavoritesBody from "./_components/Sheet/FavoritesBody";
-import HistoryBody from "./_components/Sheet/HistoryBody";
-import { Button } from "@src/components/Button";
 
 type SheetType = "product" | "favorite" | "history";
 type ActiveSheet = { type: SheetType; id: string } | null;
 
 const Profile = () => {
   const { logout } = useAuthStore();
-  const { rootNavigation } = useAppNavigation();
+  const { rootNavigation, appNavigation } = useAppNavigation();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -137,6 +133,10 @@ const Profile = () => {
     rootNavigation.replace("AuthStack");
   }, [logout, rootNavigation]);
 
+  const onEdit = useCallback(() => {
+    appNavigation.navigate("UpdateUser", { id: user?.id ?? "" });
+  }, [rootNavigation]);
+
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -201,7 +201,7 @@ const Profile = () => {
           setSelectedID={() => {}}
         />
 
-        <Button.Secondary text="Editar" onPress={onLogout} />
+        <Button.Secondary text="Editar" onPress={onEdit} />
         <Button.Destructive text="Sair" onPress={onLogout} />
       </ScrollView>
 

@@ -12,7 +12,7 @@ interface IFieldsProps {
   setCep: (cep: string) => void;
   fields: IFieldsAddress;
   setFields: (fields: IFieldsAddress) => void;
-  onRegister: () => void;
+  // onRegister: () => void;
 }
 
 const Fields = ({
@@ -20,23 +20,22 @@ const Fields = ({
   setCep,
   fields,
   setFields,
-  onRegister,
-}: IFieldsProps) => {
+}: // onRegister,
+IFieldsProps) => {
   const { width } = useWindowDimensions();
 
   const numberRef = useRef<any>();
   const neighborhoodRef = useRef<any>();
   const extraRef = useRef<any>();
   const cityRef = useRef<any>();
-  const stateRef = useRef<any>();
+  // const stateRef = useRef<any>();
 
-  const cepWidth = width - 48;
   const streetWidth = width * 0.7 - 28;
   const numberWidth = width * 0.3 - 28;
   const neighborhoodWidth = width * 0.6 - 28;
   const extraWidth = width * 0.4 - 28;
-  const cityWidth = width * 0.7 - 28;
-  const stateWidth = width * 0.3 - 28;
+  // const cityWidth = width * 0.7 - 28;
+  // const stateWidth = width * 0.3 - 28;
 
   return (
     <ScrollView
@@ -46,7 +45,6 @@ const Fields = ({
     >
       <Input.Masked
         label="Cep"
-        width={cepWidth}
         placeholder="00000-000"
         returnKeyType="done"
         value={cep}
@@ -65,9 +63,9 @@ const Fields = ({
           placeholder="Seu endereço"
           returnKeyType="next"
           onSubmitEditing={() => numberRef.current?.focus()}
-          value={fields.street}
+          value={fields.addressStreet}
           onChangeText={(text: string) => {
-            setFields({ ...fields, street: text });
+            setFields({ ...fields, addressStreet: text });
           }}
         />
 
@@ -78,9 +76,9 @@ const Fields = ({
           placeholder="000"
           returnKeyType="next"
           onSubmitEditing={() => neighborhoodRef.current?.focus()}
-          value={fields.number}
+          value={fields.addressNumber.toString()}
           onChangeText={(text: string) => {
-            setFields({ ...fields, number: text });
+            setFields({ ...fields, addressNumber: Number(text) });
           }}
         />
       </View>
@@ -93,9 +91,9 @@ const Fields = ({
           placeholder="Seu bairro"
           returnKeyType="next"
           onSubmitEditing={() => extraRef.current?.focus()}
-          value={fields.neighborhood}
+          value={fields.addressDistrict}
           onChangeText={(text: string) => {
-            setFields({ ...fields, neighborhood: text });
+            setFields({ ...fields, addressDistrict: text });
           }}
         />
 
@@ -106,14 +104,14 @@ const Fields = ({
           placeholder="Opcional"
           returnKeyType="next"
           onSubmitEditing={() => cityRef.current?.focus()}
-          value={fields.extra}
+          value={fields.addressDetail}
           onChangeText={(text: string) => {
-            setFields({ ...fields, extra: text });
+            setFields({ ...fields, addressDetail: text });
           }}
         />
       </View>
 
-      <View style={styles.containerInputGroup}>
+      {/* <View style={styles.containerInputGroup}>
         <Input.Normal
           label="Cidade*"
           width={cityWidth}
@@ -139,7 +137,7 @@ const Fields = ({
             setFields({ ...fields, state: text });
           }}
         />
-      </View>
+      </View> */}
     </ScrollView>
   );
 };

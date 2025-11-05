@@ -10,6 +10,7 @@ import Recents from "@src/screens/Recents";
 import ProductDetail from "@src/screens/ProductDetail";
 import InstituteDetail from "@src/screens/InstituteDetail";
 import ProductList from "@src/screens/ProductList";
+import UpdateUser from "@src/screens/UpdateUser";
 
 import { IFilter } from "@src/common/Interfaces/Toy.interface";
 
@@ -21,6 +22,7 @@ export type AppStackParamList = {
   ProductDetail: { id: string };
   InstituteDetail: { id: string };
   ProductList: { filter?: IFilter };
+  UpdateUser: { id: string };
 };
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
@@ -39,6 +41,7 @@ export default function AppStack() {
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="InstituteDetail" component={InstituteDetail} />
       <Stack.Screen name="ProductList" component={ProductList} />
+      <Stack.Screen name="UpdateUser" component={UpdateUser} />
     </Stack.Navigator>
   );
 }
