@@ -2,8 +2,9 @@ import { memo } from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
-import { ICategory } from "@src/common/Entities/Category";
 import { Button } from "@src/components/Button";
+
+import { ICategory } from "@src/common/Entities/Category";
 
 interface IItemProps {
   data: ICategory;
@@ -13,11 +14,7 @@ interface IItemProps {
 const Item = ({ data, onPress }: IItemProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Button.Square
-        style={{ borderRadius: 32 }}
-        icon={data.icon}
-        onPress={onPress}
-      />
+      <Button.Square icon={data.icon} onPress={onPress} />
 
       <Text style={styles.text}>{data.name}</Text>
     </TouchableOpacity>
