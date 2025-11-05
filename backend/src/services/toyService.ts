@@ -385,6 +385,7 @@ export const ToyService = {
           order: p.order,
           picture: p.picture,
         })),
+        isFavorited: favoritedToyIds.has(toy.id),
       };
       delete (result as any).ToyPictures;
       return result;
