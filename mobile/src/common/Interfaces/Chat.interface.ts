@@ -5,8 +5,3 @@ export interface IChatCreate {
 export interface IChatAllMessages {
   chatId: string;
 }
-
-export interface IChatSendMessage {
-  chatId: string;
-  message: string;
-}

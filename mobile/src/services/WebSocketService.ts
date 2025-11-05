@@ -1,4 +1,3 @@
-// webSocketService.ts
 import * as SecureStore from "expo-secure-store";
 
 type CallbackFn = (data: any) => void;
