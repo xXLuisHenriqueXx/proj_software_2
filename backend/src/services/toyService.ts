@@ -187,6 +187,19 @@ export const ToyService = {
         throw new Error("Brinquedo não encontrado");
       }
 
+      let isFavorited = false;
+      if (userId) {
+        const favorite = await prisma.favorite.findFirst({
+          where: {
+            userId: userId,
+            toyId: toy.id,
+          },
+        });
+        if (favorite) {
+          isFavorited = true;
+        }
+      }
+
       const response = {
         id: toy.id,
         createdAt: toy.createdAt,
@@ -259,6 +272,15 @@ export const ToyService = {
 
     if (pageSize > 100) {
       throw new Error("Não é possível buscar mais que 100 itens por vez");
+    }
+
+    let favoritedToyIds = new Set<string>();
+    if (userId) {
+      const userFavorites = await prisma.favorite.findMany({
+        where: { userId },
+        select: { toyId: true },
+      });
+      favoritedToyIds = new Set(userFavorites.map((f) => f.toyId));
     }
 
     const where: any = {};

@@ -7,6 +7,13 @@ import { historyParamsSchema } from "../schemas/historyValidationSchemas";
 export async function getUserHistory(request: FastifyRequest, reply: FastifyReply) {
   const userId = request.user.sub;
 
+  let favoritedToyIds = new Set<string>();
+  const userFavorites = await prisma.favorite.findMany({
+    where: { userId },
+    select: { toyId: true },
+  });
+  favoritedToyIds = new Set(userFavorites.map((f) => f.toyId));
+
   let historyEntries = await prisma.historyEntry.findMany({
     where: {
       userId: userId,
@@ -26,7 +33,14 @@ export async function getUserHistory(request: FastifyRequest, reply: FastifyRepl
   });
 
   historyEntries = historyEntries.map((entry) => {
-    entry.toy = ToyHelper.fixToyObject(entry.toy);
+
+    const isFavorited = favoritedToyIds.has(entry.toyId);
+    const fixedToy = ToyHelper.fixToyObject(entry.toy);
+
+    entry.toy = {
+      ...fixedToy,
+      isFavorited: isFavorited,
+    };
     return entry;
   });
 
