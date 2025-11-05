@@ -33,6 +33,14 @@ const Primary = ({
     return onPress;
   }, [loading, disabled, onPress]);
 
+  const renderLoading = useMemo(() => {
+    return loading ? (
+      <ActivityIndicator size="small" color={BACKGROUND_PRIMARY_COLOR} />
+    ) : (
+      <Text style={styles.text}>{text}</Text>
+    );
+  }, [loading, text]);
+
   return (
     <Pressable
       style={pressableStyle}
@@ -44,11 +52,7 @@ const Primary = ({
       disabled={loading || disabled}
       onPress={handlePress}
     >
-      {loading ? (
-        <ActivityIndicator size="small" color={BACKGROUND_PRIMARY_COLOR} />
-      ) : (
-        <Text style={styles.text}>{text}</Text>
-      )}
+      {renderLoading}
     </Pressable>
   );
 };

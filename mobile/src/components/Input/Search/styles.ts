@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     columnGap: 8,
-    height: 56,
+    height: 64,
     paddingHorizontal: 16,
     borderWidth: 1,
     borderColor: HIGHLIGHT_COLOR,

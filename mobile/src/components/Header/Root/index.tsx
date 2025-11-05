@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from "react";
+import { memo, ReactNode, useMemo } from "react";
 import { TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
@@ -27,4 +27,4 @@ const Root = ({ children, padding = 0, onPress }: IRootProps) => {
   );
 };
 
-export default Root;
+export default memo(Root);

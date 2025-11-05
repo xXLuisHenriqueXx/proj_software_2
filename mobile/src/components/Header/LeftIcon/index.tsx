@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { LucideIcon } from "lucide-react-native";
@@ -21,4 +22,4 @@ const LeftIcon = ({ icon: Icon, onPress }: ILeftIconProps) => {
   );
 };
 
-export default LeftIcon;
+export default memo(LeftIcon);

@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
 import { Text, TextInput, TextInputProps, View } from "react-native";
 import { styles } from "./styles";
 
@@ -10,8 +10,10 @@ type ITextAreaProps = TextInputProps & {
 const TextArea = forwardRef<any, ITextAreaProps>((props, ref) => {
   const { label, width, ...rest } = props;
 
+  const inputStyles = useMemo(() => [styles.container, { width }], [width]);
+
   return (
-    <View style={[styles.container, { width }]}>
+    <View style={inputStyles}>
       <Text style={styles.textLabel}>{label}</Text>
       <TextInput style={styles.input} ref={ref} {...rest} />
     </View>

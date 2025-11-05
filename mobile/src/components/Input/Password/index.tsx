@@ -1,5 +1,11 @@
-import { forwardRef, useState } from "react";
-import { Text, TextInput, TextInputProps, View } from "react-native";
+import { forwardRef, useMemo, useState } from "react";
+import {
+  Text,
+  TextInput,
+  TextInputProps,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { styles } from "./styles";
 import { Eye, EyeOff } from "lucide-react-native";
 
@@ -15,9 +21,28 @@ const Password = forwardRef<any, IPasswordProps>((props, ref) => {
   const { label, instruction, width, ...rest } = props;
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
+  const inputStyles = useMemo(
+    () => [styles.containerInput, { width }],
+    [width]
+  );
+
+  const renderIcon = useMemo(() => {
+    if (showPassword) {
+      return <Eye size={24} color={PRIMARY_COLOR_75} />;
+    } else {
+      return <EyeOff size={24} color={PRIMARY_COLOR_75} />;
+    }
+  }, [showPassword]);
+
+  const renderInstruction = useMemo(() => {
+    if (instruction) {
+      return <Text style={styles.textInstruction}>{instruction}</Text>;
+    }
+  }, [instruction]);
+
   return (
     <View style={styles.container}>
-      <View style={[styles.containerInput, { width }]}>
+      <View style={inputStyles}>
         <Text style={styles.textLabel}>{label}</Text>
         <TextInput
           style={styles.input}
@@ -25,21 +50,15 @@ const Password = forwardRef<any, IPasswordProps>((props, ref) => {
           secureTextEntry={showPassword}
           {...rest}
         />
-        {showPassword ? (
-          <Eye
-            onPress={() => setShowPassword(false)}
-            size={24}
-            color={PRIMARY_COLOR_75}
-          />
-        ) : (
-          <EyeOff
-            onPress={() => setShowPassword(true)}
-            size={24}
-            color={PRIMARY_COLOR_75}
-          />
-        )}
+        <TouchableOpacity
+          activeOpacity={0.85}
+          onPress={() => setShowPassword(!showPassword)}
+        >
+          {renderIcon}
+        </TouchableOpacity>
       </View>
-      {instruction && <Text style={styles.textInstruction}>{instruction}</Text>}
+
+      {renderInstruction}
     </View>
   );
 });

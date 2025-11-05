@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { CameraOff } from "lucide-react-native";
@@ -13,30 +13,49 @@ interface IItemProps {
   handleNavigateToDetail: (id: string) => void;
 }
 
-const Item = ({ data, widthProduct, handleNavigateToDetail }: IItemProps) => (
-  <TouchableOpacity
-    style={[styles.container, { width: widthProduct }]}
-    activeOpacity={0.85}
-    onPress={() => handleNavigateToDetail(data.id)}
-  >
-    {data?.pictures?.[0]?.picture ? (
-      <Image style={styles.image} source={{ uri: data.pictures[0].picture }} />
-    ) : (
-      <View style={styles.image}>
-        <CameraOff size={24} color={HIGHLIGHT_COLOR} />
+const Item = ({ data, widthProduct, handleNavigateToDetail }: IItemProps) => {
+  const renderImage = useMemo(() => {
+    if (data?.pictures?.[0]?.picture) {
+      return (
+        <Image
+          style={styles.image}
+          source={{ uri: data.pictures[0].picture }}
+        />
+      );
+    } else {
+      return (
+        <View style={styles.image}>
+          <CameraOff size={24} color={HIGHLIGHT_COLOR} />
+        </View>
+      );
+    }
+  }, [data.pictures]);
+
+  const renderPrice = useMemo(() => {
+    if (data.price === 0) {
+      return "Gratuito";
+    } else {
+      return formatCurrency(data.price);
+    }
+  }, [data.price]);
+
+  return (
+    <TouchableOpacity
+      style={[styles.container, { width: widthProduct }]}
+      activeOpacity={0.85}
+      onPress={() => handleNavigateToDetail(data.id)}
+    >
+      {renderImage}
+
+      <View style={styles.containerInfo}>
+        <Text style={styles.textName} numberOfLines={2}>
+          {data.name}
+        </Text>
+
+        <Text style={styles.textPrice}>{renderPrice}</Text>
       </View>
-    )}
-
-    <View style={styles.containerInfo}>
-      <Text style={styles.textName} numberOfLines={2}>
-        {data.name}
-      </Text>
-
-      <Text style={styles.textPrice}>
-        {data.price === 0 ? "Gratuito" : formatCurrency(data.price)}
-      </Text>
-    </View>
-  </TouchableOpacity>
-);
+    </TouchableOpacity>
+  );
+};
 
 export default memo(Item);

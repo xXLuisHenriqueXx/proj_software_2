@@ -1,6 +1,6 @@
+import { memo, useMemo } from "react";
 import { View, Text, ViewStyle } from "react-native";
 import { styles } from "./styles";
-import { useMemo } from "react";
 
 interface IContentProps {
   title: string;
@@ -31,4 +31,4 @@ const Content = ({ title, subtitle, textCenter }: IContentProps) => {
   );
 };
 
-export default Content;
+export default memo(Content);

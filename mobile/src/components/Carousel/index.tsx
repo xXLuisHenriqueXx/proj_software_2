@@ -64,6 +64,11 @@ const Carousel = ({
     return () => clearInterval(id);
   }, [dataLength, autoScrollInterval]);
 
+  const imageStyle = useMemo(
+    () => [styles.image, { width, height }],
+    [width, height]
+  );
+
   if (!data?.length) {
     return <LoaderSkeleton width={width} height={height} />;
   }
@@ -79,11 +84,7 @@ const Carousel = ({
       >
         {imageUris.map((uri, index) => (
           <TouchableOpacity key={data[index].id} activeOpacity={0.85}>
-            <Image
-              style={[styles.image, { width, height }]}
-              source={{ uri }}
-              resizeMode="cover"
-            />
+            <Image style={imageStyle} source={{ uri }} resizeMode="cover" />
           </TouchableOpacity>
         ))}
       </PagerView>

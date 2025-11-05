@@ -30,6 +30,14 @@ const Secondary = ({
     return onPress;
   }, [loading, disabled, onPress]);
 
+  const renderLoading = useMemo(() => {
+    return loading ? (
+      <ActivityIndicator size="small" color={HIGHLIGHT_COLOR} />
+    ) : (
+      <Text style={styles.text}>{text}</Text>
+    );
+  }, [loading, text]);
+
   return (
     <Pressable
       style={pressableStyle}

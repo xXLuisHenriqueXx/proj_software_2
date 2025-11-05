@@ -30,6 +30,14 @@ const Destructive = ({
     return onPress;
   }, [loading, disabled, onPress]);
 
+  const renderLoading = useMemo(() => {
+    return loading ? (
+      <ActivityIndicator size="small" color={CANCEL_COLOR} />
+    ) : (
+      <Text style={styles.text}>{text}</Text>
+    );
+  }, [loading, text]);
+
   return (
     <Pressable
       style={pressableStyle}
@@ -41,11 +49,7 @@ const Destructive = ({
       disabled={loading || disabled}
       onPress={handlePress}
     >
-      {loading ? (
-        <ActivityIndicator size="small" color={CANCEL_COLOR} />
-      ) : (
-        <Text style={styles.text}>{text}</Text>
-      )}
+      {renderLoading}
     </Pressable>
   );
 };

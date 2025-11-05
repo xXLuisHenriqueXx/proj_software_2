@@ -10,7 +10,7 @@ interface ICheckboxProps {
 }
 
 const Checkbox = ({ checked }: ICheckboxProps) => {
-  const icon = useMemo(
+  const renderIcon = useMemo(
     () =>
       checked ? (
         <View style={styles.checkbox}>
@@ -20,7 +20,7 @@ const Checkbox = ({ checked }: ICheckboxProps) => {
     [checked]
   );
 
-  return <View style={styles.container}>{icon}</View>;
+  return <View style={styles.container}>{renderIcon}</View>;
 };
 
 export default memo(Checkbox);

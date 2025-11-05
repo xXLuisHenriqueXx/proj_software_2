@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
 import { TextInput, TextInputProps, View } from "react-native";
 import { styles } from "./styles";
 import { ChevronLeft, SearchIcon } from "lucide-react-native";
@@ -14,9 +14,15 @@ type ISearchProps = TextInputProps & {
 const Search = forwardRef<any, ISearchProps>((props, ref) => {
   const { onBack, ...rest } = props;
 
+  const renderButton = useMemo(() => {
+    if (onBack) {
+      return <Button.Square icon={ChevronLeft} onPress={onBack} />;
+    }
+  }, [onBack]);
+
   return (
     <View style={styles.container}>
-      {onBack && <Button.Square icon={ChevronLeft} onPress={onBack} />}
+      {renderButton}
 
       <View style={styles.containerInput}>
         <SearchIcon size={20} color={HIGHLIGHT_COLOR} />

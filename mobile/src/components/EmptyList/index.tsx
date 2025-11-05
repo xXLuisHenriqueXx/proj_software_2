@@ -11,7 +11,7 @@ interface IEmptyList {
 }
 
 const EmptyList = ({ icon: Icon, message }: IEmptyList) => {
-  const RenderedIcon = useMemo(
+  const renderIcon = useMemo(
     () =>
       Icon ? (
         <Icon size={24} color={HIGHLIGHT_COLOR} />
@@ -23,7 +23,7 @@ const EmptyList = ({ icon: Icon, message }: IEmptyList) => {
 
   return (
     <View style={styles.container}>
-      {RenderedIcon}
+      {renderIcon}
 
       <Text style={styles.text}>{message || "Nenhum produto encontrado"}</Text>
     </View>
