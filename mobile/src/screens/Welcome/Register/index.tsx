@@ -15,14 +15,14 @@ const Register = () => {
     setType,
     fields,
     setFields,
-    handleNavigateToAddress,
-    handleNavigateGoBack,
+    onNavigateToAddress,
+    onNavigateGoBack,
   } = useRegister();
 
   return (
     <View style={styles.container}>
       <Header.Root padding={16}>
-        <Header.LeftIcon icon={ChevronLeft} onPress={handleNavigateGoBack} />
+        <Header.LeftIcon icon={ChevronLeft} onPress={onNavigateGoBack} />
         <Header.Content title="Criar conta" />
       </Header.Root>
 
@@ -44,10 +44,10 @@ const Register = () => {
         type={type}
         fields={fields}
         setFields={setFields}
-        handleNavigateToAddress={handleNavigateToAddress}
+        onNavigateToAddress={onNavigateToAddress}
       />
 
-      <Button.Primary text="Proximo" onPress={handleNavigateToAddress} />
+      <Button.Primary text="Proximo" onPress={onNavigateToAddress} />
     </View>
   );
 };

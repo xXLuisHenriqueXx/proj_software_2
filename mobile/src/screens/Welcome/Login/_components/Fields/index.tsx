@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { ScrollView, Text, TouchableOpacity } from "react-native";
+import { ScrollView, Text, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
 import { Input } from "@src/components/Input";
@@ -14,7 +14,7 @@ interface IFieldsProps {
 }
 
 const Fields = ({ fields, setFields, onLogin, onForgot }: IFieldsProps) => {
-  const passwordRef = useRef<any>();
+  const passwordRef = useRef<TextInput>();
 
   return (
     <ScrollView

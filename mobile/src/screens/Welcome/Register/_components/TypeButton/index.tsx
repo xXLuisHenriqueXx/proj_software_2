@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Pressable, Text } from "react-native";
 import { styles } from "./styles";
 
@@ -15,28 +16,34 @@ const TypeButton = ({
   label: string;
   isActive: boolean;
   onPress: () => void;
-}) => (
-  <Pressable
-    style={[
+}) => {
+  const pressableStyles = useMemo(() => {
+    return [
       styles.button,
       { backgroundColor: isActive ? HIGHLIGHT_COLOR : "transparent" },
-    ]}
-    android_ripple={{
-      color: BACKGROUND_SECONDARY_COLOR,
-      borderless: false,
-      foreground: true,
-    }}
-    onPress={onPress}
-  >
-    <Text
-      style={[
-        styles.text,
-        { color: isActive ? BACKGROUND_PRIMARY_COLOR : HIGHLIGHT_COLOR },
-      ]}
+    ];
+  }, [isActive]);
+
+  const textStyles = useMemo(() => {
+    return [
+      styles.text,
+      { color: isActive ? BACKGROUND_PRIMARY_COLOR : HIGHLIGHT_COLOR },
+    ];
+  }, [isActive]);
+
+  return (
+    <Pressable
+      style={pressableStyles}
+      android_ripple={{
+        color: BACKGROUND_SECONDARY_COLOR,
+        borderless: false,
+        foreground: true,
+      }}
+      onPress={onPress}
     >
-      {label}
-    </Text>
-  </Pressable>
-);
+      <Text style={textStyles}>{label}</Text>
+    </Pressable>
+  );
+};
 
 export default TypeButton;

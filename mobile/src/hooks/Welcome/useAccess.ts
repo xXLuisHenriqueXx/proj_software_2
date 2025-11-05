@@ -4,7 +4,7 @@ export function useAccess() {
   const { authNavigation } = useAppNavigation();
 
   return {
-    handleNavigateToLogin: () => authNavigation.navigate("Login"),
-    handleNavigateToRegister: () => authNavigation.navigate("Register"),
+    onNavigateToLogin: () => authNavigation.navigate("Login"),
+    onNavigateToRegister: () => authNavigation.navigate("Register"),
   };
 }

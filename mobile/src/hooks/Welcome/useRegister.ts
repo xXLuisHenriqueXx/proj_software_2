@@ -18,16 +18,17 @@ export function useRegister() {
     passwordConfirmation: "",
   });
 
-  const validateFields = (): IFieldsRegister => {
+  const validateFields = (): IFieldsRegister | null => {
     const { values, error } = validateForm(fields as any, registerSchema(type));
     if (error) throw new Error(error);
 
     return values;
   };
 
-  const handleNavigateToAddress = async () => {
+  const onNavigateToAddress = async () => {
     try {
       const validFields = validateFields();
+      if (!validFields) return;
 
       authNavigation.navigate("Address", { fieldsData: validFields, type });
     } catch (error: any) {
@@ -46,8 +47,8 @@ export function useRegister() {
     setFields,
     authNavigation,
     validateFields,
-    handleNavigateToAddress,
-    handleNavigateGoBack: () => authNavigation.goBack(),
+    onNavigateToAddress,
+    onNavigateGoBack: () => authNavigation.goBack(),
     isTypePersonal: type === "personal",
   };
 }

@@ -12,12 +12,11 @@ import { addressSchema } from "@src/utils/ValidationSchemas";
 import { useAppNavigation } from "../useAppNavigation";
 
 const EMPTY_ADDRESS: IFieldsAddress = {
-  street: "",
-  number: "",
-  neighborhood: "",
-  extra: "",
-  city: "",
-  state: "",
+  addressStreet: "",
+  addressNumber: 0,
+  addressDistrict: "",
+  addressDetail: "",
+  addressCep: "",
 };
 
 interface IParams {
@@ -30,6 +29,8 @@ export function useAddress({ fieldsData, type }: IParams) {
   const { rootNavigation } = useAppNavigation();
 
   const [cep, setCep] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [state, setState] = useState<string>("");
   const [fields, setFields] = useState<IFieldsAddress>(EMPTY_ADDRESS);
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingCep, setLoadingCep] = useState<boolean>(false);
@@ -41,7 +42,7 @@ export function useAddress({ fieldsData, type }: IParams) {
     return values;
   };
 
-  const handleRegister = async () => {
+  const onRegister = async () => {
     setLoading(true);
 
     try {
@@ -52,10 +53,10 @@ export function useAddress({ fieldsData, type }: IParams) {
 
       const params: IRegister = {
         ...cleanedFields,
-        addressDistrict: validFields.neighborhood,
-        addressStreet: validFields.street,
-        addressNumber: Number(validFields.number),
-        addressDetail: validFields.extra,
+        addressDistrict: validFields.addressDistrict,
+        addressStreet: validFields.addressStreet,
+        addressNumber: Number(validFields.addressNumber),
+        addressDetail: validFields.addressDetail,
         addressCep: cep,
       };
 
@@ -73,7 +74,7 @@ export function useAddress({ fieldsData, type }: IParams) {
     }
   };
 
-  const handleFetchAddress = async () => {
+  const onFetchAddress = async () => {
     setLoadingCep(true);
 
     try {
@@ -81,14 +82,15 @@ export function useAddress({ fieldsData, type }: IParams) {
       const data = await response.json();
 
       const newAddressData: IFieldsAddress = {
-        street: data.logradouro || "",
-        number: "",
-        neighborhood: data.bairro || "",
-        extra: "",
-        city: data.localidade || "",
-        state: data.uf || "",
+        addressStreet: data.logradouro || "",
+        addressNumber: 0,
+        addressDistrict: data.bairro || "",
+        addressDetail: "",
+        addressCep: cep,
       };
 
+      setCity(data.localidade || "");
+      setState(data.uf || "");
       setFields(newAddressData);
     } catch (error: any) {
       Toast.show({
@@ -101,16 +103,16 @@ export function useAddress({ fieldsData, type }: IParams) {
     }
   };
 
-  const handleCleanAddress = () => setFields(EMPTY_ADDRESS);
+  const onCleanAddress = () => setFields(EMPTY_ADDRESS);
 
   useEffect(() => {
     if (cep.length < 8) {
-      handleCleanAddress();
+      onCleanAddress();
       return;
     }
 
     const timeout = setTimeout(() => {
-      handleFetchAddress();
+      onFetchAddress();
     }, 400);
 
     return () => clearTimeout(timeout);
@@ -121,9 +123,11 @@ export function useAddress({ fieldsData, type }: IParams) {
     setCep,
     fields,
     setFields,
+    city,
+    state,
     loading,
     loadingCep,
-    handleRegister,
-    handleNavigateGoBack: () => rootNavigation.goBack(),
+    onRegister,
+    onNavigateGoBack: () => rootNavigation.goBack(),
   };
 }

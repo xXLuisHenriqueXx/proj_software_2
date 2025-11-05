@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { View, Text } from "react-native";
 import { styles } from "./styles";
 
@@ -15,4 +16,4 @@ const Slogan = () => {
   );
 };
 
-export default Slogan;
+export default memo(Slogan);

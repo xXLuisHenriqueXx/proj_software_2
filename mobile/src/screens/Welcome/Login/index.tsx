@@ -21,43 +21,43 @@ const Login = () => {
     setCode,
     bottomSheetEmailRef,
     bottomSheetCodeRef,
-    handleLogin,
-    handleNavigateGoBack,
-    handleOpenSheetEmail,
-    handleCloseSheetEmail,
-    handleCloseSheetCode,
-    handleSendEmail,
+    onLogin,
+    onNavigateGoBack,
+    onOpenSheetEmail,
+    onCloseSheetEmail,
+    onCloseSheetCode,
+    onSendEmail,
   } = useLogin();
 
   return (
     <View style={styles.container}>
       <Header.Root padding={16}>
-        <Header.LeftIcon icon={ChevronLeft} onPress={handleNavigateGoBack} />
+        <Header.LeftIcon icon={ChevronLeft} onPress={onNavigateGoBack} />
         <Header.Content title="Acessar conta" />
       </Header.Root>
 
       <Fields
         fields={fields}
         setFields={setFields}
-        onLogin={handleLogin}
-        onForgot={handleOpenSheetEmail}
+        onLogin={onLogin}
+        onForgot={onOpenSheetEmail}
       />
 
-      <Button.Primary text="Entrar" onPress={handleLogin} loading={loading} />
+      <Button.Primary text="Entrar" onPress={onLogin} loading={loading} />
 
       <SheetEmail
         ref={bottomSheetEmailRef}
         email={email}
         setEmail={setEmail}
-        onSend={handleSendEmail}
-        onClose={handleCloseSheetEmail}
+        onSend={onSendEmail}
+        onClose={onCloseSheetEmail}
       />
       <SheetCode
         ref={bottomSheetCodeRef}
         email={email}
         code={code}
         setCode={setCode}
-        onClose={handleCloseSheetCode}
+        onClose={onCloseSheetCode}
       />
     </View>
   );

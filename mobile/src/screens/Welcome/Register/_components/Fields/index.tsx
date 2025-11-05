@@ -10,14 +10,10 @@ import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
 interface IParams {
   type: "personal" | "enterprise";
   refs: any;
-  handleNavigateToAddress: () => void;
+  onNavigateToAddress: () => void;
 }
 
-const getFieldsRegister = ({
-  type,
-  refs,
-  handleNavigateToAddress,
-}: IParams) => {
+const getFieldsRegister = ({ type, refs, onNavigateToAddress }: IParams) => {
   const { emailRef, cnpjRef, passwordRef, passwordConfirmationRef } = refs;
 
   return [
@@ -65,7 +61,7 @@ const getFieldsRegister = ({
       label: "Confirmar senha",
       placeholder: "Confirme sua senha ...",
       ref: passwordConfirmationRef,
-      onSubmitEditing: handleNavigateToAddress,
+      onSubmitEditing: onNavigateToAddress,
       password: true,
       component: Input.Password,
     },
@@ -76,14 +72,14 @@ interface IFieldsProps {
   type: "personal" | "enterprise";
   fields: IFieldsRegister;
   setFields: (fields: IFieldsRegister) => void;
-  handleNavigateToAddress: () => void;
+  onNavigateToAddress: () => void;
 }
 
 const Fields = ({
   type,
   fields,
   setFields,
-  handleNavigateToAddress,
+  onNavigateToAddress,
 }: IFieldsProps) => {
   const emailRef = useRef<TextInput>();
   const cnpjRef = useRef<TextInput>();
@@ -92,8 +88,8 @@ const Fields = ({
 
   const refs = { emailRef, cnpjRef, passwordRef, passwordConfirmationRef };
   const fieldConfigs = useMemo(
-    () => getFieldsRegister({ type, refs, handleNavigateToAddress }),
-    [type, handleNavigateToAddress]
+    () => getFieldsRegister({ type, refs, onNavigateToAddress }),
+    [type, onNavigateToAddress]
   );
 
   return (

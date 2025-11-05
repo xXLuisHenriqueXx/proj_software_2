@@ -1,17 +1,14 @@
+import { memo } from "react";
 import { View } from "react-native";
 import { styles } from "./styles";
 
 import { Button } from "@src/components/Button";
 
-interface INavigationButtonsProps {
-  onNavigateToLogin: () => void;
-  onNavigateToRegister: () => void;
-}
+import { useAccess } from "@src/hooks/Welcome/useAccess";
 
-const NavigationButtons = ({
-  onNavigateToLogin,
-  onNavigateToRegister,
-}: INavigationButtonsProps) => {
+const NavigationButtons = () => {
+  const { onNavigateToLogin, onNavigateToRegister } = useAccess();
+
   return (
     <View style={styles.container}>
       <Button.Primary text="Acessar minha conta" onPress={onNavigateToLogin} />
@@ -25,4 +22,4 @@ const NavigationButtons = ({
   );
 };
 
-export default NavigationButtons;
+export default memo(NavigationButtons);

@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 8,
     borderRadius: 8,
+    overflow: "hidden",
   },
   text: {
     fontSize: 16,

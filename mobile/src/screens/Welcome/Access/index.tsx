@@ -4,11 +4,7 @@ import { styles } from "./styles";
 import Slogan from "./_components/Slogan";
 import NavigationButtons from "./_components/NavigationButtons";
 
-import { useAccess } from "@src/hooks/Welcome/useAccess";
-
 const Access = () => {
-  const { handleNavigateToLogin, handleNavigateToRegister } = useAccess();
-
   return (
     <View style={styles.container}>
       <Image
@@ -19,10 +15,7 @@ const Access = () => {
 
       <Slogan />
 
-      <NavigationButtons
-        onNavigateToLogin={handleNavigateToLogin}
-        onNavigateToRegister={handleNavigateToRegister}
-      />
+      <NavigationButtons />
     </View>
   );
 };

@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { ScrollView, useWindowDimensions, View } from "react-native";
+import { useRef } from "react";
+import { ScrollView, TextInput, useWindowDimensions, View } from "react-native";
 import { styles } from "./styles";
 
 import { Input } from "@src/components/Input";
@@ -10,32 +10,33 @@ import { IFieldsAddress } from "@src/common/Interfaces/Auth.interface";
 interface IFieldsProps {
   cep: string;
   setCep: (cep: string) => void;
+  city: string;
+  state: string;
   fields: IFieldsAddress;
   setFields: (fields: IFieldsAddress) => void;
-  // onRegister: () => void;
 }
 
 const Fields = ({
   cep,
   setCep,
+  city,
+  state,
   fields,
   setFields,
-}: // onRegister,
-IFieldsProps) => {
+}: IFieldsProps) => {
   const { width } = useWindowDimensions();
 
-  const numberRef = useRef<any>();
-  const neighborhoodRef = useRef<any>();
-  const extraRef = useRef<any>();
-  const cityRef = useRef<any>();
-  // const stateRef = useRef<any>();
+  const numberRef = useRef<TextInput>();
+  const neighborhoodRef = useRef<TextInput>();
+  const extraRef = useRef<TextInput>();
+  const cityRef = useRef<TextInput>();
 
   const streetWidth = width * 0.7 - 28;
   const numberWidth = width * 0.3 - 28;
   const neighborhoodWidth = width * 0.6 - 28;
   const extraWidth = width * 0.4 - 28;
-  // const cityWidth = width * 0.7 - 28;
-  // const stateWidth = width * 0.3 - 28;
+  const cityWidth = width * 0.7 - 28;
+  const stateWidth = width * 0.3 - 28;
 
   return (
     <ScrollView
@@ -76,7 +77,7 @@ IFieldsProps) => {
           placeholder="000"
           returnKeyType="next"
           onSubmitEditing={() => neighborhoodRef.current?.focus()}
-          value={fields.addressNumber.toString()}
+          value={fields.addressNumber?.toString()}
           onChangeText={(text: string) => {
             setFields({ ...fields, addressNumber: Number(text) });
           }}
@@ -111,33 +112,25 @@ IFieldsProps) => {
         />
       </View>
 
-      {/* <View style={styles.containerInputGroup}>
+      <View style={styles.containerInputGroup}>
         <Input.Normal
           label="Cidade*"
           width={cityWidth}
-          ref={cityRef}
           placeholder="Sua cidade"
           returnKeyType="next"
-          onSubmitEditing={() => stateRef.current?.focus()}
-          value={fields.city}
-          onChangeText={(text: string) => {
-            setFields({ ...fields, city: text });
-          }}
+          value={city}
+          editable={false}
         />
 
         <Input.Normal
           label="UF*"
           width={stateWidth}
-          ref={stateRef}
           placeholder="XX"
           returnKeyType="next"
-          onSubmitEditing={onRegister}
-          value={fields.state}
-          onChangeText={(text: string) => {
-            setFields({ ...fields, state: text });
-          }}
+          value={state}
+          editable={false}
         />
-      </View> */}
+      </View>
     </ScrollView>
   );
 };

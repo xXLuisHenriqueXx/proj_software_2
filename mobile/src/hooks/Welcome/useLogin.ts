@@ -30,7 +30,7 @@ export function useLogin() {
     return values;
   };
 
-  const handleLogin = async () => {
+  const onLogin = async () => {
     setLoading(true);
 
     try {
@@ -53,7 +53,7 @@ export function useLogin() {
   const openSheet = (ref: RefObject<BottomSheet>) => ref.current?.expand();
   const closeSheet = (ref: RefObject<BottomSheet>) => ref.current?.close();
 
-  const handleSendEmail = () => {
+  const onSendEmail = () => {
     if (!EMAIL_REGEX.test(email)) {
       Toast.show({
         type: "error",
@@ -78,11 +78,11 @@ export function useLogin() {
     loading,
     bottomSheetCodeRef,
     bottomSheetEmailRef,
-    handleLogin,
-    handleSendEmail,
-    handleNavigateGoBack: () => rootNavigation.goBack(),
-    handleOpenSheetEmail: () => openSheet(bottomSheetEmailRef),
-    handleCloseSheetEmail: () => closeSheet(bottomSheetEmailRef),
-    handleCloseSheetCode: () => closeSheet(bottomSheetCodeRef),
+    onLogin,
+    onSendEmail,
+    onNavigateGoBack: () => rootNavigation.goBack(),
+    onOpenSheetEmail: () => openSheet(bottomSheetEmailRef),
+    onCloseSheetEmail: () => closeSheet(bottomSheetEmailRef),
+    onCloseSheetCode: () => closeSheet(bottomSheetCodeRef),
   };
 }

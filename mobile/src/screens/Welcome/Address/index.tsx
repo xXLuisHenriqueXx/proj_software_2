@@ -29,10 +29,12 @@ const Address = ({ route }: Props) => {
     loadingCep,
     cep,
     setCep,
+    city,
+    state,
     fields,
     setFields,
-    handleRegister,
-    handleNavigateGoBack,
+    onRegister,
+    onNavigateGoBack,
     loading,
   } = useAddress({ fieldsData, type });
 
@@ -43,21 +45,22 @@ const Address = ({ route }: Props) => {
   return (
     <View style={styles.container}>
       <Header.Root padding={16}>
-        <Header.LeftIcon icon={ChevronLeft} onPress={handleNavigateGoBack} />
+        <Header.LeftIcon icon={ChevronLeft} onPress={onNavigateGoBack} />
         <Header.Content title="Endereço" />
       </Header.Root>
 
       <Fields
         cep={cep}
         setCep={setCep}
+        city={city}
+        state={state}
         fields={fields}
         setFields={setFields}
-        onRegister={handleRegister}
       />
 
       <Button.Primary
         text="Cadastrar-se"
-        onPress={handleRegister}
+        onPress={onRegister}
         loading={loading}
       />
     </View>
