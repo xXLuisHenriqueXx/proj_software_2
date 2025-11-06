@@ -17,18 +17,18 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    gap: 16,
-    width: "100%",
+    gap: 8,
   },
-  containerItem: {
+  button: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    width: (WIDTH - 48 - 16) / 2,
+    width: (WIDTH - 48 - 8) / 2,
     paddingHorizontal: 16,
     paddingVertical: 24,
     backgroundColor: BACKGROUND_SECONDARY_COLOR,
     borderRadius: 12,
+    overflow: "hidden",
   },
   title: {
     fontSize: 16,

@@ -1,9 +1,10 @@
 import { memo } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { styles } from "./styles";
 
 import { featuredData } from "@src/static/FeaturedData";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
+import { HIGHLIGHT_COLOR } from "@src/constants/Colors";
 
 const Featured = () => {
   const { appNavigation } = useAppNavigation();
@@ -14,9 +15,14 @@ const Featured = () => {
 
       <View style={styles.containerContent}>
         {featuredData.map((item) => (
-          <TouchableOpacity
+          <Pressable
             key={item.id}
-            activeOpacity={0.85}
+            style={styles.button}
+            android_ripple={{
+              color: HIGHLIGHT_COLOR,
+              borderless: false,
+              foreground: true,
+            }}
             onPress={() =>
               appNavigation.navigate("ProductList", {
                 filter: { search: item.name },
@@ -24,7 +30,7 @@ const Featured = () => {
             }
           >
             <Text style={styles.text}>{item.name}</Text>
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
     </View>

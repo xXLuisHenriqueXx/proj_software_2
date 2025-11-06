@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { styles } from "./styles";
 
 import { categoriesData } from "@src/static/CategoriesData";
@@ -15,10 +15,14 @@ const Categories = () => {
 
       <View style={styles.containerContent}>
         {categoriesData.map((item) => (
-          <TouchableOpacity
+          <Pressable
             key={item.id}
-            style={styles.containerItem}
-            activeOpacity={0.85}
+            style={styles.button}
+            android_ripple={{
+              color: HIGHLIGHT_COLOR,
+              borderless: false,
+              foreground: true,
+            }}
             onPress={() =>
               appNavigation.navigate("ProductList", {
                 filter: { type: item.value },
@@ -28,7 +32,7 @@ const Categories = () => {
             <Text style={styles.text}>{item.name}</Text>
 
             <item.icon size={20} color={HIGHLIGHT_COLOR} />
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
     </View>

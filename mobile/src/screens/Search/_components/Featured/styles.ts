@@ -12,7 +12,8 @@ export const styles = StyleSheet.create({
   containerContent: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 12,
+    columnGap: 8,
+    rowGap: 12,
     width: "100%",
   },
   title: {
@@ -20,14 +21,17 @@ export const styles = StyleSheet.create({
     fontFamily: SEMIBOLD_FONT,
     color: PRIMARY_COLOR,
   },
-  text: {
+  button: {
     paddingHorizontal: 12,
     paddingVertical: 4,
-    borderRadius: 6,
-    borderWidth: 0.25,
+    borderRadius: 12,
+    borderWidth: 0.5,
     borderColor: HIGHLIGHT_COLOR,
+    overflow: "hidden",
+  },
+  text: {
     fontSize: 14,
     fontFamily: REGULAR_FONT,
-    color: PRIMARY_COLOR,
+    color: HIGHLIGHT_COLOR,
   },
 });
