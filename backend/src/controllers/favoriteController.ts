@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { prisma } from "../prisma";
 import { addFavoriteSchema, removeFavoriteSchema } from "../schemas/favoriteValidationSchema";
+import { ToyHelper } from "../helpers/toyHelper";
 
 type AddFavoriteBody = z.infer<typeof addFavoriteSchema>;
 type RemoveFavoriteParams = z.infer<typeof removeFavoriteSchema>;
@@ -56,58 +57,19 @@ async getFavorites(req: FastifyRequest, reply: FastifyReply) {
       orderBy: { createdAt: "desc" },
       select: {
         toy: {
-          select: {
-            id: true,
-            createdAt: true,
-            name: true,
-            description: true,
-            price: true,
-            isNew: true,
-            canTrade: true,
-            canLend: true,
-            usageTime: true,
-            type: true,
-            ageGroup: true,
-            discount: true,
-            ToyPictures: {
-              select: { id: true, order: true, picture: true },
-              orderBy: { order: "asc" },
-            },
-            owner: {
-              select: { id: true, name: true, picture: true },
-            },
+          include: {ToyPictures:true, owner: true}
           },
         },
       },
-    });
+    );
 
     // Mapeia os resultados para montar o objeto de resposta final
-    const favoriteToys = favorites
-      .map(({ toy }) => {
-        // Medida de segurança caso um brinquedo relacionado seja nulo
-        if (!toy) {
-          return null;
-        }
+    var favoriteToys = ToyHelper.fixToyListObject(favorites.map(fav => fav.toy));
 
-        // Construímos o objeto manualmente para bater 100% com o schema
-        return {
-          id: toy.id,
-          createdAt: toy.createdAt,
-          name: toy.name,
-          description: toy.description,
-          price: toy.price,
-          isNew: toy.isNew,
-          canTrade: toy.canTrade,
-          canLend: toy.canLend,
-          usageTime: toy.usageTime,
-          type: toy.type,
-          ageGroup: toy.ageGroup,
-          discount: toy.discount ?? undefined,
-          owner: toy.owner,
-          pictures: toy.ToyPictures,
-        };
-      })
-      .filter(Boolean);
+    favoriteToys.map((favorite)=>{
+      favorite.isFavorited = true
+    })
+
     return reply.status(200).send(favoriteToys);
   } catch (error) {
     console.error("Erro ao buscar favoritos:", error);

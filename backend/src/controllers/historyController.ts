@@ -33,9 +33,11 @@ export async function getUserHistory(request: FastifyRequest, reply: FastifyRepl
   });
 
   historyEntries = historyEntries.map((entry) => {
-
     const isFavorited = favoritedToyIds.has(entry.toyId);
+
     const fixedToy = ToyHelper.fixToyObject(entry.toy);
+    fixedToy.isFavorited = isFavorited;
+    entry.toy = fixedToy as any;
 
     return entry;
   });
