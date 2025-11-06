@@ -76,6 +76,7 @@ export const ToyHelper = {
             ageGroup: toy.ageGroup,
             discount: toy.discount,
             pictures: fixedPictures,
+            isFavorited: false,
         };
 
         if (toy.owner) {

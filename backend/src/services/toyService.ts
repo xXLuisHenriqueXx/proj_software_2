@@ -7,6 +7,7 @@ import {
 } from "../schemas/toyValidationSchemas";
 import { ToyHelper } from "../helpers/toyHelper";
 import { ToyType } from "../generated/prisma";
+import { is, tr } from "zod/v4/locales";
 
 type ToyCreateData = z.infer<typeof toyCreateSchema>;
 type ToyUpdateData = z.infer<typeof toyUpdateSchema>;
@@ -170,16 +171,8 @@ export const ToyService = {
       const toy = await prisma.toy.findUnique({
         where: { id: id },
         include: {
-          ToyPictures: {
-            orderBy: { order: "asc" },
-          },
-          owner: {
-            select: {
-              id: true,
-              name: true,
-              picture: true,
-            },
-          },
+          ToyPictures: true,
+          owner: true,
         },
       });
 
@@ -187,6 +180,9 @@ export const ToyService = {
         throw new Error("Brinquedo não encontrado");
       }
 
+      var fixedToy = ToyHelper.fixToyObject(toy)
+
+      let userId = toy.ownerId;
       let isFavorited = false;
       if (userId) {
         const favorite = await prisma.favorite.findFirst({
@@ -200,33 +196,9 @@ export const ToyService = {
         }
       }
 
-      const response = {
-        id: toy.id,
-        createdAt: toy.createdAt,
-        name: toy.name,
-        description: toy.description,
-        price: toy.price,
-        isNew: toy.isNew,
-        canTrade: toy.canTrade,
-        canLend: toy.canLend,
-        usageTime: toy.usageTime,
-        type: toy.type,
-        ageGroup: toy.ageGroup,
-        discount: toy.discount,
-        pictures: toy.ToyPictures.map((p) => ({
-          id: p.id,
-          order: p.order,
-          picture: p.picture,
-        })),
-        owner: {
-          id: toy.owner.id,
-          name: toy.owner.name,
-          picture: toy.owner.picture
-            ? toy.owner.picture
-            : "/public/assets/avatar_not_found.webp",
-        },
-      };
-      return response;
+      fixedToy.isFavorited = isFavorited
+
+      return fixedToy;
     } catch (error) {
       return { error: error };
     }
@@ -332,7 +304,7 @@ export const ToyService = {
     if ((filter?.orderBy === "RELEVANTES" || !filter?.orderBy) && userId) {
       toys = await prisma.toy.findMany({
         where,
-        include: { ToyPictures: true },
+        include: { ToyPictures: true, owner: true },
       });
 
       const history = await prisma.historyEntry.findMany({
@@ -373,24 +345,15 @@ export const ToyService = {
         skip,
         take,
         orderBy,
-        include: { ToyPictures: true },
+        include: { ToyPictures: true, owner: true },
       });
     }
+    var fixedToys = ToyHelper.fixToyListObject(toys)
 
-    toys = toys.map((toy) => {
-      const result = {
-        ...toy,
-        pictures: toy.ToyPictures.map((p) => ({
-          id: p.id,
-          order: p.order,
-          picture: p.picture,
-        })),
-        isFavorited: favoritedToyIds.has(toy.id),
-      };
-      delete (result as any).ToyPictures;
-      return result;
-    });
-
+    toys = fixedToys.map((toy) => {
+      toy.isFavorited = favoritedToyIds.has(toy.id);
+      return toy;
+    })
 
     const total = await prisma.toy.count({ where });
 

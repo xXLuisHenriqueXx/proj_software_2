@@ -37,10 +37,6 @@ export async function getUserHistory(request: FastifyRequest, reply: FastifyRepl
     const isFavorited = favoritedToyIds.has(entry.toyId);
     const fixedToy = ToyHelper.fixToyObject(entry.toy);
 
-    entry.toy = {
-      ...fixedToy,
-      isFavorited: isFavorited,
-    };
     return entry;
   });
 

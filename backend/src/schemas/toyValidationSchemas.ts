@@ -117,13 +117,6 @@ const toyInListSchema = z.object({
   isFavorited: z.boolean(),
 });
 
-export const toyListResponseSchema = z.object({
-  page: z.number(),
-  pageSize: z.number(),
-  total: z.number(),
-  totalPages: z.number(),
-  toys: z.array(toyInListSchema),
-});
 
 export const toyResponseSchema = z.object({
   id: z.string().uuid(),
@@ -141,4 +134,12 @@ export const toyResponseSchema = z.object({
   pictures: z.array(toyPictureSchema), 
   owner: toyOwnerSchema, 
   isFavorited: z.boolean(),
+});
+
+export const toyListResponseSchema = z.object({
+  page: z.number(),
+  pageSize: z.number(),
+  total: z.number(),
+  totalPages: z.number(),
+  toys: z.array(toyResponseSchema),
 });
