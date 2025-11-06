@@ -166,7 +166,7 @@ export const ToyService = {
     };
   },
 
-  async getToyById(id: string) {
+  async getToyById(id: string, userId?: string) {
     try {
       const toy = await prisma.toy.findUnique({
         where: { id: id },
@@ -179,24 +179,19 @@ export const ToyService = {
       if (!toy) {
         throw new Error("Brinquedo não encontrado");
       }
-
-      var fixedToy = ToyHelper.fixToyObject(toy)
-
-      let userId = toy.ownerId;
-      let isFavorited = false;
+      var isFavorite = false
       if (userId) {
         const favorite = await prisma.favorite.findFirst({
-          where: {
-            userId: userId,
-            toyId: toy.id,
-          },
-        });
+          where: { toyId: id, userId: userId }
+        })
         if (favorite) {
-          isFavorited = true;
+          isFavorite = true
         }
       }
 
-      fixedToy.isFavorited = isFavorited
+      var fixedToy = ToyHelper.fixToyObject(toy)
+      
+      fixedToy.isFavorited = isFavorite
 
       return fixedToy;
     } catch (error) {
