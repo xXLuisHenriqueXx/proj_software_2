@@ -3,6 +3,9 @@ import { prisma } from "../prisma";
 import { createChatSchema, chat, allChats, allMessages, getChatInfoById, sendMessage, messageSchema, wsMessageSchema } from "../schemas/chatValidationSchema";
 import { tokenHelper } from "../helpers/tokenHelper";
 
+const chatConnections = new Map<string, Set<any>>(); 
+
+
 export const chatController = {
     async createChat(req: FastifyRequest, res: FastifyReply) {
         try {
@@ -214,24 +217,26 @@ export const chatController = {
             return res.status(500).send({ message: "Erro interno ao enviar mensagem." });
         }
     },
+    
     async handleSocket(connection: any, req: FastifyRequest) {
         try {
-            const { chatId } = getChatInfoById.parse(req.params)
+            const { chatId } = getChatInfoById.parse(req.params);
             const token = (req.query as { token?: string })?.token;
+
             if (!token) {
                 connection.send(JSON.stringify({ type: "error", message: "Token ausente." }));
                 connection.close();
-                return
+                return;
             }
+
             const decoded = await tokenHelper.verifyToken(token);
-            const currentUserId = decoded.userId
+            const currentUserId = decoded.userId;
 
             if (!currentUserId || !decoded || typeof decoded !== "object") {
-                connection.send(JSON.stringify({ type: "error", message: "Token ausente." }));
+                connection.send(JSON.stringify({ type: "error", message: "Token inválido." }));
                 connection.close();
-                return
+                return;
             }
-
 
             const chat = await prisma.chat.findUnique({
                 where: { id: chatId },
@@ -241,16 +246,20 @@ export const chatController = {
             if (!chat) {
                 connection.send(JSON.stringify({ type: "error", message: "Chat não encontrado." }));
                 connection.close();
-                return
+                return;
             }
-
 
             const isParticipant = chat.participants.some((p) => p.id === currentUserId);
             if (!isParticipant) {
                 connection.send(JSON.stringify({ type: "error", message: "Você não participa deste chat." }));
                 connection.close();
-                return
+                return;
             }
+
+            if (!chatConnections.has(chatId)) {
+                chatConnections.set(chatId, new Set());
+            }
+            chatConnections.get(chatId)!.add(connection);
 
             connection.on("message", async (raw: string) => {
                 try {
@@ -265,75 +274,51 @@ export const chatController = {
                             },
                         });
 
-                        connection.send(
-                            JSON.stringify({
-                                type: "new_message",
-                                message: {
-                                    id: msg.id,
-                                    chatId: msg.chatId,
-                                    message: msg.content,
-                                    sent_at: msg.createdAt,
-                                    sent_by_me: true,
-                                    seen: false,
-                                },
-                            })
-                        );
-                    }
-                    if (data.type === "get_latest_message") {
-                        const unreadMessages = await prisma.message.findMany({
-                            where: {
-                                chatId,
-                                seen: false,
-                                NOT: { senderId: currentUserId },
+                        const payload = {
+                            type: "new_message",
+                            message: {
+                                id: msg.id,
+                                chatId: msg.chatId,
+                                message: msg.content,
+                                sent_at: msg.createdAt,
                             },
-                            include: { sender: { select: { id: true } } },
-                            orderBy: { createdAt: "asc" },
-                        });
+                        };
 
-                        if (unreadMessages.length === 0) {
-                            connection.send(
-                                JSON.stringify({
-                                    type: "no_messages",
-                                    message: "Nenhuma mensagem nova encontrada",
-                                })
-                            );
-                        }
-
-                        await prisma.message.updateMany({
-                            where: {
-                                chatId,
-                                seen: false,
-                                NOT: { senderId: currentUserId },
-                            },
-                            data: { seen: true },
-                        });
-
-                        for (const msg of unreadMessages) {
-                            connection.send(
-                                JSON.stringify({
-                                    type: "new_message",
-                                    message: {
-                                        id: msg.id,
-                                        chatId: msg.chatId,
-                                        message: msg.content,
-                                        sent_at: msg.createdAt,
-                                        sent_by_me: false,
-                                        seen: true,
-                                    },
-                                })
-                            );
+                        const connections = chatConnections.get(chatId);
+                        if (connections) {
+                            for (const client of connections) {
+                                if (client.readyState === 1) {
+                                    const sent_by_me = client === connection;
+                                    client.send(JSON.stringify({
+                                        ...payload,
+                                        message: {
+                                            ...payload.message,
+                                            sent_by_me,
+                                            seen: !sent_by_me, // marca como visto apenas se for outro
+                                        },
+                                    }));
+                                }
+                            }
                         }
                     }
-
                 } catch (err) {
                     console.error("Erro ao processar WS:", err);
                 }
             });
-            connection.on("close", () => {
 
+            connection.on("close", () => {
+                const connections = chatConnections.get(chatId);
+                if (connections) {
+                    connections.delete(connection);
+                    if (connections.size === 0) {
+                        chatConnections.delete(chatId);
+                    }
+                }
             });
+
         } catch (err) {
             console.error("Erro no socket:", err);
         }
     }
+
 };
