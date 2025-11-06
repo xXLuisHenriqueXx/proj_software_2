@@ -110,7 +110,9 @@ export const updateUserSchema = z.object({
     addressStreet: z.string().optional(),
     addressNumber: z.number().int().positive().optional(),
     addressDetail: z.string().optional(),
-    addressCep: z.string().regex(/^\d{5}-?\d{3}$/, "CEP inválido").optional()
+    addressCep: z.string().regex(/^\d{5}-?\d{3}$/, "CEP inválido").optional(),
+    email: z.email().optional(),
+    picture: z.string().regex(/^data:image\/[a-zA-Z]+;base64/, { message: "Formato de string base64 de imagem inválido." }).optional(),
 });
 
 export const updateAvatarSchema = z.object({
