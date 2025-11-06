@@ -19,4 +19,5 @@ export interface IProduct {
   pictures: IToyPicture[];
   owner: IToyOwner;
   createdAt: Date;
+  isFavorited: boolean;
 }

@@ -10,6 +10,7 @@ export function useProductDetail(id: string) {
 
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [favorited, setFavorited] = useState<boolean>(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -18,7 +19,12 @@ export function useProductDetail(id: string) {
       setLoading(true);
       try {
         const response = await toyService.getByID({ id });
-        if (isMounted) setProduct(response?.data);
+
+        console.log(response?.data);
+        if (isMounted) {
+          setProduct(response?.data);
+          setFavorited(response?.data?.isFavorited);
+        }
       } catch (error: any) {
         Toast.show({
           type: "error",
@@ -38,5 +44,12 @@ export function useProductDetail(id: string) {
 
   const characteristicWidth = (width - 48 - 16) / 2;
 
-  return { product, loading, characteristicWidth, width };
+  return {
+    product,
+    favorited,
+    setFavorited,
+    loading,
+    characteristicWidth,
+    width,
+  };
 }

@@ -1,10 +1,12 @@
+import { StyleSheet } from "react-native";
+
 import {
+  BACKGROUND_SECONDARY_COLOR,
   HIGHLIGHT_COLOR,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
 } from "@src/constants/Colors";
 import { REGULAR_FONT } from "@src/constants/Fonts";
-import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
@@ -18,6 +20,7 @@ export const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: HIGHLIGHT_COLOR,
     borderRadius: 32,
+    backgroundColor: BACKGROUND_SECONDARY_COLOR,
   },
   title: {
     fontSize: 16,

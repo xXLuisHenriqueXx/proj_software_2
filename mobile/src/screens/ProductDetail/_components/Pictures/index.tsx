@@ -15,14 +15,28 @@ interface IPicturesProps {
   data: IToyPicture[];
   id: string;
   width: number;
+  isFavorited: boolean;
+  setIsFavorited: (value: boolean) => void;
 }
 
-const Pictures = ({ data, id, width }: IPicturesProps) => {
+const Pictures = ({
+  data,
+  id,
+  width,
+  isFavorited,
+  setIsFavorited,
+}: IPicturesProps) => {
   const { appNavigation } = useAppNavigation();
 
   const handleAddFavorite = async () => {
     try {
-      await favoriteService.add({ toyId: id });
+      if (!isFavorited) {
+        await favoriteService.add({ toyId: id });
+        setIsFavorited(true);
+      } else {
+        await favoriteService.delete({ toyId: id });
+        setIsFavorited(false);
+      }
     } catch (error: any) {
       Toast.show({
         type: "error",
@@ -55,7 +69,11 @@ const Pictures = ({ data, id, width }: IPicturesProps) => {
         onPress={handleAddFavorite}
         activeOpacity={0.85}
       >
-        <Heart size={20} color={HIGHLIGHT_COLOR} />
+        <Heart
+          size={20}
+          color={HIGHLIGHT_COLOR}
+          fill={isFavorited ? HIGHLIGHT_COLOR : "transparent"}
+        />
       </TouchableOpacity>
 
       <Carousel data={data} width={width} height={320} />

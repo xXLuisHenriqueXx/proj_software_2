@@ -9,19 +9,14 @@ interface IOwnerProps {
 }
 
 const Owner = ({ owner }: IOwnerProps) => {
+  const uri =
+    owner.picture.startsWith("data:image") || owner.picture.startsWith("http")
+      ? owner.picture
+      : `${baseURL}${owner.picture}`;
+
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={{
-          uri:
-            owner.picture.startsWith("data:image") ||
-            owner.picture.startsWith("http")
-              ? owner.picture
-              : `${baseURL}${owner.picture}`,
-        }}
-        resizeMode="contain"
-      />
+      <Image style={styles.image} source={{ uri }} resizeMode="contain" />
 
       <View>
         <Text style={styles.title}>Proprietário</Text>
