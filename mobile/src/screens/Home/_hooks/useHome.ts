@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { useWindowDimensions } from "react-native";
 import Toast from "react-native-toast-message";
 
 import { EToyType } from "@src/common/Interfaces/Toy.interface";
 import { IProduct } from "@src/common/Entities/Product";
-import { useToys } from "./useToys";
 import { useHighlightsStore } from "@src/stores/HighlightStore";
 import { useInstitutesStore } from "@src/stores/InstituteStore";
+import { useToys } from "@src/hooks/useToys";
 
 export function useHome() {
-  const { width } = useWindowDimensions();
   const { fetchToys } = useToys();
   const { highlights, fetchHighlights } = useHighlightsStore();
   const { institutes, fetchInstitutes } = useInstitutesStore();
@@ -82,6 +80,5 @@ export function useHome() {
     toys,
     loading,
     handleSearch,
-    carouselWidth: width - 48,
   };
 }

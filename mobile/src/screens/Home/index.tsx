@@ -8,12 +8,12 @@ import Institutes from "./_components/Institutes";
 import List from "@src/components/List";
 import CategoryList from "./_components/CategoryList";
 
-import { useHome } from "@src/hooks/useHome";
+import { useHome } from "./_hooks/useHome";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
+import { WIDTH } from "@src/constants/Values";
 
 const Home = () => {
-  const { carouselWidth, refreshing, onRefresh, highlights, institutes, toys } =
-    useHome();
+  const { refreshing, onRefresh, highlights, institutes, toys } = useHome();
   const { appNavigation } = useAppNavigation();
 
   return (
@@ -29,7 +29,7 @@ const Home = () => {
 
           <Institutes data={institutes} />
 
-          <Carousel width={carouselWidth} height={240} data={highlights} />
+          <Carousel width={WIDTH - 48} height={240} data={highlights} />
 
           <Header.Root>
             <Header.Content

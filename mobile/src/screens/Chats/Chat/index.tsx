@@ -16,7 +16,7 @@ import { Input } from "@src/components/Input";
 import { Button } from "@src/components/Button";
 import { styles } from "./styles";
 
-import { useChatSocket } from "@src/hooks/useChatSocket";
+import { useChatSocket } from "./_hooks/useChatSocket";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
 import { IMessage } from "@src/common/Entities/Chat";
 import {
