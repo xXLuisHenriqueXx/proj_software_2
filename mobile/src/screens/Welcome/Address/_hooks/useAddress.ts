@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 
+import useAuth from "@src/hooks/useAuth";
 import {
   IFieldsAddress,
   IFieldsRegister,
   IRegister,
 } from "@src/common/Interfaces/Auth.interface";
-import useAuth from "../useAuth";
 import { validateForm } from "@src/utils/FormValidator";
 import { addressSchema } from "@src/utils/ValidationSchemas";
-import { useAppNavigation } from "../useAppNavigation";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 const EMPTY_ADDRESS: IFieldsAddress = {
   addressStreet: "",

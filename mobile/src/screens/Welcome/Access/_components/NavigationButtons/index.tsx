@@ -4,7 +4,7 @@ import { styles } from "./styles";
 
 import { Button } from "@src/components/Button";
 
-import { useAccess } from "@src/hooks/Welcome/useAccess";
+import { useAccess } from "../../_hooks/useAccess";
 
 const NavigationButtons = () => {
   const { onNavigateToLogin, onNavigateToRegister } = useAccess();

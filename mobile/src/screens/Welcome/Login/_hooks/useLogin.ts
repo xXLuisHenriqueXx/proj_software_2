@@ -2,12 +2,12 @@ import { RefObject, useRef, useState } from "react";
 import BottomSheet from "@gorhom/bottom-sheet";
 import Toast from "react-native-toast-message";
 
-import useAuth from "../useAuth";
+import useAuth from "@src/hooks/useAuth";
 import { IFieldsLogin } from "@src/common/Interfaces/Auth.interface";
 import { validateForm } from "@src/utils/FormValidator";
 import { loginSchema } from "@src/utils/ValidationSchemas";
 import { EMAIL_REGEX } from "@src/constants/Regex";
-import { useAppNavigation } from "../useAppNavigation";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 export function useLogin() {
   const { login } = useAuth();

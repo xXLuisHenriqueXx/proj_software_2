@@ -9,7 +9,7 @@ import Fields from "./_components/Fields";
 import Loader from "@src/components/Loader";
 
 import { AuthStackParamList } from "@src/routes/stacks/AuthStack";
-import { useAddress } from "@src/hooks/Welcome/useAddress";
+import { useAddress } from "./_hooks/useAddress";
 
 export interface IEditableFields {
   street: boolean;

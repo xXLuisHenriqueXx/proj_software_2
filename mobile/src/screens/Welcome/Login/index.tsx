@@ -7,7 +7,7 @@ import Fields from "./_components/Fields";
 import SheetEmail from "./_components/SheetEmail";
 import SheetCode from "./_components/SheetCode";
 
-import { useLogin } from "@src/hooks/Welcome/useLogin";
+import { useLogin } from "./_hooks/useLogin";
 import { ChevronLeft } from "lucide-react-native";
 
 const Login = () => {

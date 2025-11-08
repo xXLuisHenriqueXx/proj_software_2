@@ -1,4 +1,4 @@
-import { useAppNavigation } from "../useAppNavigation";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 export function useAccess() {
   const { authNavigation } = useAppNavigation();

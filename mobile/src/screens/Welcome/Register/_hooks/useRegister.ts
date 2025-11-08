@@ -4,7 +4,7 @@ import Toast from "react-native-toast-message";
 import { IFieldsRegister } from "@src/common/Interfaces/Auth.interface";
 import { validateForm } from "@src/utils/FormValidator";
 import { registerSchema } from "@src/utils/ValidationSchemas";
-import { useAppNavigation } from "../useAppNavigation";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 export function useRegister() {
   const { authNavigation } = useAppNavigation();

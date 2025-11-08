@@ -7,7 +7,7 @@ import { Button } from "@src/components/Button";
 import TypeButton from "./_components/TypeButton";
 import Fields from "./_components/Fields";
 
-import { useRegister } from "@src/hooks/Welcome/useRegister";
+import { useRegister } from "./_hooks/useRegister";
 
 const Register = () => {
   const {
