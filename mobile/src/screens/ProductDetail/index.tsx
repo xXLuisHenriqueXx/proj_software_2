@@ -11,7 +11,7 @@ import Owner from "./_components/Owner";
 import { AppStackParamList } from "@src/routes/stacks/AppStack";
 import { formatCurrency } from "@src/utils/FormatCurrency";
 import { getAgeGroup } from "@src/utils/GetAgeGroup";
-import { useProductDetail } from "@src/hooks/useProductDetail";
+import { useProductDetail } from "./_hooks/useProductDetail";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
 import { chatService } from "@src/services/ChatService";
 import useAuth from "@src/hooks/useAuth";

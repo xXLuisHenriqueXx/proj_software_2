@@ -9,7 +9,7 @@ import Loader from "@src/components/Loader";
 
 import { AppStackParamList } from "@src/routes/stacks/AppStack";
 import { getAgeGroup } from "@src/utils/GetAgeGroup";
-import { useInstituteDetail } from "@src/hooks/useInstituteDetail";
+import { useInstituteDetail } from "./_hooks/useInstituteDetail";
 import { formatPhoneNumber } from "@src/utils/FormatPhoneNumber";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
