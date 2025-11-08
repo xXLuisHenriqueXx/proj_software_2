@@ -1,4 +1,5 @@
 export const HIGHLIGHT_COLOR = "#316A41";
+export const HIGHLIGHT_COLOR_25 = "#316A4140";
 export const PRIMARY_COLOR = "#131313";
 export const PRIMARY_COLOR_75 = "#131313CC";
 export const PRIMARY_COLOR_50 = "#13131380";
@@ -9,4 +10,5 @@ export const BACKGROUND_PRIMARY_COLOR = "#FAF9F6";
 export const BACKGROUND_SECONDARY_COLOR = "#EBEEEC";
 export const CANCEL_COLOR = "#BA1A1A";
 export const CANCEL_COLOR_10 = "#BA1A1A1A";
+export const CANCEL_COLOR_25 = "#BA1A1A40";
 export const ALERT_COLOR = "#FF5800";
