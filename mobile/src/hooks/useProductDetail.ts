@@ -20,7 +20,6 @@ export function useProductDetail(id: string) {
       try {
         const response = await toyService.getByID({ id });
 
-        console.log(response?.data);
         if (isMounted) {
           setProduct(response?.data);
           setFavorited(response?.data?.isFavorited);

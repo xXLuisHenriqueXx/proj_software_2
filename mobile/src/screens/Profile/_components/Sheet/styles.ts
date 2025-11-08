@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
 
-import { BACKGROUND_PRIMARY_COLOR, PRIMARY_COLOR } from "@src/constants/Colors";
+import { PRIMARY_COLOR } from "@src/constants/Colors";
 import { SEMIBOLD_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
-  containerBottom: {
+  container: {
     flex: 1,
     flexDirection: "column",
     alignItems: "center",

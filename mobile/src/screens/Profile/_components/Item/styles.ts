@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import {
+  BACKGROUND_PRIMARY_COLOR,
   BACKGROUND_SECONDARY_COLOR,
   PRIMARY_COLOR_75,
 } from "@src/constants/Colors";
@@ -12,8 +13,18 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     rowGap: 8,
     width: 128,
+    paddingBottom: 16,
     borderRadius: 8,
     overflow: "hidden",
+  },
+  button: {
+    position: "absolute",
+    top: 8,
+    right: 8,
+    padding: 8,
+    backgroundColor: BACKGROUND_PRIMARY_COLOR,
+    borderRadius: 8,
+    zIndex: 1,
   },
   image: {
     flexDirection: "column",

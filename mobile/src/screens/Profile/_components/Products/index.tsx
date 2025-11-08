@@ -1,8 +1,9 @@
+import { memo, useCallback } from "react";
 import { FlatList, ListRenderItem, View } from "react-native";
 import { styles } from "./styles";
 
 import { Header } from "@src/components/Header";
-import Item from "./Item";
+import Item from "../Item";
 import EmptyList from "@src/components/EmptyList";
 
 import { IProduct } from "@src/common/Entities/Product";
@@ -10,17 +11,17 @@ import { IProduct } from "@src/common/Entities/Product";
 interface IProductsProps {
   data?: IProduct[];
   setOpenSheet: (id: string) => void;
-  setSelectedID: (value: string) => void;
 }
 
-const Products = ({ data, setOpenSheet, setSelectedID }: IProductsProps) => {
-  const renderItem: ListRenderItem<IProduct> = ({ item }) => (
-    <Item
-      data={item}
-      setOpenSheet={() => setOpenSheet(item.id)}
-      setSelectedID={setSelectedID}
-    />
+const Products = ({ data = [], setOpenSheet }: IProductsProps) => {
+  const renderItem = useCallback<ListRenderItem<IProduct>>(
+    ({ item }) => (
+      <Item data={item} onOptionsPress={() => setOpenSheet(item.id)} />
+    ),
+    [setOpenSheet]
   );
+
+  const keyExtractor = useCallback((item: IProduct) => item.id, []);
 
   return (
     <View style={styles.container}>
@@ -32,16 +33,19 @@ const Products = ({ data, setOpenSheet, setSelectedID }: IProductsProps) => {
       </Header.Root>
 
       <FlatList
-        contentContainerStyle={styles.containerContent}
+        data={data}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
         horizontal
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => item.id}
-        data={data}
-        renderItem={renderItem}
-        ListEmptyComponent={EmptyList}
+        contentContainerStyle={styles.containerContent}
+        ListEmptyComponent={<EmptyList />}
+        initialNumToRender={4}
+        windowSize={5}
+        maxToRenderPerBatch={5}
       />
     </View>
   );
 };
 
-export default Products;
+export default memo(Products);

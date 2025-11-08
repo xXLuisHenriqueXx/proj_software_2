@@ -2,22 +2,36 @@ import { StyleSheet } from "react-native";
 
 import {
   BACKGROUND_PRIMARY_COLOR,
-  HIGHLIGHT_COLOR,
+  CONTRAST_COLOR,
   PRIMARY_COLOR,
-  PRIMARY_COLOR_75,
+  PRIMARY_COLOR_50,
 } from "@src/constants/Colors";
 import { STATUS_BAR_HEIGHT } from "@src/constants/Values";
-import { BOLD_FONT, REGULAR_FONT } from "@src/constants/Fonts";
 
 export const styles = StyleSheet.create({
   container: {
     position: "relative",
     flex: 1,
-    width: "100%",
-    height: "100%",
-    paddingHorizontal: 24,
-    paddingTop: STATUS_BAR_HEIGHT + 32,
+    paddingTop: STATUS_BAR_HEIGHT + 64,
     backgroundColor: BACKGROUND_PRIMARY_COLOR,
+  },
+  containerScroll: {
+    flexDirection: "column",
+    alignItems: "center",
+    rowGap: 32,
+    width: "100%",
+  },
+  containerContent: {
+    rowGap: 32,
+    width: "100%",
+    paddingHorizontal: 24,
+    paddingTop: 48,
+    paddingBottom: 128,
+    backgroundColor: CONTRAST_COLOR,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    elevation: 30,
+    shadowColor: PRIMARY_COLOR_50,
   },
   containerSheet: {
     borderTopLeftRadius: 24,
@@ -26,38 +40,11 @@ export const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_PRIMARY_COLOR,
     shadowColor: PRIMARY_COLOR,
   },
-  containerContent: {
-    flexDirection: "column",
-    alignItems: "center",
-    rowGap: 32,
-    width: "100%",
-    paddingBottom: 120,
-  },
-  containerUser: {
-    flexDirection: "column",
-    rowGap: 8,
-  },
-  containerText: {
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  picture: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: 128,
-    height: 128,
-    borderRadius: 64,
-    borderWidth: 2,
-    borderColor: HIGHLIGHT_COLOR,
-  },
-  nameText: {
-    fontSize: 20,
-    fontFamily: BOLD_FONT,
-    color: PRIMARY_COLOR,
-  },
-  emailText: {
-    fontSize: 14,
-    fontFamily: REGULAR_FONT,
-    color: PRIMARY_COLOR_75,
+  backButton: {
+    position: "absolute",
+    top: -32,
+    left: 24,
+    width: 48,
+    height: 48,
   },
 });
