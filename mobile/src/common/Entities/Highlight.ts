@@ -1,3 +1,5 @@
+import { IProduct } from "./Product";
+
 enum EHighlightType {
   FREE = "FREE",
   NEARBY = "NEARBY",
@@ -14,4 +16,8 @@ export interface IHighlight {
   description: string;
   type: EHighlightType;
   picture: string;
+}
+
+export interface IHighlightWithToys extends IHighlight {
+  toys: IProduct[];
 }

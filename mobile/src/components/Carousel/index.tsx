@@ -11,6 +11,7 @@ import Dots from "./Dots";
 import { IHighlight } from "@src/common/Entities/Highlight";
 import { IToyPicture } from "@src/common/Interfaces/Toy.interface";
 import { baseURL } from "@src/services/Api";
+import { useAppNavigation } from "@src/hooks/useAppNavigation";
 
 interface ICarouselProps {
   width: number;
@@ -27,6 +28,8 @@ const Carousel = ({
   autoScrollInterval = 8000,
   style,
 }: ICarouselProps) => {
+  const { appNavigation } = useAppNavigation();
+
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const pagerRef = useRef<PagerView>(null);
@@ -83,7 +86,13 @@ const Carousel = ({
         overScrollMode={"never"}
       >
         {imageUris.map((uri, index) => (
-          <TouchableOpacity key={data[index].id} activeOpacity={0.85}>
+          <TouchableOpacity
+            key={data[index].id}
+            activeOpacity={0.85}
+            onPress={() =>
+              appNavigation.navigate("HighlightDetail", { id: data[index].id })
+            }
+          >
             <Image style={imageStyle} source={{ uri }} resizeMode="cover" />
           </TouchableOpacity>
         ))}

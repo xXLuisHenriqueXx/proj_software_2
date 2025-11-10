@@ -9,6 +9,7 @@ import UpdateProduct from "@src/screens/UpdateProduct";
 import Recents from "@src/screens/Recents";
 import ProductDetail from "@src/screens/ProductDetail";
 import InstituteDetail from "@src/screens/InstituteDetail";
+import HighlightDetail from "@src/screens/HighlightDetail";
 import ProductList from "@src/screens/ProductList";
 import UpdateUser from "@src/screens/UpdateUser";
 
@@ -21,6 +22,7 @@ export type AppStackParamList = {
   Recents: undefined;
   ProductDetail: { id: string };
   InstituteDetail: { id: string };
+  HighlightDetail: { id: string };
   ProductList: { filter?: IFilter };
   UpdateUser: { id: string };
 };
@@ -40,6 +42,7 @@ export default function AppStack() {
       <Stack.Screen name="Recents" component={Recents} />
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="InstituteDetail" component={InstituteDetail} />
+      <Stack.Screen name="HighlightDetail" component={HighlightDetail} />
       <Stack.Screen name="ProductList" component={ProductList} />
       <Stack.Screen name="UpdateUser" component={UpdateUser} />
     </Stack.Navigator>
