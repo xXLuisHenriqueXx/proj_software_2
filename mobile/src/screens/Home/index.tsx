@@ -13,7 +13,15 @@ import { useAppNavigation } from "@src/hooks/useAppNavigation";
 import { WIDTH } from "@src/constants/Values";
 
 const Home = () => {
-  const { refreshing, onRefresh, highlights, institutes, toys } = useHome();
+  const {
+    refreshing,
+    onRefresh,
+    highlights,
+    institutes,
+    toys,
+    handleLoadMore,
+    loadingMore,
+  } = useHome();
   const { appNavigation } = useAppNavigation();
 
   return (
@@ -42,6 +50,8 @@ const Home = () => {
       data={toys}
       refreshing={refreshing}
       onRefresh={onRefresh}
+      onEndReached={handleLoadMore}
+      loadingMore={loadingMore}
     />
   );
 };

@@ -1,9 +1,10 @@
 import { memo } from "react";
 import {
-  useWindowDimensions,
   ListRenderItem,
   FlatList,
   RefreshControl,
+  View,
+  ActivityIndicator,
 } from "react-native";
 import { styles } from "./styles";
 
@@ -12,6 +13,7 @@ import EmptyList from "../EmptyList";
 
 import { IProduct } from "@src/common/Entities/Product";
 import { useAppNavigation } from "@src/hooks/useAppNavigation";
+import { WIDTH } from "@src/constants/Values";
 
 interface IListProps {
   header?: any;
@@ -20,6 +22,8 @@ interface IListProps {
   onRefresh?: () => void;
   keyExtractor?: (item: IProduct) => string;
   onItemPress?: (id: string) => void;
+  onEndReached?: () => void;
+  loadingMore?: boolean;
 }
 
 const List = ({
@@ -29,9 +33,9 @@ const List = ({
   onRefresh,
   keyExtractor = (item) => item.id,
   onItemPress,
+  onEndReached,
+  loadingMore = false,
 }: IListProps) => {
-  const { width } = useWindowDimensions();
-
   const { appNavigation } = useAppNavigation();
 
   const handleNavigateToDetail = (id: string) => {
@@ -47,7 +51,17 @@ const List = ({
     />
   );
 
-  const widthProduct = (width - 48 - 16) / 2;
+  const renderFooter = () => {
+    if (!loadingMore) return null;
+
+    return (
+      <View style={{ paddingVertical: 20 }}>
+        <ActivityIndicator size="small" />
+      </View>
+    );
+  };
+
+  const widthProduct = (WIDTH - 48 - 16) / 2;
   const hasRefreshControl = !!onRefresh;
 
   return (
@@ -59,6 +73,7 @@ const List = ({
       keyExtractor={keyExtractor}
       numColumns={2}
       ListEmptyComponent={<EmptyList />}
+      ListFooterComponent={renderFooter}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.containerContent}
       columnWrapperStyle={styles.containerColumn}
@@ -67,6 +82,12 @@ const List = ({
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         ) : undefined
       }
+      onEndReachedThreshold={0.3}
+      onEndReached={onEndReached}
+      removeClippedSubviews
+      maxToRenderPerBatch={6}
+      initialNumToRender={6}
+      windowSize={6}
     />
   );
 };

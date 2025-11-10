@@ -21,19 +21,59 @@ const ProductList = ({ route }: Props) => {
 
   const [toys, setToys] = useState<IProduct[]>([]);
   const [search, setSearch] = useState<string | undefined>("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [refreshing, setRefreshing] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
 
-  useEffect(() => {
-    if (!filter) return;
+  const loadToys = async (pageNumber = 1, reset = false) => {
+    try {
+      const response = await fetchToys(pageNumber, 20, {
+        ...filter,
+        search,
+      });
 
-    setSearch(filter?.search);
-    fetchToys(1, 20, { ...filter }).then((toys) => setToys(toys));
-  }, []);
+      if (reset) {
+        setToys(response.toys);
+      } else {
+        setToys((prev) => [...prev, ...response.toys]);
+      }
 
-  const handleSearch = () => {
-    fetchToys(1, 20, { search }).then((toys) => setToys(toys));
+      setPage(response.page);
+      setTotalPages(response.totalPages);
+    } catch (error: any) {
+      console.warn("Error loading toys:", error);
+    }
   };
 
-  if (loading) return <Loader />;
+  useEffect(() => {
+    loadToys(1, true);
+  }, []);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    try {
+      await loadToys(1, true);
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  const handleLoadMore = async () => {
+    if (loadingMore || page >= totalPages) return;
+    setLoadingMore(true);
+    try {
+      await loadToys(page + 1);
+    } finally {
+      setLoadingMore(false);
+    }
+  };
+
+  const handleSearch = async () => {
+    await loadToys(1, true);
+  };
+
+  if (loading && toys.length === 0) return <Loader />;
 
   return (
     <List
@@ -49,6 +89,10 @@ const ProductList = ({ route }: Props) => {
         </View>
       }
       data={toys}
+      onRefresh={onRefresh}
+      refreshing={refreshing}
+      onEndReached={handleLoadMore}
+      loadingMore={loadingMore}
     />
   );
 };

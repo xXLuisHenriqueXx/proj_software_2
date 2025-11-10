@@ -13,18 +13,25 @@ export function useHome() {
   const { institutes, fetchInstitutes } = useInstitutesStore();
 
   const [toys, setToys] = useState<IProduct[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
+  const [loadingMore, setLoadingMore] = useState<boolean>(false);
 
   const handleLoadData = async () => {
     setLoading(true);
 
     try {
-      await Promise.all([
+      const [h, i, toyResponse] = await Promise.all([
         fetchHighlights(),
         fetchInstitutes(),
-        fetchToys().then((toys) => setToys(toys)),
+        fetchToys(1, 20),
       ]);
+
+      setToys(toyResponse.toys);
+      setPage(toyResponse.page);
+      setTotalPages(toyResponse.totalPages);
     } catch (error: any) {
       Toast.show({
         type: "error",
@@ -36,19 +43,25 @@ export function useHome() {
     }
   };
 
-  const handleSearch = async (search?: string, type?: EToyType) => {
-    setLoading(true);
+  const handleLoadMore = async () => {
+    if (loadingMore || page >= totalPages) return;
 
+    setLoadingMore(true);
     try {
-      await fetchToys(1, 20, { search, type }).then((toys) => setToys(toys));
+      const nextPage = page + 1;
+      const response = await fetchToys(nextPage, 20);
+
+      setToys((prev) => [...prev, ...response.toys]);
+      setPage(response.page);
+      setTotalPages(response.totalPages);
     } catch (error: any) {
       Toast.show({
         type: "error",
         text1: "Aviso",
-        text2: error.message || "Erro ao fazer cadastro",
+        text2: error.message || "Erro ao carregar mais dados",
       });
     } finally {
-      setLoading(false);
+      setLoadingMore(false);
     }
   };
 
@@ -79,6 +92,7 @@ export function useHome() {
     institutes,
     toys,
     loading,
-    handleSearch,
+    loadingMore,
+    handleLoadMore,
   };
 }
