@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "rebrinca",
-    "slug": "ReBrinca",
+    "name": "Re.Brinca",
+    "slug": "rebrinca",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,9 +26,7 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-secure-store"
-    ],
+    "plugins": ["expo-secure-store"],
     "extra": {
       "eas": {
         "projectId": "48655bc0-8eaa-42a2-907a-37828b5d721e"

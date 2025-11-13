@@ -76,7 +76,7 @@ const Pictures = ({
         />
       </TouchableOpacity>
 
-      <Carousel data={data} width={width} height={320} />
+      <Carousel data={data} width={width} height={320} type="toy" />
     </View>
   );
 };

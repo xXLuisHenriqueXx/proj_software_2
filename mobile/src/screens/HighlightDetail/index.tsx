@@ -27,7 +27,7 @@ const HighlightDetail = ({ route }: Props) => {
     try {
       const response = await highlightService.getById({ id });
 
-      setHighlight(response);
+      setHighlight(response.data);
     } catch (error: any) {
       Toast.show({
         type: "error",

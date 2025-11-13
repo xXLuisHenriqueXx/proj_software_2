@@ -45,28 +45,6 @@ const ProductDetail = ({ route }: Props) => {
     appNavigation.navigate("AppTabs", { screen: "Chats" });
   };
 
-  const renderOwner = useMemo(() => {
-    if (!product) return null;
-
-    if (isOwner) {
-      <Button.Primary
-        text="Editar produto"
-        onPress={() =>
-          appNavigation.navigate("UpdateProduct", { id: product.id })
-        }
-      />;
-    } else {
-      <>
-        <Owner owner={product.owner} />
-
-        <Button.Primary
-          text="Conversar com o proprietário"
-          onPress={handleCreateChat}
-        />
-      </>;
-    }
-  }, [product, isOwner]);
-
   if (!product || loading) {
     return <Loader />;
   }
@@ -128,7 +106,23 @@ const ProductDetail = ({ route }: Props) => {
           <Text style={styles.text}>{product.description}</Text>
         </View>
 
-        {renderOwner}
+        {isOwner ? (
+          <Button.Primary
+            text="Editar produto"
+            onPress={() =>
+              appNavigation.navigate("UpdateProduct", { id: product.id })
+            }
+          />
+        ) : (
+          <>
+            <Owner owner={product.owner} />
+
+            <Button.Primary
+              text="Conversar com o proprietário"
+              onPress={handleCreateChat}
+            />
+          </>
+        )}
       </View>
     </ScrollView>
   );

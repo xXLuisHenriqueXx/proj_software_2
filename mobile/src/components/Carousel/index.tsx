@@ -19,6 +19,7 @@ interface ICarouselProps {
   data: IToyPicture[] | IHighlight[];
   autoScrollInterval?: number;
   style?: ViewStyle;
+  type?: "highlight" | "toy";
 }
 
 const Carousel = ({
@@ -27,6 +28,7 @@ const Carousel = ({
   data,
   autoScrollInterval = 8000,
   style,
+  type = "highlight",
 }: ICarouselProps) => {
   const { appNavigation } = useAppNavigation();
 
@@ -90,6 +92,7 @@ const Carousel = ({
             key={data[index].id}
             activeOpacity={0.85}
             onPress={() =>
+              type === "highlight" &&
               appNavigation.navigate("HighlightDetail", { id: data[index].id })
             }
           >
