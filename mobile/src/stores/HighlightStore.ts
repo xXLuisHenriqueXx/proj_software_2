@@ -1,40 +1,23 @@
 import { create } from "zustand";
-import { highlightService } from "@src/services/HighlightService";
+
 import { IHighlight } from "@src/common/Entities/Highlight";
+import { highlightService } from "@src/services/HighlightService";
 
-interface HighlightState {
+interface IHighlightsState {
   highlights: IHighlight[];
-  isLoading: boolean;
-  error: string | null;
-
   fetchHighlights: () => Promise<void>;
-  getHighlightById: (id: string) => Promise<IHighlight | null>;
 }
 
-export const useHighlightsStore = create<HighlightState>((set) => ({
+export const useHighlightsStore = create<IHighlightsState>((set) => ({
   highlights: [],
-  isLoading: false,
-  error: null,
 
   fetchHighlights: async () => {
-    set({ isLoading: true, error: null });
     try {
-      const highlights = await highlightService.getAll();
-      set({ highlights });
-    } catch (err: any) {
-      set({ error: err.message });
-    } finally {
-      set({ isLoading: false });
-    }
-  },
+      const response = await highlightService.get();
 
-  getHighlightById: async (id: string) => {
-    try {
-      const highlight = await highlightService.getById({ id });
-      return highlight;
-    } catch (err: any) {
-      set({ error: err.message });
-      return null;
+      set({ highlights: response.data });
+    } catch (error) {
+      console.error("Failed to fetch highlights:", error);
     }
   },
 }));

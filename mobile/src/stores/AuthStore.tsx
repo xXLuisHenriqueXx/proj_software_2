@@ -1,98 +1,122 @@
-// store/auth.store.ts
+import { Alert } from "react-native";
 import { create } from "zustand";
+import * as SecureStore from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
-import { authService } from "@src/services/AuthService";
+
 import { ILogin, IRegister } from "@src/common/Interfaces/Auth.interface";
+import { authService } from "@src/services/AuthService";
 import { IUserResponse } from "@src/common/Interfaces/User.interface";
+
+const TOKEN_KEY = process.env.EXPO_PUBLIC_SECURE_TOKEN;
+const USER_KEY = "@user";
 
 interface AuthState {
   user: IUserResponse | null;
   token: string | null;
   isLoading: boolean;
   isSignout: boolean;
-
-  restore: () => Promise<void>;
-  login: (params: ILogin) => Promise<void>;
   register: (params: IRegister) => Promise<void>;
+  login: (params: ILogin) => Promise<void>;
   logout: () => Promise<void>;
+  restore: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   token: null,
-  isLoading: false,
+  isLoading: true,
   isSignout: false,
 
   restore: async () => {
     set({ isLoading: true });
+
     try {
-      const token = await authService.getToken();
-      const user = await authService.getCurrentUser();
+      if (!TOKEN_KEY) return;
+      const storedToken = await SecureStore.getItemAsync(TOKEN_KEY);
+
+      const userString = await AsyncStorage.getItem(USER_KEY);
+      const user = userString ? JSON.parse(userString) : null;
 
       set({
-        token,
         user,
-        isSignout: !token,
+        token: storedToken,
+        isLoading: false,
+        isSignout: !storedToken,
       });
     } catch (error: any) {
       Toast.show({
         type: "error",
-        text1: "Erro",
-        text2: error.message || "Falha ao restaurar sessão",
+        text1: "Aviso",
+        text2: error.message || "Erro ao carregar o usuário",
       });
-      set({ token: null, user: null, isSignout: true });
-    } finally {
-      set({ isLoading: false });
-    }
-  },
 
-  login: async (params: ILogin) => {
-    set({ isLoading: true });
-    try {
-      const { token, user } = await authService.login(params);
-      set({ token, user, isSignout: false });
-    } catch (error: any) {
-      Toast.show({
-        type: "error",
-        text1: "Erro ao logar",
-        text2: error.message || "Verifique seus dados",
-      });
-      set({ isSignout: true });
-    } finally {
-      set({ isLoading: false });
-    }
-  },
-
-  register: async (params: IRegister) => {
-    set({ isLoading: true });
-    try {
-      const { token, user } = await authService.register(params);
-      set({ token, user, isSignout: false });
-    } catch (error: any) {
-      Toast.show({
-        type: "error",
-        text1: "Erro ao cadastrar",
-        text2: error.message || "Verifique seus dados",
-      });
-      set({ isSignout: true });
-    } finally {
-      set({ isLoading: false });
+      set({ isLoading: false, token: null, isSignout: true });
     }
   },
 
   logout: async () => {
-    set({ isLoading: true });
-    try {
-      await authService.logout();
-      set({ token: null, user: null, isSignout: true });
-    } catch (error: any) {
-      Toast.show({
-        type: "error",
-        text1: "Erro ao sair",
-        text2: error.message || "Falha ao limpar sessão",
-      });
-    } finally {
-      set({ isLoading: false });
+    set({ token: null, isSignout: true });
+
+    if (!TOKEN_KEY) return;
+    await SecureStore.deleteItemAsync(TOKEN_KEY);
+    await AsyncStorage.removeItem(USER_KEY);
+  },
+
+  login: async (params: ILogin) => {
+    const response = await authService.login(params);
+
+    if (!response || response.status >= 400) {
+      Alert.alert(
+        "Erro ao logar",
+        response?.data?.message || "Verifique seus dados"
+      );
+
+      return;
     }
+
+    const token = response.data.token;
+    const user = response.data.user;
+
+    if (token && TOKEN_KEY) {
+      await SecureStore.setItemAsync(TOKEN_KEY, token);
+    }
+    if (user && USER_KEY) {
+      await AsyncStorage.setItem(USER_KEY, JSON.stringify(user));
+    }
+
+    set({
+      user,
+      token,
+      isSignout: false,
+    });
+  },
+
+  register: async (params: IRegister) => {
+    const response = await authService.register(params);
+
+    if (!response || response.status >= 400) {
+      Alert.alert(
+        "Erro ao cadastrar",
+        response?.data?.message || "Verifique seus dados"
+      );
+      return;
+    }
+
+    const token = response.data.token;
+    const user = response.data.user;
+
+    if (token && TOKEN_KEY) {
+      await SecureStore.setItemAsync(TOKEN_KEY, token);
+    }
+    if (user && USER_KEY) {
+      await AsyncStorage.setItem(USER_KEY, JSON.stringify(user));
+    }
+
+    set({
+      user,
+      token,
+      isSignout: false,
+    });
   },
 }));
