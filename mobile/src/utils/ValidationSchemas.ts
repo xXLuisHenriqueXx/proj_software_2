@@ -7,11 +7,9 @@ import { FieldValidation } from "./FormValidator";
 import { validationRules } from "./ValidationRules";
 
 export const addressSchema: FieldValidation<IFieldsAddress>[] = [
-  { field: "street", rules: [validationRules.required()] },
-  { field: "number", rules: [validationRules.required()] },
-  { field: "neighborhood", rules: [validationRules.required()] },
-  { field: "city", rules: [validationRules.required()] },
-  { field: "state", rules: [validationRules.required()] },
+  { field: "addressStreet", rules: [validationRules.required()] },
+  { field: "addressNumber", rules: [validationRules.required()] },
+  { field: "addressDistrict", rules: [validationRules.required()] },
 ];
 
 export const loginSchema: FieldValidation<IFieldsLogin>[] = [

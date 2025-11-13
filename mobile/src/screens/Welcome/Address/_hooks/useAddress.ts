@@ -35,28 +35,35 @@ export function useAddress({ fieldsData, type }: IParams) {
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingCep, setLoadingCep] = useState<boolean>(false);
 
-  const validateFields = (): IFieldsAddress => {
-    const { values, error } = validateForm(fields as any, addressSchema);
-    if (error) throw new Error(error);
+  // const validateFields = (): IFieldsAddress => {
+  //   const cleanedFields = {
+  //     addressStreet: fields.addressStreet,
+  //     addressNumber: fields.addressNumber,
+  //     addressDistrict: fields.addressDistrict,
+  //     addressDetail: fields.addressDetail,
+  //   };
 
-    return values;
-  };
+  //   const { values, error } = validateForm(cleanedFields as any, addressSchema);
+  //   if (error) throw new Error(error);
+
+  //   return values;
+  // };
 
   const onRegister = async () => {
     setLoading(true);
 
     try {
-      const validFields = validateFields();
+      // const validFields = validateFields();
 
       const cleanedFields = { ...fieldsData };
       if (type !== "enterprise") delete cleanedFields.cnpj;
 
       const params: IRegister = {
         ...cleanedFields,
-        addressDistrict: validFields.addressDistrict,
-        addressStreet: validFields.addressStreet,
-        addressNumber: Number(validFields.addressNumber),
-        addressDetail: validFields.addressDetail,
+        addressDistrict: fields.addressDistrict,
+        addressStreet: fields.addressStreet,
+        addressNumber: Number(fields.addressNumber),
+        addressDetail: fields.addressDetail,
         addressCep: cep,
       };
 
