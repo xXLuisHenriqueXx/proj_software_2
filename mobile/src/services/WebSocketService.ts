@@ -49,8 +49,6 @@ export function webSocketService() {
 
       executeCallback("connect", null);
       flushPending();
-
-      sendMessage({ type: "get_latest_message" });
     };
 
     socketRef.onmessage = (e) => {

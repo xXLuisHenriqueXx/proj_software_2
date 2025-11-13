@@ -13,7 +13,6 @@ export function useChatSocket({ chatId }: { chatId?: string }) {
   const socketRef = useRef<ReturnType<typeof webSocketService> | null>(null);
   const initializedRef = useRef(false);
   const chatIdRef = useRef<string | null>(null);
-  const pollingRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleNewMessage = useCallback((data: any) => {
     const payload = data.payload || data.message;
@@ -56,23 +55,6 @@ export function useChatSocket({ chatId }: { chatId?: string }) {
     socketRef.current?.sendMessage({ type: "send_message", message });
   }, []);
 
-  const startPolling = useCallback(() => {
-    if (pollingRef.current) return;
-
-    pollingRef.current = setInterval(() => {
-      if (socketRef.current && socketRef.current.isConnected()) {
-        socketRef.current.sendMessage({ type: "get_latest_message" });
-      }
-    }, 3000);
-  }, []);
-
-  const stopPolling = useCallback(() => {
-    if (pollingRef.current) {
-      clearInterval(pollingRef.current);
-      pollingRef.current = null;
-    }
-  }, []);
-
   useEffect(() => {
     if (!chatId) return;
 
@@ -80,7 +62,6 @@ export function useChatSocket({ chatId }: { chatId?: string }) {
       return;
 
     socketRef.current?.disconnect();
-    stopPolling();
 
     const ws = webSocketService();
     socketRef.current = ws;
@@ -88,10 +69,7 @@ export function useChatSocket({ chatId }: { chatId?: string }) {
     initializedRef.current = false;
 
     ws.addCallbacks("new_message", handleNewMessage);
-    ws.addCallbacks("connect", () => {
-      handleConnect();
-      startPolling();
-    });
+    ws.addCallbacks("connect", handleConnect);
     ws.addCallbacks("error", handleError);
 
     ws.connect(chatId);
@@ -101,16 +79,8 @@ export function useChatSocket({ chatId }: { chatId?: string }) {
       ws.removeCallbacks("connect", handleConnect);
       ws.removeCallbacks("error", handleError);
       ws.disconnect();
-      stopPolling();
     };
-  }, [
-    chatId,
-    handleNewMessage,
-    handleConnect,
-    handleError,
-    startPolling,
-    stopPolling,
-  ]);
+  }, [chatId, handleNewMessage, handleConnect, handleError]);
 
   return { messages, sendMessage, connected };
 }
